@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="mmff_dffnr_dffr" suite="ff">
+    <top_module>mmff_dffnr_dffr</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffnr_dffr/mmff_dffnr_dffr.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffnr_dffr/test_mmff_dffnr_dffr.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffnr_dffr/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffnr_dffr/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="mmff_dffr_dffnr" suite="ff">
+    <top_module>mmff_dffr_dffnr</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffr_dffnr/mmff_dffr_dffnr.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffr_dffnr/test_mmff_dffr_dffnr.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffr_dffnr/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/mmff_primitive/mmff_dffr_dffnr/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="counterdown16_1clk_negedge_async_resetp" suite="counter">
+    <top_module>counterdown16_1clk_negedge_async_resetp</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_negedge_async_resetp/counterdown16_1clk_negedge_async_resetp.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_negedge_async_resetp/test_counterdown16_1clk_negedge_async_resetp.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_negedge_async_resetp/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_negedge_async_resetp/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterdown16_1clk_posedge_async_resetn" suite="counter">
+    <top_module>counterdown16_1clk_posedge_async_resetn</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_async_resetn/counterdown16_1clk_posedge_async_resetn.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_async_resetn/test_counterdown16_1clk_posedge_async_resetn.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_async_resetn/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_async_resetn/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterdown16_1clk_posedge_async_resetp" suite="counter">
+    <top_module>counterdown16_1clk_posedge_async_resetp</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_async_resetp/counterdown16_1clk_posedge_async_resetp.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_async_resetp/test_counterdown16_1clk_posedge_async_resetp.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_async_resetp/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_async_resetp/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterdown16_1clk_posedge_sync_resetn" suite="counter">
+    <top_module>counterdown16_1clk_posedge_sync_resetn</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_sync_resetn/counterdown16_1clk_posedge_sync_resetn.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_sync_resetn/test_counterdown16_1clk_posedge_sync_resetn.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_1clk_posedge_sync_resetn/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_1clk_posedge_sync_resetn/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterdown16_4clk_posedge_async_resetn" suite="counter">
+    <top_module>counterdown16_4clk_posedge_async_resetn</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_4clk_posedge_async_resetn/counterdown16_4clk_posedge_async_resetn.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_4clk_posedge_async_resetn/counterdown16.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_4clk_posedge_async_resetn/test_counterdown16_4clk_posedge_async_resetn.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterdown16_4clk_posedge_async_resetn/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterdown16_4clk_posedge_async_resetn/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterup16_1clk_posedge_async_resetn" suite="counter">
+    <top_module>counterup16_1clk_posedge_async_resetn</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_async_resetn/counterup16_1clk_posedge_async_resetn.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_async_resetn/test_counterup16_1clk_posedge_async_resetn.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_async_resetn/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_async_resetn/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterup16_1clk_posedge_async_resetp" suite="counter">
+    <top_module>counterup16_1clk_posedge_async_resetp</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_async_resetp/counterup16_1clk_posedge_async_resetp.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_async_resetp/test_counterup16_1clk_posedge_async_resetp.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_async_resetp/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_async_resetp/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterup16_1clk_posedge_sync_resetn" suite="counter">
+    <top_module>counterup16_1clk_posedge_sync_resetn</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_sync_resetn/counterup16_1clk_posedge_sync_resetn.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_sync_resetn/test_counterup16_1clk_posedge_sync_resetn.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterup16_1clk_posedge_sync_resetn/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterup16_1clk_posedge_sync_resetn/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="counterupn_1clk_dualedge_async_resetp" suite="counter">
+    <top_module>counterupn_1clk_dualedge_async_resetp</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterupn_1clk_dualedge_async_resetp/counterupn_1clk_dualedge_async_resetp.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterupn_1clk_dualedge_async_resetp/test_counterupn_1clk_dualedge_async_resetp.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_registers/counters/counterupn_1clk_dualedge_async_resetp/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counterupn_1clk_dualedge_async_resetp/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

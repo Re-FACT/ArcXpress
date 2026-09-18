@@ -1,0 +1,4 @@
+
+Welcome to ArkAngel installation wizard. 
+This program will guide you install ArkAngel Design Suite. Please follow the instructions.
+

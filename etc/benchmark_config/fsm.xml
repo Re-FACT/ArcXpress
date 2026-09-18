@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="fsm_seq_detector" suite="fsm">
+    <top_module>fsm_seq_detector</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/fsm_seq_detector/fsm_seq_detector.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/fsm_seq_detector/test_fsm_seq_detector.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/fsm_seq_detector/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/fsm_seq_detector/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="scalable_seq_detector" suite="fsm">
+    <top_module>scalable_seq_detector</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/scalable_seq_detector/scalable_seq_detector.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/scalable_seq_detector/test_scalable_seq_detector.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/fsm/scalable_seq_detector/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/scalable_seq_detector/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="seq_detector_1001011" suite="fsm">
+    <top_module>seq_detector_1001011</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_1001011/seq_detector_1001011.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_1001011/test_seq_detector_1001011.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_1001011/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_1001011/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="mimic_design" suite="fsm">
+    <top_module>mimic_design</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/mimic_design/mimic_design.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/mimic_design/test_mimic_design.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/mimic_design/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/mimic_design/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

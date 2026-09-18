@@ -1,0 +1,26 @@
+/********************************************************************
+ * Add commands to the OpenFPGA shell interface,
+ * in purpose of generate Verilog netlists modeling the full FPGA fabric
+ * This is one of the core engine of openfpga, including:
+ * - repack : create physical pbs and redo packing
+ *******************************************************************/
+#include "arkangel_bitstream_command.h"
+
+#include "openfpga_bitstream_command_template.h"
+
+/* begin namespace arkangel */
+namespace arkangel {
+
+/********************************************************************
+ * Top-level function to add all the commands related to FPGA-Bitstream
+ *******************************************************************/
+void add_bitstream_commands(openfpga::Shell<ArkangelContext>& shell) {
+  /* Add bitstream commands from openfpga */
+#ifdef ARKANGEL_PRODUCTION_EDITION
+  openfpga::add_bitstream_command_templates<ArkangelContext>(shell, true);
+#elif ARKANGEL_ENGINEERING_EDITION
+  openfpga::add_bitstream_command_templates<ArkangelContext>(shell, false);
+#endif
+}
+
+} /* end namespace arkangel */

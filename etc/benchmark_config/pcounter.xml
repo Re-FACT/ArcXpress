@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="C2000_PWM" suite="pcounter">
+    <top_module>C2000_PWM</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM/C2000_PWM.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM/test_C2000_PWM.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="C2000_PWM_rstp" suite="pcounter">
+    <top_module>C2000_PWM_rstp</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM_rstp/C2000_PWM_rstp.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM_rstp/test_C2000_PWM_rstp.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM_rstp/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_PWM_rstp/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="C2000_testcase2" suite="pcounter">
+    <top_module>C2000_testcase2</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase2/C2000_testcase2.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase2/test_C2000_testcase2.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase2/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase2/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="C2000_testcase4" suite="pcounter">
+    <top_module>C2000_testcase4</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase4/C2000_testcase4.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase4/test_C2000_testcase4.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase4/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/C2000_testcase4/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_CLB" suite="pcounter">
+    <top_module>c2k_CLB</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB/c2k_CLB.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB/test_c2k_CLB.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_ECAP_pcnt" suite="pcounter">
+    <top_module>c2k_ECAP_pcnt</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_pcnt/c2k_ECAP_pcnt.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_pcnt/test_c2k_ECAP_pcnt.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_pcnt/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_pcnt/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_EQEP" suite="pcounter">
+    <top_module>c2k_EQEP</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP/c2k_EQEP.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP/test_c2k_EQEP.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_EQEP_16bit" suite="pcounter">
+    <top_module>c2k_EQEP_16bit</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP_16bit/c2k_EQEP_16bit.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP_16bit/test_c2k_EQEP_16bit.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP_16bit/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_EQEP_16bit/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_SR_PWM_ccb" suite="pcounter">
+    <top_module>c2k_SR_PWM_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/c2k_SR_PWM_ccb.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/rf_pulse_gen.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/sr_fsm.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/test_clb_case_top.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_SR_PWM_pcnt" suite="pcounter">
+    <top_module>clb_case_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/clb_case_top.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/top_wrapper.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/rf_pulse_gen.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/sr_fsm.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/test_clb_case_top.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_pcnt/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_single_PWM_pcnt" suite="pcounter">
+    <top_module>c2k_single_PWM_pcnt</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_single_PWM_pcnt/c2k_single_PWM_pcnt.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_single_PWM_pcnt/test_c2k_single_PWM_pcnt.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_single_PWM_pcnt/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_single_PWM_pcnt/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_CLB_ccb" suite="pcounter">
+    <top_module>c2k_CLB_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB_ccb/c2k_CLB_ccb.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB_ccb/test_c2k_CLB_ccb.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_CLB_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_ECAP_ccb" suite="pcounter">
+    <top_module>c2k_ECAP_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_ccb/c2k_ECAP_ccb.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_ccb/test_c2k_ECAP_ccb.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_ECAP_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_LED_pcnt" suite="pcounter">
+    <top_module>clb_LED_pcnt</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_pcnt/clb_LED_pcnt.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_pcnt/test_clb_LED_pcnt.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_pcnt/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_pcnt/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_LED_verilog" suite="pcounter">
+    <top_module>clb_LED_verilog</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_verilog/clb_LED_verilog.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_verilog/test_clb_LED.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_verilog/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_LED_verilog/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_sig_gen_check" suite="pcounter">
+    <top_module>c2k_sig_gen_check</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check/c2k_sig_gen_check.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check/test_c2k_sig_gen_check.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_PRBS_32" suite="pcounter">
+    <top_module>clb_PRBS_32</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_PRBS_32/clb_PRBS_32.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_PRBS_32/test_clb_PRBS_32.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_PRBS_32/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_PRBS_32/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_UART_PWM_ccb" suite="pcounter">
+    <top_module>clb_UART_PWM_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/clb_UART_PWM_ccb.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/baud_rate_generator.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/uart_receiver.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/uart_top.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/uart_transmitter.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/test_clb_UART_PWM_ccb.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_UART_PWM_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="local_reset_gen_test" suite="pcounter">
+    <top_module>local_reset_gen_test</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/local_reset_gen_test/local_reset_gen_test.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/local_reset_gen_test/test_local_reset_gen_test.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/local_reset_gen_test/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/local_reset_gen_test/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_high_lut_usage" suite="pcounter">
+    <top_module>clb_high_lut_usage</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_high_lut_usage/clb_high_lut_usage.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_high_lut_usage/test_clb_high_lut_usage.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_high_lut_usage/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/clb_high_lut_usage/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_sig_gen_check_ccb" suite="pcounter">
+    <top_module>c2k_sig_gen_check_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check_ccb/c2k_sig_gen_check_ccb.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check_ccb/test_c2k_sig_gen_check_ccb.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_sig_gen_check_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_off_pwm_ctrl_g3p18" suite="pcounter">
+    <top_module>c2k_off_pwm_ctrl_g3p18</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/c2k_off_pwm_ctrl_g3p18.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/off_pwm_mode_ctrl.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/off_pwm_sel.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/off_pwm_ctrl.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/edge_detection.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/c2k_off_pwm_ctrl_g1p6_16b.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/signal_dly_ctrl.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/test_c2k_off_pwm_ctrl_g3p18.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_off_pwm_ctrl_g3p18/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_timer_ccb" suite="pcounter">
+    <top_module>c2k_timer_ccb</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_timer_ccb/c2k_timer_ccb.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_timer_ccb/test_c2k_timer_ccb.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_timer_ccb/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_timer_ccb/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith16_add" suite="pcounter">
+    <top_module>arith16_add</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_add/arith16_add.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_add/test_arith16_add.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_add/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_add/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith16_shift" suite="pcounter">
+    <top_module>arith16_shift</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift/arith16_shift.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift/test_arith16_shift.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith16_shift_left_right" suite="pcounter">
+    <top_module>arith16_shift_left_right</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift_left_right/arith16_shift_left_right.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift_left_right/test_arith16_shift_left_right.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift_left_right/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_shift_left_right/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith16_sub" suite="pcounter">
+    <top_module>arith16_sub</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_sub/arith16_sub.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_sub/test_arith16_sub.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_sub/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith16_sub/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith32_add" suite="pcounter">
+    <top_module>arith32_add</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_add/arith32_add.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_add/test_arith32_add.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_add/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_add/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith32_shift" suite="pcounter">
+    <top_module>arith32_shift</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_shift/arith32_shift.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_shift/test_arith32_shift.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_shift/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_shift/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="arith32_sub" suite="pcounter">
+    <top_module>arith32_sub</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_sub/arith32_sub.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_sub/test_arith32_sub.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_sub/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/arith32_sub/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>
+

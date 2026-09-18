@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<!-- Just an example, may not work in practical cases! -->
+<!-- A number of suite with unique name can be defined.
+     Each suite contains a number of benchmarks.
+     Each benchmark requires a list of files
+     Reserved keywords when defining the paths include: 
+     - ${PWD} represents the absolute path where Arkangel is called
+     - ${PROJ_PATH} represents the absolute path of the home directory of the project as defined by syntax 'path'
+     - ${ROOT_PATH} represents the absolute path of Arkangel installed binaries
+ -->
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="clb_add_32bit" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_32bit/clb_add_32bit.v</file>
+    </design>
+    <top_module>clb_add_32bit</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_32bit/test_clb_add_32bit.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_32bit/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_32bit/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_basic_logic" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic/clb_basic_logic.v</file>
+    </design>
+    <top_module>clb_basic_logic</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic/test_clb_basic_logic.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_combo_32bit" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_32bit/clb_combo_32bit.v</file>
+    </design>
+    <top_module>clb_combo_32bit</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_32bit/test_clb_combo_32bit.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_32bit/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_32bit/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_shift32" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift32/clb_shift32.v</file>
+    </design>
+    <top_module>clb_shift32</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift32/test_clb_shift32.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift32/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift32/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_add_8bits" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_8bits/clb_add_8bits.v</file>
+    </design>
+    <top_module>clb_add_8bits</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_8bits/test_clb_add_8bits.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_8bits/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_add_8bits/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_basic_logic_ff" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic_ff/clb_basic_logic_ff.v</file>
+    </design>
+    <top_module>clb_basic_logic_ff</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic_ff/test_clb_basic_logic_ff.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic_ff/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_basic_logic_ff/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_combo_8bit" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_8bit/clb_combo_8bit.v</file>
+    </design>
+    <top_module>clb_combo_8bit</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_8bit/test_clb_combo_8bit.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_8bit/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_combo_8bit/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="clb_shift8" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift8/clb_shift8.v</file>
+    </design>
+    <top_module>clb_shift8</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift8/test_clb_shift8.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift8/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/clb_basic/clb_shift8/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

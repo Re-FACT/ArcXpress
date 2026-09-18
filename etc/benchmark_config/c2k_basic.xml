@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="c2k_comb_logic" suite="c2k_basic">
+    <top_module>c2k_comb_logic</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_comb_logic/c2k_comb_logic.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_comb_logic/test_c2k_comb_logic.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_comb_logic/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_comb_logic/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_Glue_Logic" suite="c2k_basic">
+    <top_module>c2k_Glue_Logic</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_Glue_Logic/c2k_Glue_Logic.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_Glue_Logic/test_c2k_Glue_Logic.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_Glue_Logic/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/c2k_basic/c2k_Glue_Logic/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

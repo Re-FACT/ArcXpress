@@ -1,0 +1,95 @@
+#the instance names are given during netlist generation
+references:
+- module: tile_0__20_
+  count: 4
+  instances:
+    - tile_0__9_
+    - tile_1__9_
+    - tile_2__9_
+    - tile_3__9_
+- module: tile_1__0_
+  count: 3
+  instances:
+    - tile_3__0_
+    - tile_2__0_
+    - tile_1__0_
+- module: tile_0__1_
+  count: 1
+  instances:
+    - tile_0__1_
+- module: tile_0__2_
+  count: 7
+  instances:
+    - tile_0__2_
+    - tile_0__3_
+    - tile_0__4_
+    - tile_0__5_
+    - tile_0__6_
+    - tile_0__7_
+    - tile_0__8_
+- module: tile_1__1_
+  count: 2
+  instances:
+    - tile_1__1_
+    - tile_2__1_
+- module: tile_1__2_
+  count: 6
+  instances:
+    - tile_1__2_
+    - tile_1__5_
+    - tile_1__8_
+    - tile_2__2_
+    - tile_2__5_
+    - tile_2__8_
+- module: tile_1__4_v2
+  count: 2
+  instances:
+    - tile_1__3_
+    - tile_2__3_
+- module: tile_1__5_
+  count: 2
+  instances:
+    - tile_1__4_
+    - tile_2__4_
+- module: tile_1__8_
+  count: 1
+  width: 2
+  instances:
+    - tile_1__6_
+- module: tile_1__9_
+  count: 1
+  instances:
+    - tile_1__7_
+- module: tile_2__9_
+  count: 1
+  instances:
+    - tile_2__7_
+- module: tile_11__1_
+  count: 1
+  instances:
+    - tile_3__1_
+- module: tile_11__2_
+  count: 7
+  instances:
+    - tile_3__2_
+    - tile_3__3_
+    - tile_3__4_
+    - tile_3__5_
+    - tile_3__6_
+    - tile_3__7_
+    - tile_3__8_
+- module: direct_interc
+  count: 12
+  instances:
+    - direct_interc_0_
+    - direct_interc_1_
+    - direct_interc_2_
+    - direct_interc_3_
+    - direct_interc_4_
+    - direct_interc_5_
+    - direct_interc_6_
+    - direct_interc_7_
+    - direct_interc_8_
+    - direct_interc_9_
+    - direct_interc_10_
+    - direct_interc_11_

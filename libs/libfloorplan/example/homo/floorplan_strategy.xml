@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<floorplan_strategies>
+  <!-- Reserved width for boundary cells -->
+  <boundary_cell_width>CPP*4</boundary_cell_width>
+  <!-- Default tile utilization rate. Range (0, 1] -->
+  <height_width_ratio>1</height_width_ratio>
+  <tile_utilization default="0.8">
+    <!-- Optionally user can define utilization rate for each tile. Name must match with the report_module_names
+     Any tile not defined will follow the default utilization rate
+     For example:
+    <tile name="tile_main">0.9</tile>
+    -->
+    <tile name="tile_main">0.89</tile>
+    <tile name="tile_sub">0.88</tile>
+    <tile name="tile_right_edge_main">0.84</tile>
+    <tile name="tile_right_edge_sub">0.84</tile>
+    <tile name="left_tile_main">0.84</tile>
+    <tile name="left_tile_sub">0.84</tile>
+    <tile name="left_tile_clock_above">0.84</tile>
+    <tile name="left_tile_clock_out">0.84</tile>
+    <tile name="left_tile_clock_below">0.84</tile>
+    <tile name="top_tile">0.88</tile>
+    <tile name="top_left_tile">1</tile>
+    <tile name="right_tile_main">0.5</tile>
+    <tile name="right_tile_sub">0.5</tile>
+    <tile name="bottom_tile">0.7</tile>
+    <tile name="left_bottom_tile">0.7</tile>
+    <tile name="bottom_tile_right_edge">0.6</tile>
+    <tile name="bottom_right_tile">0.6</tile>
+  </tile_utilization>
+  <tile_gap>
+    <horizental>CPP*7</horizental>
+    <vertical>SC_HEIGHT*1</vertical>
+  </tile_gap>
+  <side_gap>
+    <left>CPP*15</left>
+    <top>SC_HEIGHT*2</top>
+    <bottom>2*SC_HEIGHT</bottom>
+    <right>15*CPP</right>
+  </side_gap>
+</floorplan_strategies>

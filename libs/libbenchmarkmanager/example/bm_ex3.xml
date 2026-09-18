@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!-- Just an example, may not work in practical cases! -->
+<!-- A number of suite with unique name can be defined.
+     Each suite contains a number of benchmarks.
+     Each benchmark requires a list of files
+ -->
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="counter16" suite="ff">
+    <design>
+      <file type="verilog">${ROOT_PATH}/tests/benchmarks/counter16/counter16.v</file>
+    </design>
+    <top_module>counter16</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/tests/benchmarks/counter16/test_counter16.py</file>
+      <file type="makefile">${ROOT_PATH}/tests/benchmarks/counter16/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="sdc">${ROOT_PATH}/tests/benchmarks/counter16/counter16.sdc</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

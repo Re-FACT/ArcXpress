@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- Final PCF on global signal including all the clock signals. Error out if there are no sufficient global signals in the network! -->
+<pin_constraints>
+  <set_io pin="clk[0]" net="clk_i" default_value="1"/>
+</pin_constraints>

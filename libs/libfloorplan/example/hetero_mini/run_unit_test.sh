@@ -1,0 +1,18 @@
+~/github/aaee/build/libs/libfloorplan/fpga_floorplan_kisok \
+  --cpp 0.21 --sc_height 1.50 \
+  --strategy floorplan_strategy.xml \
+  --tile_qor R2-tile_cell_area.csv \
+  --tile_ref R0-tile_reference.yaml \
+  --shaping_result O0-shaping.txt \
+  --report O1-floorplan_result.csv \
+  --shrink_factor 0.9 \
+  --floorplan_signal_distribution_network \
+  --signal_distribution_network_report_file O2-floorplan_sig_distr_ntwk.xml \
+  --io_coordinates R5-io_coordinates.xml \
+  --io_metal_layer M2 \
+  --io_physical_location_report O3-io_phy_loc_rpt.txt \
+  --tile_pin_location R1-fabric_pin_location_tiles.xml \
+  --tile_pin_metal_layer M1 \
+  --tile_pin_physical_location_report O4-tile_pin_phy_loc_rpt.txt \
+  --precision 3 \
+  --verbosity 2

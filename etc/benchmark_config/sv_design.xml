@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="seq_detector_sv" suite="sv_design">
+    <top_module>seq_detector</top_module>
+    <design>
+      <file type="system_verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_sv/seq_detector.sv</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_sv/test_seq_detector_sv_ver.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_sv/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/fsm/seq_detector_sv/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

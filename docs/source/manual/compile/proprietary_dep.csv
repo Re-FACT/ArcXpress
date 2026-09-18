@@ -1,0 +1,7 @@
+Vendor,Tool,Minimum Version,Notes     
+Synopsys,Design Compiler, Q-2019.12-SP4, Required by netlist development
+Synopsys,IC Compiler II, R-2020.09-SP2, Required by physical design
+Synopsys,PrimeTime, T-2022.03, Required by netlist development/design verification/physical design
+Mentor Graphics,QuestaSim,2021.2,Required by design verification
+Mentor Graphics,Modelsim,2020.4,Required by design verification
+Synopsys, VCS,2020.12-SP2-1,Required by design verification

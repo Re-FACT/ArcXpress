@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Clock location map, part of an eFPGA device package -->
+<ckbuf_location_map>
+  <ckbuf pin="clk[0]" x="0" y="4" z="1" type="clock"/>
+  <ckbuf pin="clk[1]" x="0" y="4" z="2" type="clock"/>
+  <ckbuf pin="clk[2]" x="0" y="4" z="3" type="clock"/>
+  <ckbuf pin="clk[3]" x="0" y="4" z="4" type="clock"/>
+  <ckbuf pin="clk[4]" x="0" y="5" z="1" type="clock"/>
+  <ckbuf pin="clk[5]" x="0" y="5" z="2" type="clock"/>
+  <ckbuf pin="clk[6]" x="0" y="5" z="3" type="clock"/>
+  <ckbuf pin="clk[7]" x="0" y="5" z="4" type="clock"/>
+  <ckbuf pin="rst[0]" x="0" y="4" z="5" type="reset"/>
+  <ckbuf pin="rst[1]" x="0" y="5" z="5" type="reset"/>
+</ckbuf_location_map>

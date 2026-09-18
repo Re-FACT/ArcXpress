@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="counter8_mix_design" suite="mix_hdl_design">
+    <top_module>top_module</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/top_module.v</file>
+      <file type="system_verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/counter.sv</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/comparator.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/test_counter8_mix_design.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/ff/counters/counter8_mix_design/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

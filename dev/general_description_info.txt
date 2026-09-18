@@ -1,0 +1,6 @@
+DESCRIPTION
+===========
+
+ArkAngel Design Suite installer created using by CPack (https://cmake.org).
+Please follow the instructions to install it. If you encounter any issue during
+installation, please contact Rapid Flex support for help.

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- Clock location map, part of an eFPGA device package -->
+<ckbuf_location_map>
+  <ckbuf pin="clk[0]" x="0" y="1" z="4" type="clock"/>
+  <ckbuf pin="clk[1]" x="0" y="1" z="5" type="clock"/>
+  <ckbuf pin="clk[2]" x="0" y="1" z="6" type="clock"/>
+  <ckbuf pin="clk[3]" x="0" y="1" z="7" type="clock"/>
+  <ckbuf pin="clk[4]" x="0" y="2" z="4" type="clock"/>
+  <ckbuf pin="clk[5]" x="0" y="2" z="5" type="clock"/>
+  <ckbuf pin="clk[6]" x="0" y="2" z="6" type="clock"/>
+  <ckbuf pin="clk[7]" x="0" y="2" z="7" type="clock"/>
+  <ckbuf pin="rst[0]" x="0" y="1" z="8" type="reset"/>
+  <ckbuf pin="rst[1]" x="0" y="1" z="9" type="reset"/>
+  <ckbuf pin="rst[2]" x="0" y="1" z="10" type="reset"/>
+  <ckbuf pin="rst[3]" x="0" y="1" z="11" type="reset"/>
+  <ckbuf pin="rst[4]" x="0" y="1" z="12" type="reset"/>
+  <ckbuf pin="rst[5]" x="0" y="1" z="13" type="reset"/>
+  <ckbuf pin="rst[6]" x="0" y="1" z="14" type="reset"/>
+  <ckbuf pin="rst[7]" x="0" y="1" z="15" type="reset"/>
+  <ckbuf pin="rst[8]" x="0" y="1" z="16" type="reset"/>
+  <ckbuf pin="rst[9]" x="0" y="1" z="17" type="reset"/>
+  <ckbuf pin="rst[10]" x="0" y="1" z="18" type="reset"/>
+  <ckbuf pin="rst[11]" x="0" y="1" z="19" type="reset"/>
+  <ckbuf pin="rst[12]" x="0" y="2" z="8" type="reset"/>
+  <ckbuf pin="rst[13]" x="0" y="2" z="9" type="reset"/>
+  <ckbuf pin="rst[14]" x="0" y="2" z="10" type="reset"/>
+  <ckbuf pin="rst[15]" x="0" y="2" z="11" type="reset"/>
+  <ckbuf pin="rst[16]" x="0" y="2" z="12" type="reset"/>
+  <ckbuf pin="rst[17]" x="0" y="2" z="13" type="reset"/>
+  <ckbuf pin="rst[18]" x="0" y="2" z="14" type="reset"/>
+  <ckbuf pin="rst[19]" x="0" y="2" z="15" type="reset"/>
+  <ckbuf pin="rst[20]" x="0" y="2" z="16" type="reset"/>
+  <ckbuf pin="rst[21]" x="0" y="2" z="17" type="reset"/>
+  <ckbuf pin="rst[22]" x="0" y="2" z="18" type="reset"/>
+  <ckbuf pin="rst[23]" x="0" y="2" z="19" type="reset"/>
+</ckbuf_location_map>

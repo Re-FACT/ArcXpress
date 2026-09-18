@@ -1,0 +1,177 @@
+#pragma once
+
+namespace arkangel {
+constexpr const char* XML_VPR_ARCH_ROOT_NODE_NAME = "architecture";
+/* Logical models */
+constexpr const char* XML_VPR_ARCH_MODELS_NODE_NAME = "models";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_NODE_NAME = "model";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_INPUT_PORTS_NODE_NAME = "input_ports";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_OUTPUT_PORTS_NODE_NAME = "output_ports";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_PORT_NODE_NAME = "port";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_PORT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_PORT_ATTR_COMB_SINK_PORT =
+  "combinational_sink_ports";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_PORT_ATTR_CLOCK = "clock";
+constexpr const char* XML_VPR_ARCH_MODELS_MODEL_PORT_ATTR_IS_CLOCK = "is_clock";
+/* Tiles */
+constexpr const char* XML_VPR_ARCH_TILES_NODE_NAME = "tiles";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_NODE_NAME = "tile";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_ATTR_AREA = "area";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_NODE_NAME = "sub_tile";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_ATTR_CAPACITY = "capacity";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_EQSITE_NODE_NAME = "equivalent_sites";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_EQSITE_SITE_NODE_NAME = "site";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_EQSITE_SITE_ATTR_PB_TYPE = "pb_type";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_CLOCK_NODE_NAME = "clock";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_INPUT_NODE_NAME = "input";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_OUTPUT_NODE_NAME = "output";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PORT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PORT_ATTR_NUM_PINS = "num_pins";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PORT_ATTR_EQUIVALENT = "equivalent";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PORT_ATTR_IS_NON_CLOCK_GLOBAL =
+  "is_non_clock_global";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_NODE_NAME = "fc";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_ATTR_IN_TYPE = "in_type";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_ATTR_IN_VAL = "in_val";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_ATTR_OUT_TYPE = "out_type";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_ATTR_OUT_VAL = "out_val";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_OVERRIDE_NODE_NAME = "fc_override";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_OVERRIDE_ATTR_PORT_NAME = "port_name";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_OVERRIDE_ATTR_FC_TYPE = "fc_type";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_FC_OVERRIDE_ATTR_FC_VAL = "fc_val";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PINLOC_NODE_NAME = "pinlocations";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PINLOC_ATTR_PATTERN = "pattern";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PINLOC_LOC_NODE_NAME = "loc";
+constexpr const char* XML_VPR_ARCH_TILES_TILE_SUBTILE_PINLOC_LOC_ATTR_SIDE = "side";
+/* Layout */
+constexpr const char* XML_VPR_ARCH_LAYOUT_NODE_NAME = "layout";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_TILEABLE = "tileable";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_THRU_CHANNEL = "through_channel";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_SHRINK_BOUNDARY = "shrink_boundary";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_OPIN2ALL_SIDES = "opin2all_sides";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_CONCAT_WIRE = "concat_wire";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_CONCAT_PASS_WIRE = "concat_pass_wire";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_PERIMETER_CB = "perimeter_cb";
+constexpr const char* XML_VPR_ARCH_LAYOUT_AUTO_NODE_NAME = "auto_layout";
+constexpr const char* XML_VPR_ARCH_LAYOUT_AUTO_ATTR_ASPECT_RATIO = "aspect_ratio";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_TYPE = "type";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_STARTX = "startx";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_STARTY = "starty";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_PRIORITY = "priority";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_X = "x";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ATTR_Y = "y";
+constexpr const char* XML_VPR_ARCH_LAYOUT_ROW_NODE_NAME = "row";
+constexpr const char* XML_VPR_ARCH_LAYOUT_COL_NODE_NAME = "col";
+constexpr const char* XML_VPR_ARCH_LAYOUT_SINGLE_NODE_NAME = "single";
+constexpr const char* XML_VPR_ARCH_LAYOUT_CORNERS_NODE_NAME = "corners";
+constexpr const char* XML_VPR_ARCH_LAYOUT_FILL_NODE_NAME = "fill";
+constexpr const char* XML_VPR_ARCH_LAYOUT_FIXED_NODE_NAME = "fixed_layout";
+constexpr const char* XML_VPR_ARCH_LAYOUT_FIXED_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_LAYOUT_FIXED_ATTR_WIDTH = "width";
+constexpr const char* XML_VPR_ARCH_LAYOUT_FIXED_ATTR_HEIGHT = "height";
+/* device */
+constexpr const char* XML_VPR_ARCH_DEVICE_NODE_NAME = "device";
+constexpr const char* XML_VPR_ARCH_DEVICE_SIZING_NODE_NAME = "sizing";
+constexpr const char* XML_VPR_ARCH_DEVICE_SIZING_ATTR_R_MINW_NMOS = "R_minW_nmos";
+constexpr const char* XML_VPR_ARCH_DEVICE_SIZING_ATTR_R_MINW_PMOS = "R_minW_pmos";
+constexpr const char* XML_VPR_ARCH_DEVICE_AREA_NODE_NAME = "area";
+constexpr const char* XML_VPR_ARCH_DEVICE_AREA_ATTR_GRID_LOGIC_TILE_AREA = "grid_logic_tile_area";
+constexpr const char* XML_VPR_ARCH_DEVICE_CHANDIST_NODE_NAME = "chan_width_distr";
+constexpr const char* XML_VPR_ARCH_DEVICE_CHANDIST_X_NODE_NAME = "x";
+constexpr const char* XML_VPR_ARCH_DEVICE_CHANDIST_Y_NODE_NAME = "y";
+constexpr const char* XML_VPR_ARCH_DEVICE_CHANDIST_ATTR_DISTR = "distr";
+constexpr const char* XML_VPR_ARCH_DEVICE_CHANDIST_ATTR_PEAK = "peak";
+constexpr const char* XML_VPR_ARCH_DEVICE_SWITCHBLOCK_NODE_NAME = "switch_block";
+constexpr const char* XML_VPR_ARCH_DEVICE_SWITCHBLOCK_ATTR_TYPE = "type";
+constexpr const char* XML_VPR_ARCH_DEVICE_SWITCHBLOCK_ATTR_FS = "fs";
+constexpr const char* XML_VPR_ARCH_DEVICE_SWITCHBLOCK_ATTR_SUB_TYPE = "sub_type";
+constexpr const char* XML_VPR_ARCH_DEVICE_SWITCHBLOCK_ATTR_SUB_FS = "sub_fs";
+constexpr const char* XML_VPR_ARCH_DEVICE_CONNECTIONBLOCK_NODE_NAME = "connection_block";
+constexpr const char* XML_VPR_ARCH_DEVICE_CONNECTIONBLOCK_ATTR_INPUT_SWITCH_NAME =
+  "input_switch_name";
+/* switchlist */
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_NODE_NAME = "switchlist";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_NODE_NAME = "switch";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_TYPE = "type";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_R = "R";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_CIN = "Cin";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_COUT = "Cout";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_TDEL = "Tdel";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_MUX_TRANS_SIZE = "mux_trans_size";
+constexpr const char* XML_VPR_ARCH_SWITCHLIST_SWITCH_ATTR_BUF_SIZE = "buf_size";
+/* Segmentlist */
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_NODE_NAME = "segmentlist";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_NODE_NAME = "segment";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_AXIS = "axis";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_FREQ = "freq";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_LENGTH = "length";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_TYPE = "type";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_RMETAL = "Rmetal";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SEGMENT_ATTR_CMETAL = "Cmetal";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_MUX_NODE_NAME = "mux";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_MUX_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SB_NODE_NAME = "sb";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_SB_ATTR_TYPE = "type";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_CB_NODE_NAME = "cb";
+constexpr const char* XML_VPR_ARCH_SEGMENTLIST_CB_ATTR_TYPE = "type";
+/* directlist */
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_NODE_NAME = "directlist";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_NODE_NAME = "direct";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_FROM_PIN = "from_pin";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_TO_PIN = "to_pin";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_X_OFFSET = "x_offset";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_Y_OFFSET = "y_offset";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_Z_OFFSET = "z_offset";
+constexpr const char* XML_VPR_ARCH_DIRECTLIST_DIRECT_ATTR_SWITCH_NAME = "switch_name";
+/* complexblocklist */
+constexpr const char* XML_VPR_ARCH_COMPLEXBLOCKLIST_NODE_NAME = "complexblocklist";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_NODE_NAME = "pb_type";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_ATTR_NUM_PB = "num_pb";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_ATTR_BLIF_MODEL = "blif_model";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_ATTR_CLASS = "class";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TSETUP_NODE_NAME = "T_setup";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TSETUP_ATTR_VALUE = "value";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TSETUP_ATTR_PORT = "port";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TSETUP_ATTR_CLOCK = "clock";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_THOLD_NODE_NAME = "T_hold";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_THOLD_ATTR_VALUE = "value";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_THOLD_ATTR_PORT = "port";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_THOLD_ATTR_CLOCK = "clock";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TCLK2Q_NODE_NAME = "T_clock_to_Q";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TCLK2Q_ATTR_MAX = "max";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TCLK2Q_ATTR_MIN = "min";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TCLK2Q_ATTR_PORT = "port";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_TCLK2Q_ATTR_CLOCK = "clock";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_DELAY_CONSTANT_NODE_NAME = "delay_constant";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_DELAY_CONSTANT_ATTR_MAX = "max";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_DELAY_CONSTANT_ATTR_MIN = "min";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_DELAY_CONSTANT_ATTR_IN_PORT = "in_port";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_DELAY_CONSTANT_ATTR_OUT_PORT = "out_port";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PACK_PATTERN_NODE_NAME = "pack_pattern";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PACK_PATTERN_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INPUT_NODE_NAME = "input";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_OUTPUT_NODE_NAME = "output";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_CLOCK_NODE_NAME = "clock";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PORT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PORT_ATTR_NUM_PINS = "num_pins";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PORT_ATTR_IS_NON_CLOCK_GLOBAL = "is_non_clock_global";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PORT_ATTR_EQUIVALENT = "equivalent";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_PORT_ATTR_CLASS = "port_class";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_MODE_NODE_NAME = "mode";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_MODE_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_MODE_ATTR_DISABLE_PACKING = "disable_packing";
+/* Interconnect */
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_NODE_NAME = "interconnect";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_DIRECT_NODE_NAME = "direct";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_MUX_NODE_NAME = "mux";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_NAME = "name";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_INPUT = "input";
+constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_OUTPUT = "output";
+}  // namespace arkangel

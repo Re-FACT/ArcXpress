@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!-- Name is the nickname of the tape-out project
+     Family is the device/arch family which the tape-out project is based on
+     It will impact the project setup and execuation on arch, netlist, dv and pd etc.
+     Path is the home directory of the project
+     Reserved keywords when defining the paths include: 
+     - ${PWD} represents the absolute path where Arkangel is called
+     - ${PROJ_PATH} represents the absolute path of the home directory of the project as defined by syntax 'path'
+     - ${ROOT_PATH} represents the absolute path of Arkangel installed binaries
+  -->
+<tapeout name="alkaid_ex" family="alkaidL" path="${PWD}/alkaid_exto">
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <!-- Specify the PDK configuration file -->
+  <pdk>${ROOT_PATH}/etc/pdk_data/s40ulp.xml</pdk>
+  <!-- Specify the benchmark configuration files -->
+  <benchmarks>
+    <file>${ROOT_PATH}/etc/benchmark_data/checkin.xml</file>
+    <file>${ROOT_PATH}/etc/benchmark_data/ff.xml</file>
+  </benchmarks>
+  <arch_template>
+    <dp>
+      <file type="vpr_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/vpr_arch.xml</file>
+      <file type="openfpga_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/openfpga_arch.xml</file>
+      <file type="openfpga_global_network_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/openfpga_global_network.xml</file>
+      <file type="design_variables">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/arch_timing.yaml</file>
+    </dp>
+    <ultimate>
+      <file type="vpr_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/vpr_arch.xml</file>
+      <file type="openfpga_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/openfpga_arch.xml</file>
+      <file type="openfpga_global_network_arch">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/openfpga_global_network.xml</file>
+      <file type="design_variables">${ROOT_PATH}/etc/device/MX200/E15AL1MU1/FABRIC/arch/arch_timing.yaml</file>
+    </ultimate>
+  </arch_template>
+  <!-- Record each run and the status
+       frozen means a protected run where no changes are allowed unless user flips the flag
+       failed runs will block the downstream steps
+    -->
+  <step name="arch">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <substep name="arch_data" status="success"/>
+        <substep name="arch_init_module_names" status="success"/>
+      </run>
+      <run id="1" status="fail" frozen="false"/>
+    </runs>
+  </step>
+  <step name="bitstream">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="arch" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="arch" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="netlist">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="arch" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="arch" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="pd">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="netlist" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="netlist" run="0"/>
+      </run>
+      <run id="2" status="fail" frozen="false">
+        <dep step="netlist" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="so">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="pd" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="pd" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="dv_rtl">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="netlist" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="netlist" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="dv_gl">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="netlist" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="netlist" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+    </runs>
+  </step>
+  <step name="dv_pl">
+    <runs latest_id="1">
+      <run id="0" status="success" frozen="true">
+        <dep step="pd" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+      <run id="1" status="fail" frozen="false">
+        <dep step="pd" run="0"/>
+        <dep step="bitstream" run="0"/>
+      </run>
+    </runs>
+  </step>
+</tapeout>

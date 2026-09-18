@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="adder_4" suite="adder">
+    <top_module>adder_4</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_4/adder_4.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_4/test_adder_4.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_4/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="adder_6" suite="adder">
+    <top_module>adder_6</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_6/adder_6.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_6/test_adder_6.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_6/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="adder_8" suite="adder">
+    <top_module>adder_8</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_8/adder_8.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_8/test_adder_8.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_8/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="adder_16" suite="adder">
+    <top_module>adder_16</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_16/adder_16.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_16/test_adder_16.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/micro_benchmark/simple_gates/adder/adder_16/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="adder_24" suite="adder">
+    <top_module>adder_24</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_24/adder_24.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_24/test_adder_24.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_24/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+  <benchmark name="adder_32" suite="adder">
+    <top_module>adder_32</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_32/adder_32.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_32/test_adder_32.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/adder/adder_32/Makefile</file>
+    </cocotb>
+    <constraints>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

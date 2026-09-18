@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="single_stage" suite="flexlogix">
+    <top_module>single_stage_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/single_stage/single_stage.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/single_stage/single_stage_top.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/single_stage/test_single_stage.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/single_stage/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/single_stage/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="multi_stage" suite="flexlogix">
+    <top_module>multi_stage_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/multi_stage/multi_stage.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/multi_stage/multi_stage_top.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/multi_stage/test_multi_stage.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/multi_stage/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/multi_stage/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="virtual_switch_cross" suite="flexlogix">
+    <top_module>virtual_switch_cross_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_cross/virtual_switch_cross.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_cross/virtual_switch_cross_top.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_cross/test_virtual_switch_cross.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_cross/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_cross/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="virtual_switch_straight" suite="flexlogix">
+    <top_module>virtual_switch_straight_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_straight/virtual_switch_straight.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_straight/virtual_switch_straight_top.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_straight/test_virtual_switch_straight.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_straight/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/virtual_switch_straight/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="wide_comparator" suite="flexlogix">
+    <top_module>wide_comparator_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/wide_comparator/wide_comparator.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/wide_comparator/wide_comparator_top.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/wide_comparator/test_wide_comparator.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/wide_comparator/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/flexlogix/wide_comparator/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

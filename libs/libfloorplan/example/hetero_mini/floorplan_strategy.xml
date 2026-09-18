@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<floorplan_strategies>
+  <!-- Reserved width for boundary cells -->
+  <boundary_cell_width>CPP*4</boundary_cell_width>
+  <!-- Default tile utilization rate. Range (0, 1] -->
+  <height_width_ratio>1</height_width_ratio>
+  <tile_utilization default="0.7">
+    <!-- Optionally user can define utilization rate for each tile. Name must match with the report_module_names
+     Any tile not defined will follow the default utilization rate
+     For example:
+    <tile name="tile_main">0.9</tile>
+        -->
+  </tile_utilization>
+  <tile_gap>
+    <horizental>CPP*11</horizental>
+    <vertical>SC_HEIGHT*3</vertical>
+  </tile_gap>
+  <side_gap>
+    <left>CPP*15</left>
+    <top>SC_HEIGHT*2</top>
+    <bottom>2*SC_HEIGHT</bottom>
+    <right>15*CPP</right>
+  </side_gap>
+  <!-- Pin terminal mini dimension, related to the metal stack and mini metal size by PDK DRC rules. Unit is [um] -->
+  <metal_stack>
+    <layer name="M1" length="0.28" width="0.07" spacing="0.07"/>
+    <layer name="M2" length="0.28" width="0.07" spacing="0.07"/>
+    <layer name="M3" length="0.28" width="0.07" spacing="0.07"/>
+    <layer name="M4" length="0.28" width="0.07" spacing="0.07"/>
+  </metal_stack>
+  <!-- Detailed floorplanning to build network for global signals -->
+  <signal_distribution_network>
+    <!-- Define the port available in the fpga_top as the starting point of the network. Multi-bit port will result in multi-bit network, where each bit has a dedicated network. The bufcell must be a valid buffer cell from the standard cell library, being consistent with fpga_top fabric. Type can be [ htree | fishbone ] -->
+    <network port="clk[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+    <!-- For htree, 
+      when depth is auto, build h-tree recursively through bipartition until cannot (reach a size smaller than 2x2). The depth is limited to the objective to build a balanced tree globally. If some region is too shallow and can only afford depth=2, other region should follow with diving into depth > 2
+      when depth is specified, only build h-tree by the number of level = depth, then use fishbone to touch each sink
+      -->
+    <network port="GLOBAL_RESET[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+    <network port="ccff_reset[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+    <network port="config_enable[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+    <network port="prog_clk[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+    <network port="isolate[0]" type="htree" bufcell="BUFFD4BWP" depth="2">
+      <entry x="1" y="0"/>
+    </network>
+  </signal_distribution_network>
+</floorplan_strategies>

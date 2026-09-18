@@ -1,0 +1,23 @@
+
+NON-DISCLOSURE AGREEMENT
+========================
+
+This software is proprietary and confidential information of Rapid Flex Shanghai
+Limited and its affiliates ("Rapid-Flex") and may be used and disclosed only as
+authorized in a written agreement which controls such usage and disclosure.
+
+LICENSE
+=======
+
+This is an official release. A license file is required to run it after installation.
+You can contact Rapid-Flex support to obtain a license file.
+
+DISCLAIMER
+==========
+
+To run this software, some libs and modules provided by 3rd parties need to be
+installed. Rapid-Flex is not responsible for any obligations assumed by using
+such libs and modules.
+
+You must agree to proceed with this installation.
+

@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!-- Just an example, may not work in practical cases! -->
+<!-- A number of suite with unique name can be defined.
+     Each suite contains a number of benchmarks.
+     Each benchmark requires a list of files
+     Reserved keywords when defining the paths include: 
+     - ${PWD} represents the absolute path where Arkangel is called
+     - ${PROJ_PATH} represents the absolute path of the home directory of the project as defined by syntax 'path'
+     - ${ROOT_PATH} represents the absolute path of Arkangel installed binaries
+ -->
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="shift_reg_8" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_8/shift_reg_8.v</file>
+    </design>
+    <top_module>shift_reg_8</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_8/test_shift_reg_8.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_8/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_8/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="shift_reg_12" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_12/shift_reg_12.v</file>
+    </design>
+    <top_module>shift_reg_12</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_12/test_shift_reg_12.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_12/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_12/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="shift_reg_16" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_16/shift_reg_16.v</file>
+    </design>
+    <top_module>shift_reg_16</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_16/test_shift_reg_16.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_16/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_16/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="shift_reg_24" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_24/shift_reg_24.v</file>
+    </design>
+    <top_module>shift_reg_24</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_24/test_shift_reg_24.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_24/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_24/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="shift_reg_32" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_32/shift_reg_32.v</file>
+    </design>
+    <top_module>shift_reg_32</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_32/test_shift_reg_32.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_32/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_32/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="shift_reg_48" suite="checkin">
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_48/shift_reg_48.v</file>
+    </design>
+    <top_module>shift_reg_48</top_module>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_48/test_shift_reg_48.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_48/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/shift_reg/shift_reg_48/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

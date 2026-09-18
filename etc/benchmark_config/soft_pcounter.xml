@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<benchmark_suite>
+  <stamp>
+    <author>RapidFlex</author>
+    <dates>
+      <created>Sat Dec 31 03:14:41 PM PST 2022</created>
+      <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
+    </dates>
+    <tool_version>0.0.15-dev+023fa82</tool_version>
+  </stamp>
+  <benchmark name="c2k_SR_PWM_verilog" suite="soft_pcounter">
+    <top_module>clb_case_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/clb_case_top.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/top_wrapper.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/rf_pulse_gen.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/key_debounce.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/sr_fsm.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/simple_pcnt.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/test_clb_case_top.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+  <benchmark name="c2k_SR_PWM_verilog_no_debounce" suite="soft_pcounter">
+    <top_module>clb_case_top</top_module>
+    <design>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/clb_case_top.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/top_wrapper.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/rf_pulse_gen.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/sr_fsm.v</file>
+      <file type="verilog">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/simple_pcnt.v</file>
+    </design>
+    <cocotb>
+      <file type="top">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/test_clb_case_top.py</file>
+      <file type="makefile">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/Makefile</file>
+    </cocotb>
+    <constraints>
+      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/alkaid_benchmark/checkin/pcnt/c2k_SR_PWM_verilog_no_debounce/pcf_gclk.xml</file>
+    </constraints>
+  </benchmark>
+</benchmark_suite>

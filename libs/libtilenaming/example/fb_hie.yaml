@@ -1,0 +1,75 @@
+fpga_top:
+  fpga_core:
+    tile_6_:
+      - cby_0_
+    tile_10_:
+      - grid_io_topL_top
+      - cby_5_
+    tile_16_:
+      - grid_io_rightL_right
+      - cbx_1_
+    tile_15_:
+      - grid_io_rightL_right
+      - cbx_0_
+    tile_14_:
+      - cbx_0_
+    tile_11_:
+      - grid_io_bottomL_bottom
+      - cbx_2_
+      - cby_2_
+      - sb_11_
+    tile_7_:
+      - grid_io_bottomL_bottom
+      - cbx_2_
+      - cby_2_
+      - sb_7_
+    tile_0_:
+      - cbx_0_
+      - cby_0_
+      - sb_0_
+    tile_1_:
+      - grid_io_leftL_left
+      - cbx_0_
+      - cby_1_
+      - sb_1_
+    tile_2_:
+      - grid_io_leftL_left
+      - cbx_0_
+      - cby_1_
+      - sb_2_
+    tile_3_:
+      - grid_io_leftL_left
+      - cbx_0_
+      - cby_1_
+      - sb_3_
+    tile_4_:
+      - grid_io_leftL_left
+      - cbx_0_
+      - cby_1_
+      - sb_4_
+    tile_5_:
+      - grid_io_leftL_left
+      - cbx_1_
+      - cby_1_
+      - sb_5_
+    tile_8_:
+      - grid_clb
+      - cbx_3_
+      - cby_3_
+      - sb_8_
+    tile_9_:
+      - grid_clb
+      - cbx_4_
+      - cby_4_
+      - sb_9_
+    tile_12_:
+      - grid_clb
+      - cbx_5_
+      - cby_6_
+      - sb_12_
+    tile_13_:
+      - grid_clb
+      - cbx_6_
+      - cby_7_
+      - sb_13_
+    direct_interc:
