@@ -1,0 +1,54 @@
+name: Code Format
+
+# Run CI on push, PR, and weekly.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * 0 " # weekly
+
+# Multiple job to tests
+jobs:
+  change_detect:
+    name: "Check"
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "C/C++"
+            code_type: "-cpp"
+          - name: "XML"
+            code_type: "-xml"
+          - name: "Python"
+            code_type: "-py"
+          - name: "Yaml"
+            code_type: "-yaml"
+    steps:
+      - name: Cancel previous
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout OpenFPGA repo
+        uses: actions/checkout@v3
+        with:
+          submodules: false
+
+      - name: Install dependencies
+        run: |
+          sudo bash ./.github/workflows/build_dependency_ubuntu.sh
+          sudo python3 -m pip install -r format_requirements.txt
+          
+      - name: Dump tool versions
+        run: |
+          clang-format --version
+          black --version
+
+      - name: Check format
+        run: ./dev/check-format.sh ${{ matrix.config.code_type }}

@@ -1,0 +1,56 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Regression test files
+/_*/
+*.rpt
+*.log
+_test_run
+_work
+
+# Cocotb outputs
+__pycache__
+results.xml
+sim_build
+*.vcd
+cocotb_sim.log
+# VCS outputs
+_snps_vcs
+csrc
+pli.tab
+simv
+simv.daidir
+ucli.key
+verdi_config_file
+vish_stacktrace.vstf
+

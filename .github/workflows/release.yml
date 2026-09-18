@@ -1,0 +1,341 @@
+name: Create release package
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build_ubuntu2204:
+    #When a branch tag does not contain 'license', such as v1.0.0, this job will be triggered.
+    if: |
+      startsWith(github.event.release.tag_name, 'v') && !contains(github.event.release.tag_name, '-license')
+    runs-on: [self-hosted, Linux, X64, eda_us]
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.CI4RF }}
+    steps:
+      - name: Runner workspace path 
+        run: | 
+           echo "Cleaning up previous run" 
+           rm -rf "${{ github.workspace }}" 
+           mkdir -p "${{ github.workspace }}" 
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Build doc
+        run: |
+          cd docs
+          make html
+  
+      - name: Installer
+        run: |
+          make prebuild INSTALL_FULL_DEVICE=ON
+          make installer -j4 INSTALLER_TYPE=IFW
+          # Rename package to include system identifier
+          for f in ArkAngel*-Linux.run; do
+            mv "$f" "${f%.run}-ubuntu2204.run"
+          done
+            
+      ##display the generated package on the GitHub Releases page; the current step is working.
+      - name: Release
+        uses: ncipollo/release-action@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          artifacts: ArkAngel*-ubuntu2204.run
+          generateReleaseNotes: true
+          allowUpdates: true
+          skipIfReleaseExists: false
+
+      - name: Upload documentation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: docs/source
+          retention-days: 1
+
+  upload_docs:
+    #When a branch tag does not contain 'license', such as v1.0.0, this job will be triggered.
+    if: |
+      startsWith(github.event.release.tag_name, 'v') && !contains(github.event.release.tag_name, '-license')
+    needs: build_ubuntu2204
+    runs-on: [self-hosted, Linux, X64, eda_us_machine0]
+    permissions:
+      contents: write
+      actions: read
+    env:
+      GITHUB_TOKEN: ${{ secrets.CI4RF }}
+
+    steps:
+      - name: Download documentation artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: documentation
+          path: docs/source
+
+      - name: Clone target repo (RapidFlex/aaee_ug)
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git clone https://x-access-token:${{ secrets.CI4RF }}@github.com/RapidFlex/aaee_ug.git pr_content
+
+      - name: Copy documentation to target repo
+        run: |
+          mkdir -p pr_content/docs/source/
+            rsync -avL \
+            --exclude='appendix/' \
+            --exclude='developer/' \
+            --exclude='manual/compile/' \
+            --exclude='manual/tutorial/' \
+            --include='*/' \
+            --include='*.rst' \
+            --exclude='*' \
+            docs/source/ pr_content/docs/source/
+
+      - name: Sync version to target repo
+        run: |
+          cp docs/source/VERSION.md pr_content/docs/source/
+
+      - name: Create Pull Request to RapidFlex/aaee_ug
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.CI4RF }}
+          repository: RapidFlex/aaee_ug
+          path: pr_content/
+          commit-message: "Update documentation"
+          branch: update_docs
+          title: "Update documentation"
+          body: |
+            This PR automatically updates the documentation generated from:
+            - Source: ${{ github.repository }}
+            - Commit: ${{ github.sha }}
+          base: main
+          committer: github-actions <github-actions@github.com>
+          author: github-actions <github-actions@github.com>
+
+
+  build_centos:
+    #When a branch tag does not contain 'license', such as v1.0.0, this job will be triggered.
+    if: |
+      startsWith(github.event.release.tag_name, 'v') && !contains(github.event.release.tag_name, '-license')
+    runs-on: [self-hosted, Linux, X64, eda_cn]
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.CI4RF }}
+
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          mkdir -p "${{ github.workspace }}"
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Dump tool versions
+        env:
+          CC: gcc
+          CXX: g++
+        run: |
+          cat /etc/centos-release
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          make checkout_all
+
+      - name: Activate conda and compile
+        shell: bash
+        run: |
+          echo "conda activate eda && make prebuild INSTALL_FULL_DEVICE=ON -j8 INSTALL_CENTOS7P9_ENV=ON BUILD_WITH_GRAPHVIZ=ON" > scl_compile.sh
+          cat scl_compile.sh | scl enable devtoolset-10 csh
+
+      - name: Build doc
+        run: |
+          echo "conda activate eda && cd docs && make html" > scl_docs.sh
+          cat scl_docs.sh | scl enable devtoolset-10 csh
+  
+      - name: Installer
+        env:
+          py_cv_module__tkinter: "disabled"
+        run: |
+          cat << 'EOF' > scl_installer.csh
+          conda activate eda
+          if ($status != 0) exit 1
+
+          make installer -j4 INSTALLER_TYPE=IFW
+          if ($status != 0) exit 1
+
+          foreach f (`ls ArkAngel*-Linux.run`)
+              set base = $f:r
+              mv "$f" "${base}-centos.run"
+          end
+          EOF
+
+          scl enable devtoolset-10 -- csh scl_installer.csh
+
+      - name: Copy installer to absolute path on runner
+        run: |
+          TARGET_DIR="/rapidsilicon/data/aaee_artifacts" 
+          echo "Target directory: $TARGET_DIR"
+          if [ ! -d "$TARGET_DIR" ]; then
+            echo "Directory does not exist. Creating: $TARGET_DIR"
+            mkdir -p "$TARGET_DIR"
+          else
+            echo "Directory exists: $TARGET_DIR"
+          fi
+          echo "Copying ArkAngel*.run files to $TARGET_DIR..."
+          cp ./ArkAngel*.run "$TARGET_DIR"
+
+          echo "Files in $TARGET_DIR:"
+          ls -lh "$TARGET_DIR"
+
+  win_build:
+    name: Windows Mingw64 installer
+    runs-on: windows-latest
+    if: |
+      startsWith(github.event.release.tag_name, 'v') && !contains(github.event.release.tag_name, '-license')
+    permissions:
+      contents: write
+    defaults:
+      run:
+        # This ensures all 'run' steps use the MSYS2 bash shell by default
+        shell: msys2 {0}
+    # Extend to 10 hours, most time is spending on cpack when make installer
+    timeout-minutes: 720
+    # Define the steps to run the build job
+    env:
+      GITHUB_TOKEN: ${{ secrets.CI4RF }}
+      CC: gcc
+      CXX: g++
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Checkout benchmarks
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/alkaid_benchmark
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/benchmarks/alkaid_benchmark
+
+      - name: Checkout utilities
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/cocotb_utils
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/cocotb_utils
+
+      - name: Setup MSYS2
+        id: msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          # Optional: Pre-install core tools needed to run your script
+          install: >-
+            wget
+            git
+
+      - name: Path Check (PowerShell)
+        run: echo "MSYS2 is at ${{ steps.msys2.outputs.msys2-location }}"
+
+      #In MSYS2, the flex package is an MSYS-native tool, meaning it installs its headers to /usr/include/FlexLexer.h. However, if you are using a MinGW-w64 environment (e.g., UCRT64, MINGW64), the compiler only looks for headers in /mingw64/include or similar toolchain-specific paths. The most common workaround is to copy or link the header from the MSYS directory to your active MinGW-w64 include directory. 
+      # For python build from sources
+      - name: Install dependencies
+        run: |
+          ./.github/workflows/build_dependency_win-msys2-MINGW64.sh
+          cp /usr/include/FlexLexer.h /mingw64/include/
+          python3 -m venv myenv
+          source myenv/bin/activate
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r win_requirements.txt
+          echo "==== Checking python packages ===="
+          python -c "import yaml; print('Installed')"      
+          pip install numpy cython setuptools>=60.0.0
+
+      - name: Dump tool versions
+        shell: msys2 {0}
+        run: |
+          which cmake
+          cmake --version
+          which ${CC}
+          ${CC} --version
+          which ${CXX}
+          ${CXX} --version
+          which ld
+          ld --version
+          which python3
+          python3 --version
+
+      - uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-msys2-${{ github.job }}-${{ matrix.config.prefix }}-${{ matrix.config.cc }}
+          restore-keys: |
+            ${{ runner.os }}-msys2-${{ github.job }}-${{ matrix.config.prefix }}-
+            ${{ runner.os }}-msys2-${{ github.job }}-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Build
+        shell: msys2 {0}
+        env:
+          CUSTOM_ENV_ROOT: ${{ steps.msys2.outputs.msys2-location }}
+          CCACHE_DIR: ${{ github.workspace }}/.ccache
+        run: |
+          make checkout_build_opensource
+          make prebuild EDITION_TYPE=engineering INSTALL_FULL_DEVICE=ON BUILD_PLUGIN_SLANG=OFF BUILD_CUSTOM_PYTHON=OFF BUILD_FRONTEND=ON BUILD_WITH_LICENSE_CONTROL=OFF INSTALL_DOC=OFF INSTALL_MINGW64_ENV=ON BUILD_IPO=OFF -j1
+          make installer INSTALLER_TYPE=IFW INSTALL_DOC=OFF INSTALL_MINGW64_ENV=ON -j1
+
+      ##display the generated package on the GitHub Releases page; the current step is working.
+      - name: Release
+        uses: ncipollo/release-action@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          artifacts: ArkAngel*-win64.exe
+          generateReleaseNotes: true
+          allowUpdates: true
+          skipIfReleaseExists: false
+

@@ -1,0 +1,1206 @@
+name: Test
+
+# Run CI on push, PR, and weekly.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 * * 0 " # weekly
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Environment variables
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: release
+  MAKEFLAGS: "-j8"
+  DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+  # (Boolean) Setting this value to True, will force linux tet always
+  IGNORE_DOCKER_TEST: ${{ secrets.IGNORE_DOCKER_TEST }}
+  REPO_OWNER: ${{ github.repository_owner }}
+  # Configure Qt as CI does not need to show any window
+  QT_QPA_PLATFORM: offscreen
+
+# Multiple job to tests
+jobs:
+  change_detect:
+    name: "Detect code changes"
+    runs-on: ubuntu-latest
+    outputs:
+      # this is output as string, see https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idoutputs
+      source_modified: ${{ steps.changes.outputs.status_code == '1' }}
+      force_upload: false
+      sha_short: ${{ steps.changes.outputs.sha_short }}
+      docker_repo: ${{ steps.changes.outputs.docker_repo }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check for source code changes
+        id: changes
+        run: |
+          git diff origin/main HEAD --name-status -- . ':!tests' ':!docs'
+          if git diff origin/main HEAD --name-status --exit-code -- . ':!tests' ':!docs'; then
+            echo "::set-output name=status_code::0"
+          else
+            echo "::set-output name=status_code::$?"
+          fi
+          if [[ (${GITHUB_REF} == 'refs/heads/main') || -n "${IGNORE_DOCKER_TEST}"  ]]; then
+            echo "Current branch is main forcing source_modified"
+            echo "::set-output name=status_code::1"
+          fi
+          if [[ -n "${DOCKER_REPO}" ]]; then
+            echo "name=docker_repo::$REPO_OWNER"
+            echo "::set-output name=docker_repo::$REPO_OWNER"
+          else
+            echo "name=docker_repo::RapidFlex"
+            echo "::set-output name=docker_repo::RapidFlex"
+          fi
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+  # Test the compilation compatibility
+  # Yosys-slang plugin has issues on linking library to Yosys in Msys2. Suspect the root of cause is on the linking path. Disable it for now.
+  win_build:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: windows-latest
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Build Compatibility (GCC, Windows Msys2-MINGW64)"
+            cc: gcc
+            cxx: g++
+            os: MINGW64
+            prefix: mingw64
+            edition: engineering
+            cmake_flags: "-DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache"
+    defaults:
+      run:
+        # This ensures all 'run' steps use the MSYS2 bash shell by default
+        shell: msys2 {0}
+    # Extend to 10 hours, most time is spending on cpack when make installer
+    timeout-minutes: 720
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Cancel previous
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Checkout benchmarks
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/alkaid_benchmark
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/benchmarks/alkaid_benchmark
+
+      - name: Checkout utilities
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/cocotb_utils
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/cocotb_utils
+
+      - name: Setup MSYS2
+        id: msys2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.config.os }}
+          update: true
+          # Optional: Pre-install core tools needed to run your script
+          install: >-
+            wget
+            git
+
+      - name: Path Check (PowerShell)
+        run: echo "MSYS2 is at ${{ steps.msys2.outputs.msys2-location }}"
+
+      #In MSYS2, the flex package is an MSYS-native tool, meaning it installs its headers to /usr/include/FlexLexer.h. However, if you are using a MinGW-w64 environment (e.g., UCRT64, MINGW64), the compiler only looks for headers in /mingw64/include or similar toolchain-specific paths. The most common workaround is to copy or link the header from the MSYS directory to your active MinGW-w64 include directory. 
+      # For python build from sources
+      - name: Install dependencies
+        run: |
+          ./.github/workflows/build_dependency_win-msys2-${{ matrix.config.os}}.sh
+          cp /usr/include/FlexLexer.h /${{ matrix.config.prefix}}/include/
+          python3 -m venv myenv
+          source myenv/bin/activate
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r win_requirements.txt
+          echo "==== Checking python packages ===="
+          python -c "import yaml; print('Installed')"      
+          pip install numpy cython setuptools>=60.0.0
+
+      - name: Dump tool versions
+        shell: msys2 {0}
+        run: |
+          which cmake
+          cmake --version
+          which ${CC}
+          ${CC} --version
+          which ${CXX}
+          ${CXX} --version
+          which ld
+          ld --version
+          which python3
+          python3 --version
+
+      - uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-msys2-${{ github.job }}-${{ matrix.config.prefix }}-${{ matrix.config.cc }}
+          restore-keys: |
+            ${{ runner.os }}-msys2-${{ github.job }}-${{ matrix.config.prefix }}-
+            ${{ runner.os }}-msys2-${{ github.job }}-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Build
+        shell: msys2 {0}
+        env:
+          CUSTOM_ENV_ROOT: ${{ steps.msys2.outputs.msys2-location }}
+          CCACHE_DIR: ${{ github.workspace }}/.ccache
+        run: |
+          make checkout_build_opensource
+          make compile EDITION_TYPE=${{ matrix.config.edition }} INSTALL_FULL_DEVICE=ON BUILD_PLUGIN_SLANG=OFF BUILD_CUSTOM_PYTHON=OFF BUILD_WITH_LICENSE_CONTROL=ON INSTALL_DOC=OFF INSTALL_MINGW64_ENV=ON BUILD_ON_EXTERNAL_YOSYS=OFF EXTERNAL_YOSYS_BIN=/${{ matrix.config.prefix }}/  BUILD_FRONTEND=ON -j1
+
+      - name: Installer
+        shell: msys2 {0}
+        env:
+          CUSTOM_ENV_ROOT: ${{ steps.msys2.outputs.msys2-location }}
+          CCACHE_DIR: ${{ github.workspace }}/.ccache
+        run: |
+          mkdir -p docs/build
+          make installer EDITION_TYPE=${{ matrix.config.edition }} INSTALL_FULL_DEVICE=ON BUILD_PLUGIN_SLANG=OFF BUILD_CUSTOM_PYTHON=OFF BUILD_WITH_LICENSE_CONTROL=ON INSTALL_DOC=OFF INSTALL_MINGW64_ENV=ON INSTALLER_TYPE=IFW BUILD_ON_EXTERNAL_YOSYS=OFF EXTERNAL_YOSYS_BIN=/${{ matrix.config.prefix }}/  BUILD_FRONTEND=ON -j1
+
+      - name: Upload artifact on error logs
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: failed_msys2_installer_log
+          retention-days: 1
+          path: |
+            _CPack_Packages/win64/IFW/PreinstallOutput.log 
+
+      - name: Upload artifact installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: win_msys2_installer
+          retention-days: 1
+          path: |
+            ArkAngel_*-win64.exe
+
+      - name: Create LCCgen package
+        run: |
+          make lccgen_package AAEE_LIC_PACKAGE_DIR=ArkAngel_lccgen
+
+      - name: Upload artifact lccgen
+        uses: actions/upload-artifact@v4
+        with:
+          name: win_msys2_lccgen
+          retention-days: 1
+          path: |
+            ArkAngel_lccgen*.tar.gz
+
+  # Add an installer creation for MSVC build
+  win_msvc_build:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: windows-2025
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Build Compatibility (MsBuild Windows-latest)"
+            edition: engineering
+    steps:
+      - name: Cancel previous
+        uses: styfle/cancel-workflow-action@0.12.1
+        with:
+          access_token: ${{ github.token }}
+          
+      - name: Checkout OpenFPGA repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Install Dependencies
+        shell: powershell
+        run: |
+          choco install winflexbison3 wget
+          choco install magicsplat-tcl-tk --version=1.16.0
+          choco install boost-msvc-14.3 --version 1.87.0
+          choco install graphviz --no-progress
+          choco install zlib
+          choco install readline
+          choco install pkgconfiglite
+          choco install capnproto
+
+      - name: vcpkg build
+        uses: johnwason/vcpkg-action@v8
+        id: vcpkg
+        with:
+          # vcpkg will automatically find and use the vcpkg.json in your repo root
+          token: ${{ secrets.GITHUB_TOKEN }}
+          manifest-dir: ${{ github.workspace }} # Set to the directory containing your vcpkg.json file
+          triplet: x64-windows-release # This must be set with a valid vcpkg triplet
+
+      - name: Dump tool versions
+        shell: powershell
+        run: |
+          cmake --version
+          where curl
+          win_flex --version
+          win_bison --version
+          tclsh --version
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '5.15.2'
+          use-official: true
+
+#      - name: Verify Installation
+#        run: binarycreator --version
+
+      - name: Checkout all the submodules
+        shell: powershell
+        run: |
+          make checkout_build_opensource
+
+      - name: Ensure curl is available
+        shell: powershell
+        run: |
+          $curlPath = (Get-Command curl.exe -ErrorAction SilentlyContinue).Source
+          if (-not $curlPath) {
+            choco install curl
+            $curlPath = (Get-Command curl.exe).Source
+          }
+          echo "CURL_PATH=$curlPath" >> $env:GITHUB_ENV
+
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+      
+      - name: Check MSVC Version
+        run: cl
+
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-msvc-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-msvc-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Find and Set BOOST_ROOT
+        shell: pwsh
+        run: |
+          # Common Chocolatey Boost install locations:
+          # 1. C:\local\boost_X_XX_X
+          # 2. C:\ProgramData\chocolatey\lib\boost-msvc-XX
+          $boostPath = Get-ChildItem -Path C:\local -Filter "boost_*" -Directory | Select-Object -First 1
+          if ($boostPath) {
+              echo "BOOST_ROOT=$($boostPath.FullName)" >> $GITHUB_ENV
+              echo "Found Boost at $($boostPath.FullName)"
+          } else {
+              # Fallback: check Chocolatey's own lib directory
+              $chocoLib = "C:\ProgramData\chocolatey\lib"
+              echo "Check $chocoLib if C:\local is empty"
+          }
+
+      - name: Set Graphviz Root for CMake
+        shell: pwsh
+        run: |
+          # Locate the dot executable
+          $dotPath = Get-Command dot -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+          if (-not $dotPath) {
+            # Fallback: manually check common default Chocolatey/Program Files paths
+            $dotPath = Get-ChildItem -Path "C:\\Program Files\\Graphviz*\\bin\\dot.exe" -Recurse | Select-Object -First 1 -ExpandProperty FullName
+          }
+          # Get the root directory (parent of \bin)
+          $gvRoot = Split-Path (Split-Path $dotPath -Parent) -Parent
+          # Export to GITHUB_ENV so subsequent steps (like CMake) can see it
+          echo "Graphviz_ROOT=$gvRoot" >> $env:GITHUB_ENV
+          echo "Graphviz root found at: $gvRoot"
+
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake ${{ steps.vcpkg.outputs.vcpkg-cmake-config }} -S .. -B . -DARKANGEL_EDITION_TYPE=${{ matrix.config.edition }} -DINSTALLER_WITH_FULL_DEVICE=ON -DBUILD_ARKANGEL_WITH_BUILTIN_FRONTEND=OFF -DBUILD_PYTHON_FROM_SOURCE=OFF -DBUILD_ARKANGEL_WITH_LICENSE=OFF -DWGET="${{ env.CURL_PATH }}" -DINSTALLER_WITH_DOC=OFF -DGraphviz_ROOT="${{ env.GRAPHVIZ_ROOT }}" -DARKANGEL_WITH_GRAPHVIZ=OFF -DARKANGEL_WITH_GUI=OFF -DCMAKE_C_COMPILER=LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+# TODO: Still buggy due to 
+#    C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.44.35207\include\locale(221,17): error C2988: unrecognizable template declaration/definition
+#          cmake --build . --config Release -j1
+
+  # Test the compilation compatibility
+  ubuntu_build:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Build Compatibility (Engineering edition, GCC-11, Ubuntu 22.04)"
+            cc: gcc-11
+            cxx: g++-11
+            os: ubuntu-22.04
+            edition: engineering
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    # Extend to 10 hours, most time is spending on cpack when make installer
+    timeout-minutes: 720
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Install dependencies
+        run: |
+          sudo bash ./.github/workflows/build_dependency_ubuntu.sh
+      
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          # Generates a unique key based on the specific job and matrix parameters
+          key: ${{ github.job }}-${{ runner.os }}-${{ matrix.config.cc}}
+          # Defines the fallback prefix if an exact match is missing
+          restore-keys: |
+            ${{ github.job }}-${{ runner.os }}-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Build
+        shell: bash
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          make checkout_build_opensource
+          make compile BUILD_TYPE=$BUILD_TYPE EDITION_TYPE=${{ matrix.config.edition }} INSTALL_FULL_DEVICE=ON -j${{ steps.cpu-cores.outputs.count}}
+
+      - name: Unit tests
+        shell: bash
+        run: |
+          make unit_test
+
+  centos_support:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ubuntu-22.04
+    container: ${{ matrix.config.docker_image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Build (GCC-11 on CentOS 9) with License control"
+            cc: gcc
+            cxx: g++
+            edition: engineering
+            dependency_version: "centos9"
+            docker_image: "ghcr.io/easybuilders/centosstream-9:2025-03-03-13626131526.124"
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+      ARKANGEL_LICENSE_PATH: ${{github.workspace}}/aaee_full_30days.lic
+    steps:
+      - name: Checkout OpenFPGA repo
+        uses: actions/checkout@v4
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Install dependencies
+        run: |
+          sudo bash ./.github/workflows/install_dependencies_build_${{ matrix.config.dependency_version }}.sh
+          python3 -m pip install -r format_requirements.txt
+      
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+          python3 --version
+
+      - uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          # Generates a unique key based on the specific job and matrix parameters
+          key: ${{ github.job }}-${{ runner.os }}-${{ matrix.config.cc}}-${{ matrix.config.dependency_version}}
+          # Defines the fallback prefix if an exact match is missing
+          restore-keys: |
+            ${{ github.job }}-${{ runner.os }}-${{ matrix.config.cc}}-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Build
+        shell: bash
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          git config --global --add safe.directory '*'
+          make checkout_build_opensource
+          make compile BUILD_TYPE=$BUILD_TYPE BUILD_WITH_LICENSE_CONTROL=ON INSTALL_FULL_DEVICE=ON -j${{ steps.cpu-cores.outputs.count}}
+
+      - name: trail license generation
+        shell: bash
+        run: |
+          make license LIC_TYPE=full LIC_FPATH=aaee_full_30days.lic
+
+      - name: Test with license checkout
+        shell: bash
+        run: |
+          make reg_test REG_TEST_TYPE=checkin REG_TEST_NEW_THREAD_WAIT_TIME=10
+
+  installer:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Installer (Ubuntu 22.04)"
+            cc: gcc-11
+            cxx: g++-11
+            os: ubuntu-22.04
+            edition: engineering
+            installer_type: "STGZ"
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Checkout benchmarks
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/alkaid_benchmark
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/benchmarks/alkaid_benchmark
+
+      - name: Install dependencies
+        run: |
+          sudo bash ./.github/workflows/build_dependency_ubuntu.sh
+      
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          # Generates a unique key based on the specific job and matrix parameters
+          key: ${{ github.job }}-${{ runner.os }}-${{ matrix.config.cc}}-${{ matrix.config.dependency_version}}
+          # Defines the fallback prefix if an exact match is missing
+          restore-keys: |
+            ${{ github.job }}-${{ runner.os }}-${{ matrix.config.cc}}-
+
+      - name: Get number of CPU cores
+        uses: SimenB/github-actions-cpu-cores@v3
+        id: cpu-cores
+
+      - name: Build
+        shell: bash
+        run: |
+          export PATH="/usr/lib/ccache:/usr/local/opt/ccache/libexec:$PATH"
+          make checkout_build_opensource
+          make compile BUILD_TYPE=$BUILD_TYPE EDITION_TYPE=${{ matrix.config.edition }} INSTALL_DOC=OFF INSTALL_FULL_DEVICE=ON INSTALLER_TYPE=${{ matrix.config.installer_type }} -j${{ steps.cpu-cores.outputs.count}}
+          make installer BUILD_TYPE=$BUILD_TYPE EDITION_TYPE=${{ matrix.config.edition }} INSTALL_DOC=OFF INSTALL_FULL_DEVICE=ON INSTALLER_TYPE=${{ matrix.config.installer_type }} -j${{ steps.cpu-cores.outputs.count}}
+
+  # Regression tests
+  basic_regtest:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Basic Regression Tests (GCC-11, Ubuntu 22.04)"
+            cc: gcc-11
+            cxx: g++-11
+            os: [self-hosted, Linux, X64, eda_us]
+            installer_type: "STGZ"
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          mkdir -p "${{ github.workspace }}"
+          
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - name: Build
+        shell: bash
+        run: |
+          make checkout_all
+          make compile INSTALL_FULL_DEVICE=ON
+
+#      - name: Install
+#        shell: bash
+#        run: |
+#          make installer BUILD_TYPE=$BUILD_TYPE INSTALLER_TYPE=${{ matrix.config.installer_type }}
+#          make install_test
+
+#      - name: Dependencies installation for regression tests 
+#        shell: bash
+#        run: |
+#          python3 -m pip install -r requirements.txt --user
+
+      - name: Regression test
+        shell: bash
+        run: |
+          make reg_test REG_TEST_TYPE=basic REG_TEST_NEW_THREAD_WAIT_TIME=10
+          
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: my-artifact
+          path: ${{github.workspace}}/test/tasks
+  
+  frozen_device_regtest:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Golden Netlist Regression Tests (GCC-10, CentOS 7)"
+            cc: gcc
+            cxx: g++
+            os: [self-hosted, Linux, X64, eda_us]
+            installer_type: "STGZ"
+            dut_device: "frozen_device_support"
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          mkdir -p "${{ github.workspace }}"
+          
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          make checkout_all
+
+      - name: Build
+        shell: bash
+        run: |
+          make compile INSTALL_FULL_DEVICE=ON BUILD_WITH_GRAPHVIZ=OFF -j8
+
+      - name: Regression test
+        shell: bash
+        run: |
+          make reg_test REG_TEST_TYPE=${{ matrix.config.dut_device }} NUM_JOBS=8 REG_TEST_NEW_THREAD_WAIT_TIME=10
+      
+      - name: Checkout PilotOne golden netlist
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/PilotOne
+          token: ${{ secrets.CI4RF }}
+          path: pilotone_repo
+          fetch-depth: 1
+          ref: main
+
+      - name: Find absolute path for netlist/rtl/ultimate
+        run: |
+          # Find the directory containing netlist/rtl/ultimate and output its absolute path
+          NETLIST_PATH=$(find $GITHUB_WORKSPACE -type d -path "*/netlist/rtl/ultimate" | head -n 1)
+          echo "Found NETLIST_PATH: $NETLIST_PATH"
+          echo "NETLIST_PATH=$NETLIST_PATH" >> $GITHUB_ENV
+
+      - name: Compare netlist with golden netlist
+        shell: bash
+        run: |
+          echo "NETLIST_PATH is: ${{ env.NETLIST_PATH }}"
+
+          # Check if the NETLIST_PATH exists
+          if [ ! -d "${{ env.NETLIST_PATH }}" ]; then
+            echo "ERROR: Netlist directory not found at: ${{ env.NETLIST_PATH }}"
+            exit 1
+          fi
+
+          # Ensure golden_netlist_dir exists
+          if [ ! -d "${{ github.workspace }}/golden_netlist_dir" ]; then
+            mkdir -p "${{ github.workspace }}/golden_netlist_dir"
+          fi
+
+          # Directly copy checksums.txt instead of fabric_netlist
+          echo "Copying checksums.txt..."
+          cp ${{ github.workspace }}/pilotone_repo/rtl_golden/checksums.txt ${{ github.workspace }}/golden_netlist_dir/
+
+          # Ensure the file system is synchronized and all files are written
+          sync
+
+          # Optionally, wait for a few seconds to make sure file writes are completed
+          sleep 2
+          echo "Golden netlist prepared at: ${{ github.workspace }}/golden_netlist_dir"
+
+          # Step 1: Create a checksum file for the netlist directory (including symlinks)
+          echo "Generating checksum for the netlist directory (including symlinks)..."
+          find -L ${{ env.NETLIST_PATH }} -type f -exec sha256sum {} \; | awk '{print $1}' | sort > netlist_checksums.txt
+
+          # Check if the checksum file is created
+          if [ ! -s netlist_checksums.txt ]; then
+            echo "ERROR: No checksums were generated for the netlist files."
+            exit 1
+          fi
+
+          # Step 2: Sort both checksums files before comparison
+          echo "Sorting checksums files..."
+          awk '{print $1}' ${{ github.workspace }}/golden_netlist_dir/checksums.txt | sort > checksums_sorted.txt
+          sort netlist_checksums.txt -o netlist_checksums_sorted.txt
+
+          # Step 3: Compare the sorted checksum files
+          echo "Comparing sorted checksums..."
+          if diff -q checksums_sorted.txt netlist_checksums_sorted.txt >/dev/null 2>&1; then
+            echo "SUCCESS: Checksums match."
+          else
+            echo "ERROR: Checksums do not match!"
+            exit 1
+          fi
+              
+  strong_regtest:
+    needs: [basic_regtest, frozen_device_regtest]  # Updated to run after basic and frozen device tests
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    # Strong tests require intensive computing time. Set to 12 hours
+    timeout-minutes: 720
+    # Note: dependencies are installed in the container. See details about dependency list in docker/Dockerfile.master
+    # Comment the line out when base image is built again
+    #container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-build-${{ matrix.config.cc}}
+    # Branch on different OS and settings
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "AlkaidL Strong Regression Tests (GCC-10, CentOS 7)"
+            cc: gcc
+            cxx: g++
+            os: [self-hosted, Linux, X64, eda_cn]
+            installer_type: "STGZ"
+            dut_device: "strong_alkaidL"
+          - name: "AlkaidC Strong Regression Tests (GCC-10, CentOS 7)"
+            cc: gcc
+            cxx: g++
+            os: [self-hosted, Linux, X64, eda_cn]
+            installer_type: "STGZ"
+            dut_device: "strong_alkaidC"
+          - name: "AlkaidD Strong Regression Tests (GCC-10, CentOS 7)"
+            cc: gcc
+            cxx: g++
+            os: [self-hosted, Linux, X64, eda_cn]
+            installer_type: "STGZ"
+            dut_device: "strong_alkaidD"
+    # Define the steps to run the build job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          mkdir -p "${{ github.workspace }}"
+          
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Dump tool versions
+        run: |
+          cat /etc/centos-release
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          make checkout_all
+
+      - name: Build
+        shell: bash
+        run: |
+          echo "conda activate eda && make compile INSTALL_FULL_DEVICE=ON BUILD_WITH_GRAPHVIZ=ON -j8" > scl_compile.sh
+          cat scl_compile.sh | scl enable devtoolset-10 csh
+
+      - name: Regression test
+        shell: bash
+        run: |
+          echo "conda activate eda && make reg_test REG_TEST_TYPE=${{ matrix.config.dut_device }} NUM_JOBS=8 REG_TEST_NEW_THREAD_WAIT_TIME=10" > scl_regtest_strong.sh
+          cat scl_regtest_strong.sh | scl enable devtoolset-10 csh
+
+  basic_regtest_minimal_device:
+    needs: change_detect
+    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+    name: "Basic Regression Tests (Minimal Device: alkaidL only, INSTALL_FULL_DEVICE=OFF)"
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: "Basic Regression Tests (Minimal Device: alkaidL only, INSTALL_FULL_DEVICE=OFF)"
+            cc: gcc-11
+            cxx: g++-11
+            os: [self-hosted, Linux, X64, eda_us]
+            installer_type: "STGZ"
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+    steps:
+      - name: Runner workspace path
+        run: |
+          echo "Cleaning up previous run"
+          rm -rf "${{ github.workspace }}"
+          mkdir -p "${{ github.workspace }}"
+          
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: false
+          token: ${{ secrets.CI4RF }}
+          persist-credentials: false
+
+      - name: Checkout Frontend
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/arkangel_frontend
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/libs/arkangel_frontend
+
+      - name: Checkout Spydrnet
+        uses: actions/checkout@v4
+        with:
+          repository: RapidFlex/rf_spydrnet
+          submodules: recursive
+          token: ${{ secrets.CI4RF }}
+          path: ${{github.workspace}}/etc/utils/rf_spydrnet
+
+      - name: Dump tool versions
+        run: |
+          cmake --version
+          ${CC} --version
+          ${CXX} --version
+
+      - name: Build
+        shell: bash
+        env:
+          py_cv_module__tkinter: "disabled"
+        run: |
+          make checkout_all
+          make compile INSTALL_FULL_DEVICE=OFF
+
+      - name: Regression test (alkaidL only)
+        shell: bash
+        run: |
+          make reg_test REG_TEST_TYPE=basic_alkaidL_only INSTALL_FULL_DEVICE=OFF REG_TEST_NEW_THREAD_WAIT_TIME=10
+          
+      - name: upload result
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: minimal-device-artifact
+          path: ${{github.workspace}}/test/tasks
+
+# Comment out as the basic reg tests are sufficient to validate minimal device (excluded device causes flow to error out at the beginning)
+#  strong_regtest_minimal_device:
+#    needs: basic_regtest_minimal_device
+#    if: ${{ fromJSON(needs.change_detect.outputs.source_modified) }}
+#    name: ${{ matrix.config.name }}
+#    runs-on: ${{ matrix.config.os }}
+#    # Branch on different OS and settings
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        config:
+#          - name: "AlkaidL Strong Regression Tests (GCC-10, CentOS 7) - Minimal Device"
+#            cc: gcc
+#            cxx: g++
+#            os: [self-hosted, Linux, X64, eda_cn]
+#            installer_type: "STGZ"
+#            dut_device: "strong_alkaidL"
+#    # Define the steps to run the build job
+#    env:
+#      CC: ${{ matrix.config.cc }}
+#      CXX: ${{ matrix.config.cxx }}
+#    steps:
+#      - name: Runner workspace path
+#        run: |
+#          echo "Cleaning up previous run"
+#          rm -rf "${{ github.workspace }}"
+#          mkdir -p "${{ github.workspace }}"
+#          
+#      - name: Checkout repo
+#        uses: actions/checkout@v4
+#
+#      - name: Dump tool versions
+#        run: |
+#          cat /etc/centos-release || true
+#          cmake --version
+#          ${CC} --version
+#          ${CXX} --version
+#
+#      - name: Checkout submodules
+#        shell: bash
+#        run: |
+#          make checkout_all
+#
+#      - name: Build
+#        shell: bash
+#        run: |
+#          echo "conda activate eda && make compile INSTALL_FULL_DEVICE=OFF -j8" > scl_compile.sh
+#          cat scl_compile.sh | scl enable devtoolset-10 csh
+#
+#      - name: Regression test
+#        shell: bash
+#        run: |
+#          echo "conda activate eda && make reg_test REG_TEST_TYPE=${{ matrix.config.dut_device }} NUM_JOBS=8 INSTALL_FULL_DEVICE=OFF" > scl_regtest_strong_minimal.sh
+#          cat scl_regtest_strong_minimal.sh | scl enable devtoolset-10 csh
+#
+#  docker_distribution:
+#    name: Build docker image for distribution
+#    runs-on: ubuntu-20.04
+#    needs: [linux_build, change_detect]
+#    steps:
+#      - name: Cancel previous
+#        uses: styfle/cancel-workflow-action@0.9.1
+#        with:
+#          access_token: ${{ github.token }}
+#          
+#      - name: Checkout OpenFPGA repo
+#        uses: actions/checkout@v2
+#      - name: Download a built artifacts
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: openfpga
+#      - name: Set up QEMU
+#        uses: docker/setup-qemu-action@v1
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v1
+#      - name: Login to GitHub Container Registry
+#        if: ${{ (github.ref == 'refs/heads/master' && (env.DOCKER_REPO)) || (needs.change_detect.outputs.force_upload == true) }}
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.repository_owner }}
+#          password: ${{ secrets.CR_PAT }}
+#      - name: Build and push master image
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: .
+#          file: ./docker/Dockerfile.master
+#          push: ${{ (github.ref == 'refs/heads/master' && (env.DOCKER_REPO)) || needs.change_detect.outputs.force_upload }}
+#          tags: |
+#            ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-master:latest
+#            ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-master:${{ needs.change_detect.outputs.sha_short }}
+#
+#  linux_regression_tests:
+#    name: linux_regression_tests
+#    runs-on: ubuntu-20.04
+#    needs: [linux_build, change_detect]
+#    container: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-env
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        config:
+#          - name: basic_reg_yosys_only_test
+#          - name: basic_reg_test
+#          - name: fpga_verilog_reg_test
+#          - name: fpga_bitstream_reg_test
+#          - name: fpga_sdc_reg_test
+#          - name: fpga_spice_reg_test
+#          - name: micro_benchmark_reg_test
+#          - name: quicklogic_reg_test
+#          - name: vtr_benchmark_reg_test
+#          - name: iwls_benchmark_reg_test
+#          - name: tcl_reg_test
+#    steps:
+#      - name: Cancel previous
+#        uses: styfle/cancel-workflow-action@0.9.1
+#        with:
+#          access_token: ${{ github.token }}
+#    
+#      - name: Checkout OpenFPGA repo
+#        uses: actions/checkout@v2
+#      - name: Download a built artifacts
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: openfpga
+#      - name: chmod
+#        run: |
+#          chmod +x build/vtr-verilog-to-routing/abc/abc
+#          chmod +x build/vtr-verilog-to-routing/ace2/ace
+#          chmod +x build/vtr-verilog-to-routing/vpr/vpr
+#          chmod +x build/openfpga/openfpga
+#          chmod +x yosys/install/bin/yosys
+#          chmod +x yosys/install/bin/yosys-abc
+#          chmod +x yosys/install/bin/yosys-config
+#          chmod +x yosys/install/bin/yosys-filterlib
+#          chmod +x yosys/install/bin/yosys-smtbmc
+#      - name: ${{matrix.config.name}}_GCC-8_(Ubuntu 20.04)
+#        shell: bash
+#        run: source openfpga.sh && source openfpga_flow/regression_test_scripts/${{matrix.config.name}}.sh --debug --show_thread_logs
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v2
+#        if: ${{ failure() }}
+#        with:
+#          name: failed_${{matrix.config.name}}_regression_log
+#          retention-days: 1
+#          path: |
+#            openfpga_flow/**/*.log
+#
+#  docker_regression_tests:
+#    needs: change_detect
+#    if: ${{ !fromJSON(needs.change_detect.outputs.source_modified) }}
+#    name: docker_regression_tests
+#    runs-on: ubuntu-20.04
+#    container: 
+#      image: ghcr.io/${{ needs.change_detect.outputs.docker_repo }}/openfpga-master:latest
+#      options: --user root --workdir /home/openfpga_user
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        config:
+#          - name: basic_reg_yosys_only_test
+#          - name: basic_reg_test
+#          - name: fpga_verilog_reg_test
+#          - name: fpga_bitstream_reg_test
+#          - name: fpga_sdc_reg_test
+#          - name: fpga_spice_reg_test
+#          - name: micro_benchmark_reg_test
+#          - name: quicklogic_reg_test
+#          - name: vtr_benchmark_reg_test
+#          - name: iwls_benchmark_reg_test
+#          - name: tcl_reg_test
+#    steps:
+#      - name: Cancel previous
+#        uses: styfle/cancel-workflow-action@0.9.1
+#        with:
+#          access_token: ${{ github.token }}
+#          
+#      - name: Checkout OpenFPGA repo
+#        uses: actions/checkout@v2
+#        with:
+#          submodules: true
+#      - name: ${{matrix.config.name}}_GCC-8_(Ubuntu 20.04)
+#        shell: bash
+#        run: |
+#          bash .github/workflows/install_dependencies_run.sh
+#          ${PYTHON_EXEC} -m pip install -r requirements.txt
+#          rsync -am --exclude='openfpga_flow/**' /opt/openfpga/. .
+#          unset OPENFPGA_PATH
+#          source openfpga.sh && source openfpga_flow/regression_test_scripts/${{matrix.config.name}}.sh --debug --show_thread_logs
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v2
+#        if: ${{ failure() }}
+#        with:
+#          name: failed_${{matrix.config.name}}_regression_log
+#          retention-days: 1
+#          path: openfpga_flow/**/*.log
