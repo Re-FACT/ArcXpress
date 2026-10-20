@@ -12,11 +12,15 @@ on:
   schedule:
     - cron: "0 0 * * 0 " # weekly
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # Multiple job to tests
 jobs:
   change_detect:
     name: "Check"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -30,15 +34,16 @@ jobs:
           - name: "Yaml"
             code_type: "-yaml"
     steps:
-      - name: Cancel previous
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Checkout OpenFPGA repo
-        uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
           submodules: false
+
+      - name: Checkout infra
+        uses: actions/checkout@v4
+        with:
+          repository: Re-FACT/refact_infra
+          path: utils/refact_infra
 
       - name: Install dependencies
         run: |
