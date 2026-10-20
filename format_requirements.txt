@@ -2,11 +2,6 @@
 # Python linter and formatter
 black>=26.3.1,<27
 pylint>=4.0.6,<5
-click>=8.1.8,<9
 
 # Config, logging and formatting helpers
 PyYAML>=6.0.3,<7
-envyaml>=1.10.211231
-humanize>=4.13,<5
-coloredlogs>=15.0.1,<16
-html-table>=1.0
