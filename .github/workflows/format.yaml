@@ -47,7 +47,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo bash ./.github/workflows/build_dependency_ubuntu.sh
+          sudo bash ./.github/workflows/format_dependency_ubuntu.sh
+          sudo apt install python3-venv
+          python3 -m venv .venv
+          source .venv/bin/activate
           sudo python3 -m pip install -r format_requirements.txt
           
       - name: Dump tool versions
@@ -56,4 +59,5 @@ jobs:
           black --version
 
       - name: Check format
-        run: ./dev/check-format.sh ${{ matrix.config.code_type }}
+        run: | 
+          make check-format${{ matrix.config.code_type }} INFRA_ROOT=utils/refact_infra
