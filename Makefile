@@ -294,7 +294,7 @@ format-cpp:
 	${CLANG_FORMAT_EXEC} --style=file -i $${f} || exit 1; \
 	done
 
-check-format-xml:
+check-format-cpp:
 # Check if all the C/C++ files are in the expected format
 	${INFRA_ROOT}/scripts/check-format.sh -cpp
 
