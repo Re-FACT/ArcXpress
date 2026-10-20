@@ -181,7 +181,7 @@ VERSION_FILE = VERSION.md
 TAGGED_COMMIT_FILE = .TAGGED_COMMIT
 VERSION_BUMP_TYPE = minor
 FORCE_COMMIT_VERSION_UPDATE = off
-INFRA_ROOT = /eda/internal/alkaid_infra/
+INFRA_ROOT = ${PWD}/utils/refact_infra/
 
 # Reg test options
 REG_TEST_TYPE = basic
