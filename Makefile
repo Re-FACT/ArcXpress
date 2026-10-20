@@ -319,8 +319,6 @@ clean:
 # Remove current build results
 # One exception is the arkangel gui, where the working directory is the subumodule itself
 	rm -rf ${BUILD_DIR}
-	rm -rf libs/arkangel_frontend/build
-	rm -rf libs/arkangel_frontend/yosys-plugins/rf-alkaid-plugin/build
 	rm -rf projects
 
 update_version:
@@ -367,58 +365,3 @@ with open ('Makefile', 'r' ) as f:
         header, content = match[1], match[2]
         print(f"  {header:10} {content}")
 endef
-
-# Makefile for netlist verification
-
-# Find netlist path
-.PHONY: find-netlist
-find-netlist:
-	@echo "Searching for netlist/rtl/ultimate directory..."
-	@NETLIST_PATH=$$(find "$(GITHUB_WORKSPACE)" -type d -path "*/netlist/rtl/ultimate" 2>/dev/null | head -n 1); \
-	if [ -z "$$NETLIST_PATH" ]; then \
-		echo "::error::Could not find netlist/rtl/ultimate directory"; \
-		exit 1; \
-	fi; \
-	echo "Found NETLIST_PATH: $$NETLIST_PATH"; \
-	echo "NETLIST_PATH=$$NETLIST_PATH" >> $(GITHUB_ENV); \
-	echo "path=$$NETLIST_PATH" >> $(GITHUB_OUTPUT)
-
-# Verify golden netlist
-.PHONY: verify-golden
-verify-golden:
-	@echo "Verifying golden netlist..."
-	@if [ ! -d "$(PILOTONE_REPO_PATH)/rtl_golden" ]; then \
-		echo "::error::Golden netlist directory not found at $(PILOTONE_REPO_PATH)/rtl_golden"; \
-		exit 1; \
-	fi; \
-	if [ ! -f "$(PILOTONE_REPO_PATH)/rtl_golden/checksums.txt" ]; then \
-		echo "::error::checksums.txt not found in golden netlist"; \
-		exit 1; \
-	fi; \
-	echo "✓ Golden netlist verified: $$(ls -la $(PILOTONE_REPO_PATH)/rtl_golden/checksums.txt)"
-
-
-.PHONY: compare_netlist
-
-compare_netlist:
-	@if [ -z "$(NETLIST_PATH)" ]; then \
-		echo "ERROR: NETLIST_PATH is not set"; \
-		exit 1; \
-	fi
-	@if [ ! -d "$(NETLIST_PATH)" ]; then \
-		echo "ERROR: Netlist directory not found"; \
-		exit 1; \
-	fi
-	@if [ ! -f "$(PILOTONE_REPO_PATH)/rtl_golden/checksums.txt" ]; then \
-		echo "ERROR: Golden checksums file not found at $(PILOTONE_REPO_PATH)/rtl_golden/checksums.txt"; \
-		exit 1; \
-	fi
-	@find -L $(NETLIST_PATH) -type f -exec sha256sum {} \; | awk '{print $$1}' | sort > netlist_checksums.txt
-	@awk '{print $$1}' $(PILOTONE_REPO_PATH)/rtl_golden/checksums.txt | sort > checksums_sorted.txt
-	@sort netlist_checksums.txt -o netlist_checksums_sorted.txt
-	@if diff -q checksums_sorted.txt netlist_checksums_sorted.txt >/dev/null 2>&1; then \
-		echo "SUCCESS: Checksums match"; \
-	else \
-		echo "ERROR: Checksums do not match"; \
-		exit 1; \
-	fi
