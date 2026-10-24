@@ -23,12 +23,12 @@ namespace arcxpress {
  * - Device-to-Model mapping
  *******************************************************************/
 
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
 #include "license_manager.h"
 bool init_license_manager(arcxpress::LicenseManager& license_mgr, const std::string& version) {
-  const char* lic_path = std::getenv("ARKANGEL_LICENSE_PATH");
+  const char* lic_path = std::getenv("ARCXPRESS_LICENSE_PATH");
   if (lic_path == nullptr) {
-    VTR_LOG_ERROR("License: ARKANGEL_LICENSE_PATH not defined\n");
+    VTR_LOG_ERROR("License: ARCXPRESS_LICENSE_PATH not defined\n");
     return false;
   }
   std::filesystem::path lic_fpath = std::string(lic_path);
@@ -49,7 +49,7 @@ int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
   vtr::ScopedStartFinishTimer timer("Initializing...");
   std::string build_version = std::string(LICENSED_BUILD_VERSION);
 
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (init_license_manager(arkangel_ctx.mutable_license_manager(), build_version) == false) {
     VTR_LOG_ERROR("License initialization failed\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;

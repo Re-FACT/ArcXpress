@@ -29,25 +29,11 @@ std::string create_arkangel_title() {
   title += std::string(
     "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
   title += std::string("\n");
-  title += std::string("                        ArkAngel FPGA Design Tool Suites\n");
-#ifdef ARKANGEL_PRODUCTION_EDITION
-  title += std::string("                               Production Edition\n");
-#elif ARKANGEL_ENGINEERING_EDITION
-  title += std::string("                               Engineering Edition\n");
-#endif
-  title += std::string("                                 Version 2024R1\n");
-  title += std::string("             Copyright (C) 2023-2024 by Rapid Flex Shanghai Limited\n");
-  title += std::string("                              ALL RIGHTS RESERVED\n");
+  title += std::string("                        Arcxpress FPGA Design Tool Suites\n");
+  title += std::string("             Copyright (C) 2026 by ReFACT\n");
+  title += std::string("                              Under GPL3 license\n");
   title += std::string("\n");
-  title += std::string(
-    "This program is proprietary and confidential information of Rapid Flex Shanghai\n");
-  title += std::string(
-    "Limited and its affiliates and may be used and disclosed only as authorized in a\n");
-  title +=
-    std::string("license agreement which controls such use and disclosure. The licensed product\n");
-  title +=
-    std::string("may be delivered with software that is subject to open-source licensing terms.\n");
-  title += std::string("The open-source software is provided on an \"AS IS\" basis:\n");
+  title += std::string("The open-source software is provided on an \"AS IS\" basis\n");
   title += std::string("\n");
   title +=
     std::string("ANY WARRANTIES, EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED\n");
@@ -66,15 +52,6 @@ std::string create_arkangel_title() {
   title +=
     std::string("ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n");
   title += std::string("SUCH DAMAGE.\n");
-  title += std::string("\n");
-  title +=
-    std::string("This software and the associated documentation are proprietary to Rapid Flex\n");
-  title += std::string("Shanghai Limited and its affiliates. This software may only be used in\n");
-  title +=
-    std::string("accordance with the terms and conditions of a written license agreement with\n");
-  title +=
-    std::string("Rapid Flex. All other use, reproduction, or distribution of this software is\n");
-  title += std::string("strictly prohibited.\n");
   title += std::string("\n");
   title += std::string(
     "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");

@@ -19,7 +19,7 @@ namespace arcxpress {
  *******************************************************************/
 int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;

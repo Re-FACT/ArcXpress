@@ -6,9 +6,9 @@
 int main() {
   int status = 0;
   std::cout << "======== Test License Manager Begin ========" << std::endl;
-  char* lic_path = getenv("ARKANGEL_LICENSE_PATH");
+  char* lic_path = getenv("ARCXPRESS_LICENSE_PATH");
   if (lic_path == nullptr) {
-    std::cout << "Environment variable ARKANGEL_LICENSE_PATH not defined" << std::endl;
+    std::cout << "Environment variable ARCXPRESS_LICENSE_PATH not defined" << std::endl;
     return 1;
   }
 

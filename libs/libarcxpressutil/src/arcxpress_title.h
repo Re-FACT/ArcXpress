@@ -1,5 +1,4 @@
-#ifndef ARKANGEL_TITLE_H
-#define ARKANGEL_TITLE_H
+#pragma once
 
 /********************************************************************
  * Include header files that are required by function declaration

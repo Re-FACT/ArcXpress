@@ -240,7 +240,7 @@ int generate_netlist(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
  *******************************************************************/
 int netlist_opt(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::PROTOTYPE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -551,7 +551,7 @@ int coarse_floorplan(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
  *******************************************************************/
 int extract_netlist_qor(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::PROTOTYPE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;

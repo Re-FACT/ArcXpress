@@ -16,7 +16,7 @@
 
 #include "benchmark_manager.h"
 #include "boot_config.h"
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
 #include "license_manager.h"
 #endif
 #include "openfpga_context.h"
@@ -55,7 +55,7 @@ class ArkangelContext : public OpenfpgaContext {
   const arcxpress::TapeoutManager& tapeout_manager() const { return tapeout_manager_; }
   const arcxpress::BenchmarkManager& benchmark_manager() const { return benchmark_manager_; }
   const arcxpress::PdkManager& pdk_manager() const { return pdk_manager_; }
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   arcxpress::LicenseManager& license_manager() { return license_manager_; }
 #endif
   bool is_tapeout_created() const { return tapeout_created_; }
@@ -65,7 +65,7 @@ class ArkangelContext : public OpenfpgaContext {
   arcxpress::TapeoutManager& mutable_tapeout_manager() { return tapeout_manager_; }
   arcxpress::BenchmarkManager& mutable_benchmark_manager() { return benchmark_manager_; }
   arcxpress::PdkManager& mutable_pdk_manager() { return pdk_manager_; }
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   arcxpress::LicenseManager& mutable_license_manager() { return license_manager_; }
 #endif
   void set_tapeout_created() { tapeout_created_ = true; }
@@ -77,7 +77,7 @@ class ArkangelContext : public OpenfpgaContext {
   arcxpress::TapeoutManager tapeout_manager_;
   arcxpress::BenchmarkManager benchmark_manager_;
   arcxpress::PdkManager pdk_manager_;
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   arcxpress::LicenseManager license_manager_;
 #endif
 };

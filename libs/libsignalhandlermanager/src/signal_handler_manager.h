@@ -3,26 +3,26 @@
 
 // ============================================================
 // Platform detection
-//   ARKANGEL_PLATFORM_WINDOWS  – native Win32 (MSVC / clang-cl)
-//   ARKANGEL_PLATFORM_MSYS2    – MinGW / MSYS2 toolchain on Windows
-//   ARKANGEL_PLATFORM_POSIX    – Linux (and MSYS2, which has full POSIX)
+//   ARCXPRESS_PLATFORM_WINDOWS  – native Win32 (MSVC / clang-cl)
+//   ARCXPRESS_PLATFORM_MSYS2    – MinGW / MSYS2 toolchain on Windows
+//   ARCXPRESS_PLATFORM_POSIX    – Linux (and MSYS2, which has full POSIX)
 // ============================================================
 #if defined(_WIN32) || defined(_WIN64)
 //#if defined(__MINGW32__) || defined(__MINGW64__) || defined(__MSYS__)
-//#define ARKANGEL_PLATFORM_MSYS2 1
-//#define ARKANGEL_PLATFORM_POSIX 1
+//#define ARCXPRESS_PLATFORM_MSYS2 1
+//#define ARCXPRESS_PLATFORM_POSIX 1
 //#else
-#define ARKANGEL_PLATFORM_WINDOWS 1
+#define ARCXPRESS_PLATFORM_WINDOWS 1
 //#endif
 #else
-#define ARKANGEL_PLATFORM_LINUX 1
-#define ARKANGEL_PLATFORM_POSIX 1
+#define ARCXPRESS_PLATFORM_LINUX 1
+#define ARCXPRESS_PLATFORM_POSIX 1
 #endif
 
 // ============================================================
 // Platform-specific includes and process-ID type alias
 // ============================================================
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -125,7 +125,7 @@ class SignalHandlerManager {
   static void sig_handler_default(int signum);
   static void sig_handler_fatal(int signum);
 
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
   /** Native Windows console-control handler (replaces SIGINT on Win32). */
   static BOOL WINAPI win_ctrl_handler(DWORD ctrl_type);
 #endif

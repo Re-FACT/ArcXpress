@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_BASIC_COMMAND_H
-#define ARKANGEL_BASIC_COMMAND_H
+#ifndef ARCXPRESS_BASIC_COMMAND_H
+#define ARCXPRESS_BASIC_COMMAND_H
 
 /********************************************************************
  * Include header files that are required by function declaration

@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_PROCESS_UTIL_H
-#define ARKANGEL_PROCESS_UTIL_H
+#ifndef ARCXPRESS_PROCESS_UTIL_H
+#define ARCXPRESS_PROCESS_UTIL_H
 
 /********************************************************************
  * Include header files that are required by function declaration
@@ -94,4 +94,4 @@ void terminate_task_process_group(NativePid pid);
 
 } /* end namespace arcxpress */
 
-#endif /* ARKANGEL_PROCESS_UTIL_H */
+#endif /* ARCXPRESS_PROCESS_UTIL_H */

@@ -272,7 +272,7 @@ static int load_tapeout_from_config_file(const std::string config_file_name, Tap
  *******************************************************************/
 int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -540,7 +540,7 @@ int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
                                          const openfpga::Command& cmd,
                                          const openfpga::CommandContext& cmd_ctx) {
 /* Implementation for setting custom pin utilization */
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;

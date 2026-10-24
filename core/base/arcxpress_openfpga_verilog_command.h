@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_OPENFPGA_VERILOG_COMMAND_H
-#define ARKANGEL_OPENFPGA_VERILOG_COMMAND_H
+#ifndef ARCXPRESS_OPENFPGA_VERILOG_COMMAND_H
+#define ARCXPRESS_OPENFPGA_VERILOG_COMMAND_H
 
 /********************************************************************
  * Include header files that are required by function declaration

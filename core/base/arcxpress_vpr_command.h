@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_VPR_COMMAND_H
-#define ARKANGEL_VPR_COMMAND_H
+#ifndef ARCXPRESS_VPR_COMMAND_H
+#define ARCXPRESS_VPR_COMMAND_H
 
 /********************************************************************
  * Include header files that are required by function declaration

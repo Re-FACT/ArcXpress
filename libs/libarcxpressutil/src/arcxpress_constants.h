@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_CONSTANTS_H
-#define ARKANGEL_CONSTANTS_H
+#ifndef ARCXPRESS_CONSTANTS_H
+#define ARCXPRESS_CONSTANTS_H
 /********************************************************************
  * This file includes constants for arkangel
  *******************************************************************/
@@ -257,8 +257,8 @@ constexpr const char* POWER_ANALYSIS_SCRIPT_FILE = "power_report.py";
    The caller of yosys can analysis the log file to check the result of yosys. */
 constexpr const char* YOSYS_LOG_FILE_NAME = "yosys.log";
 
-/* support path corresponding to $ARKANGEL_HOME in file path */
-constexpr const char* PATH_VARIABLE_ARKANGEL_HOME = "$ARKANGEL_HOME";
+/* support path corresponding to $ARCXPRESS_HOME in file path */
+constexpr const char* PATH_VARIABLE_ARCXPRESS_HOME = "$ARCXPRESS_HOME";
 
 /* file format used by MIF feature*/
 constexpr const char* FILE_FORMAT_MIF = "mif";

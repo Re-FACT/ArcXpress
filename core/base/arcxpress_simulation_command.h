@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_SIMULATION_COMMAND_H
-#define ARKANGEL_SIMULATION_COMMAND_H
+#ifndef ARCXPRESS_SIMULATION_COMMAND_H
+#define ARCXPRESS_SIMULATION_COMMAND_H
 
 /********************************************************************
  * Include header files that are required by function declaration

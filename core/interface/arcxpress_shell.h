@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_SHELL_H
-#define ARKANGEL_SHELL_H
+#ifndef ARCXPRESS_SHELL_H
+#define ARCXPRESS_SHELL_H
 
 #include <string>
 

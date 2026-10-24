@@ -16,9 +16,9 @@ namespace arcxpress {
  *******************************************************************/
 void add_bitstream_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* Add bitstream commands from openfpga */
-#ifdef ARKANGEL_PRODUCTION_EDITION
+#ifdef ARCXPRESS_PRODUCTION_EDITION
   openfpga::add_bitstream_command_templates<ArkangelContext>(shell, true);
-#elif ARKANGEL_ENGINEERING_EDITION
+#elif ARCXPRESS_ENGINEERING_EDITION
   openfpga::add_bitstream_command_templates<ArkangelContext>(shell, false);
 #endif
 }

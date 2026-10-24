@@ -78,7 +78,7 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   std::string sim_type = cmd_ctx.option_value(cmd, opt_type);
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
   if (sim_type == "rtl") {
     if (!arkangel_ctx.license_manager().checkOut(
           arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {

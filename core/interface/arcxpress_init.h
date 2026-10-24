@@ -1,11 +1,11 @@
-#ifndef ARKANGEL_INIT_H
-#define ARKANGEL_INIT_H
+#ifndef ARCXPRESS_INIT_H
+#define ARCXPRESS_INIT_H
 
 /********************************************************************
  * Include header files that are required by function declaration
  *******************************************************************/
 #include "arkangel_context.h"
-#ifdef ARKANGEL_LICENSED_BUILD
+#ifdef ARCXPRESS_LICENSED_BUILD
 #include "license_manager.h"
 #endif
 /********************************************************************

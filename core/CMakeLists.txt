@@ -12,7 +12,7 @@ files_to_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 list(REMOVE_ITEM LIB_SOURCES ${EXEC_SOURCE})
 list(REMOVE_ITEM LIB_SOURCES ${LAUNCHER_SOURCE})
 
-if (ARKANGEL_WITH_SWIG)
+if (ARCXPRESS_WITH_SWIG)
 # SWIG library
   SwigLib(NAME      arkangel_shell
           NAMESPACE std
@@ -44,7 +44,7 @@ target_link_libraries(libarkangel
                       libfilesignature
                       libopenfpga)
 
-if (BUILD_ARKANGEL_WITH_LICENSE)
+if (BUILD_ARCXPRESS_WITH_LICENSE)
 target_link_libraries(libarkangel
                       liblicensemanager)
 endif()
@@ -59,8 +59,8 @@ if (MSVC)
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARKANGEL_USES_IPO arkangel INTERPROCEDURAL_OPTIMIZATION)
-if (ARKANGEL_USES_IPO)
+get_target_property(ARCXPRESS_USES_IPO arkangel INTERPROCEDURAL_OPTIMIZATION)
+if (ARCXPRESS_USES_IPO)
     set_property(TARGET arkangel APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
@@ -74,8 +74,8 @@ if (MSVC)
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARKANGEL_USES_IPO aaee INTERPROCEDURAL_OPTIMIZATION)
-if (ARKANGEL_USES_IPO)
+get_target_property(ARCXPRESS_USES_IPO aaee INTERPROCEDURAL_OPTIMIZATION)
+if (ARCXPRESS_USES_IPO)
     set_property(TARGET aaee APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 

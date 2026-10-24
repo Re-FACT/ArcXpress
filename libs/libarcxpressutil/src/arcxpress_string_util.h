@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_STRING_UTIL_H
-#define ARKANGEL_STRING_UTIL_H
+#ifndef ARCXPRESS_STRING_UTIL_H
+#define ARCXPRESS_STRING_UTIL_H
 
 /********************************************************************
  * Include header files that are required by function declaration

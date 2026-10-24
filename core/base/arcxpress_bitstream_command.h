@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_BITSTREAM_COMMAND_H
-#define ARKANGEL_BITSTREAM_COMMAND_H
+#ifndef ARCXPRESS_BITSTREAM_COMMAND_H
+#define ARCXPRESS_BITSTREAM_COMMAND_H
 
 /********************************************************************
  * Include header files that are required by function declaration
