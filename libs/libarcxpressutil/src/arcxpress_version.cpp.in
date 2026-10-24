@@ -1,4 +1,4 @@
-#include "arkangel_version.h"
+#include "arcxpress_version.h"
 
 //This file is automatically processed by CMAKE and replaces
 //the values between ampersand's with the releveant CMAKE variable

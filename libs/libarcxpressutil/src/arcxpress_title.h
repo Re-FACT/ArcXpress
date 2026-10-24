@@ -11,5 +11,3 @@
 std::string create_arcxpress_title();
 
 void print_arcxpress_version_info();
-
-#endif
