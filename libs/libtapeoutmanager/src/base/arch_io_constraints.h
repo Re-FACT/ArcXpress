@@ -10,7 +10,7 @@
 namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel eFPGA architecture I/O constraints
+ * The data structure stores data for ArcXpress eFPGA architecture I/O constraints
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class ArchIoConstraints {

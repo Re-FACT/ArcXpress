@@ -1,5 +1,5 @@
 /********************************************************************
- * Add basic commands to the ArkAngel shell interface, including:
+ * Add basic commands to the ArcXpress shell interface, including:
  * - exit
  * - version
  * - help

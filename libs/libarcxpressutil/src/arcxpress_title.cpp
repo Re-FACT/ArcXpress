@@ -9,7 +9,7 @@
 
 /********************************************************************
  * Generate a string of arkangel title introduction
- * This is mainly used when launching ArkAngel shell
+ * This is mainly used when launching ArcXpress shell
  *******************************************************************/
 std::string create_arcxpress_title() {
   std::string title;
@@ -62,7 +62,7 @@ std::string create_arcxpress_title() {
 
 /********************************************************************
  * Generate a string of openfpga title introduction
- * This is mainly used when launching ArkAngel shell
+ * This is mainly used when launching ArcXpress shell
  *******************************************************************/
 void print_arcxpress_version_info() {
   /* Display version */
