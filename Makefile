@@ -180,22 +180,16 @@ help:
 
 .PHONY: help
 
-checkout: 
-# Checkout all the submodules
-	git submodule init ${SUBMODULE}
-	git submodule update --init --recursive ${SUBMODULE}
-
-checkout_shallow: 
-# Checkout all the submodules
+checkout_build_submodule: 
+# Checkout a submodule for code build only. Specify the path to the submodule through option SUBMODULE=<string>. For example, SUBMODULE=thirdpart/OpenFPGA. Note that this step will require the submodule has a Makefile with a valid target 'make checkout_build'.
 	git submodule init ${SUBMODULE}
 	git submodule update --init --depth 1 ${SUBMODULE}
+	currDir=$${PWD} && cd ${SUBMODULE} && make checkout_build && cd $${currDir}
 
 checkout_build:
 # Checkout the submodules required to build source codes
-	@+${MAKE} checkout_shallow SUBMODULE=thirdparty/OpenFPGA
-	@+${MAKE} checkout SUBMODULE=thirdparty/Yosuf
-	currDir=$${PWD} && cd thirdparty/OpenFPGA && make checkout && cd $${currDir}
-	currDir=$${PWD} && cd thirdparty/Yosuf && make checkout_build && cd $${currDir}
+	@+${MAKE} checkout_build_submodule SUBMODULE=thirdparty/OpenFPGA
+	@+${MAKE} checkout_build_submodule SUBMODULE=thirdparty/Yosuf
 
 prebuild:
 # Run cmake to generate Makefile under the build directory, before compilation
