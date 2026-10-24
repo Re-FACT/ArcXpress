@@ -1092,9 +1092,8 @@ int NetlistDevManager::import_external_netlists(const e_fabric_type& fb_type,
   std::string incl_fname =
     std::filesystem::path(des_nlist_dir / std::filesystem::path(NETLIST_INCLUDE_FILENAME_))
       .string();
-  std::fstream o_incl_f;
-  o_incl_f.open(incl_fname, std::fstream::out | std::fstream::trunc);
-  if (!o_incl_f.is_open()) {
+  openfpga::mmostream o_incl_f(incl_fname, false); // TODO: Enable compression through a command-line option
+  if (!valid_file_mmostream(o_incl_f)) {
     VTR_LOG_ERROR("Fail to open the custom module include file '%s'!\n", incl_fname.c_str());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -2111,9 +2110,8 @@ int NetlistDevManager::generate_fabric_netlist(const std::string& src_dir,
                                                const std::string& o_fname,
                                                const bool& verbose) const {
   VTR_LOGV(verbose, "Creating gate-level include netlists '%s'\n", o_fname.c_str());
-  std::fstream o_incl_f;
-  o_incl_f.open(o_fname, std::fstream::out | std::fstream::trunc);
-  if (!o_incl_f.is_open()) {
+  openfpga::mmostream o_incl_f(o_fname, false); // TODO: Enable compression through a command-line option;
+  if (!valid_file_mmostream(o_incl_f)) {
     VTR_LOG_ERROR("Fail to open the gate-level include file '%s'!\n", o_fname.c_str());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }

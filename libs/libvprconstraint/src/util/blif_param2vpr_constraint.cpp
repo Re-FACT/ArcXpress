@@ -35,7 +35,7 @@ int blif_param2vpr_constraint(const std::string& blif_fpath, const std::string& 
 
   /* Read blif file thru VPR API */
   AtomNetlist nlist;
-  nlist = read_blif(e_circuit_format::EBLIF, blif_fpath.c_str(), vpr_arch.models);
+  nlist = read_blif(e_circuit_format::EBLIF, blif_fpath.c_str(), vpr_arch.models, verbose ? 1 : 0);
 
   /* Extract location parameters */
   std::string LOC_X_PARAM_NAME = "FPGA_LOC_X";
