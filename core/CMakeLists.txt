@@ -44,11 +44,6 @@ target_link_libraries(libarcxpress
                       libfilesignature
                       libopenfpga)
 
-if (BUILD_ARCXPRESS_WITH_LICENSE)
-target_link_libraries(libarcxpress
-                      liblicensemanager)
-endif()
-
 #Create the test executable
 add_executable(arcxpress ${EXEC_SOURCE})
 target_link_libraries(arcxpress libarcxpress)
