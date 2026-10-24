@@ -1,5 +1,3 @@
-#set(WITH_ABC ON)
-add_subdirectory(OpenFPGA)
 add_subdirectory(libsignalhandlermanager)
 add_subdirectory(libarkangelutil)
 add_subdirectory(libbenchmarkmanager)
