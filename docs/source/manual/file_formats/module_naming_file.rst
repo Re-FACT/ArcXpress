@@ -1,1 +1,1 @@
-../../../../libs/OpenFPGA/docs/source/manual/file_formats/module_naming_file.rst
+../../../../thirdparty/OpenFPGA/docs/source/manual/file_formats/module_naming_file.rst
