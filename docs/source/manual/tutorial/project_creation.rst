@@ -3,13 +3,13 @@
 Project Creation
 ================
 
-This tutorial provides a step-by-step walkthrough for creating and loading an ArkAngel tape-out project. Starting from scratch, you will learn how to create a test case and then execute the three key commands: ``create_tapeout``, ``save_tapeout``, and ``load_tapeout``. By following this guide, users can understand the entire execution flow of these commands and learn how to determine whether each operation has completed successfully.
+This tutorial provides a step-by-step walkthrough for creating and loading an ArcXpress tape-out project. Starting from scratch, you will learn how to create a test case and then execute the three key commands: ``create_tapeout``, ``save_tapeout``, and ``load_tapeout``. By following this guide, users can understand the entire execution flow of these commands and learn how to determine whether each operation has completed successfully.
 
 .. note::
 
-   ArkAngel uses *Project* as the fundamental design unit.
-   Only **one project** can be created or loaded in a single ArkAngel session.
-   To work with multiple projects, please launch separate ArkAngel sessions.
+   ArcXpress uses *Project* as the fundamental design unit.
+   Only **one project** can be created or loaded in a single ArcXpress session.
+   To work with multiple projects, please launch separate ArcXpress sessions.
 
 
 Project File Structure and Configuration
@@ -66,14 +66,14 @@ Prerequisites
 
 Before starting this tutorial, ensure that:
 
-- ArkAngel (aaee) is properly installed
+- ArcXpress (aaee) is properly installed
 - Required environment variables are correctly configured
 - You have write permission for the project working directory
 
 Preparing the Project Configuration File
 ----------------------------------------
 
-ArkAngel projects are defined using a **tape-out project XML configuration file**.
+ArcXpress projects are defined using a **tape-out project XML configuration file**.
 The following is a complete example of a ``project.xml`` file used in this tutorial.
 
 .. code-block:: xml
@@ -155,17 +155,17 @@ If you have any questions about the parameter definitions in the project xml fil
 Creating a New Project
 ----------------------
 
-Before you can create a new tape-out project, you need to **launch the ArkAngel shell**.
+Before you can create a new tape-out project, you need to **launch the ArcXpress shell**.
 
-Launch ArkAngel
+Launch ArcXpress
 ~~~~~~~~~~~~~~~~
 
-ArkAngel provides a shell-like interface to integrate all tools in a modular way.  
+ArcXpress provides a shell-like interface to integrate all tools in a modular way.  
 You can launch it in **interactive mode** (type commands one by one), which is useful for step-by-step exploration and debugging.
 
 **Interactive mode** (``--interactive`` or ``-i``):
 
-- Launch ArkAngel and type commands one by one.
+- Launch ArcXpress and type commands one by one.
 - Useful for step-by-step exploration and debugging.
 
 .. code-block:: bash
@@ -174,7 +174,7 @@ You can launch it in **interactive mode** (type commands one by one), which is u
 
 .. note::
 
-   For more details on launching ArkAngel and parameter definitions, refer to :ref:`launch_arkangel_shell`.
+   For more details on launching ArcXpress and parameter definitions, refer to :ref:`launch_arkangel_shell`.
 
 
 
@@ -187,7 +187,7 @@ Run the project creation command:
 
       arkangel> create_tapeout --config_file ./config/project.xml
 
-When the ``create_tapeout`` command is executed, ArkAngel will
+When the ``create_tapeout`` command is executed, ArcXpress will
 produce console logs in the following order.
 
 Successful Creation
@@ -212,7 +212,7 @@ and initialized.
 
 .. note::
 
-   ArkAngel does **not** print an explicit "Success" message after project
+   ArcXpress does **not** print an explicit "Success" message after project
    creation. Success is determined by the absence of errors and the successful
    completion of all execution steps.
 
@@ -225,7 +225,7 @@ such as:
 These commands can help validate the project setup and provide insights into
 the configured parameters before proceeding with further steps.
 
-If project creation fails, ArkAngel will display clear error messages, such as:
+If project creation fails, ArcXpress will display clear error messages, such as:
 
 - Configuration file does not exist
 - Invalid or malformed configuration file
@@ -246,7 +246,7 @@ Run the project saving command:
 
    arkangel> save_tapeout --config_file ./config/project.xml
 
-When the ``save_tapeout`` command is executed successfully, ArkAngel will produce
+When the ``save_tapeout`` command is executed successfully, ArcXpress will produce
 console logs in the following order:
 
 .. code-block:: text
@@ -276,11 +276,11 @@ to the configuration file.
 
 .. note::
 
-   ArkAngel does **not** print an explicit "Success" message after project
+   ArcXpress does **not** print an explicit "Success" message after project
    saving. Success is determined by the absence of errors and the successful
    completion of all execution steps.
 
-If project saving fails, ArkAngel will display clear error messages, such as:
+If project saving fails, ArcXpress will display clear error messages, such as:
 
 - Insufficient permissions to write to the configuration file
 - Invalid project data
@@ -299,7 +299,7 @@ To continue working on an existing tape-out project, use the
    arkangel> load_tapeout --config_file ./config/project.xml
 
 
-When the ``load_tapeout`` command is executed successfully, ArkAngel will produce
+When the ``load_tapeout`` command is executed successfully, ArcXpress will produce
 console logs similar to the following:
 
 .. code-block:: text
@@ -325,14 +325,14 @@ A **successful load operation** is indicated by:
 - The final output ends with ``Done``
 
 This confirms that the project has been loaded successfully into the current
-ArkAngel session.
+ArcXpress session.
 
 .. note::
 
    ``load_tapeout`` does not display explicit messages such as "Success" or
    "Loaded successfully". Completion without errors indicates success.
 
-If issues occur during project loading, ArkAngel will report clear error
+If issues occur during project loading, ArcXpress will report clear error
 messages, such as:
 
 - Configuration file does not exist

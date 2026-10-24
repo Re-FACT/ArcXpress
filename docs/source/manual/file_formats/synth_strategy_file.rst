@@ -20,11 +20,11 @@ The reserved words can be used in defining file paths
 
 .. option:: ${PWD}
 
-  The current working directory when running ArkAngel. This keyword will be replaced during runtime
+  The current working directory when running ArcXpress. This keyword will be replaced during runtime
 
 .. option:: ${ROOT_PATH}
 
-  The root path which starting ArkAngel
+  The root path which starting ArcXpress
 
 Strategy
 --------

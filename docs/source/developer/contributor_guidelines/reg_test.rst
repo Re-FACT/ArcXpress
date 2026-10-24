@@ -3,7 +3,7 @@
 Regression Tests
 ================
 
-Regression tests are used to ensure that ArkAngel is
+Regression tests are used to ensure that ArcXpress is
 
 - functionally correct
 - no degradation in *Quality-of-Results* (QoR)
@@ -30,8 +30,8 @@ To add a new test case to regression test, a number of steps should be followed:
 - Create your test case under ``test/tasks``. Please name your testcase in a reasonable ways, so that other developers can identify its usage easily. For example, ``test/tasks/post_synth`` is to validate the support of post-synthesis projects.
 - A test case should include at least the following files
 
-  - A script to call ArkAngel. See example, ``test/tasks/post_synth/config/run.arkangel``.
-  - A project file required by the ArkAngel script. See example, ``test/tasks/post_synth/config/project.xml``.
+  - A script to call ArcXpress. See example, ``test/tasks/post_synth/config/run.arkangel``.
+  - A project file required by the ArcXpress script. See example, ``test/tasks/post_synth/config/project.xml``.
 
 - Add the testcase to the task list under ``test/common/task_list.yaml``.
 

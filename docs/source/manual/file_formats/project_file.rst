@@ -20,11 +20,11 @@ The reserved words can be used in defining file paths
 
 .. option:: ${PWD}
 
-  The current working directory when running ArkAngel. This keyword will be replaced during runtime
+  The current working directory when running ArcXpress. This keyword will be replaced during runtime
 
 .. option:: ${ROOT_PATH}
 
-  The root path which starting ArkAngel
+  The root path which starting ArcXpress
 
 General Syntax
 --------------
@@ -60,7 +60,7 @@ Time Stamps
 
 .. option:: tool_version="<string>"
 
-  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArkAngel.
+  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArcXpress.
 
 PDK Configuration
 -----------------

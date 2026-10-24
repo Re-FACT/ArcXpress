@@ -8,7 +8,7 @@ create_tapeout
 
 Create a new project based on a configuration file.
 
-.. note:: Only 1 project should be created or loaded in the session! Suggest to launch another ArkAngel session if you need to access another project!
+.. note:: Only 1 project should be created or loaded in the session! Suggest to launch another ArcXpress session if you need to access another project!
 
 .. option:: --config_file <string>
 
@@ -23,7 +23,7 @@ load_tapeout
 
 Load an existing project based on a configuration file.
 
-.. note:: Only 1 project should be created or loaded in the session! Suggest to launch another ArkAngel session if you need to access another project!
+.. note:: Only 1 project should be created or loaded in the session! Suggest to launch another ArcXpress session if you need to access another project!
 
 .. option:: --config_file <string>
 

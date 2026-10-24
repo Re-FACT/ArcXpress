@@ -1,9 +1,9 @@
 .. _arkangel_script_format:
 
-ArkAngel Script Format
+ArcXpress Script Format
 ----------------------
 
-ArkAngel accepts a simplified tcl-like script format.
+ArcXpress accepts a simplified tcl-like script format.
 
 .. option:: Comments
    

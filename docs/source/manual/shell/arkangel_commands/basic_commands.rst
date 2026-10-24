@@ -6,7 +6,7 @@ Basic Commands
 version
 ~~~~~~~
 
-  Show ArkAngel version information
+  Show ArcXpress version information
 
 help
 ~~~~
@@ -16,5 +16,5 @@ help
 exit
 ~~~~
 
-  Exit ArkAngel shell
+  Exit ArcXpress shell
 

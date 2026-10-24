@@ -3,7 +3,7 @@
 Dependencies
 ~~~~~~~~~~~~
 
-Dependencies can be installed upon the use of ArkAngel on different systems
+Dependencies can be installed upon the use of ArcXpress on different systems
 
 For the GUI build on WSL, please use the following to resolve Qt lib issues:
 

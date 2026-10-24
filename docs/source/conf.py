@@ -35,7 +35,7 @@ import sphinxcontrib.rsvgconverter
 
 # -- Project information -----------------------------------------------------
 
-project = u'ArkAngel'
+project = u'ArcXpress'
 copyright = u'2025, RapidFlex'
 author = u'RapidFlex'
 manpage_url = u'https://rapid-flex.com'
@@ -180,7 +180,7 @@ def setup(app):
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ArkAngeldoc'
+htmlhelp_basename = 'ArcXpressdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -207,7 +207,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'arkangel.tex', u'ArkAngel Documentation',
+    (master_doc, 'arkangel.tex', u'ArcXpress Documentation',
      u'RapidFlex', 'manual'),
 ]
 
@@ -217,7 +217,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'arkangel', u'ArkAngel Documentation',
+    (master_doc, 'arkangel', u'ArcXpress Documentation',
      [author], 1)
 ]
 
@@ -228,7 +228,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'arkangel', u'ArkAngel Documentation',
+    (master_doc, 'arkangel', u'ArcXpress Documentation',
      author, 'RapidFlex', 'RapidFlex Software',
      'Miscellaneous'),
 ]

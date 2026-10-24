@@ -3,9 +3,9 @@
 Import a PDK
 ------------
 
-ArkAngel require a number of PDK files when building an eFPGA IP.
+ArcXpress require a number of PDK files when building an eFPGA IP.
 Therefore, the required PDK files are registered through a PDK configuration file (See details in :ref:`file_format_pdk_file`)
-Even though that ArkAngel has provided examples of PDK configuration files, the way to install any PDK may be different for each user.
+Even though that ArcXpress has provided examples of PDK configuration files, the way to install any PDK may be different for each user.
 This tutorial helps users, who cannot use existing examples, create their PDK configuration file with detailed steps
 In this tutorial, a 40nm PDK is considered as an example
 
@@ -40,7 +40,7 @@ Std Cells
 
 Standard cells are mostly used during netlist optimization.
 Recommend to register all the standard cells which your consider to be used in the eFPGA layout, in order to open up the design space in optimization
-You can select the preferred standard cells in ArkAngel when applying netlist optimization.
+You can select the preferred standard cells in ArcXpress when applying netlist optimization.
 
 For each standard cell library, an unique name should be given.
 The unique name will be used by applying netlist synthesis strategy (see details in :ref:`file_format_synth_strategy_file`) 

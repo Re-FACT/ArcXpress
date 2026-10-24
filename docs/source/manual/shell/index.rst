@@ -1,8 +1,8 @@
-ArkAngel Shell
+ArcXpress Shell
 --------------
 
 .. _arkangel_shell:
-   ArkAngel Shell
+   ArcXpress Shell
  
 .. toctree::
    :maxdepth: 2

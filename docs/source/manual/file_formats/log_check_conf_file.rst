@@ -18,7 +18,7 @@ A number of keywords can be defined the root node, each of which represents a ke
 
 .. option:: name
 
-  The unique name which represents the key metic. This is the name to be shown in any ArkAngel QoR report
+  The unique name which represents the key metic. This is the name to be shown in any ArcXpress QoR report
 
 .. option:: ignore_case="<bool>"
 

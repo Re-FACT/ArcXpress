@@ -3,7 +3,7 @@
 Issue Licenses
 ==============
 
-Licenses is to ensure that ArkAngel is distributed to customer legally
+Licenses is to ensure that ArcXpress is distributed to customer legally
 For each customer, a dedicated license may be issued.
 There are two ways to generate the license:
 
