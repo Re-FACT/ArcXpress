@@ -30,7 +30,7 @@
 #include "signal_handler_manager.h"
 #include "vtr_log.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /* ====================================================================
  * Helpers – thin wrappers so the logic above stays readable
@@ -452,4 +452,4 @@ void terminate_task_process_group(NativePid pid) {
 #endif
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

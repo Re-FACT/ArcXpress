@@ -16,8 +16,8 @@
 #include "openfpga_digest.h"
 #include "qor_manager.h"
 #include "tableprinter.h"
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
@@ -810,4 +810,4 @@ int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Comman
   return status;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

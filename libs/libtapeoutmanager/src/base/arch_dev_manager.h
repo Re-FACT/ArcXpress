@@ -8,8 +8,8 @@
 #include "log_error_checker.h"
 #include "tapeout_manager.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -287,4 +287,4 @@ class ArchDevManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

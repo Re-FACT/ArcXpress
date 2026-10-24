@@ -24,7 +24,7 @@
 #include "arkangel_report_util.h"
 #include "command_exit_codes.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 FloorplanGraphicsView::FloorplanGraphicsView(QWidget* parent)
   : QGraphicsView(parent), scene_(new QGraphicsScene(this)) {
@@ -295,6 +295,6 @@ int show_floorplan_data_window(const std::string& shaping_rpt, const TileQor& ti
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

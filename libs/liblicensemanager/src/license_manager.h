@@ -19,8 +19,8 @@
 #undef ABSOLUTE
 #endif
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 class LicenseManager {
  public:
@@ -105,6 +105,6 @@ class LicenseManager {
     "DAMAGE.\n********************************************************************************\n";
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

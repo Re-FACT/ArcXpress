@@ -6,8 +6,8 @@
 
 #include "physical_types.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel eFPGA architecture I/O constraints
@@ -104,4 +104,4 @@ class ArchIoConstraints {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

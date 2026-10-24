@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchGen::ArchGen() {
   /* Default settings */
@@ -3317,4 +3317,4 @@ int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) 
 std::string ArchGen::gclock_network_name() const { return GCLK_NTWK_NAME_; }
 std::string ArchGen::greset_network_name() const { return GRST_NTWK_NAME_; }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

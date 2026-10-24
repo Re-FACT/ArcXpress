@@ -32,7 +32,7 @@
 #include "write_xml_pdk_manager.h"
 #include "write_xml_pin_constraints.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 NetlistDevManager::NetlistDevManager(const TapeoutManager& to_mgr, const std::string& run_name,
                                      const PdkManager& pdk_mgr) {
@@ -2764,4 +2764,4 @@ std::string NetlistDevManager::greset_bitstream_value_file(const size_t& rst_swe
                                 e_script_type::OPENFPGA_SCRIPT_GRSTBITGEN, rst_sweep_id, verbose);
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

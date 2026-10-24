@@ -9,8 +9,8 @@
 
 #include "arkangel_constants.h"
 
-/* begin namespace arkangel */
-namespace arkangel {  // namespace arkangel begins
+/* begin namespace arcxpress */
+namespace arcxpress {  // namespace arcxpress begins
 
 LicenseManager::LicenseManager() {}
 
@@ -202,4 +202,4 @@ bool LicenseManager::checkOut(const std::string &featureName) {
   }
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

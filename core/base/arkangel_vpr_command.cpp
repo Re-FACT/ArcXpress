@@ -5,8 +5,8 @@
 
 #include "vpr_main.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_vpr_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* Add a new class of commands */
@@ -38,4 +38,4 @@ void add_vpr_commands(openfpga::Shell<ArkangelContext>& shell) {
   shell.set_command_execute_function(shell_cmd_vpr_stdalone_id, vpr::vpr_standalone_wrapper);
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

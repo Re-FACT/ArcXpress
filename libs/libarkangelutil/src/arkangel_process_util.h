@@ -40,8 +40,8 @@ using NativeFd = int;
  * Public API
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 struct RunningTaskProcess {
   NativePid pid = NATIVE_INVALID_PID;
@@ -92,6 +92,6 @@ void replay_child_output(const RunningTaskProcess& child);
  */
 void terminate_task_process_group(NativePid pid);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */
 
 #endif /* ARKANGEL_PROCESS_UTIL_H */

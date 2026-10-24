@@ -9,11 +9,11 @@
 
 #include "openfpga_verilog_command_template.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_openfpga_verilog_commands(openfpga::Shell<ArkangelContext>& shell) {
   openfpga::add_verilog_command_templates<ArkangelContext>(shell, true);
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

@@ -2,7 +2,7 @@
 #define ARKANGEL_VERSION_H
 #include <cstddef>
 
-namespace arkangel {
+namespace arcxpress {
 extern const char* VERSION;
 extern const char* VERSION_SHORT;
 
@@ -15,6 +15,6 @@ extern const char* VCS_REVISION;
 extern const char* COMPILER;
 extern const char* BUILD_TIMESTAMP;
 extern const char* BUILD_INFO;
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

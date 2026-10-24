@@ -14,7 +14,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 DvManager::DvManager(const TapeoutManager& to_mgr, const std::string& run_name,
                      const ArchEvalManager& ae_mgr, const NetlistDevManager& nd_mgr) {
@@ -1554,4 +1554,4 @@ std::string DvManager::ppa_summary_dirpath(const e_netlist_type& nlist_type) con
   return dirpath.string();
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

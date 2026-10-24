@@ -16,7 +16,7 @@
 #include "tapeout_manager_xml_constants.h"
 #include "write_xml_tapeout_manager.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Only the time stamp of the first file that is read in will be outputted!
@@ -362,4 +362,4 @@ int write_xml_tapeout_manager(const char* fname, const TapeoutManager& to_mgr,
   return err_code;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

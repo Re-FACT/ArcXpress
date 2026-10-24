@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int export_netlist(const ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_context);
@@ -27,4 +27,4 @@ int export_benchmark_schematic(ArkangelContext& arkangel_context, const openfpga
                                const openfpga::CommandContext& cmd_context);
 #endif
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

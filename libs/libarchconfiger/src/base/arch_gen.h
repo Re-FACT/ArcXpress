@@ -12,7 +12,7 @@
 #include "vpr_arch_primitive.h"
 
 /* namespace alkaidC begins */
-namespace arkangel {
+namespace arcxpress {
 
 /**
  * arch package generator
@@ -380,4 +380,4 @@ class ArchGen {
   std::string GRST_NTWK_NAME_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

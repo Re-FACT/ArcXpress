@@ -18,8 +18,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int setup_qor_manager_post_synth(const TapeoutManager& to_mgr, const NetlistDevManager& nd_mgr,
                                  const PdkManager& pdk_mgr, QorManager& qor_mgr,
@@ -46,4 +46,4 @@ int setup_qor_manager_sta(const TapeoutManager& to_mgr, const NetlistDevManager&
                           const std::string& qor_corner, const std::string& clock_period,
                           const bool& verbose);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

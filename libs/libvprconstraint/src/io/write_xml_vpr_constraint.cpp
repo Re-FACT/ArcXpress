@@ -10,7 +10,7 @@
 #include "pugixml_loc.hpp"
 #include "pugixml_util.hpp"
 #include "vpr_constraint_file_constants.h"
-namespace arkangel {
+namespace arcxpress {
 /*write ckbuf instance info*/
 
 void write_xml_vpr_constraints_file(pugi::xml_node& root_node, const CkbufInfo& ckbuf_info,
@@ -93,4 +93,4 @@ void write_xml_vpr_constraints_file(pugi::xml_node& root_node, const CkbufInfo& 
     }
   }
 }
-}  // namespace arkangel
+}  // namespace arcxpress

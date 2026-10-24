@@ -20,7 +20,7 @@
 #include "vtr_geometry.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 TileQor::TileQor(const TileRef& tile_ref) : tile_ref_(tile_ref) {
   cell_area_.resize(tile_ref_.num_tiles());
@@ -1614,4 +1614,4 @@ std::vector<SigDistrNtwkBufId> TileQor::signal_distribution_network_buffer_fanou
   return ret;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

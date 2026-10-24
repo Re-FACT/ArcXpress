@@ -5,8 +5,8 @@
 
 #include "arkangel_netlist_dev.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * - Add a command to Shell environment: create_tapeout
@@ -248,4 +248,4 @@ void add_arkangel_netlist_dev_commands(openfpga::Shell<ArkangelContext>& shell) 
   add_arkangel_extract_netlist_qor_command(shell, arkangel_netlist_dev_cmd_class);
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

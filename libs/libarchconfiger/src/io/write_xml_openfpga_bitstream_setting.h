@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_openfpga_bitstream_setting(const char* fname, const ArchGen& arch_gen);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

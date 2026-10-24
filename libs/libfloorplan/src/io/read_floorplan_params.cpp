@@ -8,7 +8,7 @@
 #include "read_yaml_tile_ref.h"
 #include "tile_qor.h"
 #include "tile_ref.h"
-namespace arkangel {
+namespace arcxpress {
 std::vector<std::vector<int>> parseToVector(const std::vector<std::string>& input) {
   std::vector<std::vector<int>> result;
   for (const std::string& s_raw : input) {
@@ -234,4 +234,4 @@ int read_qor_file(const char* tile_ref_file, const char* tile_qor_csv_file,
   // finshed reading qor file
   return 0;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

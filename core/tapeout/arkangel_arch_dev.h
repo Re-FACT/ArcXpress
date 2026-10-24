@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int create_arch(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_context);
@@ -53,4 +53,4 @@ int remove_arch_io(ArkangelContext& arkangel_context, const openfpga::Command& c
 int eval_tapeout_arch(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_context);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

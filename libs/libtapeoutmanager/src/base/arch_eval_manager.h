@@ -13,8 +13,8 @@
 #include "task_scheduler.h"
 #include "vpr_log_parser.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -336,4 +336,4 @@ class ArchEvalManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

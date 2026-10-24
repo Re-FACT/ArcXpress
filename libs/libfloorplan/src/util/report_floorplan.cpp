@@ -21,7 +21,7 @@
 #include <QPen>
 #endif
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /** Show a summary about the floorplanning results on the screen
  * - List the height, width, utilization of tiles
@@ -855,4 +855,4 @@ int report_floorplan_io_physical_location_to_text(const TileQor& tile_qor,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

@@ -12,11 +12,11 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
                   const std::string& boot_cfg_file);
-} /* end namespace arkangel */
+} /* end namespace arcxpress */
 
 #endif

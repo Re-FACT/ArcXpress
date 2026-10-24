@@ -13,12 +13,12 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell,
                            ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_context);
-} /* end namespace arkangel */
+} /* end namespace arcxpress */
 
 #endif

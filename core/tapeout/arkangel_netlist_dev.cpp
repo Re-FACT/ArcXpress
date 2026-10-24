@@ -19,8 +19,8 @@
 #include "qor_manager.h"
 #include "read_xml_clk_loc_map.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 static int setup_netlist_dev_manager_synth_aspect(
   const TapeoutManager& to_mgr, const PdkManager& pdk_mgr, NetlistDevManager& nd_mgr,
@@ -663,4 +663,4 @@ int extract_netlist_qor(ArkangelContext& arkangel_ctx, const openfpga::Command& 
   return status;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

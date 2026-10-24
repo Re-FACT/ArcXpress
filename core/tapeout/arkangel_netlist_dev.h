@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int generate_netlist(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_context);
@@ -29,4 +29,4 @@ int coarse_floorplan(ArkangelContext& arkangel_context, const openfpga::Command&
 int extract_netlist_qor(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_context);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

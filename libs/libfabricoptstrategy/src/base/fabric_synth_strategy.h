@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -128,4 +128,4 @@ class FabricSynthStrategy {
   mutable bool is_valid_gsettings_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

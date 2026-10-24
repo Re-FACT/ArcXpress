@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int analyze_pre_arch_qor(const ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                          const openfpga::CommandContext& cmd_context);
@@ -20,4 +20,4 @@ int analyze_pre_arch_qor(const ArkangelContext& arkangel_context, const openfpga
 int analyze_arch_eval_qor(const ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                           const openfpga::CommandContext& cmd_context);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

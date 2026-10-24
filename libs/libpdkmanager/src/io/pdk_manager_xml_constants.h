@@ -5,7 +5,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_PDK_ROOT_NODE_NAME = "pdk";
 constexpr const char* XML_PDK_ATTRIBUTE_NAME = "name";
@@ -46,6 +46,6 @@ constexpr const char* XML_PDK_NODE_RCCORNERS_CORNER_ATTRIBUTE_TAG = "tag";
 constexpr const char* XML_PDK_FILE_NODE_NAME = "file";
 constexpr const char* XML_PDK_FILE_ATTRIBUTE_TYPE = "type";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

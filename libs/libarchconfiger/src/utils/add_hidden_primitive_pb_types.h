@@ -8,7 +8,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int add_builtin_pi_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::string& pb_name,
                                      const std::string& mode_bits, const bool& verbose);
@@ -19,4 +19,4 @@ int add_builtin_latch_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::
 int add_builtin_lut_primitive_pb_type(arkangel::ArchGen& arch_gen, const short& lut_size,
                                       const std::string& mode_bits, const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

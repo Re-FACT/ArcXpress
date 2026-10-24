@@ -7,7 +7,7 @@
 #include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 BenchmarkManager::BenchmarkManager() {
   is_valid_ = false;
@@ -645,4 +645,4 @@ BenchmarkSuiteId BenchmarkManager::find_benchmark_suite(const std::string& bench
   return benchmark_suite_ids_[bm_id];
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

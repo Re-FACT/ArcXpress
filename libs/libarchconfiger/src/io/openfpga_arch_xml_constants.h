@@ -1,6 +1,6 @@
 #pragma once
 
-namespace arkangel {
+namespace arcxpress {
 constexpr const char* XML_OPENFPGA_ARCH_ROOT_NODE_NAME = "openfpga_architecture";
 /* Techlib section */
 constexpr const char* XML_OPENFPGA_ARCH_TECHLIB_NODE_NAME = "technology_library";
@@ -182,4 +182,4 @@ constexpr const char* XML_OPENFPGA_ARCH_PB_TYPE_ANNOTATIONS_INTERCONNECT_NODE_NA
 constexpr const char* XML_OPENFPGA_ARCH_PB_TYPE_ANNOTATIONS_INTERCONNECT_ATTR_NAME = "name";
 constexpr const char* XML_OPENFPGA_ARCH_PB_TYPE_ANNOTATIONS_INTERCONNECT_ATTR_CIRCUIT_MODEL_NAME =
   "circuit_model_name";
-}  // namespace arkangel
+}  // namespace arcxpress

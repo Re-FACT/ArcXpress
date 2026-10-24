@@ -16,7 +16,7 @@
 #include "vtr_time.h"
 #include "vtr_vector.h"
 
-namespace arkangel {
+namespace arcxpress {
 /*get the info of ckbuf atom*/
 int set_up_ckbuf_info(std::string cell_map_file, CkbufInfo& ckbuf_info) {
   pugi::xml_document doc;
@@ -48,4 +48,4 @@ int set_up_ckbuf_info(std::string cell_map_file, CkbufInfo& ckbuf_info) {
   }
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -13,7 +13,7 @@
 #include "read_xml_clk_loc_map.h"
 #include "read_xml_pin_constraints.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 template <typename T>
 std::string to_string_with_precision(const T& value, const int precision = 6) {
@@ -218,4 +218,4 @@ int update_timing_gclk_strategy_file(const std::string& template_file, int num_c
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

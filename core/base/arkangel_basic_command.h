@@ -12,10 +12,10 @@
  *******************************************************************/
 
 /* begin namespace openfpga */
-namespace arkangel {
+namespace arcxpress {
 
 void add_basic_commands(openfpga::Shell<ArkangelContext>& shell);
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

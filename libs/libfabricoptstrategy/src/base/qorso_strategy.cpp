@@ -10,7 +10,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 QorsoStrategy::QorsoStrategy(const std::string& name, const std::string& root_path,
                              const std::string& tech_name,
@@ -1917,4 +1917,4 @@ int QorsoStrategy::set_strategy_sweep_variable(const std::string& var_name, cons
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

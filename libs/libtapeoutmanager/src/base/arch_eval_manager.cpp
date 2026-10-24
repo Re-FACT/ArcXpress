@@ -40,7 +40,7 @@
 #include "vtr_log.h"
 #include "write_xml_tapeout_manager_custom_constraints.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchEvalManager::ArchEvalManager(const TapeoutManager& to_mgr, const std::string& run_name,
                                  const BenchmarkManager& bm_mgr)
@@ -2008,4 +2008,4 @@ int ArchEvalManager::gen_report_bitgen_qor(const std::string& ext_fname,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

@@ -8,8 +8,8 @@
 #include "physical_types.h"
 #include "vtr_geometry.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -59,4 +59,4 @@ class IoCoordData {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

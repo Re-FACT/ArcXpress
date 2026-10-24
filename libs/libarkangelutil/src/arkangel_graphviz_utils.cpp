@@ -14,7 +14,7 @@
 #include "command_exit_codes.h"
 #include "vtr_log.h"
 
-namespace arkangel {
+namespace arcxpress {
 int convert_graphviz_to_image(const std::string &input_file, const std::string &output_file,
                               const std::string &file_format, int verbose) {
   GVC_t *gvc;
@@ -88,6 +88,6 @@ bool is_graphviz_supported_format(const std::string &file_format) {
   return (file_format == "png" || file_format == "svg");
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

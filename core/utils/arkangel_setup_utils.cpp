@@ -17,8 +17,8 @@
 #include "read_xml_clk_loc_map.h"
 #include "read_xml_pin_constraints.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int setup_qor_manager_post_synth(const TapeoutManager& to_mgr, const NetlistDevManager& nd_mgr,
                                  const PdkManager& pdk_mgr, QorManager& qor_mgr,
@@ -366,4 +366,4 @@ int setup_dv_manager_for_qor_analysis(const TapeoutManager& to_mgr, const Netlis
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

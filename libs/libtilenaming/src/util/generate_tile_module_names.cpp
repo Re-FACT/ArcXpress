@@ -7,7 +7,7 @@
 #include "vtr_log.h"
 #include "write_xml_module_name_map.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Generate a tile module names based on tile references, reference module names */
 int generate_tile_module_names(const std::string& i_module_names_fname,
@@ -56,4 +56,4 @@ int generate_tile_module_names(const std::string& i_module_names_fname,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

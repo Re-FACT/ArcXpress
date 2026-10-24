@@ -17,8 +17,8 @@
 #include "vtr_log.h"
 #include "vtr_ndmatrix.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 /**
  * The data structure inherits from tile_refs. It includes infomation and util functions for
  * floorplan
@@ -300,4 +300,4 @@ class TileQor {
   /* Constants */
   float UNDEF_ = -1.;
 };
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -15,8 +15,8 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Initialize arkangle data
@@ -91,4 +91,4 @@ int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

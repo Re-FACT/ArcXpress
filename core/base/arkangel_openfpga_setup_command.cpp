@@ -7,11 +7,11 @@
 
 #include "openfpga_setup_command_template.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_openfpga_setup_commands(openfpga::Shell<ArkangelContext>& shell) {
   openfpga::add_setup_command_templates<ArkangelContext>(shell, true);
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

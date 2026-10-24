@@ -13,8 +13,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int get_tapeout_default_benchmark_packet(const TapeoutManager& to_mgr,
                                          const BenchmarkManager& bm_mgr, BenchmarkPacket& bm_pkt);
@@ -48,4 +48,4 @@ int pick_existing_tapeout_step_dep_run(const TapeoutManager& to_mgr,
 std::vector<std::string> find_corners_to_sweep(const TapeoutManager& to_mgr,
                                                const std::string& eval_corner);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

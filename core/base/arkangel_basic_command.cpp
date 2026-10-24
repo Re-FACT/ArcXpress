@@ -8,8 +8,8 @@
 
 #include "arkangel_title.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_basic_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* Add a new class of commands */
@@ -38,4 +38,4 @@ void add_basic_commands(openfpga::Shell<ArkangelContext>& shell) {
   shell.set_command_execute_function(shell_cmd_help_id, [shell]() { shell.print_commands(); });
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

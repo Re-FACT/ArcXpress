@@ -5,8 +5,8 @@
 
 #include "arkangel_pre_arch_analysis.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * - Add a command to Shell environment: create_tapeout
@@ -56,4 +56,4 @@ void add_arkangel_pre_arch_commands(openfpga::Shell<ArkangelContext>& shell) {
   add_arkangel_analyze_logic_resource_command(shell, arkangel_pre_arch_cmd_class);
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

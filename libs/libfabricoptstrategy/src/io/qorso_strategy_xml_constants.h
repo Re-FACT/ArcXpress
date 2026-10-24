@@ -2,7 +2,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_QORSOSTRATEGY_ROOT_NODE_NAME = "qorso_strategies";
 
@@ -59,4 +59,4 @@ constexpr const char* XML_QORSOSTRATEGY_STRATEGY_TASK_REPORT_COMMAND_ATTR_REMOVE
 constexpr const char* XML_QORSOSTRATEGY_STRATEGY_TASK_NODE_SDC = "sdc";
 constexpr const char* XML_QORSOSTRATEGY_STRATEGY_TASK_SDC_NODE_FILE = "file";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

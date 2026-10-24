@@ -10,9 +10,9 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_arkangel_arch_dev_commands(openfpga::Shell<ArkangelContext>& shell);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

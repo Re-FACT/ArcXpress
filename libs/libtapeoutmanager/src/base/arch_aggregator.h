@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure replace the variables defined in an architecture file from the values defined
@@ -45,4 +45,4 @@ class ArchAggregator {
   std::vector<std::string> lines_remove_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

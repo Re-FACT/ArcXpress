@@ -8,8 +8,8 @@
 
 #include "openfpga_bitstream_command_template.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Top-level function to add all the commands related to FPGA-Bitstream
@@ -23,4 +23,4 @@ void add_bitstream_commands(openfpga::Shell<ArkangelContext>& shell) {
 #endif
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

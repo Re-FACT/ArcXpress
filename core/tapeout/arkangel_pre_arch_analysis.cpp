@@ -11,8 +11,8 @@
 #include "command_exit_codes.h"
 #include "report_arch_eval_qor_utils.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
@@ -103,4 +103,4 @@ int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Comman
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

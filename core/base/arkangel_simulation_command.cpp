@@ -5,8 +5,8 @@
 
 #include "arkangel_simulation.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * - Add a command to Shell environment: sim
@@ -78,4 +78,4 @@ void add_simulation_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* TODO: add pack, place and route commands */
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

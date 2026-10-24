@@ -9,8 +9,8 @@
 #include "benchmark_packet_utils.h"
 #include "command_exit_codes.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /* Get the benchmark packet which is the default choice for most tape-out flow. This is a
  * post-synthesis netlist This is a frequently used for most flow which just need a benchmark as
@@ -231,4 +231,4 @@ std::vector<std::string> find_corners_to_sweep(const TapeoutManager& to_mgr,
   return corners_to_sweep;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

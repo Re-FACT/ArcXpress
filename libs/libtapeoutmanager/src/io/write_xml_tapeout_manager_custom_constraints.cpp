@@ -64,7 +64,7 @@ std::string canonical_path(const std::string& path) {
 
 }  // anonymous namespace
 
-namespace arkangel {
+namespace arcxpress {
 
 void merge_vpr_constraint_files(const std::vector<std::string>& constraint_filenames,
                                 const std::string& output_filename) {
@@ -236,4 +236,4 @@ void merge_vpr_constraint_files(const std::vector<std::string>& constraint_filen
   }
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

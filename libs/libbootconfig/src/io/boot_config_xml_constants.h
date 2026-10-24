@@ -4,7 +4,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_BOOTCONFIG_ROOT_NODE_NAME = "boot_config";
 
@@ -22,4 +22,4 @@ constexpr const char* XML_BOOTCONFIG_BIN_ROOT_NODE_NAME = "bin_relpaths";
 constexpr const char* XML_BOOTCONFIG_FILE_NODE_NAME = "file";
 constexpr const char* XML_BOOTCONFIG_FILE_ATTRIBUTE_TYPE = "type";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

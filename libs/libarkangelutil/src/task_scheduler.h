@@ -10,8 +10,8 @@
 
 #include "arkangel_process_util.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 class ParallelTaskScheduler {
  public:
@@ -30,4 +30,4 @@ class ParallelTaskScheduler {
   std::vector<std::function<int()>> tasks_;
 };
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

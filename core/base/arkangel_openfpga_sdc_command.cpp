@@ -8,11 +8,11 @@
 
 #include "openfpga_sdc_command_template.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_openfpga_sdc_commands(openfpga::Shell<ArkangelContext>& shell) {
   openfpga::add_openfpga_sdc_command_templates<ArkangelContext>(shell, true);
 }
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

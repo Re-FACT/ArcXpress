@@ -9,7 +9,7 @@
 #include "command_exit_codes.h"
 #include "vtr_log.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int set_system_env_var(const std::string& var, const std::string& val, const bool& append,
                        const bool& overwrite) {
@@ -31,4 +31,4 @@ int set_system_env_var(const std::string& var, const std::string& val, const boo
   return openfpga::CMD_EXEC_FATAL_ERROR;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

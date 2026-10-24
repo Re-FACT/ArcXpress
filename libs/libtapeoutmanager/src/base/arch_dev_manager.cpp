@@ -23,7 +23,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchDevManager::ArchDevManager(const TapeoutManager& to_mgr, const std::string& run_name) {
   init(to_mgr.path(), to_mgr.name(), run_name, to_mgr.openfpga_error_conf_file(),
@@ -1954,4 +1954,4 @@ int ArchDevManager::set_io_num(const e_side& curr_side,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

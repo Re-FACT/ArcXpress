@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int setup_dv(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
              const openfpga::CommandContext& cmd_context);
@@ -26,4 +26,4 @@ int run_benchmark_power_analysis(ArkangelContext& arkangel_ctx, const openfpga::
 int run_benchmark_sta(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

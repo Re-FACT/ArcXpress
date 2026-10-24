@@ -6,7 +6,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 IoCoordData::IoCoordData() { is_valid_ = false; }
 
@@ -236,4 +236,4 @@ int IoCoordData::compute_borders(const bool& verbose) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

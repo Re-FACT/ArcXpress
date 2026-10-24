@@ -5,7 +5,7 @@
 #include "pin_constraints_fwd.h"
 #include "pugixml.hpp"
 
-namespace arkangel {
+namespace arcxpress {
 int assign_global_signals(PinConstraints& pcf_info, GlobalPortLoc& global_port_loc,
                           CkbufInfo& ckbuf_info,
                           const bool& include_internal_generated_global_signals,
@@ -33,4 +33,4 @@ int generate_global_signal_vpr_constraint_file(const std::string& cell_map_file,
                                                const std::string& clock_loc_map_file,
                                                pugi::xml_node& vpr_constr_xml_root,
                                                const std::string& final_pcf);
-}  // namespace arkangel
+}  // namespace arcxpress

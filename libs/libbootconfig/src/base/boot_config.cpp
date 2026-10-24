@@ -6,7 +6,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 BootConfig::BootConfig() {
   is_valid_ = false;
@@ -221,4 +221,4 @@ bool BootConfig::valid_boot_type(const e_boot_type& type) const {
 
 std::string BootConfig::boot_type_str() const { return boot_type2str(boot_type_, true); }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

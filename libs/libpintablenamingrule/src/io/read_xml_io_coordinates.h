@@ -9,8 +9,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_io_coordinates(const char* fname, IoCoordData& io_coord, const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

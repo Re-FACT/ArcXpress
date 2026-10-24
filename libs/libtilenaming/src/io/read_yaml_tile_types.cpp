@@ -16,7 +16,7 @@
 #include "vtr_time.h"
 #include "yaml-cpp/yaml.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Go recursively to find the core node where tiles are defined */
 static int find_core_node(const YAML::Node& config, YAML::Node& core_node, const bool& verbose) {
@@ -184,4 +184,4 @@ int read_yaml_tile_subblocks(const char* fname, std::vector<std::string>& subblk
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

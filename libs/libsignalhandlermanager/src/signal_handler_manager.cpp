@@ -35,7 +35,7 @@ static jmp_buf s_env_fatal;    // used by set_fatal_handler / sig_handler_fatal
 static jmp_buf s_env_recover;  // used by set_recover_handler / sig_handler_ctrl_c
 #endif
 
-namespace arkangel {
+namespace arcxpress {
 
 // ============================================================
 // Static member definitions
@@ -334,4 +334,4 @@ BOOL WINAPI SignalHandlerManager::win_ctrl_handler(DWORD ctrl_type) {
 }
 #endif
 
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -118,4 +118,4 @@ class BootConfig {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

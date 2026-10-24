@@ -30,8 +30,8 @@
 #include "openfpga_digest.h"
 #include "vtr_time.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Run synthesis
@@ -242,4 +242,4 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
                 sim_type.c_str());
   return openfpga::CMD_EXEC_FATAL_ERROR;
 }
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

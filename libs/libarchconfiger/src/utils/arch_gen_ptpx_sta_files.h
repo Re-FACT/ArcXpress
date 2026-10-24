@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace arkangel {
+namespace arcxpress {
 /* Forward declaration */
 const std::string DEFAULT_VIRTUAL_CLOCK4STA = "virtual_clock";
 
@@ -21,4 +21,4 @@ int generate_constrain_io_file(const std::string& constran_io_file_path,
 
 int generate_disable_config(const std::string& disable_config_file_path);
 
-}  // namespace arkangel
+}  // namespace arcxpress

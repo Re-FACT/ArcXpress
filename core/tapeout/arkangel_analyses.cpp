@@ -13,8 +13,8 @@
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
@@ -122,4 +122,4 @@ int analyze_arch_eval_qor(const ArkangelContext& arkangel_ctx, const openfpga::C
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

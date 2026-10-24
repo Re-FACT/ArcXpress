@@ -11,8 +11,8 @@
 #include "openfpga_tokenizer.h"
 #include "vtr_log.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Extract the cell sim files defined in the cocotb makefile for a given benchmark
@@ -62,4 +62,4 @@ std::vector<std::string> extract_benchmark_cocotb_makefile_cell_sim_files(
   return fnames;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

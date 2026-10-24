@@ -10,8 +10,8 @@
 #include "netlist_dev_manager.h"
 #include "vtr_log.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int save_results_for_step_run(const TapeoutManager& to_mgr, const BenchmarkManager& bm_mgr,
                               const PdkManager& pdk_mgr,
@@ -158,4 +158,4 @@ int check_results_for_step_run(const TapeoutManager& to_mgr, const BenchmarkMana
   return status;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

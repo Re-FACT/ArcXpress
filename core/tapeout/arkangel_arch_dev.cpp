@@ -16,8 +16,8 @@
 #include "openfpga_digest.h"
 #include "report_arch_eval_qor_utils.h"
 #include "task_scheduler.h"
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
@@ -806,4 +806,4 @@ int eval_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   return status;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

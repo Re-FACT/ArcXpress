@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int report_corners(const ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_context);
@@ -41,4 +41,4 @@ int report_config_stats(const ArkangelContext& arkangel_ctx, const openfpga::Com
 int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

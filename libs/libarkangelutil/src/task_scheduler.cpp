@@ -30,7 +30,7 @@
 #include <unistd.h>
 #endif
 
-namespace arkangel {
+namespace arcxpress {
 
 /* ======================================================================
  * Constructor / setters
@@ -345,4 +345,4 @@ int ParallelTaskScheduler::run_tasks() const {
 
 #endif /* _WIN32 */
 
-}  // namespace arkangel
+}  // namespace arcxpress

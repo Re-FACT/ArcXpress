@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "write_xml_pdk_manager.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 QorManager::QorManager(const std::string& root_path, const TapeoutManager& to_mgr,
                        const PdkManager& pdk_mgr) {
@@ -1482,4 +1482,4 @@ int QorManager::set_grst_sdc_file_value_dirpath(const size_t& idx, const std::st
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

@@ -6,8 +6,8 @@
 
 #include <string>
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Constants
@@ -286,6 +286,6 @@ constexpr const char* PYTHON_PATH_ENV_VAR_NAME = "PYTHONPATH";
 constexpr const char* SYSTEM_PATH_ENV_VAR_NAME = "PATH";
 constexpr const char* LIBPYTHON_PATH_ENV_VAR_NAME = "LIBPYTHON_LOC";
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

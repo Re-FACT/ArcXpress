@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 VprLogParser::VprLogParser() {
   clear();
@@ -272,4 +272,4 @@ int VprLogParser::parse(const std::string& fname, const bool& verbose) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

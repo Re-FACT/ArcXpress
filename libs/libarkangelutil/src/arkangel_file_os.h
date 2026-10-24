@@ -6,7 +6,7 @@
 #include <filesystem>
 #include <string>
 
-namespace arkangel {
+namespace arcxpress {
 
 /********************************************************************
  * Function declaration
@@ -41,4 +41,4 @@ std::string absolute_file_path(std::string file_name);
 bool universal_create_symlink(const std::filesystem::path& target,
                               const std::filesystem::path& link_path);
 
-}  // namespace arkangel
+}  // namespace arcxpress

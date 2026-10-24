@@ -12,7 +12,7 @@
 #include "vtr_strong_id.h"
 
 /* namespace alkaidC begins */
-namespace arkangel {
+namespace arcxpress {
 
 /**
  * arch package generator
@@ -247,4 +247,4 @@ class VprArchLayout {
   std::vector<DirectConnect> direct_connects_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

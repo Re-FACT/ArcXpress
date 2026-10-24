@@ -9,7 +9,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /** This function converts the location parameters defined in the blif file to the vpr constraints
  *  The input blif may contain the location parameters as follows
@@ -118,4 +118,4 @@ int blif_param2vpr_constraint(const std::string& blif_fpath, const std::string& 
   }
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

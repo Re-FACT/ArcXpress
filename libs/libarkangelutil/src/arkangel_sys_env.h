@@ -5,7 +5,7 @@
  *******************************************************************/
 #include <string>
 
-namespace arkangel {
+namespace arcxpress {
 
 /********************************************************************
  * Function declaration
@@ -14,4 +14,4 @@ namespace arkangel {
 int set_system_env_var(const std::string& var, const std::string& val, const bool& append,
                        const bool& overwrite = true);
 
-}  // namespace arkangel
+}  // namespace arcxpress

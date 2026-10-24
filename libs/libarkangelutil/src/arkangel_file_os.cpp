@@ -12,7 +12,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int universal_setenv(const char* name, const char* value, int overwrite) {
 #ifdef _WIN32
@@ -124,4 +124,4 @@ bool universal_create_symlink(const std::filesystem::path& target,
 #endif
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

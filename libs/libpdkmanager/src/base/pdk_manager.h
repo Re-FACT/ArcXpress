@@ -9,8 +9,8 @@
 #include "pdk_manager_fwd.h"
 #include "vtr_vector.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -195,6 +195,6 @@ class PdkManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

@@ -6,8 +6,8 @@
 
 #include "benchmark_manager.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * A packet means the necessary files for a benchmark
@@ -42,4 +42,4 @@ class BenchmarkPacket {
     file_types_; /* From which file the benchmarks are loaded from */
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

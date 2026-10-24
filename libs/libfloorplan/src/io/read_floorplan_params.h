@@ -9,7 +9,7 @@
 #include "floorplan_params.h"
 #include "tile_qor.h"
 #include "tile_ref.h"
-namespace arkangel {
+namespace arcxpress {
 
 // util functions used for parsing config yaml file
 std::vector<std::vector<int>> parseToVector(const std::vector<std::string>& input);
@@ -26,4 +26,4 @@ int read_qor_file(const char* tile_ref_file, const char* tile_qor_csv_file,
 int init_floorplan_params_with_yaml_file(const char* config_file,
                                          FloorplanParams* floorplan_params);
 
-}  // namespace arkangel
+}  // namespace arcxpress

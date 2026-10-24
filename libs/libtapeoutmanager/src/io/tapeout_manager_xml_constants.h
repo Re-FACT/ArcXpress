@@ -4,7 +4,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Project file syntax */
 constexpr const char* XML_TAPEOUT_ROOT_NODE_NAME = "tapeout";
@@ -83,4 +83,4 @@ constexpr const char* XML_TAPEOUT_BENCHMARK_STATUS_ATTRIBUTE_RUN = "run";
 constexpr const char* XML_TAPEOUT_BENCHMARK_STATUS_ATTRIBUTE_CORNER = "corner";
 constexpr const char* XML_TAPEOUT_CUSTOM_VPR_CONSTRAINT_FILE_NODE_NAME =
   "custom_vpr_constraint_file";
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

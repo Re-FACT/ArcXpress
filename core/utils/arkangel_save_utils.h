@@ -13,8 +13,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int save_results_for_step_run(const TapeoutManager& to_mgr, const BenchmarkManager& bm_mgr,
                               const PdkManager& pdk_mgr,
@@ -26,4 +26,4 @@ int check_results_for_step_run(const TapeoutManager& to_mgr, const BenchmarkMana
                                const TapeoutManager::e_step_name& curr_step,
                                const std::string& curr_run, const int& verbosity);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

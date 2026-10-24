@@ -11,7 +11,7 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int report_floorplan(const std::string& shaping_rpt, const std::string& proj_name,
                      const std::string& family, const std::string& pdk_name,
@@ -40,4 +40,4 @@ int report_floorplan_io_physical_location_to_text(const TileQor& tile_qor,
 int report_floorplan_tile_pin_physical_location_to_text(const TileQor& tile_qor,
                                                         const std::string& rpt_fpath,
                                                         const bool& verbose);
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

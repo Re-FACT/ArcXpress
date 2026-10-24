@@ -11,10 +11,10 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int backannotate(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_context);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

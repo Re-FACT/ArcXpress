@@ -10,8 +10,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int floorplan_signal_distribution_network(const FloorplanStrategy& flrpln_strtg, TileQor& tile_qor,
                                           const bool& verbose);
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

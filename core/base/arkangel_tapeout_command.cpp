@@ -9,8 +9,8 @@
 #include "arkangel_report.h"
 #include "arkangel_tapeout.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * - Add a command to Shell environment: save_tapeout
@@ -890,4 +890,4 @@ void add_arkangel_tapeout_commands(openfpga::Shell<ArkangelContext>& shell) {
   add_set_benchmark_custom_pin_utilization_command(shell, arkangel_tapeout_cmd_class);
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

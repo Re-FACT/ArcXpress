@@ -11,11 +11,11 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 void add_openfpga_sdc_commands(openfpga::Shell<ArkangelContext>& shell);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */
 
 #endif

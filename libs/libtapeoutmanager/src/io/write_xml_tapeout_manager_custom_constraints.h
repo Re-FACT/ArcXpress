@@ -6,14 +6,14 @@
 
 #include "pugixml.hpp"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 void merge_vpr_constraint_files(const std::vector<std::string>& constraint_filenames,
                                 const std::string& output_filename);
 
 void dedupe_vpr_constraints(pugi::xml_node vpr_constraints_root);
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

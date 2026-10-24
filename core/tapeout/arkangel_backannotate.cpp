@@ -15,8 +15,8 @@
 #include "openfpga_digest.h"
 #include "qor_manager.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Top-level function to back-annotate timing
@@ -151,4 +151,4 @@ int backannotate(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

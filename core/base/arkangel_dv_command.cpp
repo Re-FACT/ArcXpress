@@ -5,8 +5,8 @@
 
 #include "arkangel_dv.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * - Add a command to Shell environment: setup_dv
@@ -256,4 +256,4 @@ void add_arkangel_dv_commands(openfpga::Shell<ArkangelContext>& shell) {
   add_arkangel_run_benchmark_sta_command(shell, arkangel_dv_cmd_class);
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

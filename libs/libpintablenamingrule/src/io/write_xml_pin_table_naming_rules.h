@@ -8,9 +8,9 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_pin_table_naming_rules(const char* fname, const IoCoordData& io_coord,
                                      const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

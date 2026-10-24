@@ -11,7 +11,7 @@
 #include "vtr_time.h"
 #include "vtr_util.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 VprArchLayout::VprArchLayout() {
   default_fc_in_ = 0.15;
@@ -1888,4 +1888,4 @@ std::string VprArchLayout::subtile_physical_equivalent_site(const std::string& t
   return std::string();
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

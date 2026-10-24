@@ -9,9 +9,9 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_arch_ckbuf_loc_map(const char* fname, const ArchGen& arch_gen,
                                  const VprArchLayout::e_fabric_type& fb_type);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

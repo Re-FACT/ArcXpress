@@ -11,8 +11,8 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 int create_tapeout(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_context);
@@ -41,4 +41,4 @@ int add_benchmark_vpr_constraints(ArkangelContext& arkangel_ctx, const openfpga:
 int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
                                          const openfpga::Command& cmd,
                                          const openfpga::CommandContext& cmd_ctx);
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

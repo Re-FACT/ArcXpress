@@ -22,8 +22,8 @@
 #include "write_xml_benchmark_manager.h"
 #include "write_xml_pdk_manager.h"
 #include "write_xml_tapeout_manager.h"
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
@@ -662,4 +662,4 @@ int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
   fflush(stdout);
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

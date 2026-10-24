@@ -10,8 +10,8 @@
 #include "tableprinter.h"
 #include "tile_ref.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure stores data for ArkAngel benchmark suites
@@ -422,4 +422,4 @@ class QorsoStrategy {
   mutable bool is_valid_gsettings_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

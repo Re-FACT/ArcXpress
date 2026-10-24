@@ -15,7 +15,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int add_builtin_pi_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::string& pb_name,
                                      const std::string& mode_bits, const bool& verbose) {
@@ -121,4 +121,4 @@ int add_builtin_lut_primitive_pb_type(arkangel::ArchGen& arch_gen, const short& 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

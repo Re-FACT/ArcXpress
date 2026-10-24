@@ -17,8 +17,8 @@
 #include "dv_manager.h"
 #include "netlist_dev_manager.h"
 #include "openfpga_digest.h"
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 static int setup_dv_manager(const TapeoutManager& to_mgr, const NetlistDevManager& nd_mgr,
                             const ArchEvalManager& ae_mgr, DvManager& dv_mgr, const bool& verbose) {
@@ -646,4 +646,4 @@ int run_benchmark_sta(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -16,7 +16,7 @@
 #include "vtr_time.h"
 #include "yaml-cpp/yaml.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Parse detailed module references with sanity checks */
 static int read_yaml_module_reference(const YAML::Node& config, const size_t& imod,
@@ -169,4 +169,4 @@ int read_yaml_tile_ref(const char* fname, TileRef& tile_ref, const bool& verbose
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

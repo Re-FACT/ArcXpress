@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_floorplan_strategy(const char* fname, const FloorplanStrategy& flrpln_strtg);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

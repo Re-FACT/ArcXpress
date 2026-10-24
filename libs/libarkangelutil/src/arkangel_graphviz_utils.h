@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace arkangel {
+namespace arcxpress {
 
 /**
  * @brief Converts a Graphviz DOT file to image format (PNG or SVG)
@@ -28,6 +28,6 @@ int convert_graphviz_to_image(const std::string& input_file, const std::string& 
  */
 bool is_graphviz_supported_format(const std::string& file_format);
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

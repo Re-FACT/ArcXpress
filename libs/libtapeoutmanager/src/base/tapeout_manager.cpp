@@ -11,7 +11,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 TapeoutManager::TapeoutManager() {
   is_valid_ = false;
@@ -3328,4 +3328,4 @@ void TapeoutManager::clear_constraint_data() {
   benchmark_status_info_.clear();
   custom_pin_utilization_nested_.clear();
 }
-}  // End namespace arkangel
+}  // End namespace arcxpress

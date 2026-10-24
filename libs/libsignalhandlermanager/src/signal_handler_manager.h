@@ -49,7 +49,7 @@ using platform_pid_t = pid_t;
 
 #include "command_exit_codes.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /* Keep consistent with openfpga::CMD_EXEC_SUCCESS */
 constexpr int CMD_EXEC_SUCCESS = 0;
@@ -142,6 +142,6 @@ class SignalHandlerManager {
   static std::set<platform_pid_t> monitored_process_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif  // SIGNAL_HANDLER_MANAGER_H

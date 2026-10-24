@@ -6,7 +6,7 @@
 #include "vtr_geometry.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Depending on the center loc, split the bounding box into two halves
  * - Horizontally: upper half and lower half
@@ -251,4 +251,4 @@ int floorplan_signal_distribution_network(const FloorplanStrategy& flrpln_strtg,
   return status;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

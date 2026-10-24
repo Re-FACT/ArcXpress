@@ -2,7 +2,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_SIG_DISTR_NTWK_ROOT_NODE_NAME = "signal_distribution_network";
 constexpr const char* XML_SIG_DISTR_NTWK_NODE_NTWK = "network";
@@ -19,4 +19,4 @@ constexpr const char* XML_SIG_DISTR_NTWK_NTWK_BUF_NODE_LEAF_TILE = "leaf_tile";
 constexpr const char* XML_SIG_DISTR_NTWK_NTWK_BUF_LEAF_TILE_ATTR_X = "x";
 constexpr const char* XML_SIG_DISTR_NTWK_NTWK_BUF_LEAF_TILE_ATTR_Y = "y";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

@@ -9,7 +9,7 @@
 
 #include "command_exit_codes.h"
 #include "tile_qor.h"
-namespace arkangel {
+namespace arcxpress {
 
 FloorplanFlow::FloorplanFlow(const FloorplanParams& params, TileQor& tile_qor)
   : floorplan_params_(params), tile_qor_(tile_qor) {
@@ -329,4 +329,4 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress
