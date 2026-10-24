@@ -29,66 +29,27 @@ BUILD_WITH_GRAPHVIZ ?= ON
 # Set build with graphical user interface or not
 BUILD_WITH_GUI ?= ON
 
-EDITION_TYPE ?= engineering
-# Convert to lower case for consistency
-EDITION_TYPE := $(shell echo ${EDITION_TYPE} | tr '[:upper:]' '[lower]')
-
 BUILD_IPO ?= ON
 ifeq ($(BUILD_IPO), ON)
-CMAKE_FLAGS += -DARKANGEL_IPO_BUILD=ON
+CMAKE_FLAGS += -DARCXPRESS_IPO_BUILD=ON
 else
-CMAKE_FLAGS += -DARKANGEL_IPO_BUILD=OFF
-endif
-
-BUILD_FRONTEND ?= ON
-ifeq ($(BUILD_FRONTEND), ON)
-CMAKE_FLAGS += -DBUILD_ARKANGEL_WITH_BUILTIN_FRONTEND=ON
-ifeq ($(MSYSTEM),MINGW64)
-CMAKE_FLAGS += -DAA_PATCH_YOSYS_ABC_MAKEFILE=ON
-endif
-else
-CMAKE_FLAGS += -DBUILD_ARKANGEL_WITH_BUILTIN_FRONTEND=OFF
-endif
-
-# Switch to use an prebuilt version of Yosys and skip the long build process of Yosys
-BUILD_ON_EXTERNAL_YOSYS ?= OFF
-EXTERNAL_YOSYS_BIN=`which yosys`
-ifeq ($(BUILD_ON_EXTERNAL_YOSYS), ON)
-CMAKE_FLAGS += -DUSE_EXTERNAL_YOSYS=ON -DEXTERNAL_YOSYS_BIN=${EXTERNAL_YOSYS_BIN}
-else
-CMAKE_FLAGS += -DUSE_EXTERNAL_YOSYS=OFF
-endif
-
-# Switch to enable/disable system verilog support
-BUILD_CUSTOM_PYTHON ?= ON
-ifeq ($(BUILD_CUSTOM_PYTHON), ON)
-CMAKE_FLAGS += -DBUILD_PYTHON_FROM_SOURCE=ON
-else
-CMAKE_FLAGS += -DBUILD_PYTHON_FROM_SOURCE=OFF
-endif
-
-# Switch to enable/disable system verilog support
-BUILD_PLUGIN_SLANG ?= ON
-ifeq ($(BUILD_PLUGIN_SLANG), ON)
-CMAKE_FLAGS += -DENABLE_PLUGIN_SLANG=ON
-else
-CMAKE_FLAGS += -DENABLE_PLUGIN_SLANG=OFF
+CMAKE_FLAGS += -DARCXPRESS_IPO_BUILD=OFF
 endif
 
 ifeq ($(BUILD_WITH_GRAPHVIZ), ON)
-CMAKE_FLAGS += -DARKANGEL_WITH_GRAPHVIZ=ON
+CMAKE_FLAGS += -DARCXPRESS_WITH_GRAPHVIZ=ON
 else
-CMAKE_FLAGS += -DARKANGEL_WITH_GRAPHVIZ=OFF
+CMAKE_FLAGS += -DARCXPRESS_WITH_GRAPHVIZ=OFF
 endif
 
 ifeq ($(BUILD_WITH_GUI), ON)
-CMAKE_FLAGS += -DARKANGEL_WITH_GUI=ON
+CMAKE_FLAGS += -DARCXPRESS_WITH_GUI=ON
 else
-CMAKE_FLAGS += -DARKANGEL_WITH_GUI=OFF
+CMAKE_FLAGS += -DARCXPRESS_WITH_GUI=OFF
 endif
 
 ifeq ($(BUILD_WITH_LICENSE_CONTROL), ON)
-CMAKE_FLAGS += -DBUILD_ARKANGEL_WITH_LICENSE=ON
+CMAKE_FLAGS += -DBUILD_ARCXPRESS_WITH_LICENSE=ON
 endif
 
 
@@ -133,17 +94,9 @@ ifeq ($(INSTALL_CENTOS7P9_ENV),ON)
 CMAKE_FLAGS += -DINSTALLER_WITH_CUSTOM_ENV=ON
 endif
 
-INSTALL_FULL_DEVICE ?= OFF
-# Normalize to UPPER case so comparisons below work as expected
-INSTALL_FULL_DEVICE := $(shell echo ${INSTALL_FULL_DEVICE} | tr '[:lower:]' '[:upper:]')
-# Explicitly pass the CMake option (either ON or OFF) to ensure it's always set
-ifeq ($(INSTALL_FULL_DEVICE),ON)
-CMAKE_FLAGS += -DINSTALLER_WITH_FULL_DEVICE=ON
-endif
-
 # Allow users to pass parameters to cmake, without defining build types
 # e.g. make CMAKE_FLAGS="-DCMAKE_CXX_COMPILER=g++-9'
-override CMAKE_FLAGS := -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DARKANGEL_EDITION_TYPE=${EDITION_TYPE} -G 'Unix Makefiles' ${CMAKE_FLAGS}
+override CMAKE_FLAGS := -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -G 'Unix Makefiles' ${CMAKE_FLAGS}
 
 # -s : Suppresss makefile output (e.g. entering/leaving directories)
 # --output-sync target : For parallel compilation ensure output for each target is synchronized (make version >= 4.0)
@@ -158,9 +111,9 @@ SUBMODULE=
 NUM_JOBS = 8
 # The default boot config for Arkangel which build from source codes
 REGTEST_INSTALL = OFF
-ARKANGEL_BOOT_CONFIG_FILE = ${PWD}/etc/boot_config/build.xml
+ARCXPRESS_BOOT_CONFIG_FILE = ${PWD}/etc/boot_config/build.xml
 ifeq (${REGTEST_INSTALL}, ON)
-ARKANGEL_BOOT_CONFIG_FILE = ${PWD}/etc/boot_config/install.xml
+ARCXPRESS_BOOT_CONFIG_FILE = ${PWD}/etc/boot_config/install.xml
 endif
 
 # Find CMake command from system variable, otherwise use a default one
@@ -225,29 +178,11 @@ checkout_shallow:
 	git submodule init ${SUBMODULE}
 	git submodule update --init --depth 1 ${SUBMODULE}
 
-checkout_build_opensource:
-# Checkout the submodules required to build source codes
-	@+${MAKE} checkout_shallow SUBMODULE=libs/OpenFPGA
-	cd libs/OpenFPGA && make checkout
-
 checkout_build:
 # Checkout the submodules required to build source codes
-	@+${MAKE} checkout_shallow SUBMODULE=libs/OpenFPGA
-	@+${MAKE} checkout SUBMODULE=libs/arkangel_frontend
+	@+${MAKE} checkout_shallow SUBMODULE=thirdparty/OpenFPGA
+	@+${MAKE} checkout SUBMODULE=thirdparty/Yosuf
 	cd libs/OpenFPGA && make checkout
-
-checkout_all: checkout_build
-# Checkout the submodules required to build source codes
-	@+${MAKE} checkout SUBMODULE=etc
-	@+${MAKE} checkout SUBMODULE=test
-
-checkout_utils_submodules:
-	@+${MAKE} checkout SUBMODULE=etc/utils
-	@+${MAKE} checkout SUBMODULE=etc/device
-
-checkout_utils_submodules_alkaidL:
-	@+${MAKE} checkout SUBMODULE=etc/utils
-	@+${MAKE} checkout SUBMODULE=etc/device/ALKDL
 
 prebuild:
 # Run cmake to generate Makefile under the build directory, before compilation
@@ -272,18 +207,12 @@ installer:
 #
 #   Define the type of installer, can be [STGZ|DEB|IFW] (default: STGZ). for example, ``INSTALLER_TYPE=DEB`` indicates to create a DEB package
 	cpack --config ${BUILD_DIR}/CPackConfig.cmake -G ${INSTALLER_TYPE}
-	
-install_test:
-# Install binary into build/arkangel_home
-	rm -rf ${BUILD_DIR}/arkangel_home
-	mkdir ${BUILD_DIR}/arkangel_home
-	cd ${BUILD_DIR}/arkangel_home && ../../install.exp ../../ArkAngel*.sh
 
 list_cmake_targets: prebuild
 # Show the targets available to be built, which can be specified through ``CMAKE_GOALS`` when compile
 	cd ${BUILD_DIR} && make help && cd -
 
-all: checkout_all
+all: checkout_build
 # A shortcut command to run checkout and compile in serial
 	@+${MAKE} compile
 
@@ -333,7 +262,7 @@ format-all: format-cpp format-xml format-py format-yaml
 
 clean:
 # Remove current build results
-# One exception is the arkangel gui, where the working directory is the subumodule itself
+# One exception is the arcxpress gui, where the working directory is the subumodule itself
 	rm -rf ${BUILD_DIR}
 	rm -rf projects
 
@@ -360,12 +289,12 @@ unit_test:
 
 reg_test:
 # Run regression tests. Use REG_TEST_TYPE=[checkin|basic|basic_alkaidL_only|strong_alkaidL|strong_alkaidC|strong_alkaidD] to select the testcases. Use REG_TEST_SELECT=[task1|task2|...] to select single task run. Enable dryrun mode using REG_TEST_DRYRUN=ON
-	${PYTHON_EXEC} ${PWD}/test/scripts/run_arkangel_test.py \
+	${PYTHON_EXEC} ${PWD}/test/scripts/run_arcxpress_test.py \
 	--config ${PWD}/test/common/test_config.yaml \
 	--task ${PWD}/test/common/${REG_TEST_TYPE}_tests.yaml \
-	--arkangel_root ${PWD} \
-	--arkangel_build_path ${PWD}/build/core \
-	--arkangel_boot_config ${ARKANGEL_BOOT_CONFIG_FILE} \
+	--arcxpress_root ${PWD} \
+	--arcxpress_build_path ${PWD}/build/core \
+	--arcxpress_boot_config ${ARCXPRESS_BOOT_CONFIG_FILE} \
 	--task_select ${REG_TEST_SELECT} \
 	--new_thread_wait_time ${REG_TEST_NEW_THREAD_WAIT_TIME} \
 	--j ${NUM_JOBS} \
