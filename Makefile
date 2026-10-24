@@ -194,8 +194,8 @@ checkout_build:
 # Checkout the submodules required to build source codes
 	@+${MAKE} checkout_shallow SUBMODULE=thirdparty/OpenFPGA
 	@+${MAKE} checkout SUBMODULE=thirdparty/Yosuf
-	currDir=$${PWD} && cd thirdparty/OpenFPGA && make checkout && cd $${currDir}}
-	currDir=$${PWD} && cd thirdparty/Yosuf && make checkout_build && cd $${currDir}}
+	currDir=$${PWD} && cd thirdparty/OpenFPGA && make checkout && cd $${currDir}
+	currDir=$${PWD} && cd thirdparty/Yosuf && make checkout_build && cd $${currDir}
 
 prebuild:
 # Run cmake to generate Makefile under the build directory, before compilation
