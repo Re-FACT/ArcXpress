@@ -1,4 +1,4 @@
-# Arcxpress
+# ArcXpress
 
 Version: see [`VERSION.md`](VERSION.md)
 
