@@ -26,43 +26,43 @@ ArkAngelShell::ArkAngelShell() {
   fflush(stdout);
 
   /* Add tape-out flow related commands */
-  arkangel::add_arkangel_tapeout_commands(shell_);
-  arkangel::add_arkangel_pre_arch_commands(shell_);
-  arkangel::add_arkangel_arch_dev_commands(shell_);
-  arkangel::add_arkangel_netlist_dev_commands(shell_);
-  arkangel::add_arkangel_dv_commands(shell_);
+  arcxpress::add_arkangel_tapeout_commands(shell_);
+  arcxpress::add_arkangel_pre_arch_commands(shell_);
+  arcxpress::add_arkangel_arch_dev_commands(shell_);
+  arcxpress::add_arkangel_netlist_dev_commands(shell_);
+  arcxpress::add_arkangel_dv_commands(shell_);
 
   /* Add implementation commands */
-  arkangel::add_vpr_commands(shell_);
+  arcxpress::add_vpr_commands(shell_);
 
   /* Add openfpga setup commands */
-  arkangel::add_openfpga_setup_commands(shell_);
+  arcxpress::add_openfpga_setup_commands(shell_);
 
   /* Add openfpga verilog commands */
-  arkangel::add_openfpga_verilog_commands(shell_);
+  arcxpress::add_openfpga_verilog_commands(shell_);
 
   /* Add openfpga sdc commands */
-  arkangel::add_openfpga_sdc_commands(shell_);
+  arcxpress::add_openfpga_sdc_commands(shell_);
 
   /*Add simulation commds*/
-  arkangel::add_simulation_commands(shell_);
+  arcxpress::add_simulation_commands(shell_);
 
   /* Add basic commands: exit, help, etc.
    * Note:
    * This MUST be the last command group to be added!
    */
-  arkangel::add_basic_commands(shell_);
+  arcxpress::add_basic_commands(shell_);
 }
 
 int ArkAngelShell::run_command(const char* cmd_line) {
   bool gui_mode = false;
-  int ret = arkangel::SignalHandlerManager::set_recover_handler(gui_mode);
+  int ret = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
   if (0 == ret) {
-    arkangel::SignalHandlerManager::set_running_cmd_flag(true);
+    arcxpress::SignalHandlerManager::set_running_cmd_flag(true);
     ret = shell_.execute_command(cmd_line, arkangel_ctx_);
-    arkangel::SignalHandlerManager::set_running_cmd_flag(false);
+    arcxpress::SignalHandlerManager::set_running_cmd_flag(false);
   }
-  if (arkangel::CMD_EXEC_SIGINT_HANDLED == ret) {
+  if (arcxpress::CMD_EXEC_SIGINT_HANDLED == ret) {
     ret = 0;
   }
   return ret;
@@ -132,12 +132,12 @@ int ArkAngelShell::start(int argc, char** argv) {
   } else {
     /* Format the root path in case windows-style is found */
     std::string formatted_root_path =
-      arkangel::format_windows_path(start_cmd_context.option_value(start_cmd, opt_root_path));
+      arcxpress::format_windows_path(start_cmd_context.option_value(start_cmd, opt_root_path));
     std::string formatted_boot_cfg_path =
-      arkangel::format_windows_path(start_cmd_context.option_value(start_cmd, opt_boot_cfg));
+      arcxpress::format_windows_path(start_cmd_context.option_value(start_cmd, opt_boot_cfg));
 
     /* Parse succeed. Initialize and branch on options */
-    if (arkangel::arkangel_init(arkangel_ctx_, formatted_root_path, formatted_boot_cfg_path) ==
+    if (arcxpress::arkangel_init(arkangel_ctx_, formatted_root_path, formatted_boot_cfg_path) ==
         openfpga::CMD_EXEC_FATAL_ERROR) {
       return 1;
     };
@@ -169,25 +169,25 @@ int ArkAngelShell::start(int argc, char** argv) {
 
 void ArkAngelShell::run_interactive_mode() {
   bool gui_mode = false;
-  arkangel::SignalHandlerManager::set_sig_handler(gui_mode);
+  arcxpress::SignalHandlerManager::set_sig_handler(gui_mode);
   int ret =
-    arkangel::SignalHandlerManager::set_fatal_handler("run_interactive_mode_signal_handler");
+    arcxpress::SignalHandlerManager::set_fatal_handler("run_interactive_mode_signal_handler");
   /* If fatal error such as segment fault occurs, signal handler handles it and returns to
      interactive mode. If fatal error occurs again, the above process runs again in the below loop.
      The exit commmand can break this loop. */
-  while ((arkangel::CMD_EXEC_SUCCESS == ret) || (arkangel::CMD_EXEC_FATAL_ERROR_HANDLED == ret)) {
-    int status = arkangel::SignalHandlerManager::set_recover_handler(gui_mode);
+  while ((arcxpress::CMD_EXEC_SUCCESS == ret) || (arcxpress::CMD_EXEC_FATAL_ERROR_HANDLED == ret)) {
+    int status = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
     shell_.run_interactive_mode(arkangel_ctx_);
   }
 }
 
 void ArkAngelShell::run_script_mode(const char* script_file_name, const bool& batch_mode) {
   bool gui_mode = false;
-  arkangel::SignalHandlerManager::set_sig_handler(gui_mode);
-  int status = arkangel::CMD_EXEC_SUCCESS;
-  int ret = arkangel::SignalHandlerManager::set_fatal_handler("run_script_mode_signal_handler");
-  if (arkangel::CMD_EXEC_SUCCESS == ret) {
-    status = arkangel::SignalHandlerManager::set_recover_handler(gui_mode);
+  arcxpress::SignalHandlerManager::set_sig_handler(gui_mode);
+  int status = arcxpress::CMD_EXEC_SUCCESS;
+  int ret = arcxpress::SignalHandlerManager::set_fatal_handler("run_script_mode_signal_handler");
+  if (arcxpress::CMD_EXEC_SUCCESS == ret) {
+    status = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
     shell_.run_script_mode(script_file_name, arkangel_ctx_, batch_mode);
   }
   run_interactive_mode();

@@ -163,7 +163,7 @@ int main(int argc, const char** argv) {
   float sc_height = std::stof(cmd_ctx.option_value(cmd, opt_sc_height));
   VTR_LOG("Consider the Standard Cell Height (SC_HEIGHT): %g [um]\n", sc_height);
 
-  arkangel::FloorplanStrategy flrpln_strtg(cpp, sc_height);
+  arcxpress::FloorplanStrategy flrpln_strtg(cpp, sc_height);
 
   /* Parse from an XML file */
   std::string strategy_file = cmd_ctx.option_value(cmd, opt_strtgy);
@@ -173,7 +173,7 @@ int main(int argc, const char** argv) {
   std::string rpt_fpath = cmd_ctx.option_value(cmd, opt_rpt);
   /* Read floorplan strategy file */
   VTR_LOGV(verbosity > 0, "Reading strategy from %s\n", strategy_file.c_str());
-  int status = arkangel::read_xml_floorplan_strategy(strategy_file.c_str(), flrpln_strtg);
+  int status = arcxpress::read_xml_floorplan_strategy(strategy_file.c_str(), flrpln_strtg);
   if (openfpga::CMD_EXEC_SUCCESS != status) {
     VTR_LOG_ERROR("Reading strategy failed with errors\n");
     return status;
@@ -187,7 +187,7 @@ int main(int argc, const char** argv) {
   VTR_LOGV(verbosity > 0, "Done\n");
 
   /* read tile qor info and reference info */
-  arkangel::TileQor tile_qor;
+  arcxpress::TileQor tile_qor;
   VTR_LOGV(verbosity > 0, "Reading tile-level QoR from %s\n", synth_tile_qor_file.c_str());
   status = read_qor_file(tref_file.c_str(), synth_tile_qor_file.c_str(), tile_qor);
   if (status != openfpga::CMD_EXEC_SUCCESS) {

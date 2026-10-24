@@ -308,7 +308,7 @@ int export_benchmark_schematic(ArkangelContext& arkangel_ctx, const openfpga::Co
 
   /* Convert Graphviz to image */
   status =
-    arkangel::convert_graphviz_to_image(input_file_path, file_path, extension, verbosity = 1);
+    arcxpress::convert_graphviz_to_image(input_file_path, file_path, extension, verbosity = 1);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     fflush(stdout);
     return openfpga::CMD_EXEC_FATAL_ERROR;

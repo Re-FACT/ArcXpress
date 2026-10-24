@@ -197,13 +197,13 @@ static int load_tapeout_from_config_file(const std::string config_file_name, Tap
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* Load PDK configuration */
-  std::string pdk_config_file = arkangel::absolute_file_path(to_mgr.pdk_config());
-  if (!arkangel::file_is_legal(pdk_config_file)) {
+  std::string pdk_config_file = arcxpress::absolute_file_path(to_mgr.pdk_config());
+  if (!arcxpress::file_is_legal(pdk_config_file)) {
     VTR_LOG_ERROR("Pdk config file '%s' does not exist!\n", pdk_config_file.c_str());
     fflush(stdout);
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  pdk_mgr.set_kw_proj_path(arkangel::get_cwd());
+  pdk_mgr.set_kw_proj_path(arcxpress::get_cwd());
   status = read_xml_pdk_manager(pdk_config_file.c_str(), pdk_mgr);
   if (status == openfpga::CMD_EXEC_FATAL_ERROR) {
     fflush(stdout);
@@ -224,10 +224,10 @@ static int load_tapeout_from_config_file(const std::string config_file_name, Tap
     to_mgr.clear_status();
   }
   /* Load Benchmark configuration */
-  bm_mgr.set_kw_proj_path(arkangel::get_cwd());
+  bm_mgr.set_kw_proj_path(arcxpress::get_cwd());
   for (std::string bm_config_file : to_mgr.benchmark_configs()) {
-    std::string bm_config_file_abspath = arkangel::absolute_file_path(bm_config_file);
-    if (!arkangel::file_is_legal(bm_config_file_abspath)) {
+    std::string bm_config_file_abspath = arcxpress::absolute_file_path(bm_config_file);
+    if (!arcxpress::file_is_legal(bm_config_file_abspath)) {
       VTR_LOG_ERROR("Benchmark config file '%s' does not exist!\n", bm_config_file_abspath.c_str());
       fflush(stdout);
       return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -274,7 +274,7 @@ int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARKANGEL_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
-        arkangel::LicenseManager::LicensedFeatureName::AAEE)) {
+        arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 #endif
@@ -306,7 +306,7 @@ int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   }
   /* Start initializing project directory */
   VTR_LOG("Initializing tapeout project '%s'...\n", to_mgr.name().c_str());
-  if (!arkangel::path_is_legal(to_mgr.path())) {
+  if (!arcxpress::path_is_legal(to_mgr.path())) {
     openfpga::create_directory(to_mgr.path(), true, verbosity == 1);
   }
   arkangel_ctx.set_tapeout_created();
@@ -542,7 +542,7 @@ int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
 /* Implementation for setting custom pin utilization */
 #ifdef ARKANGEL_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
-        arkangel::LicenseManager::LicensedFeatureName::EVAL)) {
+        arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 #endif

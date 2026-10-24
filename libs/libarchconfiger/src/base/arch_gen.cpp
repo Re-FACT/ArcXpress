@@ -2624,7 +2624,7 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       }
       /* Walk through all the required ports */
       for (auto port : arch_layout_.find_tile_ports_by_type(
-             tile, arkangel::VprArchLayout::e_port_type::CLOCK)) {
+             tile, arcxpress::VprArchLayout::e_port_type::CLOCK)) {
         pugi::xml_node tile_node =
           gp_node.append_child(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_NODE_NAME);
         tile_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_ATTR_NAME) =
@@ -2654,7 +2654,7 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       }
       /* Walk through all the required ports */
       for (auto port : arch_layout_.find_tile_ports_by_type(
-             tile, arkangel::VprArchLayout::e_port_type::RESET)) {
+             tile, arcxpress::VprArchLayout::e_port_type::RESET)) {
         pugi::xml_node tile_node =
           gp_node.append_child(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_NODE_NAME);
         tile_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_ATTR_NAME) =

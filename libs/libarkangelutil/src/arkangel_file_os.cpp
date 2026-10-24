@@ -61,7 +61,7 @@ bool path_is_legal(std::string path_name) {
 bool file_is_legal(std::string path_name) { return (std::filesystem::exists(path_name)); }
 
 bool create_path(std::string path_name) {
-  if (arkangel::path_is_legal(path_name)) {
+  if (arcxpress::path_is_legal(path_name)) {
     return false;
   } else {
     std::filesystem::path path = path_name;
@@ -72,12 +72,12 @@ bool create_path(std::string path_name) {
 // in some case like strategy file parsing, have to compute full path on-fly
 std::string locate_file_path(std::string work_path, std::string file_name) {
   // file can be found at current work dir
-  if (arkangel::file_is_legal(file_name)) {
+  if (arcxpress::file_is_legal(file_name)) {
     return file_name;
   } else {
     // try to look for through work_path
     std::string path_name = openfpga::format_dir_path(work_path) + file_name;
-    if (arkangel::file_is_legal(path_name)) {
+    if (arcxpress::file_is_legal(path_name)) {
       return path_name;
     }
   }

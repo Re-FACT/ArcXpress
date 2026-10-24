@@ -781,7 +781,7 @@ int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Comman
 
   QorManager qor_mgr(nd_mgr.project_home_dir().string(), to_mgr, pdk_mgr);
 
-  arkangel::TablePrinter tp({"Qor Tasks", "Variable", "Scale Factor", "Corner"});
+  arcxpress::TablePrinter tp({"Qor Tasks", "Variable", "Scale Factor", "Corner"});
   for (auto corner_to_sweep : corners_to_sweep) {
     status = openfpga::CMD_EXEC_FATAL_ERROR;
     status = setup_qor_manager_post_synth(to_mgr, nd_mgr, pdk_mgr, qor_mgr, qor_type, std::string(),

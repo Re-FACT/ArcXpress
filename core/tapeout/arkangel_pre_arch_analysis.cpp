@@ -21,7 +21,7 @@ int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Comman
                            const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARKANGEL_LICENSED_BUILD
   if (!arkangel_ctx.license_manager().checkOut(
-        arkangel::LicenseManager::LicensedFeatureName::EVAL)) {
+        arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 #endif

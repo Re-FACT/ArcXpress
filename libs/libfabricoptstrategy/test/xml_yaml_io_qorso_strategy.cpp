@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
   int status = 0;
 
   std::array<std::string, 4> corner_info = {"tt_v1p0_25c", "tt_v1p0", "tt", "tt"};
-  arkangel::QorsoStrategy qs_strtg("default_name", "/home", "s40", corner_info);
+  arcxpress::QorsoStrategy qs_strtg("default_name", "/home", "s40", corner_info);
   qs_strtg.set_netlist_input("../netlists/gl/");
   qs_strtg.add_netlist_exclude("fabric_netlists.v");
   qs_strtg.add_netlist_exclude("efpga_circuits.v");
@@ -23,16 +23,16 @@ int main(int argc, char** argv) {
 
   /* Parse from an XML file */
   VTR_LOG("Load the Qorso strategy data from an XML file: %s.\n", argv[1]);
-  status = arkangel::read_xml_qorso_strategy(argv[1], qs_strtg, false, true);
+  status = arcxpress::read_xml_qorso_strategy(argv[1], qs_strtg, false, true);
   if (0 != status) {
     return status;
   }
-  arkangel::TileRef tref;
-  status = arkangel::read_yaml_tile_ref(argv[2], tref, true);
+  arcxpress::TileRef tref;
+  status = arcxpress::read_yaml_tile_ref(argv[2], tref, true);
   if (status != 0) {
     return status;
   }
-  status = arkangel::read_yaml_tile_types(argv[3], tref, true);
+  status = arcxpress::read_yaml_tile_types(argv[3], tref, true);
   if (status != 0) {
     return status;
   }

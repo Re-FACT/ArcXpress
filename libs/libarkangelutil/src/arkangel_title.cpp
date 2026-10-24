@@ -89,10 +89,10 @@ std::string create_arkangel_title() {
  *******************************************************************/
 void print_arkangel_version_info() {
   /* Display version */
-  VTR_LOG("Version: %s\n", arkangel::VERSION);
-  VTR_LOG("Revision: %s\n", arkangel::VCS_REVISION);
-  VTR_LOG("Compiled: %s\n", arkangel::BUILD_TIMESTAMP);
-  VTR_LOG("Compiler: %s\n", arkangel::COMPILER);
-  VTR_LOG("Build Info: %s\n", arkangel::BUILD_INFO);
+  VTR_LOG("Version: %s\n", arcxpress::VERSION);
+  VTR_LOG("Revision: %s\n", arcxpress::VCS_REVISION);
+  VTR_LOG("Compiled: %s\n", arcxpress::BUILD_TIMESTAMP);
+  VTR_LOG("Compiler: %s\n", arcxpress::COMPILER);
+  VTR_LOG("Build Info: %s\n", arcxpress::BUILD_INFO);
   VTR_LOG("\n");
 }

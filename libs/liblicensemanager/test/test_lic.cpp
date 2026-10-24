@@ -15,7 +15,7 @@ int main() {
   try {
     // to test valid license file make sure the version is working
     std::string version_to_check = "2025R1";
-    arkangel::LicenseManager lic_manager{std::string(lic_path), version_to_check};
+    arcxpress::LicenseManager lic_manager{std::string(lic_path), version_to_check};
 
     // test license info print
     lic_manager.printLicenseInfo();
@@ -47,11 +47,11 @@ int main() {
     std::cout << "---------------------------------" << std::endl;
     std::cout << "- Test  License  By Feature Tag -" << std::endl;
     std::cout << "---------------------------------" << std::endl;
-    std::vector<arkangel::LicenseManager::LicensedFeatureName> feature_tags = {
-      arkangel::LicenseManager::LicensedFeatureName::AAEE,
-      arkangel::LicenseManager::LicensedFeatureName::EVAL,
-      arkangel::LicenseManager::LicensedFeatureName::PROTOTYPE,
-      arkangel::LicenseManager::LicensedFeatureName::FULL};
+    std::vector<arcxpress::LicenseManager::LicensedFeatureName> feature_tags = {
+      arcxpress::LicenseManager::LicensedFeatureName::AAEE,
+      arcxpress::LicenseManager::LicensedFeatureName::EVAL,
+      arcxpress::LicenseManager::LicensedFeatureName::PROTOTYPE,
+      arcxpress::LicenseManager::LicensedFeatureName::FULL};
     for (const auto& feature_tag : feature_tags) {
       std::cout << "---------------------------------" << std::endl;
       std::cout << ">>>> Checking out feature: " << lic_manager.licensedFeatureNameMap[feature_tag]
@@ -64,7 +64,7 @@ int main() {
       }
     }
 
-  } catch (arkangel::LicenseManager::LicenseFatalException const& ex) {
+  } catch (arcxpress::LicenseManager::LicenseFatalException const& ex) {
     std::cout << "[LICENSE TEST] License checkout exception captured: " << ex.what() << std::endl;
     status = 1;
   }

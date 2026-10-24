@@ -25,7 +25,7 @@ namespace arcxpress {
 
 #ifdef ARKANGEL_LICENSED_BUILD
 #include "license_manager.h"
-bool init_license_manager(arkangel::LicenseManager& license_mgr, const std::string& version) {
+bool init_license_manager(arcxpress::LicenseManager& license_mgr, const std::string& version) {
   const char* lic_path = std::getenv("ARKANGEL_LICENSE_PATH");
   if (lic_path == nullptr) {
     VTR_LOG_ERROR("License: ARKANGEL_LICENSE_PATH not defined\n");
@@ -60,7 +60,7 @@ int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   if (!arkangel_ctx.license_manager().checkOut(
-        arkangel::LicenseManager::LicensedFeatureName::AAEE)) {
+        arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
     VTR_LOG_ERROR("License checkout failed\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -69,7 +69,7 @@ int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
   /* Load Boot configuration */
   VTR_LOG("Booting...\n");
   int status =
-    arkangel::read_xml_boot_config(boot_cfg_file.c_str(), arkangel_ctx.mutable_boot_config());
+    arcxpress::read_xml_boot_config(boot_cfg_file.c_str(), arkangel_ctx.mutable_boot_config());
   if (openfpga::CMD_EXEC_SUCCESS != status) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }

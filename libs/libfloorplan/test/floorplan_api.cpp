@@ -6,7 +6,7 @@
 #include "read_floorplan_params.h"
 
 void floorplan_init(const int argc, const char** argv, floorplan_args* options,
-                    arkangel::FloorplanParams& floorplan_params, arkangel::TileQor& tile_qor) {
+                    arcxpress::FloorplanParams& floorplan_params, arcxpress::TileQor& tile_qor) {
   /* Read in user options */
   *options = read_args(argc, argv);
   /* Set conditional defaults */
@@ -27,13 +27,13 @@ void floorplan_init(const int argc, const char** argv, floorplan_args* options,
 
 int main(int argc, const char** argv) {
   floorplan_args Options;
-  arkangel::FloorplanParams floorplan_params;
-  arkangel::TileQor tile_qor;
+  arcxpress::FloorplanParams floorplan_params;
+  arcxpress::TileQor tile_qor;
   // read floorplan_task.yaml & tile_reference.yaml files
   floorplan_init(argc, argv, &Options, floorplan_params, tile_qor);
   std::cout << "floorplan init finished! " << std::endl;
 
-  arkangel::FloorplanFlow floorplan_flow(floorplan_params, tile_qor);
+  arcxpress::FloorplanFlow floorplan_flow(floorplan_params, tile_qor);
 
   int status = floorplan_flow.run("", true);
   if (status == 1) {

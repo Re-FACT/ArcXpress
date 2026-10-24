@@ -294,10 +294,10 @@ int system_wrapper(std::string cmd_line, bool verbose) {
   }
 
   /* Signal-handler setup (Linux only; no-op shim expected on Windows) */
-  arkangel::SignalHandlerManager::set_sig_handler(false);
-  arkangel::SignalHandlerManager::set_running_cmd_flag(true);
+  arcxpress::SignalHandlerManager::set_sig_handler(false);
+  arcxpress::SignalHandlerManager::set_running_cmd_flag(true);
   std::set<NativePid> family_pid_collect = {child_pid};
-  arkangel::SignalHandlerManager::set_monitored_process(family_pid_collect);
+  arcxpress::SignalHandlerManager::set_monitored_process(family_pid_collect);
 
   VTR_LOGV(verbose, "[ARKANGEL INFO] Waiting for process pid: %lu\n",
            static_cast<unsigned long>(child_pid));
@@ -355,7 +355,7 @@ int system_wrapper(std::string cmd_line, bool verbose) {
   fflush(stdout);
   close_output_fd(err_fd);
 
-  arkangel::SignalHandlerManager::set_sig_handler(true);
+  arcxpress::SignalHandlerManager::set_sig_handler(true);
 
   return ((status == 0) && err_msg.empty()) ? openfpga::CMD_EXEC_SUCCESS
                                             : openfpga::CMD_EXEC_FATAL_ERROR;

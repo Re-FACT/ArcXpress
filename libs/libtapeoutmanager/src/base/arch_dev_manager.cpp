@@ -596,7 +596,7 @@ int ArchDevManager::runtime_exec_openfpga(const e_fabric_type& fb_type,
   std::filesystem::current_path(runtime_dir);
   VTR_LOGV(verbose, "Change to runtime directory\n\t%s\n", runtime_dir.string().c_str());
 
-  if (arkangel::system_wrapper(openfpga_cmd, verbose)) {
+  if (arcxpress::system_wrapper(openfpga_cmd, verbose)) {
     VTR_LOG_ERROR("OpenFPGA run failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -1649,7 +1649,7 @@ int ArchDevManager::export_arch(const std::string& fname, const bool& force_over
 
   VTR_LOG("Exporting architecture data to \n\t%s\n", fpath.string().c_str());
 
-  if (arkangel::system_wrapper(export_cmd, verbose)) {
+  if (arcxpress::system_wrapper(export_cmd, verbose)) {
     VTR_LOG_ERROR("Export arch package failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -1897,7 +1897,7 @@ int ArchDevManager::exec_arch_gen(const bool& verbose) {
   std::filesystem::current_path(runtime_dir);
   VTR_LOGV(verbose, "Change to runtime directory\n\t%s\n", runtime_dir.string().c_str());
 
-  if (arkangel::system_wrapper(arch_cfg_cmd, verbose)) {
+  if (arcxpress::system_wrapper(arch_cfg_cmd, verbose)) {
     VTR_LOG_ERROR("Architecture configurator run failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }

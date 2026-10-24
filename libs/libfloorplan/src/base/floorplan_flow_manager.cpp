@@ -69,7 +69,7 @@ TileInfo FloorplanFlow::calculate_tile_info(const float& area, const float& util
   }
   float height = height_unit * sc_height;
   float width = std::ceil(((area / utilization) / height + boundary_cell_width * 2) / cpp) * cpp;
-  arkangel::TileInfo seed_tile(height, width);
+  arcxpress::TileInfo seed_tile(height, width);
   return seed_tile;
 }
 
@@ -85,7 +85,7 @@ TileInfo FloorplanFlow::calculate_tile_info_fixed_width(const float& area, const
     height_unit++;
   }
   float height = height_unit * sc_height;
-  arkangel::TileInfo tile_info(height, width);
+  arcxpress::TileInfo tile_info(height, width);
   return tile_info;
 }
 
@@ -96,7 +96,7 @@ TileInfo FloorplanFlow::calculate_tile_info_fixed_height(const float& area, cons
                                                          const float& sc_height, const float& cpp,
                                                          const float& boundary_cell_width) const {
   float width = std::ceil(((area / utilization) / height + boundary_cell_width * 2) / cpp) * cpp;
-  arkangel::TileInfo tile_info(height, width);
+  arcxpress::TileInfo tile_info(height, width);
   return tile_info;
 }
 
@@ -160,7 +160,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
       }
       grid_max_area = grid_max_area * tile_qor_.utilization(tile_main);
       // calculate the tile height and tile width using the max_area
-      arkangel::TileInfo tile_main_info = calculate_tile_info(
+      arcxpress::TileInfo tile_main_info = calculate_tile_info(
         grid_max_area, tile_qor_.utilization(tile_main), tile_width_height_ratio, is_gap_odd,
         sc_height, cpp, boundary_cell_width);
       tile_qor_.set_tile_info(tile_main, tile_main_info, x_ofs, y_ofs);
@@ -193,7 +193,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
                    "y_offset(=%lu)\n",
                    tile.c_str(), tile_main.c_str(), x_ofs, y_ofs);
           size_t tile_main_x_ofs = tile_qor_.tile_share_width_target_offset(tile, x_ofs, tile_main);
-          arkangel::TileInfo tile_info = calculate_tile_info_fixed_width(
+          arcxpress::TileInfo tile_info = calculate_tile_info_fixed_width(
             tile_qor_.cell_grid_area(tile),
             tile_qor_.get_tile_width_by_offset(tile_main, tile_main_x_ofs),
             tile_qor_.utilization(tile), is_gap_odd, sc_height, cpp, boundary_cell_width);
@@ -211,7 +211,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
           VTR_LOGV(verbose,
                    "Given tile main '%s' y_offset(=%lu) is considered as height reference\n",
                    tile_main.c_str(), tile_main_y_ofs);
-          arkangel::TileInfo tile_info = calculate_tile_info_fixed_height(
+          arcxpress::TileInfo tile_info = calculate_tile_info_fixed_height(
             tile_qor_.cell_grid_area(tile),
             tile_qor_.get_tile_height_by_offset(tile_main, tile_main_y_ofs),
             tile_qor_.utilization(tile), is_gap_odd, sc_height, cpp, boundary_cell_width);
@@ -229,7 +229,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
               tile_qor_.is_undefined(current_tile_width)) {
             // if the tile is not tile_main's neighbor and its height and width are not set, assume
             // it is a square to calculate its height and width
-            arkangel::TileInfo tile_info =
+            arcxpress::TileInfo tile_info =
               calculate_tile_info(tile_qor_.cell_grid_area(tile), tile_qor_.utilization(tile), 1,
                                   is_gap_odd, sc_height, cpp, boundary_cell_width);
             tile_qor_.set_tile_info(tile, tile_info, x_ofs, y_ofs);
@@ -240,7 +240,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
           } else if (tile_qor_.is_undefined(current_tile_width) &&
                      !tile_qor_.is_undefined(current_tile_height)) {
             // if the tile's height has been set before, calculate its width with height fixed
-            arkangel::TileInfo tile_info = calculate_tile_info_fixed_height(
+            arcxpress::TileInfo tile_info = calculate_tile_info_fixed_height(
               tile_qor_.cell_grid_area(tile), current_tile_height, tile_qor_.utilization(tile),
               is_gap_odd, sc_height, cpp, boundary_cell_width);
             tile_qor_.set_tile_info(tile, tile_info, x_ofs, y_ofs);
@@ -248,7 +248,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
           } else if (!tile_qor_.is_undefined(current_tile_width) &&
                      tile_qor_.is_undefined(current_tile_height)) {
             // if the tile's width has been set before, calculate its height with width fixed
-            arkangel::TileInfo tile_info = calculate_tile_info_fixed_width(
+            arcxpress::TileInfo tile_info = calculate_tile_info_fixed_width(
               tile_qor_.cell_grid_area(tile), current_tile_width, tile_qor_.utilization(tile),
               is_gap_odd, sc_height, cpp, boundary_cell_width);
             tile_qor_.set_tile_info(tile, tile_info, x_ofs, y_ofs);
@@ -274,7 +274,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
       for (size_t y_ofs = 0; y_ofs < tile_qor_.grid_height(tile); ++y_ofs) {
         if (tile_qor_.tile_share_width(tile, x_ofs, tile_main)) {
           size_t tile_main_x_ofs = tile_qor_.tile_share_width_target_offset(tile, x_ofs, tile_main);
-          arkangel::TileInfo tile_info = calculate_tile_info_fixed_width(
+          arcxpress::TileInfo tile_info = calculate_tile_info_fixed_width(
             tile_qor_.cell_grid_area(tile),
             tile_qor_.get_tile_width_by_offset(tile_main, tile_main_x_ofs),
             tile_qor_.utilization(tile), is_gap_odd, sc_height, cpp, boundary_cell_width);
@@ -285,7 +285,7 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
         } else if (tile_qor_.tile_share_height(tile, y_ofs, tile_main)) {
           size_t tile_main_y_ofs =
             tile_qor_.tile_share_height_target_offset(tile, x_ofs, tile_main);
-          arkangel::TileInfo tile_info = calculate_tile_info_fixed_height(
+          arcxpress::TileInfo tile_info = calculate_tile_info_fixed_height(
             tile_qor_.cell_grid_area(tile),
             tile_qor_.get_tile_height_by_offset(tile_main, tile_main_y_ofs),
             tile_qor_.utilization(tile), is_gap_odd, sc_height, cpp, boundary_cell_width);
@@ -297,13 +297,13 @@ int FloorplanFlow::run(const std::string& dom_tile_name, const bool& verbose) {
           float current_tile_height = tile_qor_.get_tile_height_by_offset(tile, y_ofs);
           float current_tile_width = tile_qor_.get_tile_width_by_offset(tile, x_ofs);
           if (current_tile_height > current_tile_width) {
-            arkangel::TileInfo tile_info = calculate_tile_info_fixed_height(
+            arcxpress::TileInfo tile_info = calculate_tile_info_fixed_height(
               tile_qor_.cell_grid_area(tile), current_tile_height, tile_qor_.utilization(tile),
               is_gap_odd, sc_height, cpp, boundary_cell_width);
             tile_qor_.set_tile_info(tile, tile_info, x_ofs, y_ofs);
             tile_qor_.update_neighbours_width_by_offset(tile, x_ofs);
           } else {
-            arkangel::TileInfo tile_info = calculate_tile_info_fixed_width(
+            arcxpress::TileInfo tile_info = calculate_tile_info_fixed_width(
               tile_qor_.cell_grid_area(tile), current_tile_width, tile_qor_.utilization(tile),
               is_gap_odd, sc_height, cpp, boundary_cell_width);
             tile_qor_.set_tile_info(tile, tile_info, x_ofs, y_ofs);

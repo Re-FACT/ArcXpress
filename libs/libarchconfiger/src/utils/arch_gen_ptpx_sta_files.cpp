@@ -24,7 +24,7 @@ std::string to_string_with_precision(const T& value, const int precision = 6) {
 }
 int generate_disable_config(const std::string& disable_config_file_path) {
   std::vector<std::string> disable_timing_ports;
-  arkangel::ArchGen arch_gen;
+  arcxpress::ArchGen arch_gen;
   std::string circuit_mode_port_attr_prefix = arch_gen.circuit_mode_port_attr_prefix();
   disable_timing_ports.push_back(
     openfpga::generate_sram_port_name(e_config_protocol_type::CONFIG_MEM_SCAN_CHAIN,

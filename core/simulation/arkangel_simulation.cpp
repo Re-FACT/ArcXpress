@@ -81,17 +81,17 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
 #ifdef ARKANGEL_LICENSED_BUILD
   if (sim_type == "rtl") {
     if (!arkangel_ctx.license_manager().checkOut(
-          arkangel::LicenseManager::LicensedFeatureName::AAEE)) {
+          arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
   } else if (sim_type == "post_implementation") {
     if (!arkangel_ctx.license_manager().checkOut(
-          arkangel::LicenseManager::LicensedFeatureName::AAEE)) {
+          arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
   } else if (sim_type == "post_synth") {
     if (!arkangel_ctx.license_manager().checkOut(
-          arkangel::LicenseManager::LicensedFeatureName::AAEE)) {
+          arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
   } else {  // unlikely to be licensed

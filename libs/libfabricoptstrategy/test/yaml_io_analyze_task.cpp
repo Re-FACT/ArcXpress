@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc == 2);
   int status = 0;
 
-  arkangel::FabricSynthStrategy syn_strtg(".", "s40", "tt_v1p0");
+  arcxpress::FabricSynthStrategy syn_strtg(".", "s40", "tt_v1p0");
   syn_strtg.set_netlist_input("../netlists/rtl/");
   syn_strtg.set_netlist_output("../netlists/gl/subblock");
   syn_strtg.add_netlist_exclude("fabric_netlists.v");
