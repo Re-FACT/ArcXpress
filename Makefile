@@ -10,10 +10,6 @@
 #
 #  Pick the type of compilation. Can be either ``release`` or ``debug``. By default, release mode is selected (full optimization on runtime).
 #
-# .. option:: EDITION_TYPE=<string>
-#
-#  Pick the type of edition. Can be either ``engineering`` or ``production``. By default, production mode is selected (only HDL-to-Bitstream design flow supported).
-#
 # .. option:: CMAKE_FLAGS=<string>
 #
 #  Force compilation flags for CMake to generate Makefiles
@@ -48,11 +44,6 @@ else
 CMAKE_FLAGS += -DARCXPRESS_WITH_GUI=OFF
 endif
 
-ifeq ($(BUILD_WITH_LICENSE_CONTROL), ON)
-CMAKE_FLAGS += -DBUILD_ARCXPRESS_WITH_LICENSE=ON
-endif
-
-
 INSTALL_DOC ?= ON
 INSTALL_DOC := $(shell echo ${INSTALL_DOC} | tr '[:upper:]' '[lower]')
 ifeq ($(INSTALL_DOC),OFF)
@@ -81,30 +72,52 @@ else
     endif
 endif
 
-# For installer creation
-INSTALL_MINGW64_ENV ?= OFF
-INSTALL_MINGW64_ENV := $(shell echo ${INSTALL_MINGW64_ENV} | tr '[:upper:]' '[lower]')
-ifeq ($(INSTALL_MINGW64_ENV),ON)
-CMAKE_FLAGS += -DINSTALLER_WITH_CUSTOM_ENV=ON
+#Detect the operating system
+UNAME_S := $(shell uname -s)
+# Cmake generator has to be Ninja on MSVC
+CMAKE_GEN = Unix Makefiles
+ifeq ($(OS),Windows_NT)
+CMAKE_GEN = Ninja
+# Msys2 can still use Linux gcc
+ifeq ($(MSYSTEM),UCRT64)
+CMAKE_GEN = Unix Makefiles
+endif
+endif
+ifeq ($(UNAME_S),Darwin)
+CMAKE_GEN = Ninja
 endif
 
-INSTALL_CENTOS7P9_ENV ?= OFF
-INSTALL_CENTOS7P9_ENV := $(shell echo ${INSTALL_CENTOS7P9_ENV} | tr '[:upper:]' '[lower]')
-ifeq ($(INSTALL_CENTOS7P9_ENV),ON)
-CMAKE_FLAGS += -DINSTALLER_WITH_CUSTOM_ENV=ON
+CMAKE_BUILD_CONFIG=
+CPACK_CONFIG_TYPE=
+ifeq ($(CMAKE_GEN),Ninja)
+CPACK_CONFIG_TYPE=-C ${CMAKE_BUILD_CONFIG_VAL}
+CMAKE_BUILD_CONFIG=--config ${CMAKE_BUILD_CONFIG_VAL}
 endif
+
+
 
 # Allow users to pass parameters to cmake, without defining build types
 # e.g. make CMAKE_FLAGS="-DCMAKE_CXX_COMPILER=g++-9'
-override CMAKE_FLAGS := -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -G 'Unix Makefiles' ${CMAKE_FLAGS}
+override CMAKE_FLAGS := -G '${CMAKE_GEN}' -DCMAKE_BUILD_TYPE=${BUILD_TYPE} ${CMAKE_FLAGS}
 
 # -s : Suppresss makefile output (e.g. entering/leaving directories)
 # --output-sync target : For parallel compilation ensure output for each target is synchronized (make version >= 4.0)
 MAKEFLAGS := -s
 
 # Directory to build the codes
-SOURCE_DIR :=${PWD}
+# Branch on OS
+ifeq ($(OS),Windows_NT)
+ifeq ($(MSYSTEM),UCRT64)
+SOURCE_DIR := $(PWD)
+else
+SOURCE_DIR := $(shell powershell -NoProfile -Command "(Get-Location).Path")
+SOURCE_DIR := $(subst \,/,$(SOURCE_DIR))
+endif
+else
+SOURCE_DIR := $(PWD)
+endif
 BUILD_DIR ?= build
+
 CMAKE_GOALS = all
 INSTALLER_TYPE=STGZ
 SUBMODULE=
@@ -117,10 +130,12 @@ ARCXPRESS_BOOT_CONFIG_FILE = ${PWD}/etc/boot_config/install.xml
 endif
 
 # Find CMake command from system variable, otherwise use a default one
-ifeq ($(origin CMAKE_COMMAND),undefined)
-CMAKE_COMMAND := cmake
-else
-CMAKE_COMMAND := ${CMAKE_COMMAND}
+#Check for the cmake executable
+CMAKE_COMMAND := $(shell command -v cmake 2> /dev/null)
+ifeq ($(OS),Windows_NT)
+ifneq ($(MSYSTEM),UCRT64)
+CMAKE_COMMAND := cmake.exe
+endif
 endif
 
 # Define executables
@@ -155,9 +170,6 @@ FLRPLN_BASIC_INPUT_DIR = ${PWD}/libs/libfloorplan/example/homo
 FLRPLN_STRONG0_INPUT_DIR = ${PWD}/libs/libfloorplan/example/hetero
 FLRPLN_STRONG1_INPUT_DIR = ${PWD}/libs/libfloorplan/example/hetero_mini
 FLRPLN_STRONG2_INPUT_DIR = ${PWD}/libs/libfloorplan/example/sd_ntwk
-
-NETLIST_PATH ?= 
-PILOTONE_REPO_PATH ?= ./pilotone_repo
 
 # Put it first so that "make" without argument is like "make help".
 export COMMENT_EXTRACT
@@ -197,8 +209,9 @@ compile: prebuild
 # .. option:: CMAKE_GOALS
 #
 #   Define the target for cmake to compile. for example, ``cmake_goals=openfpga`` indicates that only openfpga binary will be compiled
-	echo "Building target(s): ${CMAKE_GOALS}"
-	@+${MAKE} -C ${BUILD_DIR} ${CMAKE_GOALS}
+	echo "Building target(s): ${CMAKE_GOALS}" && \
+	echo "${CMAKE_COMMAND} --build ${BUILD_DIR} ${CMAKE_BUILD_CONFIG} --target ${CMAKE_GOALS}"
+	+${CMAKE_COMMAND} --build ${BUILD_DIR} ${CMAKE_BUILD_CONFIG} --target ${CMAKE_GOALS}
 
 installer:
 # Create the package for users to install on their computer with pre-built binaries
