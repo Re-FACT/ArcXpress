@@ -7,12 +7,12 @@
 #include <filesystem>
 #include <map>
 
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_save_utils.h"
-#include "arkangel_sys_env.h"
-#include "arkangel_tapeout.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_save_utils.h"
+#include "arcxpress_sys_env.h"
+#include "arcxpress_tapeout.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 #include "read_xml_benchmark_manager.h"
@@ -27,14 +27,14 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int show_tapeout_dashboard(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int show_tapeout_dashboard(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_report_file = cmd.option("file");
   std::string report_file_path = "";
   if (cmd_ctx.option_enable(cmd, opt_report_file)) {
     report_file_path = cmd_ctx.option_value(cmd, opt_report_file);
   }
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   VTR_LOG("Dashboard of tapeout project '%s'\n", to_mgr.name().c_str());
   std::string step_tag = "Step";
   std::string substep_tag = "Substep";
@@ -87,12 +87,12 @@ int show_tapeout_dashboard(const ArkangelContext& arkangel_ctx, const openfpga::
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int show_tapeout_status(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int show_tapeout_status(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_step = cmd.option("step");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_step));
   /* Show status of a selected step */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   std::string curr_step_name = cmd_ctx.option_value(cmd, opt_step);
   TapeoutManager::e_step_name curr_step = to_mgr.str2step_name(curr_step_name, true);
   if (!to_mgr.valid_step_name(curr_step)) {
@@ -124,16 +124,16 @@ int show_tapeout_status(const ArkangelContext& arkangel_ctx, const openfpga::Com
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int save_tapeout(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int save_tapeout(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
   int verbosity = 0;
   if (cmd_ctx.option_enable(cmd, opt_verbosity)) {
     verbosity = std::stoi(cmd_ctx.option_value(cmd, opt_verbosity));
   }
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   std::string config_file_name = to_mgr.file();
   openfpga::CommandOptionId opt_file = cmd.option("config_file");
   if (true == cmd_ctx.option_enable(cmd, opt_file)) {
@@ -270,10 +270,10 @@ static int load_tapeout_from_config_file(const std::string config_file_name, Tap
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int create_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -288,17 +288,17 @@ int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
     verbosity = std::stoi(cmd_ctx.option_value(cmd, opt_verbosity));
   }
   /* Do not allow multiple creation on project */
-  if (arkangel_ctx.is_tapeout_created()) {
+  if (arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR(
       "There is already a tapeout project which is created or loaded! Not allowed to create "
       "another in the same session!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   to_mgr.clear();
-  PdkManager& pdk_mgr = arkangel_ctx.mutable_pdk_manager();
+  PdkManager& pdk_mgr = arcxpress_ctx.mutable_pdk_manager();
   pdk_mgr.clear();
-  BenchmarkManager& bm_mgr = arkangel_ctx.mutable_benchmark_manager();
+  BenchmarkManager& bm_mgr = arcxpress_ctx.mutable_benchmark_manager();
   bm_mgr.clear();
   int status = load_tapeout_from_config_file(config_file_name, to_mgr, pdk_mgr, bm_mgr, true);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
@@ -309,13 +309,13 @@ int create_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   if (!arcxpress::path_is_legal(to_mgr.path())) {
     openfpga::create_directory(to_mgr.path(), true, verbosity == 1);
   }
-  arkangel_ctx.set_tapeout_created();
+  arcxpress_ctx.set_tapeout_created();
   return status;
 }
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int load_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int load_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("config_file");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_file));
@@ -328,17 +328,17 @@ int load_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   openfpga::CommandOptionId opt_no_valid = cmd.option("no_validation");
   std::string config_file_name = cmd_ctx.option_value(cmd, opt_file);
   /* Do not allow multiple creation on project */
-  if (arkangel_ctx.is_tapeout_created()) {
+  if (arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR(
       "There is already a tapeout project which is created or loaded! Not allowed to create "
       "another in the same session!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   to_mgr.clear();
-  PdkManager& pdk_mgr = arkangel_ctx.mutable_pdk_manager();
+  PdkManager& pdk_mgr = arcxpress_ctx.mutable_pdk_manager();
   pdk_mgr.clear();
-  BenchmarkManager& bm_mgr = arkangel_ctx.mutable_benchmark_manager();
+  BenchmarkManager& bm_mgr = arcxpress_ctx.mutable_benchmark_manager();
   bm_mgr.clear();
   int status = load_tapeout_from_config_file(config_file_name, to_mgr, pdk_mgr, bm_mgr, false);
   if (status == openfpga::CMD_EXEC_FATAL_ERROR) {
@@ -368,14 +368,14 @@ int load_tapeout(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
     }
   }
   VTR_LOG("Done\n");
-  arkangel_ctx.set_tapeout_created();
+  arcxpress_ctx.set_tapeout_created();
   fflush(stdout);
   return openfpga::CMD_EXEC_SUCCESS;
 }
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int disable_benchmark(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int disable_benchmark(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_name = cmd.option("name");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_name));
@@ -386,11 +386,11 @@ int disable_benchmark(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
     verbosity = std::stoi(cmd_ctx.option_value(cmd, opt_verbosity));
   }
   /* Do not allow multiple creation on project */
-  if (!arkangel_ctx.is_tapeout_created()) {
+  if (!arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR("Require a valid tapeout to be created or loaded!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  BenchmarkManager& bm_mgr = arkangel_ctx.mutable_benchmark_manager();
+  BenchmarkManager& bm_mgr = arcxpress_ctx.mutable_benchmark_manager();
   std::string bm_name = cmd_ctx.option_value(cmd, opt_name);
   VTR_LOGV(verbosity == 1,
            "To disable the benchmark '%s' for architecture evaluation and design verification\n",
@@ -402,7 +402,7 @@ int disable_benchmark(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   }
   VTR_LOGV(verbosity == 1, "Done\n");
   /* Also need to update the tapeout manager here */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   status = to_mgr.add_disabled_benchmark(bm_name);
   if (status == openfpga::CMD_EXEC_FATAL_ERROR) {
     fflush(stdout);
@@ -414,7 +414,7 @@ int disable_benchmark(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int disable_corner(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int disable_corner(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_name = cmd.option("name");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_name));
@@ -425,11 +425,11 @@ int disable_corner(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
     verbosity = std::stoi(cmd_ctx.option_value(cmd, opt_verbosity));
   }
   /* Do not allow multiple creation on project */
-  if (!arkangel_ctx.is_tapeout_created()) {
+  if (!arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR("Require a valid tapeout to be created or loaded!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   std::string corner_name = cmd_ctx.option_value(cmd, opt_name);
   VTR_LOGV(verbosity == 1, "To disable the corner '%s'\n", corner_name.c_str());
   int status = to_mgr.add_disabled_corner(corner_name, verbosity == 1);
@@ -444,7 +444,7 @@ int disable_corner(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Add custom VPR constraints to a benchmark for architecture evaluation
  *******************************************************************/
-int add_benchmark_vpr_constraints(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int add_benchmark_vpr_constraints(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                                   const openfpga::CommandContext& cmd_ctx) {
   // Retrieve command options
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -466,7 +466,7 @@ int add_benchmark_vpr_constraints(ArkangelContext& arkangel_ctx, const openfpga:
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   // find benchmark suite id
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   BenchmarkSuiteId st_id = bm_mgr.find_benchmark_suite(benchmark_name);
   BenchmarkId bm_id = bm_mgr.find_benchmark_by_name(benchmark_name);
   if (!bm_mgr.valid_benchmark_id(bm_id) || !bm_mgr.valid_suite_id(st_id)) {
@@ -487,7 +487,7 @@ int add_benchmark_vpr_constraints(ArkangelContext& arkangel_ctx, const openfpga:
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   // Select the proper run and corner
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
   if (cmd_ctx.option_enable(cmd, opt_run)) {
@@ -536,12 +536,12 @@ int add_benchmark_vpr_constraints(ArkangelContext& arkangel_ctx, const openfpga:
 /********************************************************************
  * Add custom VPR constraints to a benchmark for architecture evaluation
  *******************************************************************/
-int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
+int set_benchmark_custom_pin_utilization(ArkangelContext& arcxpress_ctx,
                                          const openfpga::Command& cmd,
                                          const openfpga::CommandContext& cmd_ctx) {
 /* Implementation for setting custom pin utilization */
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -559,7 +559,7 @@ int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
   }
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -573,7 +573,7 @@ int set_benchmark_custom_pin_utilization(ArkangelContext& arkangel_ctx,
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* Get the data */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
 
   std::string eval_corner = to_mgr.default_corner();
   if (cmd_ctx.option_enable(cmd, opt_corner)) {

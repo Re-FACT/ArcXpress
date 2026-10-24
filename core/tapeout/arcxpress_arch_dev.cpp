@@ -7,10 +7,10 @@
 /* Headers from openfpgashell library */
 #include "arch_dev_manager.h"
 #include "arch_eval_manager.h"
-#include "arkangel_arch_dev.h"
-#include "arkangel_file_os.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_arch_dev.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "benchmark_packet_utils.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
@@ -22,10 +22,10 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int create_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int create_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -39,7 +39,7 @@ int create_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -60,7 +60,7 @@ int create_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   ArchDevManager ad_mgr(to_mgr, run);
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   BenchmarkPacket bm_pkt;
   status = setup_arch_dev_manager(to_mgr, bm_mgr, ad_mgr, bm_pkt);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
@@ -89,10 +89,10 @@ int create_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int setup_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int setup_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -106,7 +106,7 @@ int setup_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -127,7 +127,7 @@ int setup_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   ArchDevManager ad_mgr(to_mgr, run);
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   BenchmarkPacket bm_pkt;
   status = setup_arch_dev_manager(to_mgr, bm_mgr, ad_mgr, bm_pkt);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
@@ -176,7 +176,7 @@ int setup_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-int show_tapeout_arch(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int show_tapeout_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_type = cmd.option("type");
   openfpga::CommandOptionId opt_fabric = cmd.option("fabric");
@@ -189,7 +189,7 @@ int show_tapeout_arch(const ArkangelContext& arkangel_ctx, const openfpga::Comma
 
   /* Get the run to show any stats
    */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -217,7 +217,7 @@ int show_tapeout_arch(const ArkangelContext& arkangel_ctx, const openfpga::Comma
   return status;
 }
 
-int set_arch_io_num(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_io_num(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                     const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_side = cmd.option("side");
   openfpga::CommandOptionId opt_type = cmd.option("type");
@@ -231,7 +231,7 @@ int set_arch_io_num(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -261,7 +261,7 @@ int set_arch_io_num(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   return status;
 }
 
-int set_arch_sync_dp_dimension(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_sync_dp_dimension(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -272,7 +272,7 @@ int set_arch_sync_dp_dimension(ArkangelContext& arkangel_ctx, const openfpga::Co
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -291,7 +291,7 @@ int set_arch_sync_dp_dimension(ArkangelContext& arkangel_ctx, const openfpga::Co
   return status;
 }
 
-int set_arch_core_dimension(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_core_dimension(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                             const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_height = cmd.option("height");
   openfpga::CommandOptionId opt_width = cmd.option("width");
@@ -304,7 +304,7 @@ int set_arch_core_dimension(ArkangelContext& arkangel_ctx, const openfpga::Comma
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -339,7 +339,7 @@ int set_arch_core_dimension(ArkangelContext& arkangel_ctx, const openfpga::Comma
   return status;
 }
 
-int set_arch_num_clk(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_num_clk(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -351,7 +351,7 @@ int set_arch_num_clk(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -377,7 +377,7 @@ int set_arch_num_clk(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   return status;
 }
 
-int set_arch_num_rst(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_num_rst(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -389,7 +389,7 @@ int set_arch_num_rst(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -415,7 +415,7 @@ int set_arch_num_rst(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   return status;
 }
 
-int set_arch_num_pclk(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_num_pclk(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -427,7 +427,7 @@ int set_arch_num_pclk(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -453,7 +453,7 @@ int set_arch_num_pclk(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   return status;
 }
 
-int set_arch_num_config_region(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_arch_num_config_region(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -465,7 +465,7 @@ int set_arch_num_config_region(ArkangelContext& arkangel_ctx, const openfpga::Co
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -492,7 +492,7 @@ int set_arch_num_config_region(ArkangelContext& arkangel_ctx, const openfpga::Co
   return status;
 }
 
-int remove_arch_io(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int remove_arch_io(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_side = cmd.option("side");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -504,7 +504,7 @@ int remove_arch_io(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -525,7 +525,7 @@ int remove_arch_io(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   return status;
 }
 
-int set_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int set_tapeout_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_type = cmd.option("type");
   openfpga::CommandOptionId opt_fabric = cmd.option("fabric");
@@ -539,7 +539,7 @@ int set_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -557,7 +557,7 @@ int set_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   ArchDevManager ad_mgr(to_mgr, run);
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   BenchmarkPacket bm_pkt;
   status = setup_arch_dev_manager(to_mgr, bm_mgr, ad_mgr, bm_pkt);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
@@ -651,10 +651,10 @@ int set_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   return status;
 }
 
-int eval_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int eval_tapeout_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -681,7 +681,7 @@ int eval_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 
   /* Get the run to show any stats
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::BITSTREAM;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -711,7 +711,7 @@ int eval_tapeout_arch(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   }
 
   /* Get the data */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   ArchEvalManager ae_mgr(to_mgr, run, bm_mgr);
 
   std::string eval_corner = to_mgr.default_corner();

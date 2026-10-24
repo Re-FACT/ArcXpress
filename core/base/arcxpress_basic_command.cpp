@@ -4,9 +4,9 @@
  * - version
  * - help
  *******************************************************************/
-#include "arkangel_basic_command.h"
+#include "arcxpress_basic_command.h"
 
-#include "arkangel_title.h"
+#include "arcxpress_title.h"
 
 /* begin namespace arcxpress */
 namespace arcxpress {
@@ -25,7 +25,7 @@ void add_basic_commands(openfpga::Shell<ArkangelContext>& shell) {
   openfpga::ShellCommandId shell_cmd_version_id =
     shell.add_command(shell_cmd_version, "Show version information");
   shell.set_command_class(shell_cmd_version_id, basic_cmd_class);
-  shell.set_command_execute_function(shell_cmd_version_id, print_arkangel_version_info);
+  shell.set_command_execute_function(shell_cmd_version_id, print_arcxpress_version_info);
 
   /* Note:
    * help MUST be the last to add because the linking to execute function will

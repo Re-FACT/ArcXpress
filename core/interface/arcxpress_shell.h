@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "arkangel_context.h"
+#include "arcxpress_context.h"
 #include "shell.h"
 
 /********************************************************************
@@ -40,14 +40,14 @@ class ArkAngelShell {
   void reset();
 
   /* allow arkangel context to be querried */
-  const ArkangelContext* arkangel_context() { return &arkangel_ctx_; }
+  const ArkangelContext* arcxpress_context() { return &arcxpress_ctx_; }
 
   void run_interactive_mode();
   void run_script_mode(const char* script_file_name, const bool& batch_mode);
 
  private: /* Internal data */
   openfpga::Shell<ArkangelContext> shell_;
-  ArkangelContext arkangel_ctx_;
+  ArkangelContext arcxpress_ctx_;
 };
 
 #endif

@@ -1,9 +1,9 @@
 /********************************************************************
  * Add project-related commands to the Arkangel shell interface
  *******************************************************************/
-#include "arkangel_arch_dev_command.h"
+#include "arcxpress_arch_dev_command.h"
 
-#include "arkangel_arch_dev.h"
+#include "arcxpress_arch_dev.h"
 
 /* begin namespace arcxpress */
 namespace arcxpress {
@@ -13,7 +13,7 @@ namespace arcxpress {
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_create_arch_command(
+static openfpga::ShellCommandId add_arcxpress_create_arch_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("create_arch");
 
@@ -39,7 +39,7 @@ static openfpga::ShellCommandId add_arkangel_create_arch_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_setup_arch_command(
+static openfpga::ShellCommandId add_arcxpress_setup_arch_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("setup_arch");
 
@@ -66,7 +66,7 @@ static openfpga::ShellCommandId add_arkangel_setup_arch_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_show_arch_command(
+static openfpga::ShellCommandId add_arcxpress_show_arch_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("show_arch");
 
@@ -100,7 +100,7 @@ static openfpga::ShellCommandId add_arkangel_show_arch_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_arch_command(
+static openfpga::ShellCommandId add_arcxpress_set_arch_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_arch");
 
@@ -140,7 +140,7 @@ static openfpga::ShellCommandId add_arkangel_set_arch_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_io_num_command(
+static openfpga::ShellCommandId add_arcxpress_set_io_num_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_io_num");
 
@@ -178,7 +178,7 @@ static openfpga::ShellCommandId add_arkangel_set_io_num_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_sync_dp_dimension_command(
+static openfpga::ShellCommandId add_arcxpress_set_sync_dp_dimension_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_sync_dp_dimension");
 
@@ -206,7 +206,7 @@ static openfpga::ShellCommandId add_arkangel_set_sync_dp_dimension_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_core_dimension_command(
+static openfpga::ShellCommandId add_arcxpress_set_core_dimension_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_core_dimension");
 
@@ -247,7 +247,7 @@ static openfpga::ShellCommandId add_arkangel_set_core_dimension_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_num_prog_clock_command(
+static openfpga::ShellCommandId add_arcxpress_set_num_prog_clock_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_prog_clock");
 
@@ -277,7 +277,7 @@ static openfpga::ShellCommandId add_arkangel_set_num_prog_clock_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_num_clock_command(
+static openfpga::ShellCommandId add_arcxpress_set_num_clock_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_clock");
 
@@ -307,7 +307,7 @@ static openfpga::ShellCommandId add_arkangel_set_num_clock_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_num_reset_command(
+static openfpga::ShellCommandId add_arcxpress_set_num_reset_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_reset");
 
@@ -337,7 +337,7 @@ static openfpga::ShellCommandId add_arkangel_set_num_reset_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_set_num_config_region_command(
+static openfpga::ShellCommandId add_arcxpress_set_num_config_region_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_config_region");
 
@@ -367,7 +367,7 @@ static openfpga::ShellCommandId add_arkangel_set_num_config_region_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_remove_io_command(
+static openfpga::ShellCommandId add_arcxpress_remove_io_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("remove_io");
 
@@ -398,7 +398,7 @@ static openfpga::ShellCommandId add_arkangel_remove_io_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_eval_arch_command(
+static openfpga::ShellCommandId add_arcxpress_eval_arch_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("eval_arch");
 
@@ -445,24 +445,24 @@ static openfpga::ShellCommandId add_arkangel_eval_arch_command(
   return shell_cmd_id;
 }
 
-void add_arkangel_arch_dev_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_arch_dev_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* Add a new class of commands */
-  openfpga::ShellCommandClassId arkangel_arch_dev_cmd_class =
+  openfpga::ShellCommandClassId arcxpress_arch_dev_cmd_class =
     shell.add_command_class("Arkangel architecture development");
 
-  add_arkangel_create_arch_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_setup_arch_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_show_arch_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_arch_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_io_num_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_core_dimension_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_sync_dp_dimension_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_num_clock_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_num_reset_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_num_prog_clock_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_set_num_config_region_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_remove_io_command(shell, arkangel_arch_dev_cmd_class);
-  add_arkangel_eval_arch_command(shell, arkangel_arch_dev_cmd_class);
+  add_arcxpress_create_arch_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_setup_arch_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_show_arch_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_arch_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_io_num_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_core_dimension_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_sync_dp_dimension_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_num_clock_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_num_reset_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_num_prog_clock_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_set_num_config_region_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_remove_io_command(shell, arcxpress_arch_dev_cmd_class);
+  add_arcxpress_eval_arch_command(shell, arcxpress_arch_dev_cmd_class);
 }
 
 }  // namespace arcxpress

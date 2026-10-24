@@ -1,13 +1,13 @@
 /********************************************************************
  * This file includes functions to create/load/save projects in arkangel
  *******************************************************************/
-#include "arkangel_init.h"
+#include "arcxpress_init.h"
 
 #include <filesystem>
 
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_version.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_version.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 #include "openfpga_tokenizer.h"
@@ -44,22 +44,22 @@ bool init_license_manager(arcxpress::LicenseManager& license_mgr, const std::str
 }
 #endif
 
-int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
+int arcxpress_init(ArkangelContext& arcxpress_ctx, const std::string& root_path,
                   const std::string& boot_cfg_file) {
   vtr::ScopedStartFinishTimer timer("Initializing...");
   std::string build_version = std::string(LICENSED_BUILD_VERSION);
 
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (init_license_manager(arkangel_ctx.mutable_license_manager(), build_version) == false) {
+  if (init_license_manager(arcxpress_ctx.mutable_license_manager(), build_version) == false) {
     VTR_LOG_ERROR("License initialization failed\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  if (arkangel_ctx.license_manager().verifyBuildVersion(build_version) == false) {
+  if (arcxpress_ctx.license_manager().verifyBuildVersion(build_version) == false) {
     VTR_LOG_ERROR("License was generated for a different version. Expected version: %s\n",
                   build_version.c_str());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
     VTR_LOG_ERROR("License checkout failed\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -69,24 +69,24 @@ int arkangel_init(ArkangelContext& arkangel_ctx, const std::string& root_path,
   /* Load Boot configuration */
   VTR_LOG("Booting...\n");
   int status =
-    arcxpress::read_xml_boot_config(boot_cfg_file.c_str(), arkangel_ctx.mutable_boot_config());
+    arcxpress::read_xml_boot_config(boot_cfg_file.c_str(), arcxpress_ctx.mutable_boot_config());
   if (openfpga::CMD_EXEC_SUCCESS != status) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* Validation */
-  status = arkangel_ctx.mutable_boot_config().validate();
+  status = arcxpress_ctx.mutable_boot_config().validate();
   if (!status) {
     VTR_LOG("Invalid booting configuration! Abort\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* Initialize tapeout manager */
-  arkangel_ctx.mutable_tapeout_manager().load_boot_config(arkangel_ctx.boot_config());
+  arcxpress_ctx.mutable_tapeout_manager().load_boot_config(arcxpress_ctx.boot_config());
   VTR_LOG("Done\n");
 
   /* Initialize tape-out related data structure */
-  arkangel_ctx.mutable_tapeout_manager().set_kw_root_path(root_path);
-  arkangel_ctx.mutable_benchmark_manager().set_kw_root_path(root_path);
-  arkangel_ctx.mutable_pdk_manager().set_kw_root_path(root_path);
+  arcxpress_ctx.mutable_tapeout_manager().set_kw_root_path(root_path);
+  arcxpress_ctx.mutable_benchmark_manager().set_kw_root_path(root_path);
+  arcxpress_ctx.mutable_pdk_manager().set_kw_root_path(root_path);
 
   return openfpga::CMD_EXEC_SUCCESS;
 }

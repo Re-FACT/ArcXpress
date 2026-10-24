@@ -7,10 +7,10 @@
 /* Headers from openfpgashell library */
 #include "arch_dev_manager.h"
 #include "arch_gen_ptpx_sta_files.h"
-#include "arkangel_file_os.h"
-#include "arkangel_netlist_dev.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_netlist_dev.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "benchmark_packet_utils.h"
 #include "command_exit_codes.h"
 #include "global_port_loc_map.h"
@@ -132,7 +132,7 @@ static int setup_netlist_dev_manager(const TapeoutManager& to_mgr, const Benchma
 /********************************************************************
  * Top-level function to generate RTL netlist
  *******************************************************************/
-int generate_netlist(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int generate_netlist(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_nlist_makeup = cmd.option("netlist_makeup");
@@ -145,7 +145,7 @@ int generate_netlist(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -179,8 +179,8 @@ int generate_netlist(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
   BenchmarkPacket bm_pkt;
   BenchmarkPacket bm4clk_sweep_pkt;
@@ -238,10 +238,10 @@ int generate_netlist(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int netlist_opt(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int netlist_opt(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::PROTOTYPE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -260,7 +260,7 @@ int netlist_opt(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -279,8 +279,8 @@ int netlist_opt(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Error out if the pdk is not supported */
@@ -348,7 +348,7 @@ int netlist_opt(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int analyze_tile_area(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int analyze_tile_area(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_dryrun = cmd.option("dryrun");
@@ -362,7 +362,7 @@ int analyze_tile_area(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -381,8 +381,8 @@ int analyze_tile_area(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Start with a deposit of fail status */
@@ -427,7 +427,7 @@ int analyze_tile_area(ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int coarse_floorplan(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int coarse_floorplan(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_rptf = cmd.option("report_file");
@@ -457,7 +457,7 @@ int coarse_floorplan(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -476,8 +476,8 @@ int coarse_floorplan(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   std::string shaping_rpt = "";
@@ -549,10 +549,10 @@ int coarse_floorplan(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int extract_netlist_qor(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int extract_netlist_qor(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::PROTOTYPE)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -577,7 +577,7 @@ int extract_netlist_qor(ArkangelContext& arkangel_ctx, const openfpga::Command& 
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -596,7 +596,7 @@ int extract_netlist_qor(ArkangelContext& arkangel_ctx, const openfpga::Command& 
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Setup Qor types */

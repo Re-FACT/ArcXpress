@@ -6,10 +6,10 @@
 
 /* Headers from openfpgashell library */
 #include "arch_dev_manager.h"
-#include "arkangel_file_os.h"
-#include "arkangel_report.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_report.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "dv_manager.h"
 #include "netlist_dev_manager.h"
@@ -21,7 +21,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_corners(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_corners(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -34,7 +34,7 @@ int report_corners(const ArkangelContext& arkangel_ctx, const openfpga::Command&
     report_file = cmd_ctx.option_value(cmd, opt_file);
   }
 
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   VTR_LOG("Corners of tapeout project '%s'\n", to_mgr.name().c_str());
 
   TablePrinter tp({"Corner Type", "Corner Name"});
@@ -70,7 +70,7 @@ int report_corners(const ArkangelContext& arkangel_ctx, const openfpga::Command&
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_module_names(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_module_names(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -81,7 +81,7 @@ int report_module_names(const ArkangelContext& arkangel_ctx, const openfpga::Com
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -130,7 +130,7 @@ int report_module_names(const ArkangelContext& arkangel_ctx, const openfpga::Com
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_ref_module_names(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_ref_module_names(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                             const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -141,7 +141,7 @@ int report_ref_module_names(const ArkangelContext& arkangel_ctx, const openfpga:
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -192,7 +192,7 @@ int report_ref_module_names(const ArkangelContext& arkangel_ctx, const openfpga:
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_io(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_io(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
               const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -207,7 +207,7 @@ int report_io(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   }
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -258,7 +258,7 @@ int report_io(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_static_power(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_static_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -275,7 +275,7 @@ int report_static_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -312,7 +312,7 @@ int report_static_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
   }
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Setup Qor types */
@@ -363,7 +363,7 @@ int report_static_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_benchmark_power(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_benchmark_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -385,7 +385,7 @@ int report_benchmark_power(const ArkangelContext& arkangel_ctx, const openfpga::
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::DV;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -434,10 +434,10 @@ int report_benchmark_power(const ArkangelContext& arkangel_ctx, const openfpga::
   to_mgr.check_valid_run(nlist_step_name, nlist_run);
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, nlist_run, pdk_mgr);
 
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   ArchEvalManager ae_mgr(to_mgr, bitgen_run, bm_mgr);
 
   /* Load corners to arch eval manager */
@@ -504,7 +504,7 @@ int report_benchmark_power(const ArkangelContext& arkangel_ctx, const openfpga::
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_config_power(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_config_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -520,7 +520,7 @@ int report_config_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
   }
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -557,7 +557,7 @@ int report_config_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
   }
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Setup Qor types */
@@ -609,7 +609,7 @@ int report_config_power(const ArkangelContext& arkangel_ctx, const openfpga::Com
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_config_stats(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_config_stats(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_pclk_freq = cmd.option("pclk_freq");
@@ -634,7 +634,7 @@ int report_config_stats(const ArkangelContext& arkangel_ctx, const openfpga::Com
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -671,7 +671,7 @@ int report_config_stats(const ArkangelContext& arkangel_ctx, const openfpga::Com
   }
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   float pclk_freq = std::stof(cmd_ctx.option_value(cmd, opt_pclk_freq));
@@ -687,7 +687,7 @@ int report_config_stats(const ArkangelContext& arkangel_ctx, const openfpga::Com
 /********************************************************************
  * Report qor scale
  *******************************************************************/
-int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int report_qor_scale(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_type = cmd.option("type");
@@ -711,7 +711,7 @@ int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Comman
     report_file_path = cmd_ctx.option_value(cmd, opt_report_file);
   }
 
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -754,7 +754,7 @@ int report_qor_scale(const ArkangelContext& arkangel_ctx, const openfpga::Comman
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
   /* Setup Qor types */

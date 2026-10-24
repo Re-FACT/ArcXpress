@@ -3,9 +3,9 @@
 #include <yaml-cpp/yaml.h>
 
 #include "arch_aggregator.h"
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_sys_env.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_sys_env.h"
 #include "cocotb_makefile_utils.h"
 #include "command_exit_codes.h"
 #include "file_md5_manager.h"

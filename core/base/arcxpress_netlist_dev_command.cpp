@@ -1,9 +1,9 @@
 /********************************************************************
  * Add project-related commands to the Arkangel shell interface
  *******************************************************************/
-#include "arkangel_netlist_dev_command.h"
+#include "arcxpress_netlist_dev_command.h"
 
-#include "arkangel_netlist_dev.h"
+#include "arcxpress_netlist_dev.h"
 
 /* begin namespace arcxpress */
 namespace arcxpress {
@@ -13,7 +13,7 @@ namespace arcxpress {
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_generate_netlist_command(
+static openfpga::ShellCommandId add_arcxpress_generate_netlist_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("generate_netlist");
 
@@ -46,7 +46,7 @@ static openfpga::ShellCommandId add_arkangel_generate_netlist_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_netlist_optimization_command(
+static openfpga::ShellCommandId add_arcxpress_netlist_optimization_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("optimize_netlist");
 
@@ -94,7 +94,7 @@ static openfpga::ShellCommandId add_arkangel_netlist_optimization_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_coarse_analyze_netlist_command(
+static openfpga::ShellCommandId add_arcxpress_coarse_analyze_netlist_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("coarse_analyze_netlist");
 
@@ -132,7 +132,7 @@ static openfpga::ShellCommandId add_arkangel_coarse_analyze_netlist_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_coarse_floorplan_command(
+static openfpga::ShellCommandId add_arcxpress_coarse_floorplan_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("coarse_floorplan");
 
@@ -183,7 +183,7 @@ static openfpga::ShellCommandId add_arkangel_coarse_floorplan_command(
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_extract_netlist_qor_command(
+static openfpga::ShellCommandId add_arcxpress_extract_netlist_qor_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("extract_netlist_qor");
 
@@ -236,16 +236,16 @@ static openfpga::ShellCommandId add_arkangel_extract_netlist_qor_command(
   return shell_cmd_id;
 }
 
-void add_arkangel_netlist_dev_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_netlist_dev_commands(openfpga::Shell<ArkangelContext>& shell) {
   /* Add a new class of commands */
-  openfpga::ShellCommandClassId arkangel_netlist_dev_cmd_class =
+  openfpga::ShellCommandClassId arcxpress_netlist_dev_cmd_class =
     shell.add_command_class("Arkangel netlist development");
 
-  add_arkangel_generate_netlist_command(shell, arkangel_netlist_dev_cmd_class);
-  add_arkangel_netlist_optimization_command(shell, arkangel_netlist_dev_cmd_class);
-  add_arkangel_coarse_analyze_netlist_command(shell, arkangel_netlist_dev_cmd_class);
-  add_arkangel_coarse_floorplan_command(shell, arkangel_netlist_dev_cmd_class);
-  add_arkangel_extract_netlist_qor_command(shell, arkangel_netlist_dev_cmd_class);
+  add_arcxpress_generate_netlist_command(shell, arcxpress_netlist_dev_cmd_class);
+  add_arcxpress_netlist_optimization_command(shell, arcxpress_netlist_dev_cmd_class);
+  add_arcxpress_coarse_analyze_netlist_command(shell, arcxpress_netlist_dev_cmd_class);
+  add_arcxpress_coarse_floorplan_command(shell, arcxpress_netlist_dev_cmd_class);
+  add_arcxpress_extract_netlist_qor_command(shell, arcxpress_netlist_dev_cmd_class);
 }
 
 }  // namespace arcxpress

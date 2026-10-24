@@ -7,10 +7,10 @@
 /* Headers from openfpgashell library */
 #include "arch_dev_manager.h"
 #include "arch_eval_manager.h"
-#include "arkangel_export.h"
-#include "arkangel_file_os.h"
-#include "arkangel_graphviz_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_export.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_graphviz_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "netlist_dev_manager.h"
 #include "openfpga_digest.h"
@@ -20,7 +20,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int export_netlist(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int export_netlist(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_fow = cmd.option("force_overwrite");
@@ -40,7 +40,7 @@ int export_netlist(const ArkangelContext& arkangel_ctx, const openfpga::Command&
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -91,7 +91,7 @@ int export_netlist(const ArkangelContext& arkangel_ctx, const openfpga::Command&
   }
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
   VTR_LOG("Export netlist package for the netlist run '%s' of tapeout project: %s\n", run.c_str(),
           to_mgr.name().c_str());
@@ -109,7 +109,7 @@ int export_netlist(const ArkangelContext& arkangel_ctx, const openfpga::Command&
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int export_arch(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int export_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_fow = cmd.option("force_overwrite");
@@ -124,7 +124,7 @@ int export_arch(const ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -178,16 +178,16 @@ int export_arch(const ArkangelContext& arkangel_ctx, const openfpga::Command& cm
 // If Graphviz is found, enable the following functionality
 // This is a temporay fix due to the graphviz package issue on CentOS 7.9
 #ifdef USE_GRAPHVIZ
-int export_benchmark_schematic(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int export_benchmark_schematic(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   /* Must have a valid tapeout first */
-  if (!arkangel_ctx.is_tapeout_created()) {
+  if (!arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR("A valid tapeout must be created or loaded!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
   /* Get tapeout manager early */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
 
   /* Define step name early */
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::ARCH;
@@ -292,7 +292,7 @@ int export_benchmark_schematic(ArkangelContext& arkangel_ctx, const openfpga::Co
     VTR_LOGV(verbosity, "Converting Graphviz to %s...\n", extension.c_str());
   }
   /* Get benchmark data */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   ArchEvalManager ae_mgr(to_mgr, run, bm_mgr);
 
   BenchmarkSuiteId st_id = bm_mgr.find_benchmark_suite(benchmark_name);

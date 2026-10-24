@@ -1,7 +1,7 @@
 /********************************************************************
  * Add vpr-related commands to the OpenFPGA shell interface
  *******************************************************************/
-#include "arkangel_vpr_command.h"
+#include "arcxpress_vpr_command.h"
 
 #include "vpr_main.h"
 

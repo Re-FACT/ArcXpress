@@ -6,10 +6,10 @@
 
 /* Headers from openfpgashell library */
 #include "arch_dev_manager.h"
-#include "arkangel_export.h"
-#include "arkangel_file_os.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_export.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "netlist_dev_manager.h"
 #include "openfpga_digest.h"
@@ -21,7 +21,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to back-annotate timing
  *******************************************************************/
-int backannotate(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int backannotate(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -38,7 +38,7 @@ int backannotate(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
 
   int status = openfpga::CMD_EXEC_FATAL_ERROR;
   /* Select the proper run */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::NETLIST;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -103,10 +103,10 @@ int backannotate(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
   std::vector<std::string> corners_to_sweep = find_corners_to_sweep(to_mgr, qor_corner);
 
   /* Setup */
-  const PdkManager& pdk_mgr = arkangel_ctx.pdk_manager();
+  const PdkManager& pdk_mgr = arcxpress_ctx.pdk_manager();
   NetlistDevManager nd_mgr(to_mgr, run, pdk_mgr);
 
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   BenchmarkPacket bm_pkt;
   ArchDevManager ad_mgr(to_mgr, dep_run);
   status = setup_arch_dev_manager(to_mgr, bm_mgr, ad_mgr, bm_pkt);

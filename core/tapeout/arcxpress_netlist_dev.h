@@ -3,7 +3,7 @@
 /********************************************************************
  * Include header files that are required by function declaration
  *******************************************************************/
-#include "arkangel_context.h"
+#include "arcxpress_context.h"
 #include "command.h"
 #include "command_context.h"
 
@@ -14,19 +14,19 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int generate_netlist(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
+int generate_netlist(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_context);
 
-int netlist_opt(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
+int netlist_opt(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_context);
 
-int analyze_tile_area(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
+int analyze_tile_area(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_context);
 
-int coarse_floorplan(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
+int coarse_floorplan(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_context);
 
-int extract_netlist_qor(ArkangelContext& arkangel_context, const openfpga::Command& cmd,
+int extract_netlist_qor(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_context);
 
 } /* end namespace arcxpress */

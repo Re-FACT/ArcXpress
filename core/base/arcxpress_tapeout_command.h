@@ -3,7 +3,7 @@
 /********************************************************************
  * Include header files that are required by function declaration
  *******************************************************************/
-#include "arkangel_context.h"
+#include "arcxpress_context.h"
 #include "shell.h"
 
 /********************************************************************
@@ -13,6 +13,6 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-void add_arkangel_tapeout_commands(openfpga::Shell<ArkangelContext>& shell);
+void add_arcxpress_tapeout_commands(openfpga::Shell<ArkangelContext>& shell);
 
 } /* end namespace arcxpress */

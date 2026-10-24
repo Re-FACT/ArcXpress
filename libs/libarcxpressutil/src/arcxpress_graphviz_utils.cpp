@@ -2,7 +2,7 @@
 // This is a temporay fix due to the graphviz package issue on CentOS 7.9
 #ifdef USE_GRAPHVIZ
 
-#include "arkangel_graphviz_utils.h"
+#include "arcxpress_graphviz_utils.h"
 
 #include <graphviz/cgraph.h>
 #include <graphviz/gvc.h>

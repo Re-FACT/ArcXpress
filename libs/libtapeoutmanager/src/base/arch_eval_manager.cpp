@@ -20,8 +20,8 @@
 #endif
 
 #include "arch_aggregator.h"
-#include "arkangel_file_os.h"
-#include "arkangel_report_util.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_report_util.h"
 #include "blif_param2vpr_constraint.h"
 #include "command_exit_codes.h"
 #include "file_md5_manager.h"

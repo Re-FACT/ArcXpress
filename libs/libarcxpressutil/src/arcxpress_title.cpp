@@ -2,16 +2,16 @@
  * This file includes the functions to create the title page
  * which introduces generality of OpenFPGA framework
  *******************************************************************/
-#include "arkangel_title.h"
+#include "arcxpress_title.h"
 
-#include "arkangel_version.h"
+#include "arcxpress_version.h"
 #include "vtr_log.h"
 
 /********************************************************************
  * Generate a string of arkangel title introduction
  * This is mainly used when launching ArkAngel shell
  *******************************************************************/
-std::string create_arkangel_title() {
+std::string create_arcxpress_title() {
   std::string title;
 
   title += std::string("\n");
@@ -64,7 +64,7 @@ std::string create_arkangel_title() {
  * Generate a string of openfpga title introduction
  * This is mainly used when launching ArkAngel shell
  *******************************************************************/
-void print_arkangel_version_info() {
+void print_arcxpress_version_info() {
   /* Display version */
   VTR_LOG("Version: %s\n", arcxpress::VERSION);
   VTR_LOG("Revision: %s\n", arcxpress::VCS_REVISION);

@@ -1,9 +1,9 @@
 /********************************************************************
  * Add simulation-related commands to the OpenFPGA shell interface
  *******************************************************************/
-#include "arkangel_simulation_command.h"
+#include "arcxpress_simulation_command.h"
 
-#include "arkangel_simulation.h"
+#include "arcxpress_simulation.h"
 
 /* begin namespace arcxpress */
 namespace arcxpress {
@@ -13,7 +13,7 @@ namespace arcxpress {
  * - Add associated options
  * - Add command dependency
  *******************************************************************/
-static openfpga::ShellCommandId add_arkangel_simulation_command(
+static openfpga::ShellCommandId add_arcxpress_simulation_command(
   openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id,
   const std::vector<openfpga::ShellCommandId>& dependent_cmds) {
   openfpga::Command shell_cmd("run_benchmark_simulation");
@@ -73,7 +73,7 @@ void add_simulation_commands(openfpga::Shell<ArkangelContext>& shell) {
   openfpga::ShellCommandClassId sim_cmd_class = shell.add_command_class("simulation");
 
   std::vector<openfpga::ShellCommandId> sim_cmd_deps;
-  add_arkangel_simulation_command(shell, sim_cmd_class, sim_cmd_deps);
+  add_arcxpress_simulation_command(shell, sim_cmd_class, sim_cmd_deps);
 
   /* TODO: add pack, place and route commands */
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project("arkangel_shell")
+project("arcxpress_shell")
 
 file(GLOB_RECURSE EXEC_SOURCE main.cpp)
 file(GLOB_RECURSE LAUNCHER_SOURCE aaee.cpp)
@@ -14,12 +14,12 @@ list(REMOVE_ITEM LIB_SOURCES ${LAUNCHER_SOURCE})
 
 if (ARCXPRESS_WITH_SWIG)
 # SWIG library
-  SwigLib(NAME      arkangel_shell
+  SwigLib(NAME      arcxpress_shell
           NAMESPACE std
           LANGUAGE  tcl
-          I_FILE    interface/arkangel_shell.i)
-  target_include_directories(arkangel_shell PUBLIC ${LIB_INCLUDE_DIRS})
-  target_link_libraries(arkangel_shell
+          I_FILE    interface/arcxpress_shell.i)
+  target_include_directories(arcxpress_shell PUBLIC ${LIB_INCLUDE_DIRS})
+  target_link_libraries(arcxpress_shell
                         libarkangel)
 endif()
 

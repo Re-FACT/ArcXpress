@@ -1,7 +1,7 @@
 /********************************************************************
  * This file includes the functions to manipulate strings for Arkangel's usage
  *******************************************************************/
-#include "arkangel_string_util.h"
+#include "arcxpress_string_util.h"
 
 #include "vtr_assert.h"
 

@@ -97,9 +97,9 @@ TapeoutManager::TapeoutManager() {
   NETLIST_MAKEUP_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/netlist_makeup/netlist_makeup.py";
   CCFF_MAKEUP_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/netlist_makeup/ccff_makeup.py";
   SYNTH_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/snps_dc_utils/scripts/run_dc_task.py";
-  FRONTEND_BIN_RELPATH_ = KW_ROOT_ + "/build/libs/arkangel_frontend/yosys/bin/yosys";
+  FRONTEND_BIN_RELPATH_ = KW_ROOT_ + "/build/libs/arcxpress_frontend/yosys/bin/yosys";
   FRONTEND_CELL_LIB_RELPATH_ =
-    KW_ROOT_ + "/build/libs/arkangel_frontend/yosys/share/yosys/rapidflex";
+    KW_ROOT_ + "/build/libs/arcxpress_frontend/yosys/share/yosys/rapidflex";
   QORSO_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/ptpx_utils/scripts/run_ptpx_task.py";
   BGG_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/bus_group_gen/bus_group_gen.py";
   COCOTB_UTIL_BIN_RELPATH_ = KW_ROOT_ + "/etc/utils/cocotb_utils/scripts/run_cocotb_task.py";

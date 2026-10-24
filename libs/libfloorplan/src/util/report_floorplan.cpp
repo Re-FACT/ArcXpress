@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "arkangel_report_util.h"
+#include "arcxpress_report_util.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 #include "openfpga_reserved_words.h"

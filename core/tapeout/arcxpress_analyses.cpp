@@ -6,10 +6,10 @@
 
 /* Headers from openfpgashell library */
 #include "arch_eval_manager.h"
-#include "arkangel_analyses.h"
-#include "arkangel_file_os.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_analyses.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 
@@ -19,9 +19,9 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int analyze_pre_arch_qor(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int analyze_pre_arch_qor(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                          const openfpga::CommandContext& cmd_ctx) {
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   VTR_LOG("Under construction for tapeout project '%s'\n", to_mgr.name().c_str());
 
   fflush(stdout);
@@ -31,7 +31,7 @@ int analyze_pre_arch_qor(const ArkangelContext& arkangel_ctx, const openfpga::Co
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int analyze_arch_eval_qor(const ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int analyze_arch_eval_qor(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                           const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -56,7 +56,7 @@ int analyze_arch_eval_qor(const ArkangelContext& arkangel_ctx, const openfpga::C
 
   /* Get the run to show any stats
    */
-  const TapeoutManager& to_mgr = arkangel_ctx.tapeout_manager();
+  const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::BITSTREAM;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -75,7 +75,7 @@ int analyze_arch_eval_qor(const ArkangelContext& arkangel_ctx, const openfpga::C
   to_mgr.check_valid_run(arch_step_name, arch_run);
 
   /* Get the data */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   ArchEvalManager ae_mgr(to_mgr, run, bm_mgr);
 
   std::string eval_corner = to_mgr.default_corner();

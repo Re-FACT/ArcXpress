@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-std::string create_arkangel_title();
+std::string create_arcxpress_title();
 
-void print_arkangel_version_info();
+void print_arcxpress_version_info();
 
 #endif

@@ -1,19 +1,19 @@
-#include "arkangel_shell.h"
+#include "arcxpress_shell.h"
 
-#include "arkangel_arch_dev_command.h"
-#include "arkangel_basic_command.h"
-#include "arkangel_dv_command.h"
-#include "arkangel_file_os.h"
-#include "arkangel_init.h"
-#include "arkangel_netlist_dev_command.h"
-#include "arkangel_openfpga_sdc_command.h"
-#include "arkangel_openfpga_setup_command.h"
-#include "arkangel_openfpga_verilog_command.h"
-#include "arkangel_pre_arch_command.h"
-#include "arkangel_simulation_command.h"
-#include "arkangel_tapeout_command.h"
-#include "arkangel_title.h"
-#include "arkangel_vpr_command.h"
+#include "arcxpress_arch_dev_command.h"
+#include "arcxpress_basic_command.h"
+#include "arcxpress_dv_command.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_init.h"
+#include "arcxpress_netlist_dev_command.h"
+#include "arcxpress_openfpga_sdc_command.h"
+#include "arcxpress_openfpga_setup_command.h"
+#include "arcxpress_openfpga_verilog_command.h"
+#include "arcxpress_pre_arch_command.h"
+#include "arcxpress_simulation_command.h"
+#include "arcxpress_tapeout_command.h"
+#include "arcxpress_title.h"
+#include "arcxpress_vpr_command.h"
 #include "command_echo.h"
 #include "command_parser.h"
 #include "signal_handler_manager.h"
@@ -22,15 +22,15 @@ ArkAngelShell::ArkAngelShell() {
   shell_.set_name("ArkAngel");
 
   /* Print out title */
-  VTR_LOG("\n%s\n", create_arkangel_title().c_str());
+  VTR_LOG("\n%s\n", create_arcxpress_title().c_str());
   fflush(stdout);
 
   /* Add tape-out flow related commands */
-  arcxpress::add_arkangel_tapeout_commands(shell_);
-  arcxpress::add_arkangel_pre_arch_commands(shell_);
-  arcxpress::add_arkangel_arch_dev_commands(shell_);
-  arcxpress::add_arkangel_netlist_dev_commands(shell_);
-  arcxpress::add_arkangel_dv_commands(shell_);
+  arcxpress::add_arcxpress_tapeout_commands(shell_);
+  arcxpress::add_arcxpress_pre_arch_commands(shell_);
+  arcxpress::add_arcxpress_arch_dev_commands(shell_);
+  arcxpress::add_arcxpress_netlist_dev_commands(shell_);
+  arcxpress::add_arcxpress_dv_commands(shell_);
 
   /* Add implementation commands */
   arcxpress::add_vpr_commands(shell_);
@@ -59,7 +59,7 @@ int ArkAngelShell::run_command(const char* cmd_line) {
   int ret = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
   if (0 == ret) {
     arcxpress::SignalHandlerManager::set_running_cmd_flag(true);
-    ret = shell_.execute_command(cmd_line, arkangel_ctx_);
+    ret = shell_.execute_command(cmd_line, arcxpress_ctx_);
     arcxpress::SignalHandlerManager::set_running_cmd_flag(false);
   }
   if (arcxpress::CMD_EXEC_SIGINT_HANDLED == ret) {
@@ -137,13 +137,13 @@ int ArkAngelShell::start(int argc, char** argv) {
       arcxpress::format_windows_path(start_cmd_context.option_value(start_cmd, opt_boot_cfg));
 
     /* Parse succeed. Initialize and branch on options */
-    if (arcxpress::arkangel_init(arkangel_ctx_, formatted_root_path, formatted_boot_cfg_path) ==
+    if (arcxpress::arcxpress_init(arcxpress_ctx_, formatted_root_path, formatted_boot_cfg_path) ==
         openfpga::CMD_EXEC_FATAL_ERROR) {
       return 1;
     };
     /* Show version */
     if (true == start_cmd_context.option_enable(start_cmd, opt_version)) {
-      print_arkangel_version_info();
+      print_arcxpress_version_info();
       return 0;
     }
     /* Start a shell */
@@ -177,7 +177,7 @@ void ArkAngelShell::run_interactive_mode() {
      The exit commmand can break this loop. */
   while ((arcxpress::CMD_EXEC_SUCCESS == ret) || (arcxpress::CMD_EXEC_FATAL_ERROR_HANDLED == ret)) {
     int status = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
-    shell_.run_interactive_mode(arkangel_ctx_);
+    shell_.run_interactive_mode(arcxpress_ctx_);
   }
 }
 
@@ -188,7 +188,7 @@ void ArkAngelShell::run_script_mode(const char* script_file_name, const bool& ba
   int ret = arcxpress::SignalHandlerManager::set_fatal_handler("run_script_mode_signal_handler");
   if (arcxpress::CMD_EXEC_SUCCESS == ret) {
     status = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
-    shell_.run_script_mode(script_file_name, arkangel_ctx_, batch_mode);
+    shell_.run_script_mode(script_file_name, arcxpress_ctx_, batch_mode);
   }
   run_interactive_mode();
 }

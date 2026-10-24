@@ -4,7 +4,7 @@
  * This is one of the core engine of openfpga, including:
  * - repack : create physical pbs and redo packing
  *******************************************************************/
-#include "arkangel_bitstream_command.h"
+#include "arcxpress_bitstream_command.h"
 
 #include "openfpga_bitstream_command_template.h"
 

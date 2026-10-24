@@ -6,8 +6,8 @@
 
 /* Headers from openfpgashell library */
 #include "arch_eval_manager.h"
-#include "arkangel_pre_arch_analysis.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_pre_arch_analysis.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "report_arch_eval_qor_utils.h"
 
@@ -17,10 +17,10 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Command& cmd,
+int analyze_logic_resource(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arkangel_ctx.license_manager().checkOut(
+  if (!arcxpress_ctx.license_manager().checkOut(
         arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -37,7 +37,7 @@ int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Comman
 
   /* If the run exists and it succeeds, throw a warning and return, unless user asks to start over
    */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   TapeoutManager::e_step_name step_name = TapeoutManager::e_step_name::PRE_ARCH;
   std::string run = to_mgr.invalid_run();
   std::string user_defined_run = to_mgr.invalid_run();
@@ -57,7 +57,7 @@ int analyze_logic_resource(ArkangelContext& arkangel_ctx, const openfpga::Comman
   VTR_LOGV(verbosity == 1, "Project name: %s\n", to_mgr.name().c_str());
 
   /* Setup */
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   ArchEvalManager ae_mgr(to_mgr, run, bm_mgr);
 
   if (cmd_ctx.option_enable(cmd, opt_min_lut_size)) {

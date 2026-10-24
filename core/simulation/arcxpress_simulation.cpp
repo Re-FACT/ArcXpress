@@ -1,4 +1,4 @@
-#include "arkangel_simulation.h"
+#include "arcxpress_simulation.h"
 
 #include <chrono>
 #include <ctime>
@@ -19,11 +19,11 @@
 #endif
 
 #include "arch_eval_manager.h"
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_string_util.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_string_util.h"
+#include "arcxpress_tapeout_utils.h"
 #include "command_exit_codes.h"
 #include "dv_manager.h"
 #include "openfpga_basic.h"
@@ -41,7 +41,7 @@ namespace arcxpress {
  * - Collect options from strategy manager
  *******************************************************************/
 
-int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelContext& arkangel_ctx,
+int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelContext& arcxpress_ctx,
                            const openfpga::Command& cmd, const openfpga::CommandContext& cmd_ctx) {
   vtr::Timer sim_runtime;
   openfpga::CommandOptionId opt_benchmark_name = cmd.option("benchmark");
@@ -73,24 +73,24 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
   }
 
   /* Do not allow multiple creation on project */
-  if (!arkangel_ctx.is_tapeout_created()) {
+  if (!arcxpress_ctx.is_tapeout_created()) {
     VTR_LOG_ERROR("Require a valid tapeout to be created or loaded!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   std::string sim_type = cmd_ctx.option_value(cmd, opt_type);
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (sim_type == "rtl") {
-    if (!arkangel_ctx.license_manager().checkOut(
+    if (!arcxpress_ctx.license_manager().checkOut(
           arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
   } else if (sim_type == "post_implementation") {
-    if (!arkangel_ctx.license_manager().checkOut(
+    if (!arcxpress_ctx.license_manager().checkOut(
           arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
   } else if (sim_type == "post_synth") {
-    if (!arkangel_ctx.license_manager().checkOut(
+    if (!arcxpress_ctx.license_manager().checkOut(
           arcxpress::LicenseManager::LicensedFeatureName::AAEE)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
@@ -99,7 +99,7 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
   }
 #endif
   /*get benchmark name*/
-  const BenchmarkManager& bm_mgr = arkangel_ctx.benchmark_manager();
+  const BenchmarkManager& bm_mgr = arcxpress_ctx.benchmark_manager();
   std::string bm_name = cmd_ctx.option_value(cmd, opt_benchmark_name);
   VTR_LOGV(verbosity == 1, "Selected benchmark for simulation is %s \n", bm_name.c_str());
   auto benchmark_id = bm_mgr.find_benchmark_by_name(bm_name);
@@ -107,7 +107,7 @@ int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell, ArkangelCont
   BenchmarkSuiteId benchmark_suite_id = bm_mgr.find_benchmark_suite(bm_name);
 
   /* Sanity checks on options */
-  TapeoutManager& to_mgr = arkangel_ctx.mutable_tapeout_manager();
+  TapeoutManager& to_mgr = arcxpress_ctx.mutable_tapeout_manager();
   std::string simulator = to_mgr.default_simulator();
   if (cmd_ctx.option_enable(cmd, opt_simulator)) {
     simulator = cmd_ctx.option_value(cmd, opt_simulator);

@@ -2,13 +2,13 @@
 
 /* -----------------------------------------------------------------------
  * Platform portability: on POSIX a "pid" is pid_t; on Windows it is a
- * DWORD.  Both are covered by NativePid from arkangel_process_util.h.
+ * DWORD.  Both are covered by NativePid from arcxpress_process_util.h.
  * ----------------------------------------------------------------------- */
 #include <cstddef>
 #include <functional>
 #include <vector>
 
-#include "arkangel_process_util.h"
+#include "arcxpress_process_util.h"
 
 /* begin namespace arcxpress */
 namespace arcxpress {

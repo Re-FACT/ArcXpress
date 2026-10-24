@@ -7,8 +7,8 @@
 /* Headers from openfpgashell library */
 
 #include "arch_gen_ptpx_sta_files.h"
-#include "arkangel_setup_utils.h"
-#include "arkangel_tapeout_utils.h"
+#include "arcxpress_setup_utils.h"
+#include "arcxpress_tapeout_utils.h"
 #include "circuit_types.h"
 #include "command_exit_codes.h"
 #include "global_port_loc_map.h"

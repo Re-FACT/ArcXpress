@@ -5,7 +5,7 @@
  * - generate_fabric_verilog : generate Verilog netlists about FPGA fabric
  * - generate_fabric_verilog_testbench : TODO: generate Verilog testbenches
  *******************************************************************/
-#include "arkangel_openfpga_verilog_command.h"
+#include "arcxpress_openfpga_verilog_command.h"
 
 #include "openfpga_verilog_command_template.h"
 
