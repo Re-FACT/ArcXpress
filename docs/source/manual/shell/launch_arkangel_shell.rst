@@ -1,4 +1,4 @@
-.. _launch_arkangel_shell:
+.. _launch_arcxpress_shell:
 
 Launch ArcXpress Shell
 ---------------------

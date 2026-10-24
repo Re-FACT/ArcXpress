@@ -69,7 +69,7 @@ Typical Invocation
 
   .. code-block:: bash
 
-     arkangel> setup_design_verification
+     arcxpress> setup_design_verification
 
 By default, this command initializes the Design Verification (DV) workspace with all corners and benchmarks that are not disabled in the configuration. It ensures that all relevant simulations and power analyses can proceed based on this full setup, unless specific corners or benchmarks have been explicitly disabled in the configuration file or through command-line parameters.
 
@@ -77,7 +77,7 @@ By default, this command initializes the Design Verification (DV) workspace with
 
   .. code-block:: bash
 
-     arkangel> setup_design_verification \
+     arcxpress> setup_design_verification \
        --corner tt_25C_v0p9 \
        --netlist_run iter0 \
        --pd_run iter0 \
@@ -156,7 +156,7 @@ Notes
 This section provides a high-level usage guide for
 ``setup_design_verification``.  
 For detailed descriptions of all available options and their default values,
-refer to :ref:`arkangel_dv_commands_setup_design_verification`.
+refer to :ref:`arcxpress_dv_commands_setup_design_verification`.
 
 run_preconfigured_simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -188,7 +188,7 @@ Typical Invocation
 
   .. code-block:: bash
 
-     arkangel> run_preconfigured_simulation
+     arcxpress> run_preconfigured_simulation
 
 By default, this command initializes the DV workspace with all available corners and benchmarks that are not disabled in the configuration.
 
@@ -196,7 +196,7 @@ By default, this command initializes the DV workspace with all available corners
 
   .. code-block:: bash
 
-     arkangel> run_preconfigured_simulation \
+     arcxpress> run_preconfigured_simulation \
        --corner tt_25C_v0p9 \
        --benchmark and2 \
        --simulator mentor_modelsim \
@@ -269,7 +269,7 @@ This command is intended for **fabric-level functional verification** and is
 typically executed before running benchmark-level simulations.
 
 For detailed option descriptions and advanced usage, refer to
-:ref:`arkangel_arch_eval_commands_run_preconfigured_simulation`.
+:ref:`arcxpress_arch_eval_commands_run_preconfigured_simulation`.
 
 run_benchmark_simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -302,7 +302,7 @@ Typical Invocation
 
   .. code-block:: bash
 
-     arkangel> run_benchmark_simulation --benchmark and2 --type rtl  
+     arcxpress> run_benchmark_simulation --benchmark and2 --type rtl  
 
 By default, this command initializes the DV workspace with all available options for the selected benchmark, using the latest results unless explicitly specified otherwise.
 
@@ -310,7 +310,7 @@ By default, this command initializes the DV workspace with all available options
 
   .. code-block:: bash
 
-     arkangel> run_benchmark_simulation \
+     arcxpress> run_benchmark_simulation \
        --corner tt_25C_v0p9 \
        --benchmark and2 \
        --simulator mentor_modelsim \
@@ -379,7 +379,7 @@ Notes
 This command is intended for **benchmark-level functional verification** and is typically executed **after `setup_design_verification`** and optional preconfigured simulations.  
 
 For detailed option descriptions and advanced usage, refer to
-:ref:`arkangel_arch_eval_commands_run_benchmark_simulation`.
+:ref:`arcxpress_arch_eval_commands_run_benchmark_simulation`.
 
 run_benchmark_power_analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -413,7 +413,7 @@ Typical Invocation
 
   .. code-block:: bash
 
-     arkangel> run_benchmark_power_analysis \
+     arcxpress> run_benchmark_power_analysis \
        --benchmark and2
 
 By default, this command initializes the DV workspace with all available settings for the selected benchmark, using the latest design verification run unless specified otherwise.
@@ -422,7 +422,7 @@ By default, this command initializes the DV workspace with all available setting
 
   .. code-block:: bash
 
-     arkangel> run_benchmark_power_analysis \
+     arcxpress> run_benchmark_power_analysis \
        --corner tt_25C_v0p9 \
        --benchmark and2 \
        --jobs 32
@@ -482,4 +482,4 @@ This command is intended for **benchmark-level power analysis** and is typically
 run **after functional verification**.  
 
 For detailed option descriptions and advanced usage, refer to
-:ref:`arkangel_dv_commands_run_benchmark_power_analysis`.
+:ref:`arcxpress_dv_commands_run_benchmark_power_analysis`.

@@ -30,7 +30,7 @@ To add a new test case to regression test, a number of steps should be followed:
 - Create your test case under ``test/tasks``. Please name your testcase in a reasonable ways, so that other developers can identify its usage easily. For example, ``test/tasks/post_synth`` is to validate the support of post-synthesis projects.
 - A test case should include at least the following files
 
-  - A script to call ArcXpress. See example, ``test/tasks/post_synth/config/run.arkangel``.
+  - A script to call ArcXpress. See example, ``test/tasks/post_synth/config/run.arcxpress``.
   - A project file required by the ArcXpress script. See example, ``test/tasks/post_synth/config/project.xml``.
 
 - Add the testcase to the task list under ``test/common/task_list.yaml``.
@@ -41,4 +41,4 @@ Debug tests
 If a regression test failed, 
 
 - detailed logs and intermediate files can be found under a ``_work`` directory. For example, ``test/tasks/post_synth/_work``.
-- test run can be reproduced by calling the command in ``_work/run.arkangel_runcmd.sh``. Remeber that the command should be called under the ``_work`` directory
+- test run can be reproduced by calling the command in ``_work/run.arcxpress_runcmd.sh``. Remeber that the command should be called under the ``_work`` directory

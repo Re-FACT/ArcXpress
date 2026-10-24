@@ -98,7 +98,7 @@ The following options are available for a custom build
 
 .. option:: CMAKE_GOALS=<string>
 
-  Specify the build target for CMake system. For example, ``cmake_goals=arkangel`` indicates that only openfpga binary will be compiled. For a detailed list of targets, use ``make list_cmake_targets`` to show. By default, all the build targets will be included. 
+  Specify the build target for CMake system. For example, ``cmake_goals=arcxpress`` indicates that only openfpga binary will be compiled. For a detailed list of targets, use ``make list_cmake_targets`` to show. By default, all the build targets will be included. 
 
 Installer
 ~~~~~~~~~

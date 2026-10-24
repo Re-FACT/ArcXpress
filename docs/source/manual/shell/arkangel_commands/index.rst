@@ -3,7 +3,7 @@ Commands
 
 As ArcXpress integrates various tools, the commands are categorized into different classes:
 
-.. _arkangel_commands:
+.. _arcxpress_commands:
  
 .. toctree::
    :maxdepth: 2

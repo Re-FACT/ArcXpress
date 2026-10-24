@@ -28,7 +28,7 @@ The following diagram illustrates the typical structure of an AAEE test case dir
     │
     ├── config/                   # Configuration directory
     │   ├── project.xml           # Project configuration file
-    │   └── run.arkangel          # AAEE command script
+    │   └── run.arcxpress          # AAEE command script
 
 File Descriptions
 -----------------
@@ -52,13 +52,13 @@ File Descriptions
    - **Architecture template file path**
    - **Output directory settings**
 
-**run.arkangel** - *AAEE Command Script*
+**run.arcxpress** - *AAEE Command Script*
    Contains the sequence of AAEE commands to execute.
    Defines the complete flow from synthesis to netlist generation.
    Can include multiple tool invocations and data processing steps.
 
 .. note::
-   This run.arkangel script is optional; you can also execute the commands one by one in interactive mode.
+   This run.arcxpress script is optional; you can also execute the commands one by one in interactive mode.
 
 
 Prerequisites
@@ -174,7 +174,7 @@ You can launch it in **interactive mode** (type commands one by one), which is u
 
 .. note::
 
-   For more details on launching ArcXpress and parameter definitions, refer to :ref:`launch_arkangel_shell`.
+   For more details on launching ArcXpress and parameter definitions, refer to :ref:`launch_arcxpress_shell`.
 
 
 
@@ -185,7 +185,7 @@ Run the project creation command:
 
    .. code-block:: bash
 
-      arkangel> create_tapeout --config_file ./config/project.xml
+      arcxpress> create_tapeout --config_file ./config/project.xml
 
 When the ``create_tapeout`` command is executed, ArcXpress will
 produce console logs in the following order.
@@ -232,7 +232,7 @@ If project creation fails, ArcXpress will display clear error messages, such as:
 - Missing or unsupported dependencies
 
 In these cases, the project will not be created, and the reported issues must be
-resolved before retrying the ``create_tapeout`` command. If you want to learn more, please refer to :ref:`create_tapeout <arkangel_project_commands>`.
+resolved before retrying the ``create_tapeout`` command. If you want to learn more, please refer to :ref:`create_tapeout <arcxpress_project_commands>`.
 
 Execution Flow of ``save_tapeout``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -244,7 +244,7 @@ Run the project saving command:
 
 .. code-block:: bash
 
-   arkangel> save_tapeout --config_file ./config/project.xml
+   arcxpress> save_tapeout --config_file ./config/project.xml
 
 When the ``save_tapeout`` command is executed successfully, ArcXpress will produce
 console logs in the following order:
@@ -286,7 +286,7 @@ If project saving fails, ArcXpress will display clear error messages, such as:
 - Invalid project data
 
 In these cases, the project data will not be saved, and the reported issues must be
-resolved before retrying the ``save_tapeout`` command. If you want to learn more, please refer to :ref:`save_tapeout <arkangel_project_commands>`.
+resolved before retrying the ``save_tapeout`` command. If you want to learn more, please refer to :ref:`save_tapeout <arcxpress_project_commands>`.
 
 Execution Flow of ``load_tapeout``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -296,7 +296,7 @@ To continue working on an existing tape-out project, use the
 
 .. code-block:: bash
 
-   arkangel> load_tapeout --config_file ./config/project.xml
+   arcxpress> load_tapeout --config_file ./config/project.xml
 
 
 When the ``load_tapeout`` command is executed successfully, ArcXpress will produce
@@ -340,7 +340,7 @@ messages, such as:
 - Missing dependent files or resources
 
 In these cases, the project will not be loaded, and the reported errors must be
-resolved before retrying the ``load_tapeout`` command. If you want to learn more, please refer to :ref:`load_tapeout <arkangel_project_commands>`.
+resolved before retrying the ``load_tapeout`` command. If you want to learn more, please refer to :ref:`load_tapeout <arcxpress_project_commands>`.
 
 Next Steps
 ----------
@@ -359,12 +359,12 @@ After successfully creating or loading a project, you can proceed with:
 
    .. code-block:: bash
 
-      aaee -f run.arkangel  # Run commands from script file
+      aaee -f run.arcxpress  # Run commands from script file
 
-run.arkangel example
+run.arcxpress example
 --------------------
 
-The following are example commands for `run.arkangel`:
+The following are example commands for `run.arcxpress`:
 
 .. code:: bash
    

@@ -23,13 +23,13 @@ Namespace
 
 In general, all the classes and functions should be under a dedicated namespace.
 
-- arkangel
+- arcxpress
 
 For example
 
 .. code-block::
 
-  namespace arkangel {
+  namespace arcxpress {
     // Functions, variables and classes
   }
 

@@ -10,7 +10,7 @@ For the GUI build on WSL, please use the following to resolve Qt lib issues:
 .. code-block::
    
    # If you encounter issues like: 
-   # ./build/gui/arkangel_engineering_kit: error while loading shared libraries: libQt5Core.so.5: cannot open shared object file: No such file or directory
+   # ./build/gui/arcxpress_engineering_kit: error while loading shared libraries: libQt5Core.so.5: cannot open shared object file: No such file or directory
    sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5 
    # If you encounter issues like: qt.qpa.xcb: could not connect to display
    # Ensure that you have installed X11 (Xlaunch on Win) and run the following if your shell is bash

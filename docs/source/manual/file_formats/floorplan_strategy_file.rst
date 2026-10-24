@@ -64,7 +64,7 @@ For each tile, a specific utilization rate can be defined through the child node
 
 .. option:: name="<string>"
 
-  Specify the name of the tile where a custom utilization rate should be defined. Note that the tile name should match one of the tiles which can be checked through command ``report_module_names`` (See details in :ref:`arkangel_project_commands_report_module_names`)
+  Specify the name of the tile where a custom utilization rate should be defined. Note that the tile name should match one of the tiles which can be checked through command ``report_module_names`` (See details in :ref:`arcxpress_project_commands_report_module_names`)
 
 Tile gap
 --------

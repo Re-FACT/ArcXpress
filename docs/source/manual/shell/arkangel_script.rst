@@ -1,4 +1,4 @@
-.. _arkangel_script_format:
+.. _arcxpress_script_format:
 
 ArcXpress Script Format
 ----------------------

@@ -1,4 +1,4 @@
-.. _arkangel_basic_commands:
+.. _arcxpress_basic_commands:
 
 Basic Commands
 --------------

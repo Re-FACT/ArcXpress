@@ -1,4 +1,4 @@
-.. _arkangel_project_commands:
+.. _arcxpress_project_commands:
 
 Project Commands
 ----------------
@@ -82,7 +82,7 @@ Show the dashboard of the development flow. Note that only the latest run of maj
 
   Specify the output file name for the generated dashboard logs. If not specified, the logs will be printed on screen.
 
-.. _arkangel_project_commands_report_corners:
+.. _arcxpress_project_commands_report_corners:
 
 report_corners
 ~~~~~~~~~~~~~~
@@ -97,7 +97,7 @@ Report all the available corners that are defined in the project
 
   Specify the output file name for the generated corner report. If not specified, corner report will be printed on screen.
 
-.. _arkangel_project_commands_report_module_names:
+.. _arcxpress_project_commands_report_module_names:
 
 report_module_names
 ~~~~~~~~~~~~~~~~~~~
@@ -112,7 +112,7 @@ Report all the module names for a selected architecture development flow. Requir
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_project_commands_report_io:
+.. _arcxpress_project_commands_report_io:
 
 report_io
 ~~~~~~~~~
@@ -374,7 +374,7 @@ Analyze the Fmax from bitstream generation reports and generate a summary for al
 
   Specify the precision of the values of Fmax in qor report. If not specified, a default precision of ``6`` is used to round the values.
 
-.. _arkangel_project_commands_disable_benchmark:
+.. _arcxpress_project_commands_disable_benchmark:
 
 disable_benchmark
 ~~~~~~~~~~~~~~~~~
@@ -389,12 +389,12 @@ Disable a selected benchmark during pre-arch analyses, architecture evaluation a
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_project_commands_disable_corner:
+.. _arcxpress_project_commands_disable_corner:
 
 disable_corner
 ~~~~~~~~~~~~~~
 
-Disable a selected corner. Availble corners can be checked using command :ref:`arkangel_project_commands_report_corners`
+Disable a selected corner. Availble corners can be checked using command :ref:`arcxpress_project_commands_report_corners`
 
 .. note:: Disabling the default corner is prohibited and will trigger an error.
 
@@ -406,7 +406,7 @@ Disable a selected corner. Availble corners can be checked using command :ref:`a
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_project_commands_set_benchmark_custom_pin_utilization:
+.. _arcxpress_project_commands_set_benchmark_custom_pin_utilization:
 
 set_benchmark_custom_pin_utilization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
