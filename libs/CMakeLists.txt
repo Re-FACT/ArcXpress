@@ -1,5 +1,5 @@
 add_subdirectory(libsignalhandlermanager)
-add_subdirectory(libarkangelutil)
+add_subdirectory(libarcxpressutil)
 add_subdirectory(libbenchmarkmanager)
 add_subdirectory(libpdkmanager)
 add_subdirectory(libbootconfig)
