@@ -20,24 +20,24 @@ if (ARCXPRESS_WITH_SWIG)
           I_FILE    interface/arcxpress_shell.i)
   target_include_directories(arcxpress_shell PUBLIC ${LIB_INCLUDE_DIRS})
   target_link_libraries(arcxpress_shell
-                        libarkangel)
+                        libarcxpress)
 endif()
 
 #Create the library
 #Static linked library for other C++ libraries
-add_library(libarkangel STATIC
+add_library(libarcxpress STATIC
             ${LIB_HEADERS}
             ${LIB_SOURCES})
-target_include_directories(libarkangel PUBLIC ${LIB_INCLUDE_DIRS})
-set_target_properties(libarkangel PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
+target_include_directories(libarcxpress PUBLIC ${LIB_INCLUDE_DIRS})
+set_target_properties(libarcxpress PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
 
 #Specify link-time dependancies
-target_link_libraries(libarkangel
+target_link_libraries(libarcxpress
                       libtapeoutmanager
                       libbenchmarkmanager
                       libpdkmanager
                       libbootconfig
-                      libarkangelutil
+                      libarcxpressutil
                       libsignalhandlermanager
                       libvprstats
                       libarchconfiger
@@ -45,28 +45,28 @@ target_link_libraries(libarkangel
                       libopenfpga)
 
 if (BUILD_ARCXPRESS_WITH_LICENSE)
-target_link_libraries(libarkangel
+target_link_libraries(libarcxpress
                       liblicensemanager)
 endif()
 
 #Create the test executable
-add_executable(arkangel ${EXEC_SOURCE})
-target_link_libraries(arkangel libarkangel)
+add_executable(arcxpress ${EXEC_SOURCE})
+target_link_libraries(arcxpress libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
 if (MSVC)
-    target_compile_options(arkangel PRIVATE "/showIncludes")
+    target_compile_options(arcxpress PRIVATE "/showIncludes")
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARCXPRESS_USES_IPO arkangel INTERPROCEDURAL_OPTIMIZATION)
+get_target_property(ARCXPRESS_USES_IPO arcxpress INTERPROCEDURAL_OPTIMIZATION)
 if (ARCXPRESS_USES_IPO)
-    set_property(TARGET arkangel APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
+    set_property(TARGET arcxpress APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
 # Create launcher
 add_executable(aaee ${LAUNCHER_SOURCE})
-target_link_libraries(aaee libarkangel)
+target_link_libraries(aaee libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
 if (MSVC)
@@ -80,7 +80,7 @@ if (ARCXPRESS_USES_IPO)
 endif()
 
 # Install targets
-install(TARGETS libarkangel arkangel aaee
+install(TARGETS libarcxpress arcxpress aaee
         DESTINATION bin
         COMPONENT engine_package
 )

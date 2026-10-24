@@ -19,7 +19,7 @@ function(files_to_dirs file_list directory_list)
     set(${directory_list} ${dir_list} PARENT_SCOPE)
 endfunction(files_to_dirs)
 
-# for arkangel integration
+# for arcxpress integration
 file(GLOB_RECURSE EXEC_SOURCES test/*.cpp)
 file(GLOB_RECURSE LIB_SOURCES src/*.cpp)
 file(GLOB_RECURSE LIB_HEADERS src/*.h)
@@ -71,7 +71,7 @@ target_include_directories(liblicensemanager PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} 
 add_executable(test_lic src/license_manager.h src/license_manager.cpp test/test_lic.cpp)
 target_include_directories(test_lic PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}  ${CMAKE_CURRENT_SOURCE_DIR}/licensecc/install/include ${CMAKE_CURRENT_SOURCE_DIR}/licensecc/install/include/licensecc/${LCC_PROJECT_NAME})
 target_link_libraries(test_lic
-    libarkangelutil
+    libarcxpressutil
 	liblicensemanager)
 add_dependencies(test_lic install_licensecc)
 
@@ -83,7 +83,7 @@ target_compile_options(liblicensemanager PRIVATE
 # link licensecc to liblicensemanager
 cmake_policy(SET CMP0028 NEW)
 target_link_libraries(liblicensemanager 
-    libarkangelutil
+    libarcxpressutil
     licensecc_static)
 add_dependencies(liblicensemanager install_licensecc)
 

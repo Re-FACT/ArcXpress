@@ -44,7 +44,7 @@ target_link_libraries(libfloorplan
                       libopenfpga
                       yaml-cpp 
                       libtilenaming
-                      libarkangelutil
+                      libarcxpressutil
                       libpugiutil
                       libtableprinter)
 
