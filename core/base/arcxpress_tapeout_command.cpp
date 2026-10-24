@@ -1,5 +1,5 @@
 /********************************************************************
- * Add project-related commands to the Arkangel shell interface
+ * Add project-related commands to the Arcxpress shell interface
  *******************************************************************/
 #include "arcxpress_tapeout_command.h"
 
@@ -18,7 +18,7 @@ namespace arcxpress {
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_save_tapeout_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("save_tapeout");
 
   /* Add an option '--config_file' */
@@ -47,7 +47,7 @@ static openfpga::ShellCommandId add_arcxpress_save_tapeout_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_create_tapeout_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("create_tapeout");
 
   /* Add an option '--config_file' */
@@ -74,7 +74,7 @@ static openfpga::ShellCommandId add_arcxpress_create_tapeout_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_load_tapeout_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("load_tapeout");
 
   /* Add an option '--config_file' */
@@ -106,7 +106,7 @@ static openfpga::ShellCommandId add_arcxpress_load_tapeout_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_show_status_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("show_status");
 
   /* Add an option '--step' */
@@ -137,7 +137,7 @@ static openfpga::ShellCommandId add_arcxpress_show_status_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_show_dashboard_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("show_dashboard");
 
   openfpga::CommandOptionId opt_verbosity =
@@ -161,7 +161,7 @@ static openfpga::ShellCommandId add_arcxpress_show_dashboard_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_corners_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_corners");
 
   openfpga::CommandOptionId opt_verbosity =
@@ -187,7 +187,7 @@ static openfpga::ShellCommandId add_arcxpress_report_corners_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_module_names_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_module_names");
 
   openfpga::CommandOptionId opt_run =
@@ -213,7 +213,7 @@ static openfpga::ShellCommandId add_arcxpress_report_module_names_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_ref_module_names_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_reference_module_names");
 
   openfpga::CommandOptionId opt_run =
@@ -239,7 +239,7 @@ static openfpga::ShellCommandId add_arcxpress_report_ref_module_names_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_io_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_io");
 
   openfpga::CommandOptionId opt_run =
@@ -268,7 +268,7 @@ static openfpga::ShellCommandId add_arcxpress_report_io_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_static_power_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_static_power");
 
   openfpga::CommandOptionId opt_run =
@@ -303,7 +303,7 @@ static openfpga::ShellCommandId add_arcxpress_report_static_power_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_benchmark_power_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_benchmark_power");
 
   openfpga::CommandOptionId opt_run =
@@ -344,7 +344,7 @@ static openfpga::ShellCommandId add_arcxpress_report_benchmark_power_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_config_power_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_config_power");
 
   openfpga::CommandOptionId opt_run =
@@ -381,7 +381,7 @@ static openfpga::ShellCommandId add_arcxpress_report_config_power_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_config_stats_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_config_stats");
 
   openfpga::CommandOptionId opt_run =
@@ -422,7 +422,7 @@ static openfpga::ShellCommandId add_arcxpress_report_config_stats_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_export_netlist_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("export_netlist");
 
   /* Add an option '--file' */
@@ -463,7 +463,7 @@ static openfpga::ShellCommandId add_arcxpress_export_netlist_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_export_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("export_arch");
 
   /* Add an option '--file' */
@@ -501,7 +501,7 @@ static openfpga::ShellCommandId add_arcxpress_export_arch_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_backannotate_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("backannotate");
 
   openfpga::CommandOptionId opt_run =
@@ -538,7 +538,7 @@ static openfpga::ShellCommandId add_arcxpress_backannotate_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_disable_benchmark_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("disable_benchmark");
 
   openfpga::CommandOptionId opt_name = shell_cmd.add_option(
@@ -565,7 +565,7 @@ static openfpga::ShellCommandId add_arcxpress_disable_benchmark_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_disable_corner_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("disable_corner");
 
   openfpga::CommandOptionId opt_name = shell_cmd.add_option(
@@ -591,7 +591,7 @@ static openfpga::ShellCommandId add_arcxpress_disable_corner_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_analyze_pre_arch_qor_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("analyze_pre_arch_qor");
 
   /* Add an option '--file' */
@@ -624,7 +624,7 @@ static openfpga::ShellCommandId add_arcxpress_analyze_pre_arch_qor_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_analyze_qor_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("analyze_qor");
 
   /* Add an option '--file' */
@@ -667,7 +667,7 @@ static openfpga::ShellCommandId add_arcxpress_analyze_qor_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_report_qor_scale_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("report_qor_scale");
 
   openfpga::CommandOptionId opt_run =
@@ -716,7 +716,7 @@ static openfpga::ShellCommandId add_arcxpress_report_qor_scale_command(
 // This is a temporay fix due to the graphviz package issue on CentOS 7.9
 #ifdef USE_GRAPHVIZ
 static openfpga::ShellCommandId add_arcxpress_export_benchmark_schematic_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("export_benchmark_schematic");
 
   openfpga::CommandOptionId opt_run =
@@ -757,7 +757,7 @@ static openfpga::ShellCommandId add_arcxpress_export_benchmark_schematic_command
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_benchmark_vpr_constraints_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("add_benchmark_vpr_constraints");
 
   // Option to specify the run name of the architecture evaluation
@@ -805,7 +805,7 @@ static openfpga::ShellCommandId add_benchmark_vpr_constraints_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_set_benchmark_custom_pin_utilization_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_benchmark_custom_pin_utilization");
   openfpga::CommandOptionId opt_run =
     shell_cmd.add_option("run", false, "Specify the name of run to start with");
@@ -854,10 +854,10 @@ static openfpga::ShellCommandId add_set_benchmark_custom_pin_utilization_command
   return shell_cmd_id;
 }
 
-void add_arcxpress_tapeout_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_tapeout_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId arcxpress_tapeout_cmd_class =
-    shell.add_command_class("Arkangel tapeout");
+    shell.add_command_class("Arcxpress tapeout");
 
   add_arcxpress_create_tapeout_command(shell, arcxpress_tapeout_cmd_class);
   add_arcxpress_load_tapeout_command(shell, arcxpress_tapeout_cmd_class);

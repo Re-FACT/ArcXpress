@@ -14,7 +14,7 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int backannotate(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int backannotate(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_context);
 
 } /* end namespace arcxpress */

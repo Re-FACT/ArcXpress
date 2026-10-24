@@ -14,7 +14,7 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int analyze_logic_resource(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int analyze_logic_resource(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_context);
 
 } /* end namespace arcxpress */

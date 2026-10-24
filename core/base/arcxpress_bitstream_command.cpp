@@ -14,12 +14,12 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to add all the commands related to FPGA-Bitstream
  *******************************************************************/
-void add_bitstream_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_bitstream_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add bitstream commands from openfpga */
 #ifdef ARCXPRESS_PRODUCTION_EDITION
-  openfpga::add_bitstream_command_templates<ArkangelContext>(shell, true);
+  openfpga::add_bitstream_command_templates<ArcxpressContext>(shell, true);
 #elif ARCXPRESS_ENGINEERING_EDITION
-  openfpga::add_bitstream_command_templates<ArkangelContext>(shell, false);
+  openfpga::add_bitstream_command_templates<ArcxpressContext>(shell, false);
 #endif
 }
 

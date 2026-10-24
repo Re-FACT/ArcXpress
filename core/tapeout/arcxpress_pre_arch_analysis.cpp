@@ -17,7 +17,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int analyze_logic_resource(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int analyze_logic_resource(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(

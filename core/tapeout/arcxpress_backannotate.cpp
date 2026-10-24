@@ -21,7 +21,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to back-annotate timing
  *******************************************************************/
-int backannotate(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int backannotate(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");

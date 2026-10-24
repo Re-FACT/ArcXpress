@@ -11,8 +11,8 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-void add_openfpga_sdc_commands(openfpga::Shell<ArkangelContext>& shell) {
-  openfpga::add_openfpga_sdc_command_templates<ArkangelContext>(shell, true);
+void add_openfpga_sdc_commands(openfpga::Shell<ArcxpressContext>& shell) {
+  openfpga::add_openfpga_sdc_command_templates<ArcxpressContext>(shell, true);
 }
 
 } /* end namespace arcxpress */

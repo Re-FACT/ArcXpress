@@ -1,5 +1,5 @@
 /********************************************************************
- * Add project-related commands to the Arkangel shell interface
+ * Add project-related commands to the Arcxpress shell interface
  *******************************************************************/
 #include "arcxpress_pre_arch_command.h"
 
@@ -14,7 +14,7 @@ namespace arcxpress {
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_analyze_logic_resource_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("analyze_logic_resource");
 
   openfpga::CommandOptionId opt_run =
@@ -48,10 +48,10 @@ static openfpga::ShellCommandId add_arcxpress_analyze_logic_resource_command(
   return shell_cmd_id;
 }
 
-void add_arcxpress_pre_arch_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_pre_arch_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId arcxpress_pre_arch_cmd_class =
-    shell.add_command_class("Arkangel pre-arch evaluation");
+    shell.add_command_class("Arcxpress pre-arch evaluation");
 
   add_arcxpress_analyze_logic_resource_command(shell, arcxpress_pre_arch_cmd_class);
 }

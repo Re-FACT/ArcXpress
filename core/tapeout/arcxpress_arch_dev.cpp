@@ -22,7 +22,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int create_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int create_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(
@@ -89,7 +89,7 @@ int create_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int setup_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int setup_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(
@@ -176,7 +176,7 @@ int setup_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-int show_tapeout_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int show_tapeout_arch(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_type = cmd.option("type");
   openfpga::CommandOptionId opt_fabric = cmd.option("fabric");
@@ -217,7 +217,7 @@ int show_tapeout_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Comm
   return status;
 }
 
-int set_arch_io_num(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_io_num(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                     const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_side = cmd.option("side");
   openfpga::CommandOptionId opt_type = cmd.option("type");
@@ -261,7 +261,7 @@ int set_arch_io_num(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd
   return status;
 }
 
-int set_arch_sync_dp_dimension(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_sync_dp_dimension(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -291,7 +291,7 @@ int set_arch_sync_dp_dimension(ArkangelContext& arcxpress_ctx, const openfpga::C
   return status;
 }
 
-int set_arch_core_dimension(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_core_dimension(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                             const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_height = cmd.option("height");
   openfpga::CommandOptionId opt_width = cmd.option("width");
@@ -339,7 +339,7 @@ int set_arch_core_dimension(ArkangelContext& arcxpress_ctx, const openfpga::Comm
   return status;
 }
 
-int set_arch_num_clk(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_num_clk(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -377,7 +377,7 @@ int set_arch_num_clk(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
   return status;
 }
 
-int set_arch_num_rst(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_num_rst(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -415,7 +415,7 @@ int set_arch_num_rst(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
   return status;
 }
 
-int set_arch_num_pclk(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_num_pclk(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -453,7 +453,7 @@ int set_arch_num_pclk(ArkangelContext& arcxpress_ctx, const openfpga::Command& c
   return status;
 }
 
-int set_arch_num_config_region(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_arch_num_config_region(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_num = cmd.option("num");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -492,7 +492,7 @@ int set_arch_num_config_region(ArkangelContext& arcxpress_ctx, const openfpga::C
   return status;
 }
 
-int remove_arch_io(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int remove_arch_io(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_side = cmd.option("side");
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -525,7 +525,7 @@ int remove_arch_io(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
   return status;
 }
 
-int set_tapeout_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int set_tapeout_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_type = cmd.option("type");
   openfpga::CommandOptionId opt_fabric = cmd.option("fabric");
@@ -651,7 +651,7 @@ int set_tapeout_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
   return status;
 }
 
-int eval_tapeout_arch(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int eval_tapeout_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(

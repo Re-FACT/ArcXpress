@@ -19,7 +19,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int analyze_pre_arch_qor(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int analyze_pre_arch_qor(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                          const openfpga::CommandContext& cmd_ctx) {
   const TapeoutManager& to_mgr = arcxpress_ctx.tapeout_manager();
   VTR_LOG("Under construction for tapeout project '%s'\n", to_mgr.name().c_str());
@@ -31,7 +31,7 @@ int analyze_pre_arch_qor(const ArkangelContext& arcxpress_ctx, const openfpga::C
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int analyze_arch_eval_qor(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int analyze_arch_eval_qor(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                           const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_run = cmd.option("run");

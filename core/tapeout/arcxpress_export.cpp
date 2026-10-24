@@ -20,7 +20,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int export_netlist(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int export_netlist(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_fow = cmd.option("force_overwrite");
@@ -109,7 +109,7 @@ int export_netlist(const ArkangelContext& arcxpress_ctx, const openfpga::Command
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int export_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int export_arch(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_fow = cmd.option("force_overwrite");
@@ -178,7 +178,7 @@ int export_arch(const ArkangelContext& arcxpress_ctx, const openfpga::Command& c
 // If Graphviz is found, enable the following functionality
 // This is a temporay fix due to the graphviz package issue on CentOS 7.9
 #ifdef USE_GRAPHVIZ
-int export_benchmark_schematic(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int export_benchmark_schematic(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                                const openfpga::CommandContext& cmd_ctx) {
   /* Must have a valid tapeout first */
   if (!arcxpress_ctx.is_tapeout_created()) {

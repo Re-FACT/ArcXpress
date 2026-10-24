@@ -14,19 +14,19 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int generate_netlist(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int generate_netlist(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_context);
 
-int netlist_opt(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int netlist_opt(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_context);
 
-int analyze_tile_area(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int analyze_tile_area(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_context);
 
-int coarse_floorplan(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int coarse_floorplan(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_context);
 
-int extract_netlist_qor(ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int extract_netlist_qor(ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_context);
 
 } /* end namespace arcxpress */

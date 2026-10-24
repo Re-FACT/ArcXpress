@@ -14,7 +14,7 @@
 /* begin namespace openfpga */
 namespace arcxpress {
 
-void add_basic_commands(openfpga::Shell<ArkangelContext>& shell);
+void add_basic_commands(openfpga::Shell<ArcxpressContext>& shell);
 
 }  // namespace arcxpress
 

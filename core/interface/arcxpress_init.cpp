@@ -44,7 +44,7 @@ bool init_license_manager(arcxpress::LicenseManager& license_mgr, const std::str
 }
 #endif
 
-int arcxpress_init(ArkangelContext& arcxpress_ctx, const std::string& root_path,
+int arcxpress_init(ArcxpressContext& arcxpress_ctx, const std::string& root_path,
                   const std::string& boot_cfg_file) {
   vtr::ScopedStartFinishTimer timer("Initializing...");
   std::string build_version = std::string(LICENSED_BUILD_VERSION);

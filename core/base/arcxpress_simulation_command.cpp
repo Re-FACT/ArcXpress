@@ -14,7 +14,7 @@ namespace arcxpress {
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_simulation_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id,
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id,
   const std::vector<openfpga::ShellCommandId>& dependent_cmds) {
   openfpga::Command shell_cmd("run_benchmark_simulation");
 
@@ -68,7 +68,7 @@ static openfpga::ShellCommandId add_arcxpress_simulation_command(
   return shell_cmd_id;
 }
 
-void add_simulation_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_simulation_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId sim_cmd_class = shell.add_command_class("simulation");
 

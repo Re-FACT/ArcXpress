@@ -27,7 +27,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int show_tapeout_dashboard(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int show_tapeout_dashboard(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_report_file = cmd.option("file");
   std::string report_file_path = "";
@@ -87,7 +87,7 @@ int show_tapeout_dashboard(const ArkangelContext& arcxpress_ctx, const openfpga:
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int show_tapeout_status(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int show_tapeout_status(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_step = cmd.option("step");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_step));
@@ -124,7 +124,7 @@ int show_tapeout_status(const ArkangelContext& arcxpress_ctx, const openfpga::Co
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int save_tapeout(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int save_tapeout(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
   int verbosity = 0;
@@ -270,7 +270,7 @@ static int load_tapeout_from_config_file(const std::string config_file_name, Tap
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int create_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int create_tapeout(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(
@@ -315,7 +315,7 @@ int create_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int load_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int load_tapeout(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("config_file");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_file));
@@ -375,7 +375,7 @@ int load_tapeout(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int disable_benchmark(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int disable_benchmark(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_name = cmd.option("name");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_name));
@@ -414,7 +414,7 @@ int disable_benchmark(ArkangelContext& arcxpress_ctx, const openfpga::Command& c
 /********************************************************************
  * Top-level function to create a new project based on a configuration file
  *******************************************************************/
-int disable_corner(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int disable_corner(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_name = cmd.option("name");
   VTR_ASSERT(true == cmd_ctx.option_enable(cmd, opt_name));
@@ -444,7 +444,7 @@ int disable_corner(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Add custom VPR constraints to a benchmark for architecture evaluation
  *******************************************************************/
-int add_benchmark_vpr_constraints(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int add_benchmark_vpr_constraints(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                                   const openfpga::CommandContext& cmd_ctx) {
   // Retrieve command options
   openfpga::CommandOptionId opt_run = cmd.option("run");
@@ -536,7 +536,7 @@ int add_benchmark_vpr_constraints(ArkangelContext& arcxpress_ctx, const openfpga
 /********************************************************************
  * Add custom VPR constraints to a benchmark for architecture evaluation
  *******************************************************************/
-int set_benchmark_custom_pin_utilization(ArkangelContext& arcxpress_ctx,
+int set_benchmark_custom_pin_utilization(ArcxpressContext& arcxpress_ctx,
                                          const openfpga::Command& cmd,
                                          const openfpga::CommandContext& cmd_ctx) {
 /* Implementation for setting custom pin utilization */

@@ -132,7 +132,7 @@ static int setup_netlist_dev_manager(const TapeoutManager& to_mgr, const Benchma
 /********************************************************************
  * Top-level function to generate RTL netlist
  *******************************************************************/
-int generate_netlist(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int generate_netlist(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_nlist_makeup = cmd.option("netlist_makeup");
@@ -238,7 +238,7 @@ int generate_netlist(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int netlist_opt(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int netlist_opt(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(
@@ -348,7 +348,7 @@ int netlist_opt(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int analyze_tile_area(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int analyze_tile_area(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_dryrun = cmd.option("dryrun");
@@ -427,7 +427,7 @@ int analyze_tile_area(ArkangelContext& arcxpress_ctx, const openfpga::Command& c
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int coarse_floorplan(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int coarse_floorplan(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_rptf = cmd.option("report_file");
@@ -549,7 +549,7 @@ int coarse_floorplan(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
 /********************************************************************
  * Top-level function to optimize netlists
  *******************************************************************/
-int extract_netlist_qor(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int extract_netlist_qor(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
 #ifdef ARCXPRESS_LICENSED_BUILD
   if (!arcxpress_ctx.license_manager().checkOut(

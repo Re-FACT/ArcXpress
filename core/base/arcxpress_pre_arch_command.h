@@ -13,6 +13,6 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-void add_arcxpress_pre_arch_commands(openfpga::Shell<ArkangelContext>& shell);
+void add_arcxpress_pre_arch_commands(openfpga::Shell<ArcxpressContext>& shell);
 
 } /* end namespace arcxpress */

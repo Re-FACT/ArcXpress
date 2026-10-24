@@ -11,6 +11,6 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int arcxpress_init(ArkangelContext& arcxpress_ctx, const std::string& root_path,
+int arcxpress_init(ArcxpressContext& arcxpress_ctx, const std::string& root_path,
                   const std::string& boot_cfg_file);
 } /* end namespace arcxpress */

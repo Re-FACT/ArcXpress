@@ -21,7 +21,7 @@ namespace arcxpress {
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_corners(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_corners(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                    const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_file = cmd.option("file");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -70,7 +70,7 @@ int report_corners(const ArkangelContext& arcxpress_ctx, const openfpga::Command
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_module_names(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_module_names(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -130,7 +130,7 @@ int report_module_names(const ArkangelContext& arcxpress_ctx, const openfpga::Co
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_ref_module_names(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_ref_module_names(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                             const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -192,7 +192,7 @@ int report_ref_module_names(const ArkangelContext& arcxpress_ctx, const openfpga
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_io(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_io(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
               const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
@@ -258,7 +258,7 @@ int report_io(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_static_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_static_power(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -363,7 +363,7 @@ int report_static_power(const ArkangelContext& arcxpress_ctx, const openfpga::Co
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_benchmark_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_benchmark_power(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -504,7 +504,7 @@ int report_benchmark_power(const ArkangelContext& arcxpress_ctx, const openfpga:
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_config_power(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_config_power(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -609,7 +609,7 @@ int report_config_power(const ArkangelContext& arcxpress_ctx, const openfpga::Co
 /********************************************************************
  * Top-level function to show status of a tapeout flow/step
  *******************************************************************/
-int report_config_stats(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_config_stats(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                         const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_pclk_freq = cmd.option("pclk_freq");
@@ -687,7 +687,7 @@ int report_config_stats(const ArkangelContext& arcxpress_ctx, const openfpga::Co
 /********************************************************************
  * Report qor scale
  *******************************************************************/
-int report_qor_scale(const ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int report_qor_scale(const ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_type = cmd.option("type");

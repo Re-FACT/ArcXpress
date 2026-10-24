@@ -75,7 +75,7 @@ static int setup_dv_manager(const TapeoutManager& to_mgr, const NetlistDevManage
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-int setup_dv(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int setup_dv(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
              const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -233,7 +233,7 @@ int setup_dv(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
   return status;
 }
 
-int run_preconfig_dv(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int run_preconfig_dv(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                      const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -375,7 +375,7 @@ int run_preconfig_dv(ArkangelContext& arcxpress_ctx, const openfpga::Command& cm
 /***********************************************************************************
  * Top-level function to report dynamic power for a benchmark of a tapeout flow/step
  **********************************************************************************/
-int run_benchmark_power_analysis(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int run_benchmark_power_analysis(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                                  const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");
@@ -505,7 +505,7 @@ int run_benchmark_power_analysis(ArkangelContext& arcxpress_ctx, const openfpga:
 /***********************************************************************************
  * Top-level function to report sta for a benchmark of a tapeout flow/step
  **********************************************************************************/
-int run_benchmark_sta(ArkangelContext& arcxpress_ctx, const openfpga::Command& cmd,
+int run_benchmark_sta(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                       const openfpga::CommandContext& cmd_ctx) {
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_corner = cmd.option("corner");

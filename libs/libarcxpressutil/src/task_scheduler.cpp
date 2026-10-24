@@ -143,7 +143,7 @@ int ParallelTaskScheduler::run_tasks() const {
 
       WinTaskSlot slot;
       if (!CreatePipe(&slot.read_pipe, &slot.write_pipe, &sa, 0)) {
-        VTR_LOG_ERROR("[Arkangel ERROR] Failed to create output pipe\n");
+        VTR_LOG_ERROR("[Arcxpress ERROR] Failed to create output pipe\n");
         cleanup_all_slots();
         return openfpga::CMD_EXEC_FATAL_ERROR;
       }
@@ -251,7 +251,7 @@ int ParallelTaskScheduler::run_tasks() const {
 
       int output_pipe[2];
       if (pipe(output_pipe) != 0) {
-        VTR_LOG_ERROR("[Arkangel ERROR] Failed to create child output pipe\n");
+        VTR_LOG_ERROR("[Arcxpress ERROR] Failed to create child output pipe\n");
         for (auto& child : running_children) {
           terminate_task_process_group(child.pid);
           waitpid(child.pid, nullptr, 0);
@@ -267,7 +267,7 @@ int ParallelTaskScheduler::run_tasks() const {
       if (pid < 0) {
         close(output_pipe[0]);
         close(output_pipe[1]);
-        VTR_LOG_ERROR("[Arkangel ERROR] Failed to fork child process\n");
+        VTR_LOG_ERROR("[Arcxpress ERROR] Failed to fork child process\n");
         for (auto& child : running_children) {
           terminate_task_process_group(child.pid);
           waitpid(child.pid, nullptr, 0);
@@ -328,7 +328,7 @@ int ParallelTaskScheduler::run_tasks() const {
         it = running_children.erase(it);
 
       } else if (ret < 0) {
-        VTR_LOG_ERROR("[Arkangel ERROR] waitpid failed for child %d\n", it->pid);
+        VTR_LOG_ERROR("[Arcxpress ERROR] waitpid failed for child %d\n", it->pid);
         close_output_fd(it->output_fd);
         it = running_children.erase(it);
         all_ok = false;

@@ -1,5 +1,5 @@
 /********************************************************************
- * This file includes the functions to manipulate strings for Arkangel's usage
+ * This file includes the functions to manipulate strings for Arcxpress's usage
  *******************************************************************/
 #include "arcxpress_string_util.h"
 

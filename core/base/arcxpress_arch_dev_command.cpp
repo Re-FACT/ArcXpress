@@ -1,5 +1,5 @@
 /********************************************************************
- * Add project-related commands to the Arkangel shell interface
+ * Add project-related commands to the Arcxpress shell interface
  *******************************************************************/
 #include "arcxpress_arch_dev_command.h"
 
@@ -14,7 +14,7 @@ namespace arcxpress {
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_create_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("create_arch");
 
   openfpga::CommandOptionId opt_run =
@@ -40,7 +40,7 @@ static openfpga::ShellCommandId add_arcxpress_create_arch_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_setup_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("setup_arch");
 
   openfpga::CommandOptionId opt_run =
@@ -67,7 +67,7 @@ static openfpga::ShellCommandId add_arcxpress_setup_arch_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_show_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("show_arch");
 
   openfpga::CommandOptionId opt_type =
@@ -101,7 +101,7 @@ static openfpga::ShellCommandId add_arcxpress_show_arch_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_arch");
 
   openfpga::CommandOptionId opt_type =
@@ -141,7 +141,7 @@ static openfpga::ShellCommandId add_arcxpress_set_arch_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_io_num_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_io_num");
 
   openfpga::CommandOptionId opt_side = shell_cmd.add_option(
@@ -179,7 +179,7 @@ static openfpga::ShellCommandId add_arcxpress_set_io_num_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_sync_dp_dimension_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_sync_dp_dimension");
 
   openfpga::CommandOptionId opt_run =
@@ -207,7 +207,7 @@ static openfpga::ShellCommandId add_arcxpress_set_sync_dp_dimension_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_core_dimension_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_core_dimension");
 
   openfpga::CommandOptionId opt_height = shell_cmd.add_option(
@@ -248,7 +248,7 @@ static openfpga::ShellCommandId add_arcxpress_set_core_dimension_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_num_prog_clock_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_prog_clock");
 
   openfpga::CommandOptionId opt_num =
@@ -278,7 +278,7 @@ static openfpga::ShellCommandId add_arcxpress_set_num_prog_clock_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_num_clock_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_clock");
 
   openfpga::CommandOptionId opt_num =
@@ -308,7 +308,7 @@ static openfpga::ShellCommandId add_arcxpress_set_num_clock_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_num_reset_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_reset");
 
   openfpga::CommandOptionId opt_num =
@@ -338,7 +338,7 @@ static openfpga::ShellCommandId add_arcxpress_set_num_reset_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_set_num_config_region_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("set_num_config_region");
 
   openfpga::CommandOptionId opt_num =
@@ -368,7 +368,7 @@ static openfpga::ShellCommandId add_arcxpress_set_num_config_region_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_remove_io_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("remove_io");
 
   openfpga::CommandOptionId opt_side = shell_cmd.add_option(
@@ -399,7 +399,7 @@ static openfpga::ShellCommandId add_arcxpress_remove_io_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_eval_arch_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("eval_arch");
 
   openfpga::CommandOptionId opt_run =
@@ -445,10 +445,10 @@ static openfpga::ShellCommandId add_arcxpress_eval_arch_command(
   return shell_cmd_id;
 }
 
-void add_arcxpress_arch_dev_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_arch_dev_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId arcxpress_arch_dev_cmd_class =
-    shell.add_command_class("Arkangel architecture development");
+    shell.add_command_class("Arcxpress architecture development");
 
   add_arcxpress_create_arch_command(shell, arcxpress_arch_dev_cmd_class);
   add_arcxpress_setup_arch_command(shell, arcxpress_arch_dev_cmd_class);

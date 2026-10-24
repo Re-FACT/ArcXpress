@@ -1,5 +1,5 @@
 /********************************************************************
- * Add project-related commands to the Arkangel shell interface
+ * Add project-related commands to the Arcxpress shell interface
  *******************************************************************/
 #include "arcxpress_dv_command.h"
 
@@ -14,7 +14,7 @@ namespace arcxpress {
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_setup_dv_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("setup_design_verification");
 
   openfpga::CommandOptionId opt_run =
@@ -77,7 +77,7 @@ static openfpga::ShellCommandId add_arcxpress_setup_dv_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_run_preconfig_sim_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("run_preconfigured_simulation");
 
   openfpga::CommandOptionId opt_run =
@@ -154,7 +154,7 @@ static openfpga::ShellCommandId add_arcxpress_run_preconfig_sim_command(
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_run_benchmark_power_analysis_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("run_benchmark_power_analysis");
 
   openfpga::CommandOptionId opt_run =
@@ -198,7 +198,7 @@ static openfpga::ShellCommandId add_arcxpress_run_benchmark_power_analysis_comma
  * - Add command dependency
  *******************************************************************/
 static openfpga::ShellCommandId add_arcxpress_run_benchmark_sta_command(
-  openfpga::Shell<ArkangelContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
+  openfpga::Shell<ArcxpressContext>& shell, const openfpga::ShellCommandClassId& cmd_class_id) {
   openfpga::Command shell_cmd("run_benchmark_sta");
 
   openfpga::CommandOptionId opt_run =
@@ -245,10 +245,10 @@ static openfpga::ShellCommandId add_arcxpress_run_benchmark_sta_command(
   return shell_cmd_id;
 }
 
-void add_arcxpress_dv_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_arcxpress_dv_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId arcxpress_dv_cmd_class =
-    shell.add_command_class("Arkangel tapeout design verification");
+    shell.add_command_class("Arcxpress tapeout design verification");
 
   add_arcxpress_setup_dv_command(shell, arcxpress_dv_cmd_class);
   add_arcxpress_run_preconfig_sim_command(shell, arcxpress_dv_cmd_class);

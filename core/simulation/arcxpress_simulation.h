@@ -16,8 +16,8 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-int run_app_hdl_simulation(openfpga::Shell<ArkangelContext>* shell,
-                           ArkangelContext& arcxpress_context, const openfpga::Command& cmd,
+int run_app_hdl_simulation(openfpga::Shell<ArcxpressContext>* shell,
+                           ArcxpressContext& arcxpress_context, const openfpga::Command& cmd,
                            const openfpga::CommandContext& cmd_context);
 } /* end namespace arcxpress */
 

@@ -11,7 +11,7 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-void add_basic_commands(openfpga::Shell<ArkangelContext>& shell) {
+void add_basic_commands(openfpga::Shell<ArcxpressContext>& shell) {
   /* Add a new class of commands */
   openfpga::ShellCommandClassId basic_cmd_class = shell.add_command_class("Basic");
 

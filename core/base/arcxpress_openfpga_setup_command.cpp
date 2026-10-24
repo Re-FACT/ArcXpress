@@ -10,8 +10,8 @@
 /* begin namespace arcxpress */
 namespace arcxpress {
 
-void add_openfpga_setup_commands(openfpga::Shell<ArkangelContext>& shell) {
-  openfpga::add_setup_command_templates<ArkangelContext>(shell, true);
+void add_openfpga_setup_commands(openfpga::Shell<ArcxpressContext>& shell) {
+  openfpga::add_setup_command_templates<ArcxpressContext>(shell, true);
 }
 
 } /* end namespace arcxpress */
