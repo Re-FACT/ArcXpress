@@ -16,18 +16,15 @@
 
 #include "benchmark_manager.h"
 #include "boot_config.h"
-#ifdef ARCXPRESS_LICENSED_BUILD
-#include "license_manager.h"
-#endif
 #include "openfpga_context.h"
 #include "pdk_manager.h"
 #include "tapeout_manager.h"
 /********************************************************************
  * This file includes the declaration of the date structure
- * ArkangelContext, which is used for data exchange between
- * different modules in Arkangel shell environment
+ * ArcxpressContext, which is used for data exchange between
+ * different modules in Arcxpress shell environment
  *
- * If a command of Arkangel needs to exchange data with other commands,
+ * If a command of Arcxpress needs to exchange data with other commands,
  * it must use this data structure to access/mutate.
  * In such case, you must add data structures to this context
  *
@@ -39,25 +36,22 @@
  *    Do NOT create or duplicate in your own module!
  * 2. Be clear in your mind if you want to access/mutate the data inside
  *    Read-only data should be accessed by
-        const ArkangelContext&
+        const ArcxpressContext&
  *    Mutate should use reference
- *      ArkangelContext&
- * 3. Please keep the definition of ArkangelContext short
+ *      ArcxpressContext&
+ * 3. Please keep the definition of ArcxpressContext short
  *    Do put ONLY well-modularized data structure under this root.
  * 4. We build this data structure based on the Context from VPR
  *    which does NOT allow users to copy the internal members
- *    This is due to that the data structures in the Arkangel context
+ *    This is due to that the data structures in the Arcxpress context
  *    are typically big in terms of memory
  *******************************************************************/
-class ArkangelContext : public OpenfpgaContext {
+class ArcxpressContext : public OpenfpgaContext {
  public: /* Public accessors */
   const arcxpress::BootConfig& boot_config() const { return boot_config_; }
   const arcxpress::TapeoutManager& tapeout_manager() const { return tapeout_manager_; }
   const arcxpress::BenchmarkManager& benchmark_manager() const { return benchmark_manager_; }
   const arcxpress::PdkManager& pdk_manager() const { return pdk_manager_; }
-#ifdef ARCXPRESS_LICENSED_BUILD
-  arcxpress::LicenseManager& license_manager() { return license_manager_; }
-#endif
   bool is_tapeout_created() const { return tapeout_created_; }
 
  public: /* Public mutators */
@@ -65,9 +59,6 @@ class ArkangelContext : public OpenfpgaContext {
   arcxpress::TapeoutManager& mutable_tapeout_manager() { return tapeout_manager_; }
   arcxpress::BenchmarkManager& mutable_benchmark_manager() { return benchmark_manager_; }
   arcxpress::PdkManager& mutable_pdk_manager() { return pdk_manager_; }
-#ifdef ARCXPRESS_LICENSED_BUILD
-  arcxpress::LicenseManager& mutable_license_manager() { return license_manager_; }
-#endif
   void set_tapeout_created() { tapeout_created_ = true; }
 
  private: /* Internal data */
@@ -77,7 +68,4 @@ class ArkangelContext : public OpenfpgaContext {
   arcxpress::TapeoutManager tapeout_manager_;
   arcxpress::BenchmarkManager benchmark_manager_;
   arcxpress::PdkManager pdk_manager_;
-#ifdef ARCXPRESS_LICENSED_BUILD
-  arcxpress::LicenseManager license_manager_;
-#endif
 };

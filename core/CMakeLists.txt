@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.9)
 project("arcxpress_shell")
 
 file(GLOB_RECURSE EXEC_SOURCE main.cpp)
-file(GLOB_RECURSE LAUNCHER_SOURCE aaee.cpp)
+file(GLOB_RECURSE LAUNCHER_SOURCE arcxpress.cpp)
 file(GLOB_RECURSE LIB_SOURCES */*.cpp)
 file(GLOB_RECURSE LIB_HEADERS */*.h)
 files_to_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
@@ -45,7 +45,22 @@ target_link_libraries(libarcxpress
                       libopenfpga)
 
 #Create the test executable
-add_executable(arcxpress ${EXEC_SOURCE})
+add_executable(arcxpress_shell ${EXEC_SOURCE})
+target_link_libraries(arcxpress_shell libarcxpress)
+
+# Show nested tree for header file being read for debugging compilation error when occurred
+if (MSVC)
+    target_compile_options(arcxpress_shell PRIVATE "/showIncludes")
+endif()
+
+#Suppress IPO link warnings if IPO is enabled
+get_target_property(ARCXPRESS_USES_IPO arcxpress_shell INTERPROCEDURAL_OPTIMIZATION)
+if (ARCXPRESS_USES_IPO)
+    set_property(TARGET arcxpress_shell APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
+endif()
+
+# Create launcher
+add_executable(arcxpress ${LAUNCHER_SOURCE})
 target_link_libraries(arcxpress libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
@@ -59,23 +74,8 @@ if (ARCXPRESS_USES_IPO)
     set_property(TARGET arcxpress APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
-# Create launcher
-add_executable(aaee ${LAUNCHER_SOURCE})
-target_link_libraries(aaee libarcxpress)
-
-# Show nested tree for header file being read for debugging compilation error when occurred
-if (MSVC)
-    target_compile_options(aaee PRIVATE "/showIncludes")
-endif()
-
-#Suppress IPO link warnings if IPO is enabled
-get_target_property(ARCXPRESS_USES_IPO aaee INTERPROCEDURAL_OPTIMIZATION)
-if (ARCXPRESS_USES_IPO)
-    set_property(TARGET aaee APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
-endif()
-
 # Install targets
-install(TARGETS libarcxpress arcxpress aaee
+install(TARGETS libarcxpress arcxpress arcxpress_shell
         DESTINATION bin
         COMPONENT engine_package
 )

@@ -1,8 +1,8 @@
-/* SWIG interface file for ArkAngel shell APIs */
-%module arkangel_shell
+/* SWIG interface file for ArcXpress shell APIs */
+%module arcxpress_shell
 
 %{
-#include "arkangel_shell.h"
+#include "arcxpress_shell.h"
 %}
 
-%include "arkangel_shell.h"
+%include "arcxpress_shell.h"

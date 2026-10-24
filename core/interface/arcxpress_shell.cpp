@@ -18,8 +18,8 @@
 #include "command_parser.h"
 #include "signal_handler_manager.h"
 
-ArkAngelShell::ArkAngelShell() {
-  shell_.set_name("ArkAngel");
+ArcXpressShell::ArcXpressShell() {
+  shell_.set_name("ArcXpress");
 
   /* Print out title */
   VTR_LOG("\n%s\n", create_arcxpress_title().c_str());
@@ -54,7 +54,7 @@ ArkAngelShell::ArkAngelShell() {
   arcxpress::add_basic_commands(shell_);
 }
 
-int ArkAngelShell::run_command(const char* cmd_line) {
+int ArcXpressShell::run_command(const char* cmd_line) {
   bool gui_mode = false;
   int ret = arcxpress::SignalHandlerManager::set_recover_handler(gui_mode);
   if (0 == ret) {
@@ -68,25 +68,25 @@ int ArkAngelShell::run_command(const char* cmd_line) {
   return ret;
 }
 
-void ArkAngelShell::reset() {
+void ArcXpressShell::reset() {
   /* TODO: reset the shell status */
   /* TODO: reset the data storage */
 }
 
-int ArkAngelShell::start(int argc, char** argv) {
+int ArcXpressShell::start(int argc, char** argv) {
   /* Ensure a clean start */
   reset();
   /* Create the command to launch shell in different modes */
-  openfpga::Command start_cmd("ArkAngel");
+  openfpga::Command start_cmd("ArcXpress");
   /* Add options to openfpga shell interface */
   /* '--interactive', -i': launch the interactive mode */
   openfpga::CommandOptionId opt_interactive =
-    start_cmd.add_option("interactive", false, "Launch ArkAngel in interactive mode");
+    start_cmd.add_option("interactive", false, "Launch ArcXpress in interactive mode");
   start_cmd.set_option_short_name(opt_interactive, "i");
 
   /* '--file', -f': launch the script mode */
   openfpga::CommandOptionId opt_script_mode =
-    start_cmd.add_option("file", false, "Launch ArkAngel in script mode");
+    start_cmd.add_option("file", false, "Launch ArcXpress in script mode");
   start_cmd.set_option_require_value(opt_script_mode, openfpga::OPT_STRING);
   start_cmd.set_option_short_name(opt_script_mode, "f");
 
@@ -105,12 +105,12 @@ int ArkAngelShell::start(int argc, char** argv) {
    * Will exit immediately when fatal errors occurred
    */
   openfpga::CommandOptionId opt_batch_exec = start_cmd.add_option(
-    "batch_execution", false, "Launch ArkAngel in batch mode when running scripts");
+    "batch_execution", false, "Launch ArcXpress in batch mode when running scripts");
   start_cmd.set_option_short_name(opt_batch_exec, "batch");
 
   /* '--version', -v': print version information */
   openfpga::CommandOptionId opt_version =
-    start_cmd.add_option("version", false, "Show ArkAngel version");
+    start_cmd.add_option("version", false, "Show ArcXpress version");
   start_cmd.set_option_short_name(opt_version, "v");
 
   /* '--help', -h': print help desk */
@@ -167,7 +167,7 @@ int ArkAngelShell::start(int argc, char** argv) {
   return 1;
 }
 
-void ArkAngelShell::run_interactive_mode() {
+void ArcXpressShell::run_interactive_mode() {
   bool gui_mode = false;
   arcxpress::SignalHandlerManager::set_sig_handler(gui_mode);
   int ret =
@@ -181,7 +181,7 @@ void ArkAngelShell::run_interactive_mode() {
   }
 }
 
-void ArkAngelShell::run_script_mode(const char* script_file_name, const bool& batch_mode) {
+void ArcXpressShell::run_script_mode(const char* script_file_name, const bool& batch_mode) {
   bool gui_mode = false;
   arcxpress::SignalHandlerManager::set_sig_handler(gui_mode);
   int status = arcxpress::CMD_EXEC_SUCCESS;

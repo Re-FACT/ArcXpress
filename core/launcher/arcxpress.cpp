@@ -1,15 +1,15 @@
 /**
- * aaee - Cross-platform launcher for the arkangel executable.
+ * arcxpress - Cross-platform launcher for the arcxpress executable.
  *
  * Replicates the logic of the original Bash script:
- *   1. Locate the directory that contains this binary  (AAEE_HOME).
- *   2. Optionally prepend <AAEE_HOME>/../lib to the library search path
+ *   1. Locate the directory that contains this binary  (ARCXPRESS_HOME).
+ *   2. Optionally prepend <ARCXPRESS_HOME>/../lib to the library search path
  *      if the directory exists.
- *   3. Optionally prepend <AAEE_HOME>/../env/eda/lib to the library search
+ *   3. Optionally prepend <ARCXPRESS_HOME>/../env/eda/lib to the library search
  *      path (highest priority) ONLY on CentOS / RHEL, and only if the
  *      directory exists.  Detection is done by reading /etc/os-release at
  *      runtime; no compile-time flag is required.
- *   4. Exec  <AAEE_HOME>/arkangel  with fixed args + any args passed by
+ *   4. Exec  <ARCXPRESS_HOME>/arcxpress  with fixed args + any args passed by
  *      the caller.
  *
  * Platform notes
@@ -46,7 +46,7 @@ static std::filesystem::path self_dir() {
 #ifdef _WIN32
   wchar_t buf[MAX_PATH + 1] = {};
   if (GetModuleFileNameW(nullptr, buf, MAX_PATH) == 0) {
-    VTR_LOG_ERROR("aaee: GetModuleFileNameW failed\n");
+    VTR_LOG_ERROR("arcxpress: GetModuleFileNameW failed\n");
     std::exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   return std::filesystem::path(buf).parent_path();
@@ -60,7 +60,7 @@ static std::filesystem::path self_dir() {
   // macOS / BSD: _NSGetExecutablePath or use argv[0] resolution
   // For portability we rely on the caller to set argv[0] correctly.
   // (argv[0] is available in main – see selfDirFromArgv below)
-  VTR_LOG_ERROR("aaee: cannot determine executable path\n");
+  VTR_LOG_ERROR("arcxpress: cannot determine executable path\n");
   std::exit(openfpga::CMD_EXEC_FATAL_ERROR);
 #endif
 }
@@ -158,18 +158,18 @@ static bool isCentOSOrRHEL() {
 // main
 // ---------------------------------------------------------------------------
 int main(int argc, char* argv[]) {
-  // --- 1. Locate AAEE_HOME ------------------------------------------------
-  const std::filesystem::path aaee_home = self_dir();
+  // --- 1. Locate ARCXPRESS_HOME ------------------------------------------------
+  const std::filesystem::path arcxpress_home = self_dir();
 
-  // --- 2. Default lib path: <AAEE_HOME>/../lib ----------------------------
-  const std::filesystem::path root_path = std::filesystem::canonical(aaee_home / "..");
+  // --- 2. Default lib path: <ARCXPRESS_HOME>/../lib ----------------------------
+  const std::filesystem::path root_path = std::filesystem::canonical(arcxpress_home / "..");
   const std::filesystem::path defaultLibPath = root_path / "lib";
   if (std::filesystem::is_directory(defaultLibPath)) {
     VTR_LOG("Include the default lib path\n");
     prepend2env_path(LIB_PATH_VAR, std::filesystem::canonical(defaultLibPath));
   }
 
-  // --- 3. EDA lib path: <AAEE_HOME>/../env/eda/lib (highest priority) -----
+  // --- 3. EDA lib path: <ARCXPRESS_HOME>/../env/eda/lib (highest priority) -----
   //        Only applied on CentOS / RHEL.
   const std::filesystem::path edaLibPath = root_path / "env" / "eda" / "lib";
   if (isCentOSOrRHEL()) {
@@ -179,15 +179,15 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  // --- 4. Build the arkangel command line ---------------------------------
-  //   Fixed: --root_path <AAEE_HOME>/../  --boot_config <AAEE_HOME>/../etc/boot_config/install.xml
-  //   Variadic: everything the user passed to aaee
-  // TODO: use constants for arkangel executable
+  // --- 4. Build the arcxpress command line ---------------------------------
+  //   Fixed: --root_path <ARCXPRESS_HOME>/../  --boot_config <ARCXPRESS_HOME>/../etc/boot_config/install.xml
+  //   Variadic: everything the user passed to arcxpress
+  // TODO: use constants for arcxpress executable
 
 #ifdef _WIN32
-  const std::filesystem::path arkangelExe = aaee_home / "arkangel.exe";
+  const std::filesystem::path arcxpressExe = arcxpress_home / "arcxpress.exe";
 #else
-  const std::filesystem::path arkangelExe = aaee_home / "arkangel";
+  const std::filesystem::path arcxpressExe = arcxpress_home / "arcxpress";
 #endif
 
 #ifdef _WIN32
@@ -214,8 +214,8 @@ int main(int argc, char* argv[]) {
     return out;
   };
 
-  // TODO: use constants for arkangel options
-  std::string cmdLine = quoteArg(arkangelExe.string());
+  // TODO: use constants for arcxpress options
+  std::string cmdLine = quoteArg(arcxpressExe.string());
   cmdLine += " --root_path " + quoteArg(root_path.string());
   cmdLine += " --boot_config " + quoteArg(boot_config_fpath.string());
 
@@ -235,7 +235,7 @@ int main(int argc, char* argv[]) {
 
   if (!CreateProcessW(nullptr, wCmdLine.data(), nullptr, nullptr, /*inheritHandles=*/TRUE, 0,
                       nullptr, nullptr, &si, &pi)) {
-    VTR_LOG_ERROR("aaee: failed to launch arkangel (error %ld)\n", GetLastError());
+    VTR_LOG_ERROR("arcxpress: failed to launch arcxpress (error %ld)\n", GetLastError());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
@@ -250,7 +250,7 @@ int main(int argc, char* argv[]) {
 #else
   // POSIX: build argv array and execv (replaces the current process image)
   std::vector<std::string> args;
-  args.push_back(arkangelExe.string());
+  args.push_back(arcxpressExe.string());
   args.push_back("--root_path");
   args.push_back(root_path.string());
   args.push_back("--boot_config");
@@ -263,10 +263,10 @@ int main(int argc, char* argv[]) {
   for (auto& s : args) cArgs.push_back(const_cast<char*>(s.c_str()));
   cArgs.push_back(nullptr);
 
-  execv(arkangelExe.c_str(), cArgs.data());
+  execv(arcxpressExe.c_str(), cArgs.data());
 
   // execv only returns on error
-  VTR_LOG_ERROR("aaee: execv failed: %s\n", std::strerror(errno));
+  VTR_LOG_ERROR("arcxpress: execv failed: %s\n", std::strerror(errno));
   return openfpga::CMD_EXEC_FATAL_ERROR;
 #endif
 }

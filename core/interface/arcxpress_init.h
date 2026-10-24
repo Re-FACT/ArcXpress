@@ -1,13 +1,9 @@
-#ifndef ARCXPRESS_INIT_H
-#define ARCXPRESS_INIT_H
+#pragma once
 
 /********************************************************************
  * Include header files that are required by function declaration
  *******************************************************************/
 #include "arcxpress_context.h"
-#ifdef ARCXPRESS_LICENSED_BUILD
-#include "license_manager.h"
-#endif
 /********************************************************************
  * Function declaration
  *******************************************************************/
@@ -18,5 +14,3 @@ namespace arcxpress {
 int arcxpress_init(ArkangelContext& arcxpress_ctx, const std::string& root_path,
                   const std::string& boot_cfg_file);
 } /* end namespace arcxpress */
-
-#endif

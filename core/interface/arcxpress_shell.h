@@ -1,6 +1,4 @@
-#ifndef ARCXPRESS_SHELL_H
-#define ARCXPRESS_SHELL_H
-
+#pragma once
 #include <string>
 
 #include "arcxpress_context.h"
@@ -8,13 +6,13 @@
 
 /********************************************************************
  * This is a shell class built on top of the general-purpose shell
- * It is dedicated for the usage of ArkAngel engines
+ * It is dedicated for the usage of ArcXpress engines
  * - It includes the data storage required
- * - It includes all the commands available in ArkAngel
+ * - It includes all the commands available in ArcXpress
  *******************************************************************/
-class ArkAngelShell {
+class ArcXpressShell {
  public: /* Contructors */
-  ArkAngelShell();
+  ArcXpressShell();
 
  public: /* Mutators */
   /* Execute a specific command with options in a line, which is available in
@@ -40,14 +38,12 @@ class ArkAngelShell {
   void reset();
 
   /* allow arkangel context to be querried */
-  const ArkangelContext* arcxpress_context() { return &arcxpress_ctx_; }
+  const ArcxpressContext* arcxpress_context() { return &arcxpress_ctx_; }
 
   void run_interactive_mode();
   void run_script_mode(const char* script_file_name, const bool& batch_mode);
 
  private: /* Internal data */
-  openfpga::Shell<ArkangelContext> shell_;
-  ArkangelContext arcxpress_ctx_;
+  openfpga::Shell<ArcxpressContext> shell_;
+  ArcxpressContext arcxpress_ctx_;
 };
-
-#endif
