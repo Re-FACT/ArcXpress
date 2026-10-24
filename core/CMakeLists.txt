@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project("arcxpress_shell")
+project("ax_shell")
 
 file(GLOB_RECURSE EXEC_SOURCE main.cpp)
 file(GLOB_RECURSE LAUNCHER_SOURCE arcxpress.cpp)
@@ -14,12 +14,12 @@ list(REMOVE_ITEM LIB_SOURCES ${LAUNCHER_SOURCE})
 
 if (ARCXPRESS_WITH_SWIG)
 # SWIG library
-  SwigLib(NAME      arcxpress_shell
+  SwigLib(NAME      ax_shell
           NAMESPACE std
           LANGUAGE  tcl
-          I_FILE    interface/arcxpress_shell.i)
-  target_include_directories(arcxpress_shell PUBLIC ${LIB_INCLUDE_DIRS})
-  target_link_libraries(arcxpress_shell
+          I_FILE    interface/ax_shell.i)
+  target_include_directories(ax_shell PUBLIC ${LIB_INCLUDE_DIRS})
+  target_link_libraries(ax_shell
                         libarcxpress)
 endif()
 
@@ -45,18 +45,18 @@ target_link_libraries(libarcxpress
                       libopenfpga)
 
 #Create the test executable
-add_executable(arcxpress_shell ${EXEC_SOURCE})
-target_link_libraries(arcxpress_shell libarcxpress)
+add_executable(ax_shell ${EXEC_SOURCE})
+target_link_libraries(ax_shell libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
 if (MSVC)
-    target_compile_options(arcxpress_shell PRIVATE "/showIncludes")
+    target_compile_options(ax_shell PRIVATE "/showIncludes")
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARCXPRESS_USES_IPO arcxpress_shell INTERPROCEDURAL_OPTIMIZATION)
+get_target_property(ARCXPRESS_USES_IPO ax_shell INTERPROCEDURAL_OPTIMIZATION)
 if (ARCXPRESS_USES_IPO)
-    set_property(TARGET arcxpress_shell APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
+    set_property(TARGET ax_shell APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
 # Create launcher
@@ -75,7 +75,7 @@ if (ARCXPRESS_USES_IPO)
 endif()
 
 # Install targets
-install(TARGETS libarcxpress arcxpress arcxpress_shell
+install(TARGETS libarcxpress arcxpress ax_shell
         DESTINATION bin
         COMPONENT engine_package
 )
