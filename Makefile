@@ -44,7 +44,7 @@ else
 CMAKE_FLAGS += -DARCXPRESS_WITH_GUI=OFF
 endif
 
-INSTALL_DOC ?= ON
+INSTALL_DOC ?= OFF
 INSTALL_DOC := $(shell echo ${INSTALL_DOC} | tr '[:upper:]' '[lower]')
 ifeq ($(INSTALL_DOC),OFF)
 CMAKE_FLAGS += -DINSTALLER_WITH_DOC=OFF
