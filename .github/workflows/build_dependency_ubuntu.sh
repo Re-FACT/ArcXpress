@@ -124,8 +124,3 @@ elif [ "$(lsb_release -rs)" = "26.04" ]; then
         clang-20 \
         clang-format-20
 fi
-```[cite: 1]
-
-### What was changed:
-1. **Repository Update Check**: Added an `elif [ "$(lsb_release -rs)" = "26.04" ]; then apt-get update` branch to correctly handle package index syncing on Ubuntu 26.04[cite: 1].
-2. **Version-Specific Package Block**: Appended a conditional install block for Ubuntu 26.04 mapping out standard toolchain packages (`exuberant-ctags`, `qtbase5-dev`, matching newer default toolchain versions like GCC 14 and Clang 20 typically aligned with or available for that release cycle)[cite: 1]. Feel free to adjust the specific compiler/clang versions in that block if your project requires alternative toolchain versions.
