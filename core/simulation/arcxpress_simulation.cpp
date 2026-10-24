@@ -41,8 +41,9 @@ namespace arcxpress {
  * - Collect options from strategy manager
  *******************************************************************/
 
-int run_app_hdl_simulation(openfpga::Shell<ArcxpressContext>* shell, ArcxpressContext& arcxpress_ctx,
-                           const openfpga::Command& cmd, const openfpga::CommandContext& cmd_ctx) {
+int run_app_hdl_simulation(openfpga::Shell<ArcxpressContext>* shell,
+                           ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
+                           const openfpga::CommandContext& cmd_ctx) {
   vtr::Timer sim_runtime;
   openfpga::CommandOptionId opt_benchmark_name = cmd.option("benchmark");
   openfpga::CommandOptionId opt_simulator = cmd.option("simulator");

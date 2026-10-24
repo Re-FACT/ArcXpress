@@ -180,8 +180,9 @@ int main(int argc, char* argv[]) {
   }
 
   // --- 4. Build the arcxpress command line ---------------------------------
-  //   Fixed: --root_path <ARCXPRESS_HOME>/../  --boot_config <ARCXPRESS_HOME>/../etc/boot_config/install.xml
-  //   Variadic: everything the user passed to arcxpress
+  //   Fixed: --root_path <ARCXPRESS_HOME>/../  --boot_config
+  //   <ARCXPRESS_HOME>/../etc/boot_config/install.xml Variadic: everything the user passed to
+  //   arcxpress
   // TODO: use constants for arcxpress executable
 
 #ifdef _WIN32

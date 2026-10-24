@@ -11,5 +11,5 @@ int main(int argc, char** argv) {
   int status = 0;
 
   return arcxpress::generate_pin_table_naming_rules(std::string(argv[1]), std::string(argv[2]),
-                                                   true);
+                                                    true);
 }

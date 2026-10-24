@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
   pugi::xml_document out_xml;
   pugi::xml_node root_node = out_xml.append_child(arcxpress::XML_VPR_CONSTRAINT_FILE_ROOT_NAME);
   arcxpress::generate_global_signal_vpr_constraint_file(cell_map_file, pcf_file, clock_loc_map_file,
-                                                       root_node, final_pcf_file);
+                                                        root_node, final_pcf_file);
   out_xml.save_file(vpr_constr_file.c_str());
 
   return 0;

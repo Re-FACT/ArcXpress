@@ -11,5 +11,5 @@ int main(int argc, char** argv) {
   int status = 0;
 
   return arcxpress::generate_tile_module_names(std::string(argv[1]), std::string(argv[2]),
-                                              std::string(argv[3]), std::string(argv[4]), true);
+                                               std::string(argv[3]), std::string(argv[4]), true);
 }
