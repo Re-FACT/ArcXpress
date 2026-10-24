@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 
-project("libarkangelutil")
+project("libarcxpressutil")
 
 # Find Graphviz (set to OPTIONAL to skip if not found)
-if (ARKANGEL_WITH_GRAPHVIZ)
+if (ARCXPRESS_WITH_GRAPHVIZ)
   find_package(Graphviz REQUIRED)
   if (Graphviz_FOUND)
     message(STATUS "Graphviz version is : ${Graphviz_VERSION}")
@@ -20,29 +20,29 @@ if (ARKANGEL_WITH_GRAPHVIZ)
 endif()
 
 # Version info
-set(ARKANGEL_VERSION_FILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/arkangel_version.cpp.in)
-set(ARKANGEL_VERSION_FILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/arkangel_version.cpp)
+set(ARCXPRESS_VERSION_FILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/arcxpress_version.cpp.in)
+set(ARCXPRESS_VERSION_FILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/arcxpress_version.cpp)
 
 # Compiler info
-set(ARKANGEL_COMPILER_INFO "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} on ${CMAKE_SYSTEM} ${CMAKE_SYSTEM_PROCESSOR}")
-set(ARKANGEL_BUILD_INFO "${CMAKE_BUILD_TYPE}")
+set(ARCXPRESS_COMPILER_INFO "${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION} on ${CMAKE_SYSTEM} ${CMAKE_SYSTEM_PROCESSOR}")
+set(ARCXPRESS_BUILD_INFO "${CMAKE_BUILD_TYPE}")
 
 # Set default version numbers in case not specified
-if (NOT DEFINED ARKANGEL_VERSION_MAJOR)
-    set(ARKANGEL_VERSION_MAJOR 0)
+if (NOT DEFINED ARCXPRESS_VERSION_MAJOR)
+    set(ARCXPRESS_VERSION_MAJOR 0)
 endif()
 
-if (NOT DEFINED ARKANGEL_VERSION_MINOR)
-    set(ARKANGEL_VERSION_MINOR 0)
+if (NOT DEFINED ARCXPRESS_VERSION_MINOR)
+    set(ARCXPRESS_VERSION_MINOR 0)
 endif()
 
-if (NOT DEFINED ARKANGEL_VERSION_PATCH)
-    set(ARKANGEL_VERSION_PATCH 0)
+if (NOT DEFINED ARCXPRESS_VERSION_PATCH)
+    set(ARCXPRESS_VERSION_PATCH 0)
 endif()
 
-set(ARKANGEL_BUILD_INFO "${ARKANGEL_BUILD_INFO} ASSERT_LEVEL=${VTR_ASSERT_LEVEL}")
+set(ARCXPRESS_BUILD_INFO "${ARCXPRESS_BUILD_INFO} ASSERT_LEVEL=${VTR_ASSERT_LEVEL}")
 
-# We always update the arkangel_version.cpp file every time the project is built, 
+# We always update the arcxpress_version.cpp file every time the project is built, 
 # to ensure the git revision and dirty status are up to date.
 #
 # We need to do this in two stages:
@@ -53,26 +53,26 @@ set(ARKANGEL_BUILD_INFO "${ARKANGEL_BUILD_INFO} ASSERT_LEVEL=${VTR_ASSERT_LEVEL}
 # 2) The custom command depends on the touched version input file and generates the processed 
 #    version file, with updated values. The custom command uses the configure_version.cmake 
 #    script to generate the up-to-date openfpga_version.cpp
-if (ARKANGEL_WITH_VERSION) 
-    add_custom_target(arkangel_version ALL
-        COMMAND ${CMAKE_COMMAND} -E touch ${ARKANGEL_VERSION_FILE_IN})
+if (ARCXPRESS_WITH_VERSION) 
+    add_custom_target(arcxpress_version ALL
+        COMMAND ${CMAKE_COMMAND} -E touch ${ARCXPRESS_VERSION_FILE_IN})
 
-    add_custom_command(OUTPUT ${ARKANGEL_VERSION_FILE_OUT}
+    add_custom_command(OUTPUT ${ARCXPRESS_VERSION_FILE_OUT}
         COMMAND ${CMAKE_COMMAND} 
-                        -D IN_FILE=${ARKANGEL_VERSION_FILE_IN}
-                        -D OUT_FILE=${ARKANGEL_VERSION_FILE_OUT}
-                        -D ARKANGEL_VERSION_MAJOR=${ARKANGEL_VERSION_MAJOR}
-                        -D ARKANGEL_VERSION_MINOR=${ARKANGEL_VERSION_MINOR}
-                        -D ARKANGEL_VERSION_PATCH=${ARKANGEL_VERSION_PATCH}
-                        -D ARKANGEL_VERSION_PRERELEASE=${ARKANGEL_VERSION_PRERELEASE}
-                        -D ARKANGEL_COMPILER_INFO=${ARKANGEL_COMPILER_INFO}
-                        -D ARKANGEL_BUILD_INFO=${ARKANGEL_BUILD_INFO}
+                        -D IN_FILE=${ARCXPRESS_VERSION_FILE_IN}
+                        -D OUT_FILE=${ARCXPRESS_VERSION_FILE_OUT}
+                        -D ARCXPRESS_VERSION_MAJOR=${ARCXPRESS_VERSION_MAJOR}
+                        -D ARCXPRESS_VERSION_MINOR=${ARCXPRESS_VERSION_MINOR}
+                        -D ARCXPRESS_VERSION_PATCH=${ARCXPRESS_VERSION_PATCH}
+                        -D ARCXPRESS_VERSION_PRERELEASE=${ARCXPRESS_VERSION_PRERELEASE}
+                        -D ARCXPRESS_COMPILER_INFO=${ARCXPRESS_COMPILER_INFO}
+                        -D ARCXPRESS_BUILD_INFO=${ARCXPRESS_BUILD_INFO}
                         -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/configure_version.cmake
-        MAIN_DEPENDENCY ${ARKANGEL_VERSION_FILE_IN}
+        MAIN_DEPENDENCY ${ARCXPRESS_VERSION_FILE_IN}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         VERBATIM)
 else()
-    configure_file(${ARKANGEL_VERSION_FILE_IN} ${ARKANGEL_VERSION_FILE_OUT})
+    configure_file(${ARCXPRESS_VERSION_FILE_IN} ${ARCXPRESS_VERSION_FILE_OUT})
 endif()
 
 # Find source files
@@ -83,40 +83,40 @@ file(GLOB_RECURSE LIB_HEADERS */*.h)
 files_to_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 
 # Add version file to the sources
-list(APPEND LIB_SOURCES ${ARKANGEL_VERSION_FILE_OUT})
+list(APPEND LIB_SOURCES ${ARCXPRESS_VERSION_FILE_OUT})
 
 # If Graphviz is not found, remove the Graphviz-related source file
 #if (NOT USE_GRAPHVIZ)
-#    list(REMOVE_ITEM LIB_SOURCES src/arkangel_graphviz_utils.cpp)
+#    list(REMOVE_ITEM LIB_SOURCES src/arcxpress_graphviz_utils.cpp)
 #endif()
 
 # Create the library
-add_library(libarkangelutil STATIC
+add_library(libarcxpressutil STATIC
             ${LIB_SOURCES}
             ${LIB_HEADERS})
 
 # Include directories for the library
-target_include_directories(libarkangelutil PUBLIC ${LIB_INCLUDE_DIRS})
+target_include_directories(libarcxpressutil PUBLIC ${LIB_INCLUDE_DIRS})
 if (Graphviz_FOUND)
-  target_include_directories(libarkangelutil PUBLIC ${Graphviz_INCLUDE_DIRS})
-  target_include_directories(libarkangelutil PRIVATE ${Graphviz_PARENT_INCLUDE_DIRS})
+  target_include_directories(libarcxpressutil PUBLIC ${Graphviz_INCLUDE_DIRS})
+  target_include_directories(libarcxpressutil PRIVATE ${Graphviz_PARENT_INCLUDE_DIRS})
 endif()
 
 # Pass the USE_GRAPHVIZ macro to all targets in the project
 if (Graphviz_FOUND)
-  target_compile_definitions(libarkangelutil PUBLIC USE_GRAPHVIZ)
+  target_compile_definitions(libarcxpressutil PUBLIC USE_GRAPHVIZ)
 endif()
 
 # Avoid 'lib' prefix in the target
-set_target_properties(libarkangelutil PROPERTIES PREFIX "")
+set_target_properties(libarcxpressutil PROPERTIES PREFIX "")
 
 # Ensure version is up-to-date by requiring 'version' to be run first
-if (ARKANGEL_WITH_VERSION) 
-    add_dependencies(libarkangelutil arkangel_version)
+if (ARCXPRESS_WITH_VERSION) 
+    add_dependencies(libarcxpressutil arcxpress_version)
 endif()
 
 # Specify link-time dependencies
-target_link_libraries(libarkangelutil
+target_link_libraries(libarcxpressutil
                       libopenfpgautil
                       libopenfpga
                       libsignalhandlermanager
@@ -124,10 +124,10 @@ target_link_libraries(libarkangelutil
 
 # If Graphviz is enabled, link Graphviz libraries
 if (Graphviz_FOUND)
-  target_link_libraries(libarkangelutil ${Graphviz_LIBRARIES})
+  target_link_libraries(libarcxpressutil ${Graphviz_LIBRARIES})
 endif()
 
 # Install the target
-install(TARGETS libarkangelutil
+install(TARGETS libarcxpressutil
         DESTINATION bin
         COMPONENT engine_package)

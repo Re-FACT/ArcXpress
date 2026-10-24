@@ -1,5 +1,5 @@
-#ifndef ARKANGEL_VERSION_H
-#define ARKANGEL_VERSION_H
+#ifndef ARCXPRESS_VERSION_H
+#define ARCXPRESS_VERSION_H
 #include <cstddef>
 
 namespace arcxpress {
