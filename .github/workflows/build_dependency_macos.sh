@@ -64,6 +64,11 @@ brew install \
 echo "--------------------------------------------------"
 echo "Configuring environment variables..."
 
+# Force Homebrew's python@3.14 to take precedence in PATH
+if [ -d "${BREW_PREFIX}/opt/python@3.14/bin" ]; then
+    export PATH="${BREW_PREFIX}/opt/python@3.14/bin:${PATH}"
+fi
+
 # Apple Clang
 export CC="$(xcrun --find clang)"
 export CXX="$(xcrun --find clang++)"
