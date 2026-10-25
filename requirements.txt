@@ -7,8 +7,8 @@ html-table
 click
 black
 pylint
-cocotb==2.0.0
-pyverilog==1.3.0
+cocotb>=2.0.0
+pyverilog>=1.3.0
 seaborn==0.13.2
 
 # Special version of spydrnet
