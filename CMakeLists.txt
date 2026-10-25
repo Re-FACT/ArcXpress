@@ -116,13 +116,18 @@ include(CheckCXXCompilerFlag)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF) #No compiler specific extensions
-if(MINGW OR CYGWIN)
+
+
+# Build 3rd party first
+# Yosys may require the build
+if(DEFINED ENV{MSYSTEM})
     set(CMAKE_C_EXTENSIONS ON)
     set(CMAKE_CXX_EXTENSIONS ON)
 endif()
-
-# Build 3rd party first
 add_subdirectory(thirdparty/Yosuf)
+  if(DEFINED ENV{MSYSTEM})
+    set(BUILD_SHARED_LIBS ON)
+  endif()
 add_subdirectory(thirdparty/OpenFPGA)
 
 #
