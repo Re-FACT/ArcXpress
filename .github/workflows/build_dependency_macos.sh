@@ -59,7 +59,7 @@ brew install \
     googletest \
     gawk \
     llvm \
-    qt
+    qt@5
 
 echo "--------------------------------------------------"
 echo "Configuring environment variables..."
@@ -86,11 +86,11 @@ if [ -d "${BREW_PREFIX}/opt/openssl@3" ]; then
     export CPPFLAGS="-I${BREW_PREFIX}/opt/openssl@3/include ${CPPFLAGS:-}"
 fi
 
-# Qt6 Configuration
-if [ -d "${BREW_PREFIX}/opt/qt" ]; then
-    export QT_PREFIX="${BREW_PREFIX}/opt/qt"
+# Qt5 Configuration
+if [ -d "${BREW_PREFIX}/opt/qt@5" ]; then
+    export QT_PREFIX="${BREW_PREFIX}/opt/qt@5"
 else
-    export QT_PREFIX="$(brew --prefix qt)"
+    export QT_PREFIX="$(brew --prefix qt@5)"
 fi
 export PATH="${QT_PREFIX}/bin:${PATH}"
 export CMAKE_PREFIX_PATH="${QT_PREFIX}:${CMAKE_PREFIX_PATH:-}"
