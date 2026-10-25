@@ -19,6 +19,14 @@ BUILD_TYPE ?= release
 BUILD_TYPE := $(shell echo ${BUILD_TYPE} | tr '[:upper:]' '[lower]')
 # Trim any _pgo or _strict in the build type name (since it would not match any of CMake's standard build types
 CMAKE_BUILD_TYPE := $(shell echo ${BUILD_TYPE} | sed 's/_\?pgo//' | sed 's/_\?strict//')
+CMAKE_BUILD_CONFIG_VAL = Release
+ifeq ($(CMAKE_BUILD_TYPE), release)
+CMAKE_BUILD_CONFIG_VAL = Release
+else ifeq ($(CMAKE_BUILD_TYPE), debug)
+CMAKE_BUILD_CONFIG_VAL = Debug
+else
+$(error Invalid BUILD type '$(BUILD_TYPE)'. Allowed values are 'release' or 'debug')
+endif
 
 # Set build with graphviz or not
 BUILD_WITH_GRAPHVIZ ?= ON
