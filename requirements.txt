@@ -4,7 +4,7 @@ humanize
 coloredlogs
 # Python linter and formatter
 html-table
-cocotb>=2.0.0
+#cocotb>=2.0.0
 pyverilog>=1.3.0
 #seaborn==0.13.2
 
