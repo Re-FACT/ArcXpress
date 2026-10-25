@@ -36,11 +36,11 @@ import sphinxcontrib.rsvgconverter
 # -- Project information -----------------------------------------------------
 
 project = u'ArcXpress'
-copyright = u'2025, RapidFlex'
-author = u'RapidFlex'
-manpage_url = u'https://rapid-flex.com'
+copyright = u'2026, ReFACT'
+author = u'ReFACT'
+manpage_url = u'https://refact-fpga.org'
 # Logo for PDF build at front-page
-latex_logo = 'appendix/rf_logo.jpeg' 
+latex_logo = 'appendix/refact_logo.jpeg' 
 
 # The short X.Y version
 with open("VERSION.md") as ver_f:
@@ -207,8 +207,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'arkangel.tex', u'ArcXpress Documentation',
-     u'RapidFlex', 'manual'),
+    (master_doc, 'arcxpress.tex', u'ArcXpress Documentation',
+     u'ReFACT', 'manual'),
 ]
 
 
@@ -217,7 +217,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'arkangel', u'ArcXpress Documentation',
+    (master_doc, 'arcxpress', u'ArcXpress Documentation',
      [author], 1)
 ]
 
@@ -228,8 +228,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'arkangel', u'ArcXpress Documentation',
-     author, 'RapidFlex', 'RapidFlex Software',
+    (master_doc, 'arcxpress', u'ArcXpress Documentation',
+     author, 'ReFACT', 'ReFACT Software',
      'Miscellaneous'),
 ]
 
