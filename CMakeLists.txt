@@ -117,6 +117,10 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF) #No compiler specific extensions
 
+# Build 3rd party first
+add_subdirectory(thirdparty/Yosuf)
+add_subdirectory(thirdparty/OpenFPGA)
+
 #
 # Interprocedural optimization
 #
@@ -272,8 +276,6 @@ endif()
 
 # Sub-projects to apply current complier settings
 #
-add_subdirectory(thirdparty/Yosuf)
-add_subdirectory(thirdparty/OpenFPGA)
 add_subdirectory(libs)
 add_subdirectory(core)
 
