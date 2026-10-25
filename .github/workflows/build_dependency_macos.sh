@@ -51,7 +51,7 @@ brew install \
     readline \
     libxml2 \
     ncurses \
-    python \
+    python@3.14 \
     tcl-tk \
     swig \
     graphviz \
