@@ -20,19 +20,15 @@ set_target_properties(libfilesignature PROPERTIES PREFIX "") #Avoid extra 'lib' 
 # For version > 3.0.0, set a flag as new API should be used
 # For version < 3.0.0, set a flag as old API should be used
 find_package(OpenSSL REQUIRED)
-if(OPENSSL_FOUND)
-    message(STATUS "OpenSSL found")
-    include_directories(${OPENSSL_INCLUDE_DIRS})
-    message(STATUS "OpenSSL version: ${OPENSSL_VERSION}")
-else() 
-  message(FATAL_ERROR "OpenSSL not found")
-endif()
-find_package(OpenSSL 3.0.0)
-if(OPENSSL_FOUND)
-  message(STATUS "Will use OpenSSL >3 APIs")
-  add_definitions(-DUSE_OPENSSL3_API)
+message(STATUS "OpenSSL version: ${OPENSSL_VERSION}")
+message(STATUS "OpenSSL include directory: ${OPENSSL_INCLUDE_DIR}")
+message(STATUS "OpenSSL libraries: ${OPENSSL_LIBRARIES}")
+# Select API according to the detected OpenSSL version
+if(OPENSSL_VERSION VERSION_GREATER_EQUAL "3.0.0")
+    message(STATUS "Will use OpenSSL >= 3.0 APIs")
+    target_compile_definitions(libfilesignature PRIVATE USE_OPENSSL3_API)
 else()
-  message(STATUS "Will use OpenSSL <3 APIs")
+    message(STATUS "Will use OpenSSL < 3.0 APIs")
 endif()
 
 #Specify link-time dependancies
@@ -42,6 +38,9 @@ target_link_libraries(libfilesignature
                       yaml-cpp
                       libopenfpgashell
                       ${OPENSSL_LIBRARIES})
+if (APPLE)
+target_link_libraries(libfilesignature OpenSSL::Crypto)
+endif()
 
 #Create the test executable
 foreach(testsourcefile ${EXEC_SOURCES})
