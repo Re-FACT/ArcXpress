@@ -735,13 +735,13 @@ bool ArchEvalManager::valid_script_type(const ArchEvalManager::e_script_type& f_
 
 bool ArchEvalManager::valid_openfpga_script_type(
   const ArchEvalManager::e_script_type& f_type) const {
-  return size_t(ArchEvalManager::e_script_type::OPENFPGA_SCRIPT_BITGEN) <= size_t(f_type) <
-         size_t(ArchEvalManager::e_script_type::NUM_TYPES);
+  return size_t(ArchEvalManager::e_script_type::OPENFPGA_SCRIPT_BITGEN) <= size_t(f_type) &&
+         size_t(f_type) < size_t(ArchEvalManager::e_script_type::NUM_TYPES);
 }
 
 bool ArchEvalManager::valid_yosys_script_type(const ArchEvalManager::e_script_type& f_type) const {
-  return size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SWEEP_K) <= size_t(f_type) <=
-         size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SYNTH);
+  return size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SWEEP_K) <= size_t(f_type) &&
+         size_t(f_type) <= size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SYNTH);
 }
 
 bool ArchEvalManager::valid_file_type(const ArchEvalManager::e_file_type& f_type) const {
