@@ -1,14 +1,14 @@
-ArkAngel Shell
+ArcXpress Shell
 --------------
 
-.. _arkangel_shell:
-   ArkAngel Shell
+.. _arcxpress_shell:
+   ArcXpress Shell
  
 .. toctree::
    :maxdepth: 2
 
-   launch_arkangel_shell
+   launch_arcxpress_shell
 
-   arkangel_script
+   arcxpress_script
   
-   arkangel_commands/index
+   arcxpress_commands/index

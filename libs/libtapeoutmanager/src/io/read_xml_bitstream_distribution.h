@@ -9,8 +9,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_bitstream_distribution(const std::string& fname, BitstreamDistribution& bit_dist);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

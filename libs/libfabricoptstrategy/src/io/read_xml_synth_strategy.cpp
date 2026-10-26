@@ -22,7 +22,7 @@
 #include "synth_strategy_xml_constants.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_strategy(pugi::xml_node& xml_node, const pugiutil::loc_data& loc_data,
                              FabricSynthStrategy& syn_strtg, size_t& num_defaults,
@@ -159,4 +159,4 @@ int read_xml_synth_strategy(const char* fname, FabricSynthStrategy& syn_strtg,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

@@ -8,7 +8,7 @@
 #include "read_yaml_tile_ref.h"
 #include "tile_qor.h"
 #include "tile_ref.h"
-namespace arkangel {
+namespace arcxpress {
 std::vector<std::vector<int>> parseToVector(const std::vector<std::string>& input) {
   std::vector<std::vector<int>> result;
   for (const std::string& s_raw : input) {
@@ -201,14 +201,14 @@ int init_floorplan_params_with_yaml_file(const char* config_file,
 
 // read qor file and store the information into tile_ref and tile_qor
 int read_qor_file(const char* tile_ref_file, const char* tile_qor_csv_file,
-                  arkangel::TileQor& tile_qor) {
-  arkangel::TileRef tile_ref;
-  int status = arkangel::read_yaml_tile_ref(tile_ref_file, tile_ref, true);
+                  arcxpress::TileQor& tile_qor) {
+  arcxpress::TileRef tile_ref;
+  int status = arcxpress::read_yaml_tile_ref(tile_ref_file, tile_ref, true);
   if (status) {
     VTR_LOG_ERROR("Failed to read tile reference file!");
     VTR_ASSERT(status == 0);
   }
-  tile_qor = arkangel::TileQor(tile_ref);
+  tile_qor = arcxpress::TileQor(tile_ref);
 
   try {
     rapidcsv::Document csvFile(tile_qor_csv_file, rapidcsv::LabelParams(-1, -1));  // no header
@@ -234,4 +234,4 @@ int read_qor_file(const char* tile_ref_file, const char* tile_qor_csv_file,
   // finshed reading qor file
   return 0;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

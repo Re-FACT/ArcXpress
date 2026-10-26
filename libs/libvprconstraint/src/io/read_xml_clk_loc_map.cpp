@@ -15,7 +15,7 @@
 #include "vtr_time.h"
 #include "vtr_vector.h"
 #include "write_xml_utils.h"
-namespace arkangel {
+namespace arcxpress {
 /* get the global signal ports info from clock_loc_map.xml */
 int set_up_global_ports(std::string clock_loc_map_file, GlobalPortLoc& global_port_loc) {
   /* Parse the file */
@@ -53,4 +53,4 @@ int set_up_global_ports(std::string clock_loc_map_file, GlobalPortLoc& global_po
   }
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

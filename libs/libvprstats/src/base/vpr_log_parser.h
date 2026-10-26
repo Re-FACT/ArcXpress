@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class VprLogParser {
@@ -78,4 +78,4 @@ class VprLogParser {
   mutable bool result_is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -4,7 +4,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* eFPGA architecture template file syntax */
 constexpr const char* XML_TAPEOUT_ARCH_ROOT_NODE_NAME = "efpga_arch_template";
@@ -83,4 +83,4 @@ constexpr const char* XML_TAPEOUT_ARCH_IO_SETTINGS_IO_TYPE_NODE_NAME = "io_type"
 constexpr const char* XML_TAPEOUT_ARCH_IO_SETTINGS_IO_TYPE_ATTRIBUTE_NAME = "name";
 constexpr const char* XML_TAPEOUT_ARCH_IO_SETTINGS_IO_TYPE_ATTRIBUTE_SIDE = "side";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

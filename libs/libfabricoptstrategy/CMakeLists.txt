@@ -25,7 +25,7 @@ target_link_libraries(libfabricoptstrategy
                       libtilenaming
                       yaml-cpp
                       libpugiutil
-                      libarkangelutil
+                      libarcxpressutil
                       libtableprinter)
 
 #Create the test executable

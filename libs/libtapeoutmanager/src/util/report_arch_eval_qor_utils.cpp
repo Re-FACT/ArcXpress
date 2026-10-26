@@ -16,7 +16,7 @@
 #include "report_arch_eval_qor_utils.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int report_pre_arch_qor_to_csv_file(const std::string& fname, const ArchEvalManager& ae_mgr) {
   return ae_mgr.report_pre_arch_qor_to_csv_file(fname);
@@ -27,4 +27,4 @@ int report_arch_eval_qor_to_csv_file(const std::string& fname, const ArchEvalMan
   return ae_mgr.gen_report_bitgen_qor(fname, corners, verbose);
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

@@ -5,7 +5,7 @@
 #include "read_xml_io_coordinates.h"
 #include "write_xml_pin_table_naming_rules.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Generate a pin table naming rule based on the input I/O coordinates. */
 int generate_pin_table_naming_rules(const std::string& io_coord_fname, const std::string& out_fname,
@@ -31,4 +31,4 @@ int generate_pin_table_naming_rules(const std::string& io_coord_fname, const std
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

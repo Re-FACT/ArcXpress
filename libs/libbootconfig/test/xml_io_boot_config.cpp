@@ -11,14 +11,14 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc > 2);
   int status = 0;
 
-  arkangel::BootConfig boot_cfg;
+  arcxpress::BootConfig boot_cfg;
 
   /* Last arg is to output file. All the others except the first are the input files */
 
   /* Parse from an XML file */
   for (size_t iarg = 1; iarg < argc - 1; ++iarg) {
     VTR_LOG("Load the boot configuration data to an XML file: %s.\n", argv[iarg]);
-    status = arkangel::read_xml_boot_config(argv[iarg], boot_cfg);
+    status = arcxpress::read_xml_boot_config(argv[iarg], boot_cfg);
     if (0 != status) {
       return status;
     }
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
   }
 
   VTR_LOG("Write the boot configuration data to an XML file: %s.\n", argv[argc - 1]);
-  status = arkangel::write_xml_boot_config(argv[argc - 1], boot_cfg);
+  status = arcxpress::write_xml_boot_config(argv[argc - 1], boot_cfg);
 
   return status;
 }

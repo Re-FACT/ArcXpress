@@ -10,7 +10,7 @@
 #include "rapidcsv.h"
 #include "vtr_log.h"
 
-namespace arkangel {
+namespace arcxpress {
 bool TablePrinter::is_csv_file(const std::string& file_path) const {
   return std::filesystem::path(file_path).extension() == ".csv";
 }
@@ -178,4 +178,4 @@ void TablePrinter::print_row(const std::vector<std::string>& row, const std::vec
     ofs << DELIM_ << std::endl;
   }
 }
-}  // namespace arkangel
+}  // namespace arcxpress

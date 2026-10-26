@@ -9,7 +9,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_pdk_manager(const char* fname, const PdkManager& pdk_mgr);
 
@@ -18,6 +18,6 @@ int write_xml_pdk_config_for_synth(const char* fname, const PdkManager& pdk_mgr)
 int write_xml_pdk_config_for_qor_extraction(const char* fname, const PdkManager& pdk_mgr,
                                             const std::map<std::string, std::string>& corner_map);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

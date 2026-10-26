@@ -332,7 +332,7 @@ For example,
     </module>
   </fabric_key>
 
-ArkAngel can auto-fill the rest of the data required (when you check the result through command ``show_arch``)
+ArcXpress can auto-fill the rest of the data required (when you check the result through command ``show_arch``)
 
 .. note:: You may use the built-in fabric key if you do not wish to perform customization yourself.
 

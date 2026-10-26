@@ -15,7 +15,7 @@
 //    </partition_list>
 // </vpr_constraints>
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 // For final vpr constriant file
 constexpr const char* XML_VPR_CONSTRAINT_FILE_ROOT_NAME = "vpr_constraints";
 constexpr const char* XML_VPR_CONSTRAINT_FILE_SUBROOT_NAME = "partition_list";
@@ -55,4 +55,4 @@ constexpr const char* XML_CLK_LOC_MAP_FILE_INSTANCE_NODE_X = "x";
 constexpr const char* XML_CLK_LOC_MAP_FILE_INSTANCE_NODE_Y = "y";
 constexpr const char* XML_CLK_LOC_MAP_FILE_INSTANCE_NODE_Z = "z";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

@@ -9,8 +9,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_synth_strategy(const char* fname, FabricSynthStrategy& syn_strtg, const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

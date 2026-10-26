@@ -22,7 +22,7 @@ target_link_libraries(libbenchmarkmanager
                       libopenfpgautil
                       libvtrutil
                       libarchopenfpga
-                      libarkangelutil
+                      libarcxpressutil
                       libpugiutil)
 
 #Create the test executable

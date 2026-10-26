@@ -23,7 +23,7 @@
 #include "read_xml_util.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Parse XML codes of a <design_source> to an object of ProjectManager
@@ -82,4 +82,4 @@ int read_xml_io_coordinates(const char* fname, IoCoordData& io_coord, const bool
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

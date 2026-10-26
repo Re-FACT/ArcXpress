@@ -1,3 +1,6 @@
 [submodule "libs/OpenFPGA"]
-	path = libs/OpenFPGA
+	path = thirdparty/OpenFPGA
 	url = https://github.com/lnis-uofu/OpenFPGA.git
+[submodule "thirdparty/Yosuf"]
+	path = thirdparty/Yosuf
+	url = https://github.com/Re-FACT/Yosuf.git

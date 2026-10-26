@@ -12,10 +12,10 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_benchmark_manager(const char* fname, BenchmarkManager& bm_mgr, const bool& overwrite);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

@@ -4,10 +4,5 @@ Contact
 
 - Xifan Tang
 
-xifan@rapid-flex.com
-
-
-- Tao Li
-
-tao@rapid-flex.com
+xifan@refact-fpga.org
 

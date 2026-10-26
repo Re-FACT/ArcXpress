@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-namespace arkangel {
+namespace arcxpress {
 class TablePrinter {
  public:
   TablePrinter(const std::vector<std::string>& headers) : headers(headers) { DELIM_ = "|"; }
@@ -27,4 +27,4 @@ class TablePrinter {
                  const std::string& file_path = "") const;
   std::string DELIM_;
 };
-}  // namespace arkangel
+}  // namespace arcxpress

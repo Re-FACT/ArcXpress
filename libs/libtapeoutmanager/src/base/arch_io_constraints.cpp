@@ -11,7 +11,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchIoConstraints::ArchIoConstraints() {
   is_valid_ = false;
@@ -397,4 +397,4 @@ int ArchIoConstraints::find_and_assign_arch_io_vars(
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

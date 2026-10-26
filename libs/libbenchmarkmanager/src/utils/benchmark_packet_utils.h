@@ -10,10 +10,10 @@
  * Function declaration
  *******************************************************************/
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 BenchmarkPacket create_benchmark_packet_by_name(const BenchmarkManager& bm_mgr,
                                                 const std::string& bm_name);
 
-} /* end namespace arkangel */
+} /* end namespace arcxpress */

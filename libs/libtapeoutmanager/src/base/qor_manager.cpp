@@ -1,7 +1,7 @@
 #include "qor_manager.h"
 
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
 #include "command_exit_codes.h"
 #include "openfpga_digest.h"
 #include "rapidcsv.h"
@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "write_xml_pdk_manager.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 QorManager::QorManager(const std::string& root_path, const TapeoutManager& to_mgr,
                        const PdkManager& pdk_mgr) {
@@ -1482,4 +1482,4 @@ int QorManager::set_grst_sdc_file_value_dirpath(const size_t& idx, const std::st
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

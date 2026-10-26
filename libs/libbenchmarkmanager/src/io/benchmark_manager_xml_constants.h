@@ -5,7 +5,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_SUITE_ROOT_NODE_NAME = "benchmark_suite";
 
@@ -28,6 +28,6 @@ constexpr const char* XML_SUITE_BENCHMARK_CONSTRAINTS_NODE_NAME = "constraints";
 constexpr const char* XML_SUITE_BENCHMARK_FILE_NODE_NAME = "file";
 constexpr const char* XML_SUITE_BENCHMARK_FILE_ATTRIBUTE_TYPE = "type";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

@@ -23,7 +23,7 @@
 #include "read_xml_util.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Parse XML codes of a <stamp> to an object of ProjectManager
@@ -216,4 +216,4 @@ int read_xml_pdk_manager(const char* fname, PdkManager& pdk_mgr) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

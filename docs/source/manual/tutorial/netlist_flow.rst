@@ -57,15 +57,15 @@ Basic Usage
 
 .. code-block:: bash
 
-   arkangel> generate_netlist
+   arcxpress> generate_netlist
 
 You can still use the command :ref:`show_status` and :ref:`show_dashboard` command to check the status.
 The usage is as follows:
 
 .. code-block:: text
 
-   arkangel> show_status
-   arkangel> show_dashboard
+   arcxpress> show_status
+   arcxpress> show_dashboard
 
 Successful Execution Flow
 """""""""""""""""""""""""
@@ -94,9 +94,9 @@ Use ``--verbosity 1`` for detailed logs:
 
 .. code-block:: bash
 
-   arkangel> generate_netlist
+   arcxpress> generate_netlist
 
-For full options, see :ref:`arkangel_netlist_dev_commands_generate_netlist`.
+For full options, see :ref:`arcxpress_netlist_dev_commands_generate_netlist`.
 
 .. _optimize_netlist_example:
 
@@ -112,15 +112,15 @@ Basic Usage
 
 .. code-block:: bash
 
-   arkangel> optimize_netlist
+   arcxpress> optimize_netlist
 
 You can still use the command :ref:`show_status` and :ref:`show_dashboard` command to check the status.
 The usage is as follows:
 
 .. code-block:: text
 
-   arkangel> show_status
-   arkangel> show_dashboard
+   arcxpress> show_status
+   arcxpress> show_dashboard
 
 Successful Execution Flow
 """""""""""""""""""""""""
@@ -155,9 +155,9 @@ The generated file path is under `alkaid_ex_netlist/iter0/netlist`. You can see 
 
 .. code-block:: bash
 
-   arkangel> optimize_netlist  --verbosity 1
+   arcxpress> optimize_netlist  --verbosity 1
 
-For full options, see :ref:`arkangel_netlist_dev_commands_optimize_netlist`.
+For full options, see :ref:`arcxpress_netlist_dev_commands_optimize_netlist`.
 
 .. _coarse_analyze_netlist_example:
 
@@ -172,15 +172,15 @@ Basic Usage
 
 .. code-block:: bash
 
-   arkangel> coarse_analyze_netlist
+   arcxpress> coarse_analyze_netlist
 
 You can still use the command :ref:`show_status` and :ref:`show_dashboard` command to check the status.
 The usage is as follows:
 
 .. code-block:: text
 
-   arkangel> show_status
-   arkangel> show_dashboard
+   arcxpress> show_status
+   arcxpress> show_dashboard
 
 Successful Execution Flow
 """""""""""""""""""""""""
@@ -209,9 +209,9 @@ Generated Files
 
 .. code-block:: bash
 
-   arkangel> coarse_analyze_netlist --verbosity 1
+   arcxpress> coarse_analyze_netlist --verbosity 1
 
-For full options, see :ref:`arkangel_netlist_dev_commands_coarse_analyze_netlist`.
+For full options, see :ref:`arcxpress_netlist_dev_commands_coarse_analyze_netlist`.
 
 .. _coarse_floorplan_example:
 
@@ -226,15 +226,15 @@ Basic Usage
 
 .. code-block:: bash
 
-   arkangel> coarse_floorplan
+   arcxpress> coarse_floorplan
 
 You can still use the command :ref:`show_status` and :ref:`show_dashboard` command to check the status.
 The usage is as follows:
 
 .. code-block:: text
 
-   arkangel> show_status
-   arkangel> show_dashboard
+   arcxpress> show_status
+   arcxpress> show_dashboard
 
 Successful Execution Flow
 """""""""""""""""""""""""
@@ -291,9 +291,9 @@ Generated Files
 
 .. code-block:: bash
 
-   arkangel> coarse_floorplan --verbosity 1
+   arcxpress> coarse_floorplan --verbosity 1
 
-For full options, see :ref:`arkangel_netlist_dev_commands_coarse_floorplan`.
+For full options, see :ref:`arcxpress_netlist_dev_commands_coarse_floorplan`.
 
 .. _extract_netlist_qor_example:
 
@@ -308,15 +308,15 @@ Basic Usage
 
 .. code-block:: bash
 
-   arkangel> extract_netlist_qor
+   arcxpress> extract_netlist_qor
 
 You can still use the command :ref:`show_status` and :ref:`show_dashboard` command to check the status.
 The usage is as follows:
 
 .. code-block:: text
 
-   arkangel> show_status
-   arkangel> show_dashboard
+   arcxpress> show_status
+   arcxpress> show_dashboard
 
 Successful Execution Flow
 """""""""""""""""""""""""
@@ -344,6 +344,6 @@ Generated Files
 
 .. code-block:: bash
 
-   arkangel> extract_netlist_qor --verbosity 1
+   arcxpress> extract_netlist_qor --verbosity 1
 
-For full options, see :ref:`arkangel_netlist_dev_commands_extract_netlist_qor`.
+For full options, see :ref:`arcxpress_netlist_dev_commands_extract_netlist_qor`.

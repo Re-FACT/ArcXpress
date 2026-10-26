@@ -9,8 +9,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_floorplan_strategy(const char* fname, FloorplanStrategy& flrpln_strtg);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

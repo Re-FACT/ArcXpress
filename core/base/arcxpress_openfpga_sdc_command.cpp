@@ -1,0 +1,18 @@
+/********************************************************************
+ * Add commands to the OpenFPGA shell interface,
+ * in purpose of generate SDC files
+ * - write_pnr_sdc : generate SDC to constrain the back-end flow for FPGA fabric
+ * - write_analysis_sdc: TODO: generate SDC based on users' implementations
+ *******************************************************************/
+#include "arcxpress_openfpga_sdc_command.h"
+
+#include "openfpga_sdc_command_template.h"
+
+/* begin namespace arcxpress */
+namespace arcxpress {
+
+void add_openfpga_sdc_commands(openfpga::Shell<ArcxpressContext>& shell) {
+  openfpga::add_openfpga_sdc_command_templates<ArcxpressContext>(shell, true);
+}
+
+} /* end namespace arcxpress */

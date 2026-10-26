@@ -23,7 +23,7 @@
 #include "side_manager.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_boundary_cell_width(pugi::xml_node& xml_node,
                                         const pugiutil::loc_data& loc_data,
@@ -267,4 +267,4 @@ int read_xml_floorplan_strategy(const char* fname, FloorplanStrategy& flrpln_str
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

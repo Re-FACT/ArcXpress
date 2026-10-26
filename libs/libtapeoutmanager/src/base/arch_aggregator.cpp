@@ -10,7 +10,7 @@
 #include "vtr_log.h"
 #include "yaml-cpp/yaml.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchAggregator::ArchAggregator() {
   vars_.clear();
@@ -209,4 +209,4 @@ std::string ArchAggregator::to_var_format(const std::string& name) const {
   return std::string("${") + name + std::string("}");
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

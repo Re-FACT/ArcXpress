@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc > 1);
   int status = 0;
 
-  arkangel::VprBlockUsageParser parser;
+  arcxpress::VprBlockUsageParser parser;
 
   /* Parse from an XML file */
   VTR_LOG("Load the VPR block usage from file: %s.\n", argv[1]);

@@ -21,7 +21,7 @@ set_target_properties(libtableprinter PROPERTIES PREFIX "") #Avoid extra 'lib' p
 target_link_libraries(libtableprinter
                       libvtrutil
                       libopenfpgautil
-                      libarkangelutil
+                      libarcxpressutil
                       )
 
 #Create the test executable

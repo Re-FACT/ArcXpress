@@ -1,4 +1,4 @@
-.. _arkangel_arch_dev_commands:
+.. _arcxpress_arch_dev_commands:
 
 Arch Development Commands
 -------------------------
@@ -18,16 +18,16 @@ Create a new architecture as the starting point of architecture development. Thi
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_arch_dev_commands_set_io_num:
+.. _arcxpress_arch_dev_commands_set_io_num:
 
 set_io_num
 ~~~~~~~~~~
 
 Specify the number of I/O, either input or output, on a given side of the eFPGA. 
 
-.. note:: Due the architecture constraints, the actual number of I/O may be larger than the wanted. Use the command :ref:`arkangel_project_commands_report_io` to get the actual I/O arrangment
+.. note:: Due the architecture constraints, the actual number of I/O may be larger than the wanted. Use the command :ref:`arcxpress_project_commands_report_io` to get the actual I/O arrangment
 
-.. note:: This command cannot remove all the I/Os on a given side. Use command :ref:`arkangel_arch_dev_commands_remove_io`
+.. note:: This command cannot remove all the I/Os on a given side. Use command :ref:`arcxpress_arch_dev_commands_remove_io`
 
 .. option:: --run <string>
 
@@ -51,7 +51,7 @@ Specify the number of I/O, either input or output, on a given side of the eFPGA.
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_arch_dev_commands_remove_io:
+.. _arcxpress_arch_dev_commands_remove_io:
 
 remove_io
 ~~~~~~~~~

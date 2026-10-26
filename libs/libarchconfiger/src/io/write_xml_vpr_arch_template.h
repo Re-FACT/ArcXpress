@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_vpr_arch_template(const char* fname, const ArchGen& arch_gen);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

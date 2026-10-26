@@ -15,7 +15,7 @@
 #include "pugixml.hpp"
 #include "write_xml_benchmark_manager.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Only the time stamp of the first file that is read in will be outputted!
@@ -115,4 +115,4 @@ int write_xml_benchmark_manager(const char* fname, const BenchmarkManager& bm_mg
   return err_code;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

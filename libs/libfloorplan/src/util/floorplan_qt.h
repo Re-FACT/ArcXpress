@@ -11,7 +11,7 @@
 
 #include "tile_qor.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 class FloorplanGraphicsView : public QGraphicsView {
  public:
@@ -52,6 +52,6 @@ class FloorplanGraphicsView : public QGraphicsView {
 int show_floorplan_data_window(const std::string& shaping_rpt, const TileQor& tile_qor,
                                const float& shrink_factor, const size_t& precision);
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

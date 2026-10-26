@@ -23,7 +23,7 @@
 #include "tapeout_manager_arch_template_xml_constants.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_flow_settings_synth(pugi::xml_node& xml_synth,
                                         const pugiutil::loc_data& loc_data,
@@ -601,4 +601,4 @@ int read_xml_tapeout_manager_arch_template(const char* fname, TapeoutManager& to
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

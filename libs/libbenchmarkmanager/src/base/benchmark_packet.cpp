@@ -6,7 +6,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 std::vector<std::string> BenchmarkPacket::files_by_type(
   const BenchmarkManager::e_file_type& f_type) const {
@@ -87,4 +87,4 @@ void BenchmarkPacket::add_file(const BenchmarkManager::e_file_type& f_type,
   file_types_.push_back(f_type);
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

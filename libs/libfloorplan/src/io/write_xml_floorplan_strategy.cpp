@@ -19,7 +19,7 @@
 #include "side_manager.h"
 #include "write_xml_floorplan_strategy.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * A writer to output a PDK manager object to XML format
@@ -73,4 +73,4 @@ int write_xml_floorplan_strategy(const char* fname, const FloorplanStrategy& flr
   return status;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

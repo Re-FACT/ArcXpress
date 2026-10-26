@@ -5,18 +5,18 @@
 #include <string>
 #include <vector>
 
-#include "arkangel_report_util.h"
+#include "arcxpress_report_util.h"
 #include "openfpga_port.h"
 #include "pdk_manager.h"
 #include "qorso_strategy.h"
 #include "tableprinter.h"
 #include "tapeout_manager.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class QorManager {
@@ -211,4 +211,4 @@ class QorManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

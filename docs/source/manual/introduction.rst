@@ -3,7 +3,7 @@
 Introduction
 ------------
 
-ArkAngel is a unified platform by RapidFlex to develop and evaluate eFPGA fabric.
+ArcXpress is a unified platform by RapidFlex to develop and evaluate eFPGA fabric.
 This include a number of critical development process:
 
 - architecture exploration

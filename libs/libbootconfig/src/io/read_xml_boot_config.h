@@ -9,8 +9,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int read_xml_boot_config(const char* fname, BootConfig& boot_cfg);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

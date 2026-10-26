@@ -14,7 +14,7 @@
 #include "vtr_log.h"
 #include "yaml-cpp/yaml.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 FileMd5Manager::FileMd5Manager() { clear(); }
 
@@ -227,4 +227,4 @@ int FileMd5Manager::gen_md5_for_file(const size_t& f_idx, const bool& verbose) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

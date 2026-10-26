@@ -192,7 +192,7 @@ The configuration files are typically kept under the subdirectory ``qor_signoff`
 Flow Configuration
 ``````````````````
 
-The common utility to enable ArkAngel flow is typically kept under the subdirectory ``flow_conf``
+The common utility to enable ArcXpress flow is typically kept under the subdirectory ``flow_conf``
 
 .. list-table:: Custom module files
   :widths: 70 30
@@ -201,7 +201,7 @@ The common utility to enable ArkAngel flow is typically kept under the subdirect
   * - File example
     - Description
   * - efpga_arch_template.xml
-    - The template file required to create any ArkAngel project
+    - The template file required to create any ArcXpress project
   * - log_error_keywords.xml
     - The keywords to detect Yosys and OpenFPGA log errors
   * - openfpga_log_keywords.xml

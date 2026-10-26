@@ -11,7 +11,7 @@
 
 #include "vtr_strong_id.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 struct ip_file_id_tag;
 struct qorso_task_id_tag;
@@ -22,4 +22,4 @@ typedef vtr::StrongId<qorso_task_id_tag> QorsoTaskId;
 /* Short declaration of class */
 class TapeoutManager;
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

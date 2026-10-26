@@ -10,7 +10,7 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int floorplan_io_physical_location(const FloorplanStrategy& flrpln_strtg,
                                    const std::string& io_coord_fpath,
@@ -22,4 +22,4 @@ int floorplan_tile_pin_physical_location(const FloorplanStrategy& flrpln_strtg,
                                          const std::string& tile_pin_metal_layer, TileQor& tile_qor,
                                          const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

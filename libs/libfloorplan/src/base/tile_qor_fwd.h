@@ -11,7 +11,7 @@
 
 #include "vtr_strong_id.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 struct sig_distr_ntwk_buf_id_tag;
 
@@ -20,4 +20,4 @@ typedef vtr::StrongId<sig_distr_ntwk_buf_id_tag> SigDistrNtwkBufId;
 /* Short declaration of class */
 class TileQor;
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

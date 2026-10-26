@@ -10,7 +10,7 @@
 // ============================================================
 // Platform-specific includes
 // ============================================================
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
 // Native Windows – no sigjmp_buf.
 // Fatal-fault recovery is implemented with SEH (__try / __except).
 // Ctrl+C recovery is implemented with SetConsoleCtrlHandler + an Event.
@@ -35,7 +35,7 @@ static jmp_buf s_env_fatal;    // used by set_fatal_handler / sig_handler_fatal
 static jmp_buf s_env_recover;  // used by set_recover_handler / sig_handler_ctrl_c
 #endif
 
-namespace arkangel {
+namespace arcxpress {
 
 // ============================================================
 // Static member definitions
@@ -60,7 +60,7 @@ std::vector<std::pair<int, sig_func_t>> SignalHandlerManager::sig_handler_collec
   {SIGILL, SignalHandlerManager::sig_handler_exit},
   {SIGTERM, SignalHandlerManager::sig_handler_exit},
 
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   // POSIX-only signals
   {SIGPIPE, SignalHandlerManager::sig_handler_exit},
   {SIGTSTP, SignalHandlerManager::sig_handler_exit},
@@ -85,7 +85,7 @@ SignalHandlerManager::SignalHandlerManager(bool print_sig_num) {
 // kill_monitored_processes
 // ============================================================
 void SignalHandlerManager::kill_monitored_processes() {
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
   for (auto pid : monitored_process_) {
     HANDLE hProc = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
     if (hProc != NULL) {
@@ -113,7 +113,7 @@ void SignalHandlerManager::set_sig_handler(bool gui_mode) {
     signal(entry.first, entry.second);
   }
 
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
   // On native Windows, SIGINT via signal() is unreliable in console apps.
   // SetConsoleCtrlHandler gives us CTRL_C_EVENT and CTRL_BREAK_EVENT.
   SetConsoleCtrlHandler(win_ctrl_handler, TRUE);
@@ -134,7 +134,7 @@ void SignalHandlerManager::sig_handler_ctrl_c(int /*signum*/) {
   VTR_LOG("\n[ARKANGEL INFO] Ctrl+C pressed. Terminating the running program.\n");
   kill_monitored_processes();
 
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   if (running_cmd_flag_) {
     siglongjmp(s_env_recover, CMD_EXEC_SIGINT_HANDLED);
   } else {
@@ -155,7 +155,7 @@ void SignalHandlerManager::sig_handler_ctrl_c(int /*signum*/) {
 // Only reachable on POSIX; Windows uses win_ctrl_handler instead.
 // ============================================================
 void SignalHandlerManager::sig_handler_ctrl_c_interactive(int /*signum*/) {
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   VTR_LOG(
     "\n[ARKANGEL INFO] Ctrl+C pressed. "
     "Are you sure you want to terminate the running program? [y/n]\n");
@@ -183,7 +183,7 @@ void SignalHandlerManager::sig_handler_ctrl_c_interactive(int /*signum*/) {
 // recover_running_cmd
 // ============================================================
 void SignalHandlerManager::recover_running_cmd(int status) {
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   if (running_cmd_flag_) {
     siglongjmp(s_env_recover, status);
   }
@@ -218,7 +218,7 @@ void SignalHandlerManager::sig_handler_default(int signum) {
 // sig_handler_fatal  (SIGSEGV on POSIX)
 // ============================================================
 void SignalHandlerManager::sig_handler_fatal(int sig) {
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   if (sig == SIGSEGV) {
     siglongjmp(s_env_fatal, CMD_EXEC_FATAL_ERROR_HANDLED);
   }
@@ -235,7 +235,7 @@ void SignalHandlerManager::sig_handler_fatal(int sig) {
 int SignalHandlerManager::set_fatal_handler(const char* handler_name) {
   str_cur_handler = (handler_name != nullptr) ? handler_name : "";
 
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   int ret = sigsetjmp(s_env_fatal, 1);
   if (ret == 0) {
     signal(SIGSEGV, sig_handler_fatal);
@@ -277,7 +277,7 @@ int SignalHandlerManager::set_fatal_handler(const char* handler_name) {
 // set_recover_handler
 // ============================================================
 int SignalHandlerManager::set_recover_handler(bool gui_mode) {
-#if defined(ARKANGEL_PLATFORM_POSIX)
+#if defined(ARCXPRESS_PLATFORM_POSIX)
   int ret = sigsetjmp(s_env_recover, 1);
   if (ret == 0) {
     // First entry: arm the Ctrl+C handler.
@@ -318,7 +318,7 @@ int SignalHandlerManager::set_recover_handler(bool gui_mode) {
 // ============================================================
 // win_ctrl_handler  (native Windows only)
 // ============================================================
-#if defined(ARKANGEL_PLATFORM_WINDOWS)
+#if defined(ARCXPRESS_PLATFORM_WINDOWS)
 BOOL WINAPI SignalHandlerManager::win_ctrl_handler(DWORD ctrl_type) {
   if (ctrl_type == CTRL_C_EVENT || ctrl_type == CTRL_BREAK_EVENT) {
     VTR_LOG("\n[ARKANGEL INFO] Ctrl+C pressed. Terminating the running program.\n");
@@ -334,4 +334,4 @@ BOOL WINAPI SignalHandlerManager::win_ctrl_handler(DWORD ctrl_type) {
 }
 #endif
 
-}  // namespace arkangel
+}  // namespace arcxpress

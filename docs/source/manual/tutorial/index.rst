@@ -1,7 +1,7 @@
 Tutorial
 --------
 
-ArkAngel is a multi-objective EDA framework. This section showcases the commonly used features
+ArcXpress is a multi-objective EDA framework. This section showcases the commonly used features
 
 .. _tutorial:
    Tutorial

@@ -24,7 +24,7 @@
 #include "tapeout_manager_xml_constants.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Parse XML codes of a <stamp> to an object of ProjectManager
@@ -530,4 +530,4 @@ int read_xml_tapeout_manager(const char* fname, TapeoutManager& to_mgr) {
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

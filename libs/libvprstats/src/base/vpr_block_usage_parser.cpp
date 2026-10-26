@@ -9,7 +9,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 VprBlockUsageParser::VprBlockUsageParser() {
   clear();
@@ -140,4 +140,4 @@ void VprBlockUsageParser::clear() {
   is_valid_ = false;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

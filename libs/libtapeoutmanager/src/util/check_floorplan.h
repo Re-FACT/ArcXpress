@@ -11,7 +11,7 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int check_synth_sclib_cpp(const PdkManager& pdk_mgr, const FabricSynthStrategy& synth_strtg,
                           float& ref_cpp, const bool& verbose);
@@ -23,4 +23,4 @@ int init_floorplan_from_synth_sclib(const PdkManager& pdk_mgr,
                                     const FabricSynthStrategy& synth_strtg,
                                     FloorplanStrategy& floorplan_strtg, const bool& verbose);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

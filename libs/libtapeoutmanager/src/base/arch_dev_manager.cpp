@@ -3,9 +3,9 @@
 #include <filesystem>
 
 #include "arch_aggregator.h"
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_process_util.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_process_util.h"
 #include "command_exit_codes.h"
 #include "file_md5_manager.h"
 #include "generate_pin_table_naming_rules.h"
@@ -23,7 +23,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchDevManager::ArchDevManager(const TapeoutManager& to_mgr, const std::string& run_name) {
   init(to_mgr.path(), to_mgr.name(), run_name, to_mgr.openfpga_error_conf_file(),
@@ -596,7 +596,7 @@ int ArchDevManager::runtime_exec_openfpga(const e_fabric_type& fb_type,
   std::filesystem::current_path(runtime_dir);
   VTR_LOGV(verbose, "Change to runtime directory\n\t%s\n", runtime_dir.string().c_str());
 
-  if (arkangel::system_wrapper(openfpga_cmd, verbose)) {
+  if (arcxpress::system_wrapper(openfpga_cmd, verbose)) {
     VTR_LOG_ERROR("OpenFPGA run failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -1649,7 +1649,7 @@ int ArchDevManager::export_arch(const std::string& fname, const bool& force_over
 
   VTR_LOG("Exporting architecture data to \n\t%s\n", fpath.string().c_str());
 
-  if (arkangel::system_wrapper(export_cmd, verbose)) {
+  if (arcxpress::system_wrapper(export_cmd, verbose)) {
     VTR_LOG_ERROR("Export arch package failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -1897,7 +1897,7 @@ int ArchDevManager::exec_arch_gen(const bool& verbose) {
   std::filesystem::current_path(runtime_dir);
   VTR_LOGV(verbose, "Change to runtime directory\n\t%s\n", runtime_dir.string().c_str());
 
-  if (arkangel::system_wrapper(arch_cfg_cmd, verbose)) {
+  if (arcxpress::system_wrapper(arch_cfg_cmd, verbose)) {
     VTR_LOG_ERROR("Architecture configurator run failed with errors!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -1954,4 +1954,4 @@ int ArchDevManager::set_io_num(const e_side& curr_side,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc > 2);
   int status = 0;
 
-  arkangel::LogErrorChecker parser;
+  arcxpress::LogErrorChecker parser;
 
   /* Parse from an XML file */
   VTR_LOG("Load the keyword from an XML file: %s.\n", argv[1]);

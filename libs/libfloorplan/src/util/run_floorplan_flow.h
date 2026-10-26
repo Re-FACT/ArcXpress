@@ -10,8 +10,8 @@
  * Function declaration
  *******************************************************************/
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int run_floorplan_flow(const FloorplanStrategy& flrpln_strtg, TileQor& tile_qor,
                        const std::string& dom_tile_name, const bool& verbose);
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

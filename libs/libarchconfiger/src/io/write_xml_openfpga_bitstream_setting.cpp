@@ -15,7 +15,7 @@
 #include "vtr_time.h"
 #include "write_xml_openfpga_bitstream_setting.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /********************************************************************
  * A writer to output a VPR arch object to XML format
@@ -44,4 +44,4 @@ int write_xml_openfpga_bitstream_setting(const char* fname, const ArchGen& arch_
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

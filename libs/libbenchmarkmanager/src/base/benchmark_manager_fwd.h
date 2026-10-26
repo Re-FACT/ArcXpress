@@ -12,7 +12,7 @@
 
 #include "vtr_strong_id.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 struct benchmark_suite_id_tag;
 struct benchmark_id_tag;
@@ -29,6 +29,6 @@ typedef vtr::StrongId<benchmark_cocotb_source_id_tag> BenchmarkCocotbSourceId;
 /* Short declaration of class */
 class BenchmarkManager;
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

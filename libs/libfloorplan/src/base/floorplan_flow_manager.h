@@ -9,7 +9,7 @@
 #include "floorplan_params.h"
 #include "read_floorplan_params.h"
 #include "tile_qor.h"
-namespace arkangel {
+namespace arcxpress {
 class FloorplanFlow {
  public: /* -- Constructors -- */
   /* Not allow to copy and copy assignment operator. Keep the copy unique */
@@ -43,4 +43,4 @@ class FloorplanFlow {
   size_t MAX_ITERATION_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

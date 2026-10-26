@@ -10,7 +10,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 FloorplanStrategy::FloorplanStrategy(const float& cpp, const float& sc_h) {
   clear_all();
@@ -450,4 +450,4 @@ float FloorplanStrategy::metal_layer_spacing(const std::string& name) const {
   return 0;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

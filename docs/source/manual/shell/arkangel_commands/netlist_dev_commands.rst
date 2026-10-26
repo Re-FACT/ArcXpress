@@ -1,9 +1,9 @@
-.. _arkangel_netlist_dev_commands:
+.. _arcxpress_netlist_dev_commands:
 
 Netlist Development Commands
 ----------------------------
 
-.. _arkangel_netlist_dev_commands_generate_netlist:
+.. _arcxpress_netlist_dev_commands_generate_netlist:
 
 generate_netlist
 ~~~~~~~~~~~~~~~~
@@ -18,7 +18,7 @@ Generate the RTL-level netlists for the eFPGA architecture.
 
 .. option:: --arch_run <string>
 
-  Specify the run id of architecture development. See details in :ref:`arkangel_arch_dev_commands`. Note that the architecture development should be finished successfully. If not specifed, the latest run will be automatically consideried.
+  Specify the run id of architecture development. See details in :ref:`arcxpress_arch_dev_commands`. Note that the architecture development should be finished successfully. If not specifed, the latest run will be automatically consideried.
 
 .. option:: --netlist_makeup
 
@@ -28,7 +28,7 @@ Generate the RTL-level netlists for the eFPGA architecture.
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is `0``, leading to minimum logging messages.
 
-.. _arkangel_netlist_dev_commands_optimize_netlist:
+.. _arcxpress_netlist_dev_commands_optimize_netlist:
 
 optimize_netlist
 ~~~~~~~~~~~~~~~~
@@ -71,7 +71,7 @@ Optimize the RTL-level netlists for the eFPGA architecture and generate gate-lev
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is `0``, leading to minimum logging messages.
 
-.. _arkangel_netlist_dev_commands_coarse_analyze_netlist:
+.. _arcxpress_netlist_dev_commands_coarse_analyze_netlist:
 
 coarse_analyze_netlist
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -102,7 +102,7 @@ Run a coarse analyze on the area of the gate-level netlist.
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is `0``, leading to minimum logging messages.
 
-.. _arkangel_netlist_dev_commands_coarse_floorplan:
+.. _arcxpress_netlist_dev_commands_coarse_floorplan:
 
 coarse_floorplan
 ~~~~~~~~~~~~~~~~
@@ -135,7 +135,7 @@ Run a coarse floorplan on the area of the eFPGA based on the gate-level netlist.
   
   Specify the XML file containing the custom floorplan strategy,If not specified, a default strategy will be applied.
 
-.. _arkangel_netlist_dev_commands_extract_netlist_qor:
+.. _arcxpress_netlist_dev_commands_extract_netlist_qor:
 
 extract_netlist_qor
 ~~~~~~~~~~~~~~~~~~~

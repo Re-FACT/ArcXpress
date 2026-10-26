@@ -1,6 +1,6 @@
 #pragma once
 
-namespace arkangel {
+namespace arcxpress {
 constexpr const char* XML_VPR_ARCH_ROOT_NODE_NAME = "architecture";
 /* Logical models */
 constexpr const char* XML_VPR_ARCH_MODELS_NODE_NAME = "models";
@@ -174,4 +174,4 @@ constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_MUX_NODE_NAME = "mux";
 constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_NAME = "name";
 constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_INPUT = "input";
 constexpr const char* XML_VPR_ARCH_PB_TYPE_INTERCONNECT_ATTR_OUTPUT = "output";
-}  // namespace arkangel
+}  // namespace arcxpress

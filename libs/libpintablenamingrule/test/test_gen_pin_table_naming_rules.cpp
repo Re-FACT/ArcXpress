@@ -10,6 +10,6 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc == 3);
   int status = 0;
 
-  return arkangel::generate_pin_table_naming_rules(std::string(argv[1]), std::string(argv[2]),
-                                                   true);
+  return arcxpress::generate_pin_table_naming_rules(std::string(argv[1]), std::string(argv[2]),
+                                                    true);
 }

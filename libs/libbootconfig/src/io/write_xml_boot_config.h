@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_boot_config(const char* fname, const BootConfig& boot_cfg);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

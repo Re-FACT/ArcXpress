@@ -10,7 +10,7 @@
 int main(int argc, char** argv) {
   VTR_ASSERT(argc > 2);
 
-  arkangel::FloorplanStrategy flrpln_strtg(0.19, 0.98);
+  arcxpress::FloorplanStrategy flrpln_strtg(0.19, 0.98);
   /* Last arg is to output file. All the others except the first are the input files */
 
   /* Parse from an XML file */
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
   }
 
   /*read floorplan strategy file*/
-  status = arkangel::read_xml_floorplan_strategy(strategy_file.c_str(), flrpln_strtg);
+  status = arcxpress::read_xml_floorplan_strategy(strategy_file.c_str(), flrpln_strtg);
   if (0 != status) {
     return status;
   }
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
   }
 
   /* read tile qor info and reference info */
-  arkangel::TileQor tile_qor;
+  arcxpress::TileQor tile_qor;
   status = read_qor_file(tref_file.c_str(), synth_tile_qor_file.c_str(), tile_qor);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     return openfpga::CMD_EXEC_FATAL_ERROR;

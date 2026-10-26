@@ -14,7 +14,7 @@
 #include "write_xml_utils.h"
 #include "write_xml_vpr_constraint.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int assign_global_clk(GlobalPortLoc& global_port_loc, openfpga::BasicPort& assigned_ckbuf_port,
                       vtr::Point<int>& assigned_location, int& assigned_subtile) {
@@ -273,4 +273,4 @@ int generate_global_signal_vpr_constraint_file(const std::string& cell_map_file,
   write_xml_vpr_constraints_file(vpr_constr_xml_root, ckbuf_info, global_port_loc, pcf_info);
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

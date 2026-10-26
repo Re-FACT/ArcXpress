@@ -16,7 +16,7 @@
 #include "vtr_time.h"
 #include "yaml-cpp/yaml.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Parse detailed module references with sanity checks */
 static int read_yaml_module_reference(const YAML::Node& config, const size_t& imod,
@@ -28,7 +28,7 @@ static int read_yaml_module_reference(const YAML::Node& config, const size_t& im
     VTR_LOG_ERROR(
       "Expected node '%s' under root '%s' not found!\nThe tile reference file '%s' may be "
       "broken!\n",
-      YML_TILEREF_NODE_MODULE, YML_TILEREF_ROOT_NODE_NAME, fname);
+      YML_TILEREF_NODE_MODULE, YML_TILEREF_ROOT_NODE_NAME, fname.c_str());
     num_err++;
     return num_err;
   }
@@ -40,7 +40,7 @@ static int read_yaml_module_reference(const YAML::Node& config, const size_t& im
     VTR_LOG_ERROR(
       "Expected node '%s' under root '%s' not found!\nThe tile reference file '%s' may be "
       "broken!\n",
-      YML_TILEREF_NODE_COUNT, YML_TILEREF_ROOT_NODE_NAME, fname);
+      YML_TILEREF_NODE_COUNT, YML_TILEREF_ROOT_NODE_NAME, fname.c_str());
     num_err++;
     return num_err;
   }
@@ -61,7 +61,7 @@ static int read_yaml_module_reference(const YAML::Node& config, const size_t& im
     VTR_LOG_ERROR(
       "Expected node '%s' under root '%s' not found!\nThe tile reference file '%s' may be "
       "broken!\n",
-      YML_TILEREF_NODE_INSTANCES, YML_TILEREF_ROOT_NODE_NAME, fname);
+      YML_TILEREF_NODE_INSTANCES, YML_TILEREF_ROOT_NODE_NAME, fname.c_str());
     num_err++;
     return num_err;
   }
@@ -69,7 +69,7 @@ static int read_yaml_module_reference(const YAML::Node& config, const size_t& im
     VTR_LOG_ERROR(
       "Expected a list under node '%s' of root '%s'!\nThe tile reference file '%s' may be "
       "broken!\n",
-      YML_TILEREF_NODE_INSTANCES, YML_TILEREF_ROOT_NODE_NAME, fname);
+      YML_TILEREF_NODE_INSTANCES, YML_TILEREF_ROOT_NODE_NAME, fname.c_str());
     num_err++;
     return num_err;
   }
@@ -79,7 +79,7 @@ static int read_yaml_module_reference(const YAML::Node& config, const size_t& im
       "in node '%s' !\nThe tile reference file '%s' may be broken!\n",
       config[YML_TILEREF_ROOT_NODE_NAME][imod][YML_TILEREF_NODE_INSTANCES].size(),
       YML_TILEREF_NODE_INSTANCES, YML_TILEREF_ROOT_NODE_NAME, inst_count, YML_TILEREF_NODE_COUNT,
-      fname);
+      fname.c_str());
     num_err++;
     return num_err;
   }
@@ -169,4 +169,4 @@ int read_yaml_tile_ref(const char* fname, TileRef& tile_ref, const bool& verbose
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
