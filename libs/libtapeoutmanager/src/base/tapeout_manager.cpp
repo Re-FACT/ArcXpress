@@ -1758,8 +1758,8 @@ bool TapeoutManager::valid_arch_file_type(
 
 bool TapeoutManager::valid_openfpga_setting_file_type(
   const TapeoutManager::e_arch_file_type& arch_file_type) const {
-  return size_t(TapeoutManager::e_arch_file_type::OPENFPGA_SIM_SETTING) <= size_t(arch_file_type) <
-         size_t(TapeoutManager::e_arch_file_type::NUM_TYPES);
+  return size_t(TapeoutManager::e_arch_file_type::OPENFPGA_SIM_SETTING) <= size_t(arch_file_type) && 
+         size_t(arch_file_type) < size_t(TapeoutManager::e_arch_file_type::NUM_TYPES);
 }
 
 TapeoutManager::e_script_type TapeoutManager::str2script_type(const std::string& str,
@@ -2652,7 +2652,7 @@ bool TapeoutManager::add_netlist_makeup_config_file(const std::string& pdk_name,
     VTR_LOG_WARN(
       "Attempt to redefine netlist makeup configuration file for pdk '%s' from val '%lu' to "
       "val '%lu'!\n",
-      pdk_name.c_str(), result->second, val);
+      pdk_name.c_str(), result->second.c_str(), val.c_str());
     return false;
   }
   netlist_makeup_config_file_[pdk_name] = val;
@@ -2666,7 +2666,7 @@ bool TapeoutManager::add_ccff_makeup_buf_config_file(const std::string& pdk_name
     VTR_LOG_WARN(
       "Attempt to redefine CCFF makeup buffer configuration file for pdk '%s' from val '%lu' to "
       "val '%lu'!\n",
-      pdk_name.c_str(), result->second, val);
+      pdk_name.c_str(), result->second.c_str(), val.c_str());
     return false;
   }
   ccff_makeup_buf_config_file_[pdk_name] = val;
