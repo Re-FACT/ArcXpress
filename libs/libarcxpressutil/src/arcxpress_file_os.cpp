@@ -117,7 +117,7 @@ bool universal_create_symlink(const std::filesystem::path& target,
 
   if (ec) {
     VTR_LOG_ERROR("Failed to create symbolic link (error code: %d) for source file:\n%s\n",
-                  ec.message(), std::filesystem::path(target).make_preferred().string().c_str());
+                  ec.message().value(), std::filesystem::path(target).make_preferred().string().c_str());
     return false;
   }
   return true;
