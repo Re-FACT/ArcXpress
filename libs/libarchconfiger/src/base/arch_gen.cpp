@@ -1673,7 +1673,7 @@ bool ArchGen::set_internal_edge_pack_pattern(const std::string& mode_name, const
                     pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end(),
                     pack_pattern) != pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end()) {
         VTR_LOG_ERROR("Pack pattern '%s' is already defined for edge %s[%lu].%s -> %s[%lu].%s!\n",
-                      pack_pattern.c_str(), std::get<0>(src_port), std::get<1>(src_port),
+                      pack_pattern.c_str(), std::get<0>(src_port).c_str(), std::get<1>(src_port),
                       std::get<2>(src_port).to_verilog_string().c_str(),
                       std::get<0>(des_port).c_str(), std::get<1>(des_port),
                       std::get<2>(des_port).to_verilog_string().c_str());
