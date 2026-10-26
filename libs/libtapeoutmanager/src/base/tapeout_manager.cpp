@@ -1758,7 +1758,7 @@ bool TapeoutManager::valid_arch_file_type(
 
 bool TapeoutManager::valid_openfpga_setting_file_type(
   const TapeoutManager::e_arch_file_type& arch_file_type) const {
-  return size_t(TapeoutManager::e_arch_file_type::OPENFPGA_SIM_SETTING) <= size_t(arch_file_type) && 
+  return size_t(TapeoutManager::e_arch_file_type::OPENFPGA_SIM_SETTING) <= size_t(arch_file_type) &&
          size_t(arch_file_type) < size_t(TapeoutManager::e_arch_file_type::NUM_TYPES);
 }
 
