@@ -221,11 +221,18 @@ jobs:
           echo "---- Sleep 10 seconds before copy file consider system glitching ----"
           sleep 10s
 
-      - name: Configure Qt5 Environment for Runner
+      - name: Configure Environment for Runner
         run: |
           BREW_PREFIX=$(brew --prefix)
           echo "CMAKE_PREFIX_PATH=${BREW_PREFIX}/opt/qt@5" >> $GITHUB_ENV
           echo "${BREW_PREFIX}/opt/qt@5/bin" >> $GITHUB_PATH
+          echo "OPENSSL_ROOT_DIR=${OPENSSL_PREFIX}" >> "$GITHUB_ENV"
+          echo "OPENSSL_INCLUDE_DIR=${OPENSSL_PREFIX}/include" >> "$GITHUB_ENV"
+          echo "PKG_CONFIG_PATH=${OPENSSL_PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH}" >> "$GITHUB_ENV"
+          echo "CPPFLAGS=-I${OPENSSL_PREFIX}/include" >> "$GITHUB_ENV"
+          echo "LDFLAGS=-L${OPENSSL_PREFIX}/lib" >> "$GITHUB_ENV"
+          echo "OpenSSL prefix: ${OPENSSL_PREFIX}"
+          test -f "${OPENSSL_PREFIX}/include/openssl/evp.h"
 
       - name: ccache
         uses: hendrikmuhs/ccache-action@v1.2

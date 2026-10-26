@@ -86,6 +86,9 @@ if [ -d "${BREW_PREFIX}/opt/openssl@3" ]; then
     export CPPFLAGS="-I${BREW_PREFIX}/opt/openssl@3/include ${CPPFLAGS:-}"
 fi
 
+# Openssl configuration
+OPENSSL_PREFIX="$(brew --prefix openssl@3)"
+
 # Qt5 Configuration
 if [ -d "${BREW_PREFIX}/opt/qt@5" ]; then
     export QT_PREFIX="${BREW_PREFIX}/opt/qt@5"
@@ -93,7 +96,7 @@ else
     export QT_PREFIX="$(brew --prefix qt@5)"
 fi
 export PATH="${QT_PREFIX}/bin:${PATH}"
-export CMAKE_PREFIX_PATH="${QT_PREFIX}:${CMAKE_PREFIX_PATH:-}"
+export CMAKE_PREFIX_PATH="${OPENSSL_PREFIX}:${QT_PREFIX}:${CMAKE_PREFIX_PATH:-}"
 
 # ccache Configuration
 export CCACHE_DIR="${HOME}/.ccache"
