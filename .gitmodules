@@ -7,3 +7,6 @@
 [submodule "etc/utils/Qsyn"]
 	path = etc/utils/Qsyn
 	url = https://github.com/Re-FACT/Qsyn.git
+[submodule "etc/benchmarks/ubm"]
+	path = etc/benchmarks/ubm
+	url = https://github.com/tangxifan/ubm.git
