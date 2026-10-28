@@ -2,20 +2,42 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include "command.h"
 #include "command_context.h"
+#include "arch_gen.h"
+#include "physical_types.h"
 
 namespace arcxpress { // begin namespace arcxpress
 
-class ArchGenCommandParser {
+class ArchGenCommandInterface {
 public:
-  explicit ArchGenCommandParser(const std::string& cmd_name);
+  explicit ArchGenCommandInterface(const std::string& cmd_name);
 
   /**
    * Parse command-line arguments and populate the command context.
    * Returns true on success, or false if parsing fails.
    */
   bool parse(int argc, char** argv, openfpga::CommandContext& exec_cmd_ctx);
+
+  /**
+   * Encapsulates architecture primitives initialization.
+   */
+  int init_primitives(arkangel::ArchGen& arch_gen) const;
+
+  /**
+   * Encapsulates layout extraction, input/output constraints parsing, 
+   * option logging, and layout initialization.
+   */
+  int init_layout(const openfpga::CommandContext& exec_cmd_ctx, 
+                  arkangel::ArchGen& arch_gen) const;
+
+  /**
+   * Encapsulates writing and generating all VPR and OpenFPGA template files,
+   * global clock networks, bitstream settings, and location maps.
+   */
+  int write_xml_templates(const openfpga::CommandContext& exec_cmd_ctx, 
+                          arkangel::ArchGen& arch_gen) const;
 
   // Accessor for the underlying command object (needed for option lookups)
   const openfpga::Command& command() const;
