@@ -1,3 +1,9 @@
 [submodule "libs/OpenFPGA"]
 	path = libs/OpenFPGA
 	url = https://github.com/lnis-uofu/OpenFPGA.git
+[submodule "etc/utils/Qver"]
+	path = etc/utils/Qver
+	url = https://github.com/Re-FACT/Qver.git
+[submodule "etc/utils/Qsyn"]
+	path = etc/utils/Qsyn
+	url = https://github.com/Re-FACT/Qsyn.git
