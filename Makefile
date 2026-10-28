@@ -300,7 +300,7 @@ check-format-cpp:
 
 format-xml:
 # Format all the XML files under this project, excluding submodules
-	for f in `find etc/device/*/arch etc/device/*/flow_conf etc/device/*/craft_files etc/device/*/openfpga_settings libs/lib*/example -iname *.xml`; \
+	for f in `find etc/pdk_config/* etc/device/*/arch etc/device/*/flow_conf etc/device/*/craft_files etc/device/*/openfpga_settings libs/lib*/example -iname *.xml`; \
 	do \
 	XMLLINT_INDENT="  " && ${XML_FORMAT_EXEC} --format $${f} --output $${f} || exit 1; \
 	done
