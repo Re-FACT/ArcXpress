@@ -4,6 +4,7 @@
 #include "arch_gen_command_interface.h"
 #include "arch_gen.h"
 #include "command_exit_codes.h"
+#include "sofahd_arch_layout.h"
 
 int main(int argc, char** argv) {
   /*************************************
@@ -26,12 +27,12 @@ int main(int argc, char** argv) {
    * Run device-specific arch generation
    */
   // TODO: merge the vpr_arch_primitive to init_vpr_arch_layout
-  status = SofaHD::init_vpr_arch_primitives(arch_gen, false, false);
+  status = SofaHD::create_vpr_arch_primitives(arch_gen);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     VTR_LOG_ERROR("Failed in creating primitive details\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  status = SofaHD::init_vpr_arch_layout(arch_gen, height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
+  status = SofaHD::create_vpr_arch_layout(arch_gen, height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     VTR_LOG_ERROR("Failed in creating layout details\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
