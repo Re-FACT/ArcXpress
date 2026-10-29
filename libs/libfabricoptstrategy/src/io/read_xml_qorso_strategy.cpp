@@ -22,7 +22,7 @@
 #include "read_xml_util.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_power_strategy_task(pugi::xml_node& xml_node,
                                         const pugiutil::loc_data& loc_data, QorsoStrategy& qs_strtg,
@@ -505,4 +505,4 @@ int read_xml_qorso_strategy(const char* fname, QorsoStrategy& qs_strtg, const bo
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

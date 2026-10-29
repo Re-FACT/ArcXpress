@@ -10,7 +10,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int add_full_capable_direct_connections(VprArchLayout& va_layout, const std::string& clb_tile,
                                         const std::string& clb_eq_input_port_prefix,
@@ -18,4 +18,4 @@ int add_full_capable_direct_connections(VprArchLayout& va_layout, const std::str
                                         const std::string& clb_output_port, const size_t& lut_size,
                                         const size_t& num_fle, const size_t& num_outputs);
 
-}  // namespace arkangel
+}  // namespace arcxpress

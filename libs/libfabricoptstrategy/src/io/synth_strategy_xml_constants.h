@@ -2,7 +2,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_SYNTHSTRATEGY_ROOT_NODE_NAME = "synth_strategies";
 
@@ -20,4 +20,4 @@ constexpr const char* XML_SYNTHSTRATEGY_STRATEGY_COMPILE_ATTR_EFFORT = "effort";
 constexpr const char* XML_SYNTHSTRATEGY_STRATEGY_NODE_SDC = "sdc";
 constexpr const char* XML_SYNTHSTRATEGY_STRATEGY_SDC_NODE_FILE = "file";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

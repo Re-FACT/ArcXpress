@@ -10,7 +10,7 @@
 #include "vtr_strong_id.h"
 
 /* namespace alkaidC begins */
-namespace arkangel {
+namespace arcxpress {
 
 /* Constants */
 constexpr const char* DEFAULT_MODE_SELECT_PARAMETER_KEY_ = "default";
@@ -159,4 +159,4 @@ class VprArchPrimitive {
   std::vector<bool> output_is_data_io_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

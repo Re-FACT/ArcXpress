@@ -12,7 +12,7 @@
 
 #include "vtr_strong_id.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 struct sclib_id_tag;
 struct sclib_file_id_tag;
@@ -25,6 +25,6 @@ typedef vtr::StrongId<techfile_id_tag> TechfileId;
 /* Short declaration of class */
 class PdkManager;
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress
 
 #endif

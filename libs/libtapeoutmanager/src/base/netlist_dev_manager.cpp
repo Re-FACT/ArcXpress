@@ -4,9 +4,9 @@
 
 #include "arch_aggregator.h"
 #include "arch_gen.h"
-#include "arkangel_constants.h"
-#include "arkangel_file_os.h"
-#include "arkangel_report_util.cpp"
+#include "arcxpress_constants.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_report_util.cpp"
 #include "check_floorplan.h"
 #include "command_exit_codes.h"
 #include "fabric_synth_strategy.h"
@@ -32,7 +32,7 @@
 #include "write_xml_pdk_manager.h"
 #include "write_xml_pin_constraints.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 NetlistDevManager::NetlistDevManager(const TapeoutManager& to_mgr, const std::string& run_name,
                                      const PdkManager& pdk_mgr) {
@@ -1092,9 +1092,9 @@ int NetlistDevManager::import_external_netlists(const e_fabric_type& fb_type,
   std::string incl_fname =
     std::filesystem::path(des_nlist_dir / std::filesystem::path(NETLIST_INCLUDE_FILENAME_))
       .string();
-  std::fstream o_incl_f;
-  o_incl_f.open(incl_fname, std::fstream::out | std::fstream::trunc);
-  if (!o_incl_f.is_open()) {
+  openfpga::mmostream o_incl_f(incl_fname,
+                               false);  // TODO: Enable compression through a command-line option
+  if (!valid_file_mmostream(o_incl_f)) {
     VTR_LOG_ERROR("Fail to open the custom module include file '%s'!\n", incl_fname.c_str());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -2111,9 +2111,9 @@ int NetlistDevManager::generate_fabric_netlist(const std::string& src_dir,
                                                const std::string& o_fname,
                                                const bool& verbose) const {
   VTR_LOGV(verbose, "Creating gate-level include netlists '%s'\n", o_fname.c_str());
-  std::fstream o_incl_f;
-  o_incl_f.open(o_fname, std::fstream::out | std::fstream::trunc);
-  if (!o_incl_f.is_open()) {
+  openfpga::mmostream o_incl_f(o_fname,
+                               false);  // TODO: Enable compression through a command-line option;
+  if (!valid_file_mmostream(o_incl_f)) {
     VTR_LOG_ERROR("Fail to open the gate-level include file '%s'!\n", o_fname.c_str());
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
@@ -2766,4 +2766,4 @@ std::string NetlistDevManager::greset_bitstream_value_file(const size_t& rst_swe
                                 e_script_type::OPENFPGA_SCRIPT_GRSTBITGEN, rst_sweep_id, verbose);
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

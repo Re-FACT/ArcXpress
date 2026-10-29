@@ -4,6 +4,6 @@
 
 #include "global_port_loc_map.h"
 
-namespace arkangel {
+namespace arcxpress {
 int set_up_global_ports(std::string clock_loc_map_file, GlobalPortLoc& global_port_loc);
-}  // namespace arkangel
+}  // namespace arcxpress

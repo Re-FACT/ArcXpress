@@ -9,7 +9,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 TileRef::TileRef() {
   init();
@@ -264,4 +264,4 @@ bool TileRef::tile_exist(const std::string& tile) const {
   return result != name2ids_.end();
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

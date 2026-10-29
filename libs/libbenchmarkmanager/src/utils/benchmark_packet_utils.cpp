@@ -8,8 +8,8 @@
 #include "benchmark_packet_utils.h"
 #include "command_exit_codes.h"
 
-/* begin namespace arkangel */
-namespace arkangel {
+/* begin namespace arcxpress */
+namespace arcxpress {
 
 /********************************************************************
  * Create a packet of data for a benchmark from the database
@@ -33,4 +33,4 @@ BenchmarkPacket create_benchmark_packet_by_name(const BenchmarkManager& bm_mgr,
   return bm_pkt;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

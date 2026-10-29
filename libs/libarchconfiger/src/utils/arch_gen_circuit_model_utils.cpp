@@ -14,7 +14,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int add_xml_openfpga_arch_circuit_model_global_input(pugi::xml_node& cmdl_node,
                                                      const std::string& prefix, const size_t& size,
@@ -74,4 +74,4 @@ int add_xml_openfpga_arch_circuit_model_mode_port(pugi::xml_node& cmdl_node,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

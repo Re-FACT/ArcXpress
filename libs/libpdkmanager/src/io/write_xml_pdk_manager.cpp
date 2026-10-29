@@ -18,7 +18,7 @@
 #include "verilog_constants.h"
 #include "write_xml_pdk_manager.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Only the time stamp of the first file that is read in will be outputted!
@@ -272,4 +272,4 @@ int write_xml_pdk_config_for_qor_extraction(const char* fname, const PdkManager&
   return err_code;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

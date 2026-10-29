@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc > 2);
   int status = 0;
 
-  arkangel::FileMd5Manager md5_mgr4gen;
+  arcxpress::FileMd5Manager md5_mgr4gen;
 
   /* Last arg is to output file. All the others except the first are the input files */
 
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
   }
 
   /* Read back and check md5 */
-  arkangel::FileMd5Manager md5_mgr4chk;
+  arcxpress::FileMd5Manager md5_mgr4chk;
   VTR_LOG("Load the md5 from file: %s.\n", argv[2]);
   status = md5_mgr4chk.load_md5_from_yaml_file(argv[2], true);
   if (0 != status) {

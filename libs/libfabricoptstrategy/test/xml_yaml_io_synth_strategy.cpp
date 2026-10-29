@@ -10,7 +10,7 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc == 3);
   int status = 0;
 
-  arkangel::FabricSynthStrategy syn_strtg("/home", "s40", "tt_v1p0");
+  arcxpress::FabricSynthStrategy syn_strtg("/home", "s40", "tt_v1p0");
   syn_strtg.set_netlist_input("../netlists/rtl/");
   syn_strtg.set_netlist_output("../netlists/gl/subblock");
   syn_strtg.add_netlist_exclude("fabric_netlists.v");
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
   /* Parse from an XML file */
   VTR_LOG("Load the synthesis strategy data from an XML file: %s.\n", argv[1]);
-  status = arkangel::read_xml_synth_strategy(argv[1], syn_strtg, true);
+  status = arcxpress::read_xml_synth_strategy(argv[1], syn_strtg, true);
   if (0 != status) {
     return status;
   }

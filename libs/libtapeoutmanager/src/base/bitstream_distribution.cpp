@@ -4,7 +4,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 BitstreamDistribution::BitstreamDistribution() { is_valid_ = false; }
 
@@ -64,4 +64,4 @@ void BitstreamDistribution::check_valid() const {
   }
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

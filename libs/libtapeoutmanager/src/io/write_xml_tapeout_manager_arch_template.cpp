@@ -15,7 +15,7 @@
 #include "tapeout_manager_arch_template_xml_constants.h"
 #include "write_xml_tapeout_manager_arch_template.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int write_xml_flow_settings_synth(pugi::xml_node& flset_node, const TapeoutManager& to_mgr,
                                          const bool& keep_reserved_word) {
@@ -265,4 +265,4 @@ int write_xml_tapeout_manager_arch_template(const char* fname, const TapeoutMana
   return err_code;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

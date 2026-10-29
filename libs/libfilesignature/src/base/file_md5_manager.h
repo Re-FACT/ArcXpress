@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
  * The data structure to generate/check md5 for a list of files
@@ -58,4 +58,4 @@ class FileMd5Manager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

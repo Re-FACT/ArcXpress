@@ -8,7 +8,7 @@
 #include "vtr_assert.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 /* get the global signal ports info from clock_loc_map.xml */
 int write_xml_clk_loc_map(const std::string& ck_loc_map_file,
                           const GlobalPortLoc& global_port_loc) {
@@ -36,4 +36,4 @@ int write_xml_clk_loc_map(const std::string& ck_loc_map_file,
 
   return openfpga::CMD_EXEC_SUCCESS;
 }
-}  // namespace arkangel
+}  // namespace arcxpress

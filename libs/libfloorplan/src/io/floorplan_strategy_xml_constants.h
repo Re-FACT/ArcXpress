@@ -2,7 +2,7 @@
 
 /* Constants required by XML parser */
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 constexpr const char* XML_FLOORPLANSTRATEGY_ROOT_NODE_NAME = "floorplan_strategies";
 constexpr const char* XML_FLOORPLANSTRATEGY_NODE_BOUNDARY_CELL_WIDTH = "boundary_cell_width";
@@ -37,4 +37,4 @@ constexpr const char* XML_FLOORPLANSTRATEGY_SIGNAL_DISTRIBUTION_NETWORK_NETWORK_
 constexpr const char* XML_FLOORPLANSTRATEGY_SIGNAL_DISTRIBUTION_NETWORK_NETWORK_ENTRY_ATTR_X = "x";
 constexpr const char* XML_FLOORPLANSTRATEGY_SIGNAL_DISTRIBUTION_NETWORK_NETWORK_ENTRY_ATTR_Y = "y";
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

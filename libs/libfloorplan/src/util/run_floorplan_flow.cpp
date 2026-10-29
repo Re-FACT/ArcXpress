@@ -7,7 +7,7 @@
 #include "floorplan_params.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* Load the data from a floorplan strategy to the parameters that floorplanner can accept
  * TODO: Floorplanner should accept strategy file directly
@@ -66,4 +66,4 @@ int run_floorplan_flow(const FloorplanStrategy& flrpln_strtg, TileQor& tile_qor,
   return status;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

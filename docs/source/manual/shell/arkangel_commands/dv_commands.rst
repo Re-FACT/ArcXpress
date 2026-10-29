@@ -1,9 +1,9 @@
-.. _arkangel_dv_commands:
+.. _arcxpress_dv_commands:
 
 Design Verification Commands
 ----------------------------
 
-.. _arkangel_dv_commands_setup_design_verification:
+.. _arcxpress_dv_commands_setup_design_verification:
 
 setup_design_verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -24,17 +24,17 @@ Setup design verification for selected golden bitstream and netlists
 
 .. option:: --bitstream_run <string>
 
-  Specify the run id of architecture evaluation. See details in :ref:`arkangel_arch_eval_commands`. Note that the architecture evaluation should be finished successfully. If not specifed, the latest run will be automatically consideried.
+  Specify the run id of architecture evaluation. See details in :ref:`arcxpress_arch_eval_commands`. Note that the architecture evaluation should be finished successfully. If not specifed, the latest run will be automatically consideried.
 
 .. option:: --netlist_run <string>
 
-  Specify the run id of netlist development. See details in :ref:`arkangel_netlist_dev_commands`. Note that the netlist development should be finished successfully. If not specifed, the latest run will be automatically consideried.
+  Specify the run id of netlist development. See details in :ref:`arcxpress_netlist_dev_commands`. Note that the netlist development should be finished successfully. If not specifed, the latest run will be automatically consideried.
 
 .. option:: --pd_run <string>
 
   .. note:: For gate-level design verification, this is not required.
 
-  Specify the run id of physical design. See details in :ref:`arkangel_netlist_dev_commands`. Note that the physical design should be finished successfully. If not specifed, the latest run will be automatically consideried.
+  Specify the run id of physical design. See details in :ref:`arcxpress_netlist_dev_commands`. Note that the physical design should be finished successfully. If not specifed, the latest run will be automatically consideried.
 
 .. option:: --jobs <int>
 
@@ -58,7 +58,7 @@ Setup design verification for selected golden bitstream and netlists
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is `0``, leading to minimum logging messages.
 
-.. _arkangel_dv_commands_run_preconfigured_simulation:
+.. _arcxpress_dv_commands_run_preconfigured_simulation:
 
 run_preconfigured_simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -113,7 +113,7 @@ Run preconfigured simulation based on the selected netlists and benchmarks
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is ``0``, leading to minimum logging messages.
 
-.. _arkangel_arch_eval_commands_run_benchmark_power_analysis:
+.. _arcxpress_arch_eval_commands_run_benchmark_power_analysis:
 
 run_benchmark_power_analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

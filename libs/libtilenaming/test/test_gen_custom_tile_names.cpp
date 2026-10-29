@@ -10,6 +10,6 @@ int main(int argc, char** argv) {
   VTR_ASSERT(argc == 5);
   int status = 0;
 
-  return arkangel::generate_tile_module_names(std::string(argv[1]), std::string(argv[2]),
-                                              std::string(argv[3]), std::string(argv[4]), true);
+  return arcxpress::generate_tile_module_names(std::string(argv[1]), std::string(argv[2]),
+                                               std::string(argv[3]), std::string(argv[4]), true);
 }

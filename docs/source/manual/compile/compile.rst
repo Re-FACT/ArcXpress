@@ -8,7 +8,7 @@ How to Compile
 Supported Operating Systems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-ArkAngel Engineering is continously tested on
+ArcXpress Engineering is continously tested on
 
 - Ubuntu 22.04 
 - CentOS 9
@@ -24,12 +24,12 @@ In general, please follow the steps to compile
 .. code-block:: shell
 
   git clone 
-  cd ArkAngel
+  cd ArcXpress
   make all
 
 .. note:: Requires gcc/g++ version >= 9 and clang version >= 11.
 
-.. note:: cmake3.12+ is recommended to compile ArkAngel with GUI
+.. note:: cmake3.12+ is recommended to compile ArcXpress with GUI
 
 .. note:: Require boost version > 1.75 when compile with license control. See details in :ref:`tutorial_compile_build_options`
 
@@ -98,7 +98,7 @@ The following options are available for a custom build
 
 .. option:: CMAKE_GOALS=<string>
 
-  Specify the build target for CMake system. For example, ``cmake_goals=arkangel`` indicates that only openfpga binary will be compiled. For a detailed list of targets, use ``make list_cmake_targets`` to show. By default, all the build targets will be included. 
+  Specify the build target for CMake system. For example, ``cmake_goals=arcxpress`` indicates that only openfpga binary will be compiled. For a detailed list of targets, use ``make list_cmake_targets`` to show. By default, all the build targets will be included. 
 
 Installer
 ~~~~~~~~~

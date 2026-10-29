@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchGen::ArchGen() {
   /* Default settings */
@@ -1647,7 +1647,7 @@ bool ArchGen::set_in2in_edge_pack_pattern(const std::string& mode_name,
                     pack_pattern) != pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end()) {
         VTR_LOG_ERROR("Pack pattern '%s' is already defined for edge %s[%lu].%s -> %s[%lu].%s!\n",
                       pack_pattern.c_str(), parent_pb_type.c_str(), 0,
-                      src_port.to_verilog_string().c_str(), std::get<0>(des_port),
+                      src_port.to_verilog_string().c_str(), std::get<0>(des_port).c_str(),
                       std::get<1>(des_port), std::get<2>(des_port).to_verilog_string().c_str());
         return false;
       }
@@ -1673,9 +1673,10 @@ bool ArchGen::set_internal_edge_pack_pattern(const std::string& mode_name, const
                     pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end(),
                     pack_pattern) != pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end()) {
         VTR_LOG_ERROR("Pack pattern '%s' is already defined for edge %s[%lu].%s -> %s[%lu].%s!\n",
-                      pack_pattern.c_str(), std::get<0>(src_port), std::get<1>(src_port),
-                      std::get<2>(src_port).to_verilog_string().c_str(), std::get<0>(des_port),
-                      std::get<1>(des_port), std::get<2>(des_port).to_verilog_string().c_str());
+                      pack_pattern.c_str(), std::get<0>(src_port).c_str(), std::get<1>(src_port),
+                      std::get<2>(src_port).to_verilog_string().c_str(),
+                      std::get<0>(des_port).c_str(), std::get<1>(des_port),
+                      std::get<2>(des_port).to_verilog_string().c_str());
         return false;
       }
       pb_mode_edges_[pb_mode_id][iedge].pack_patterns.push_back(pack_pattern);
@@ -1700,7 +1701,7 @@ bool ArchGen::set_out2out_edge_pack_pattern(const std::string& mode_name, const 
                     pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end(),
                     pack_pattern) != pb_mode_edges_[pb_mode_id][iedge].pack_patterns.end()) {
         VTR_LOG_ERROR("Pack pattern '%s' is already defined for edge %s[%lu].%s -> %s[%lu].%s!\n",
-                      pack_pattern.c_str(), std::get<0>(src_port), std::get<1>(src_port),
+                      pack_pattern.c_str(), std::get<0>(src_port).c_str(), std::get<1>(src_port),
                       std::get<2>(src_port).to_verilog_string().c_str(), parent_pb_type.c_str(), 0,
                       des_port.to_verilog_string().c_str());
         return false;
@@ -2624,7 +2625,7 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       }
       /* Walk through all the required ports */
       for (auto port : arch_layout_.find_tile_ports_by_type(
-             tile, arkangel::VprArchLayout::e_port_type::CLOCK)) {
+             tile, arcxpress::VprArchLayout::e_port_type::CLOCK)) {
         pugi::xml_node tile_node =
           gp_node.append_child(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_NODE_NAME);
         tile_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_ATTR_NAME) =
@@ -2654,7 +2655,7 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       }
       /* Walk through all the required ports */
       for (auto port : arch_layout_.find_tile_ports_by_type(
-             tile, arkangel::VprArchLayout::e_port_type::RESET)) {
+             tile, arcxpress::VprArchLayout::e_port_type::RESET)) {
         pugi::xml_node tile_node =
           gp_node.append_child(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_NODE_NAME);
         tile_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_TILE_ATTR_NAME) =
@@ -3317,4 +3318,4 @@ int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) 
 std::string ArchGen::gclock_network_name() const { return GCLK_NTWK_NAME_; }
 std::string ArchGen::greset_network_name() const { return GRST_NTWK_NAME_; }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

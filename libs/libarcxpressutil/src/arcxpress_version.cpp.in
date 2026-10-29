@@ -1,0 +1,21 @@
+#include "arcxpress_version.h"
+
+//This file is automatically processed by CMAKE and replaces
+//the values between ampersand's with the releveant CMAKE variable
+//before being compiled.
+namespace arcxpress {
+    const char* VERSION = "@ARCXPRESS_VERSION@";
+    const char* VERSION_SHORT = "@ARCXPRESS_VERSION_SHORT@";
+
+    const size_t VERSION_MAJOR = @ARCXPRESS_VERSION_MAJOR@;
+    const size_t VERSION_MINOR = @ARCXPRESS_VERSION_MINOR@;
+    const size_t VERSION_PATCH = @ARCXPRESS_VERSION_PATCH@;
+    const char* VERSION_PRERELEASE = "@ARCXPRESS_VERSION_PRERELEASE@";
+
+    const char* VCS_REVISION = "@ARCXPRESS_VCS_REVISION@";
+    const char* VCS_REVISION_SHORT = "@ARCXPRESS_VCS_REVISION_SHORT@";
+
+    const char* COMPILER = "@ARCXPRESS_COMPILER_INFO@";
+    const char* BUILD_TIMESTAMP = "@ARCXPRESS_BUILD_TIMESTAMP@";
+    const char* BUILD_INFO = "@ARCXPRESS_BUILD_INFO@";
+}

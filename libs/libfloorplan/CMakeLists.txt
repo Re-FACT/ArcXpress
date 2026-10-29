@@ -18,7 +18,7 @@ target_include_directories(libfloorplan PUBLIC ${LIB_INCLUDE_DIRS})
 
 set_target_properties(libfloorplan PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
 
-if (ARKANGEL_WITH_GUI)
+if (ARCXPRESS_WITH_GUI)
   find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui)
   if(Qt5_FOUND)
     # Set necessary Qt variables
@@ -44,7 +44,7 @@ target_link_libraries(libfloorplan
                       libopenfpga
                       yaml-cpp 
                       libtilenaming
-                      libarkangelutil
+                      libarcxpressutil
                       libpugiutil
                       libtableprinter)
 

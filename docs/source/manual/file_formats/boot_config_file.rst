@@ -3,9 +3,9 @@
 Boot Config File (.xml)
 =======================
 
-The boot configuration file contains the path to third-party tools which ArkAngel relies on.
-The file unlock possibilities for ArkAngel to interface various version of third-party tools.
-Also the file is used to adapt ArkAngel for diverse deployment conditions.
+The boot configuration file contains the path to third-party tools which ArcXpress relies on.
+The file unlock possibilities for ArcXpress to interface various version of third-party tools.
+Also the file is used to adapt ArcXpress for diverse deployment conditions.
 
 An example of file is shown as follows.
 
@@ -19,11 +19,11 @@ The reserved words can be used in defining file paths
 
 .. option:: ${PWD}
 
-  The current working directory when running ArkAngel. This keyword will be replaced during runtime
+  The current working directory when running ArcXpress. This keyword will be replaced during runtime
 
 .. option:: ${ROOT_PATH}
 
-  The root path which starting ArkAngel
+  The root path which starting ArcXpress
 
 Time Stamps
 -----------
@@ -42,7 +42,7 @@ Time Stamps
 
 .. option:: tool_version="<string>"
 
-  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArkAngel.
+  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArcXpress.
 
 .. _file_format_boot_config_file_boot_type:
 
@@ -74,8 +74,8 @@ Binary path for each third-party tool can be defined under the node ``bin_relpat
   - ``netlist_makeup``: The python script of netlist makeup, used during netlist development
   - ``ccff_makeup``: The python script of configuration-chain makeup, used during netlist development
   - ``netlist_synthesis``: The python script of fabric netlist synthesis, used during netlist development
-  - ``frontend``: The binary of ArkAngel frontend
-  - ``frontend_cell_lib``: The root path to all the cell libraries of ArkAngel frontend
+  - ``frontend``: The binary of ArcXpress frontend
+  - ``frontend_cell_lib``: The root path to all the cell libraries of ArcXpress frontend
   - ``qorso``: The python script of Quality-of-Result Sign-off 
   - ``bus_group_generator``: The python script to generate bus group file
   - ``cocotb_util``: The python script to run cocotb tasks

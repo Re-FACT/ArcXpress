@@ -5,7 +5,7 @@ Debug Guidelines
 
 When a test case in preconfigured verification fails, please consider the following steps in debugging
 
-- Enable waveform outputs in simulation. Refer to the :ref:`arkangel_dv_commands_run_preconfig_sim`
+- Enable waveform outputs in simulation. Refer to the :ref:`arcxpress_dv_commands_run_preconfig_sim`
 
 
 .. code-block::

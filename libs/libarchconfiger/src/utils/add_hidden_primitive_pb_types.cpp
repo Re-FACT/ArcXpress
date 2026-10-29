@@ -15,9 +15,9 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 
-int add_builtin_pi_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::string& pb_name,
+int add_builtin_pi_primitive_pb_type(arcxpress::ArchGen& arch_gen, const std::string& pb_name,
                                      const std::string& mode_bits, const bool& verbose) {
   int num_err = 0;
 
@@ -35,7 +35,7 @@ int add_builtin_pi_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::str
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_builtin_po_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::string& pb_name,
+int add_builtin_po_primitive_pb_type(arcxpress::ArchGen& arch_gen, const std::string& pb_name,
                                      const bool& verbose) {
   int num_err = 0;
 
@@ -50,7 +50,7 @@ int add_builtin_po_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::str
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_builtin_latch_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::string& pb_name,
+int add_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const std::string& pb_name,
                                         const bool& verbose) {
   int num_err = 0;
 
@@ -81,7 +81,7 @@ int add_builtin_latch_primitive_pb_type(arkangel::ArchGen& arch_gen, const std::
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_builtin_lut_primitive_pb_type(arkangel::ArchGen& arch_gen, const short& lut_size,
+int add_builtin_lut_primitive_pb_type(arcxpress::ArchGen& arch_gen, const short& lut_size,
                                       const std::string& mode_bits, const bool& verbose) {
   int num_err = 0;
   VTR_LOGV(verbose, "Adding primitive pb_types for VPR built-in LUTs...\n");
@@ -121,4 +121,4 @@ int add_builtin_lut_primitive_pb_type(arkangel::ArchGen& arch_gen, const short& 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

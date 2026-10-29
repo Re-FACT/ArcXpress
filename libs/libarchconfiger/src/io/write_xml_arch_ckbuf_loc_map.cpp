@@ -15,7 +15,7 @@
 #include "write_xml_arch_ckbuf_loc_map.h"
 #include "write_xml_clk_loc_map.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /********************************************************************
  * A writer to output a VPR arch object to XML format
@@ -39,4 +39,4 @@ int write_xml_arch_ckbuf_loc_map(const char* fname, const ArchGen& arch_gen,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

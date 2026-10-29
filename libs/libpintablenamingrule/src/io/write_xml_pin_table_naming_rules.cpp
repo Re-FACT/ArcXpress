@@ -18,7 +18,7 @@
 #include "pugixml.hpp"
 #include "write_xml_pin_table_naming_rules.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int write_xml_borderline(pugi::xml_node& root_node, const IoCoordData& io_coord,
                                 const e_side& b_side, const IoBorderlineId& b_idx) {
@@ -73,4 +73,4 @@ int write_xml_pin_table_naming_rules(const char* fname, const IoCoordData& io_co
   return err_code ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

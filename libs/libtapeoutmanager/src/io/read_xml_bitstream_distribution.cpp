@@ -23,7 +23,7 @@
 #include "read_xml_util.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_region(pugi::xml_node& xml_region, const pugiutil::loc_data& loc_data,
                            BitstreamDistribution& bit_dist) {
@@ -117,4 +117,4 @@ int read_xml_bitstream_distribution(const std::string& fname, BitstreamDistribut
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

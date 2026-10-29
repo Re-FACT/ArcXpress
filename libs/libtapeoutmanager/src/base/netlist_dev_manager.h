@@ -12,11 +12,11 @@
 #include "tapeout_manager.h"
 #include "tile_qor.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class NetlistDevManager {
@@ -409,4 +409,4 @@ class NetlistDevManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

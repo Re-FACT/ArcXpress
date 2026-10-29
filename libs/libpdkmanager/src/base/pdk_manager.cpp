@@ -6,7 +6,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 PdkManager::PdkManager() {
   is_valid_ = false;
@@ -667,4 +667,4 @@ float PdkManager::find_sclib_cpp_by_name(const std::string& sclib_name) const {
   return sclib_cpp_[sclib_id];
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

@@ -7,7 +7,7 @@
 #include "vtr_strong_id.h"
 #include "vtr_vector.h"
 
-namespace arkangel {
+namespace arcxpress {
 class GlobalPortLoc {
  public:
   GlobalPortLoc() { return; }
@@ -65,4 +65,4 @@ class GlobalPortLoc {
   vtr::vector<GlobalPortId, bool> global_port_is_assigned_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

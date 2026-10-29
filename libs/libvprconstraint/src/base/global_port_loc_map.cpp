@@ -6,7 +6,7 @@
 #include "vtr_log.h"
 #include "vtr_util.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 GlobalPortLoc::GlobalPortId_range GlobalPortLoc::global_ports() const {
   return vtr::make_range(global_port_ids_.begin(), global_port_ids_.end());
@@ -157,4 +157,4 @@ bool GlobalPortLoc::valid_global_port_id(GlobalPortId port_id) const {
   return (size_t(port_id) < global_port_ids_.size()) && (port_id == global_port_ids_[port_id]);
 }
 
-};  // namespace arkangel
+};  // namespace arcxpress

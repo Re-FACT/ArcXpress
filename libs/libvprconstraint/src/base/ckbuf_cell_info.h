@@ -7,7 +7,7 @@
 #include "vtr_strong_id.h"
 #include "vtr_vector.h"
 
-namespace arkangel {
+namespace arcxpress {
 class CkbufInfo {
  public:
   CkbufInfo() { return; }
@@ -61,4 +61,4 @@ class CkbufInfo {
   vtr::vector<CkbufId, vtr::Point<int>> ckbuf_assigned_location_;
   vtr::vector<CkbufId, int> ckbuf_assigned_subtile_;
 };
-}  // namespace arkangel
+}  // namespace arcxpress

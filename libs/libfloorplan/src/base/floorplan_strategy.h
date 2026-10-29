@@ -8,11 +8,11 @@
 #include "physical_types.h"
 #include "vtr_geometry.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class FloorplanStrategy {
@@ -138,4 +138,4 @@ class FloorplanStrategy {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

@@ -13,11 +13,11 @@
 #include "tapeout_manager_fwd.h"
 #include "vtr_geometry.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class TapeoutManager {
@@ -653,7 +653,7 @@ class TapeoutManager {
   std::string author_;             /* Author of pdk file */
   std::string date_created_;       /* the date that created for the first time */
   std::string date_last_modified_; /* the date that is lastly modified */
-  std::string tool_version_;       /* the version of ArkAngel that creates the project */
+  std::string tool_version_;       /* the version of ArcXpress that creates the project */
 
   /* Boot type */
   BootConfig::e_boot_type boot_type_;
@@ -793,6 +793,6 @@ class TapeoutManager {
   mutable bool is_valid_boundary_timing_file_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

@@ -8,7 +8,7 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 FabricSynthStrategy::FabricSynthStrategy(const std::string& root_path, const std::string& tech_name,
                                          const std::string& corner) {
@@ -506,4 +506,4 @@ std::vector<std::string> FabricSynthStrategy::target_libs() const {
   return ret;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

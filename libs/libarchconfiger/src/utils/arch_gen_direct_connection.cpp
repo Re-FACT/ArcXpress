@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 int add_full_capable_direct_connections(VprArchLayout& va_layout, const std::string& clb_tile,
                                         const std::string& clb_eq_input_port_prefix,
@@ -51,4 +51,4 @@ int add_full_capable_direct_connections(VprArchLayout& va_layout, const std::str
   return num_err;
 }
 
-}  // namespace arkangel
+}  // namespace arcxpress

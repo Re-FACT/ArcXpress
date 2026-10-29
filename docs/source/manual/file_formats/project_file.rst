@@ -20,11 +20,11 @@ The reserved words can be used in defining file paths
 
 .. option:: ${PWD}
 
-  The current working directory when running ArkAngel. This keyword will be replaced during runtime
+  The current working directory when running ArcXpress. This keyword will be replaced during runtime
 
 .. option:: ${ROOT_PATH}
 
-  The root path which starting ArkAngel
+  The root path which starting ArcXpress
 
 General Syntax
 --------------
@@ -60,7 +60,7 @@ Time Stamps
 
 .. option:: tool_version="<string>"
 
-  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArkAngel.
+  The tool version when the project file should be used. This is to avoid mis-use of project files across different versions of ArcXpress.
 
 PDK Configuration
 -----------------
@@ -90,7 +90,7 @@ Specify the path to the benchmark configuration file. See details in :ref:`file_
 
   Specify the list of benchmark names that should be disabled for architecture evaluation and design verification. Note that the benchmark names should be valid ones defined in the benchmark files.
 
-.. note:: Use the syntax ``disabled`` in the project file results in the same impact as running command ``disable_benchmark`` (See details in :ref:`arkangel_project_commands_disable_benchmark`)
+.. note:: Use the syntax ``disabled`` in the project file results in the same impact as running command ``disable_benchmark`` (See details in :ref:`arcxpress_project_commands_disable_benchmark`)
 
 .. _file_format_project_file_corner_map:
 
@@ -119,7 +119,7 @@ User-defined corners can be defined under the node ``corner_map``.
 
   Specify the list of corner names that should be disabled. 
 
-.. note:: Use the syntax ``disabled`` in the project file results in the same impact as running command ``disable_corner`` (See details in :ref:`arkangel_project_commands_disable_corner`)
+.. note:: Use the syntax ``disabled`` in the project file results in the same impact as running command ``disable_corner`` (See details in :ref:`arcxpress_project_commands_disable_corner`)
 
 Boundary Timing
 ---------------
@@ -130,7 +130,7 @@ Boundary timing files per corner can be defined under the node ``boundary_timing
 
 .. option:: corner="<string>"
 
-  The unique name of the corner to which the boundary timing is associated to. The corner name can be found through command :ref`arkangel_project_commands_report_corners`. 
+  The unique name of the corner to which the boundary timing is associated to. The corner name can be found through command :ref`arcxpress_project_commands_report_corners`. 
 
 Arch Settings
 -------------

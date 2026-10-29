@@ -20,8 +20,8 @@
 #endif
 
 #include "arch_aggregator.h"
-#include "arkangel_file_os.h"
-#include "arkangel_report_util.h"
+#include "arcxpress_file_os.h"
+#include "arcxpress_report_util.h"
 #include "blif_param2vpr_constraint.h"
 #include "command_exit_codes.h"
 #include "file_md5_manager.h"
@@ -40,7 +40,7 @@
 #include "vtr_log.h"
 #include "write_xml_tapeout_manager_custom_constraints.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 ArchEvalManager::ArchEvalManager(const TapeoutManager& to_mgr, const std::string& run_name,
                                  const BenchmarkManager& bm_mgr)
@@ -735,13 +735,13 @@ bool ArchEvalManager::valid_script_type(const ArchEvalManager::e_script_type& f_
 
 bool ArchEvalManager::valid_openfpga_script_type(
   const ArchEvalManager::e_script_type& f_type) const {
-  return size_t(ArchEvalManager::e_script_type::OPENFPGA_SCRIPT_BITGEN) <= size_t(f_type) <
-         size_t(ArchEvalManager::e_script_type::NUM_TYPES);
+  return size_t(ArchEvalManager::e_script_type::OPENFPGA_SCRIPT_BITGEN) <= size_t(f_type) &&
+         size_t(f_type) < size_t(ArchEvalManager::e_script_type::NUM_TYPES);
 }
 
 bool ArchEvalManager::valid_yosys_script_type(const ArchEvalManager::e_script_type& f_type) const {
-  return size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SWEEP_K) <= size_t(f_type) <=
-         size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SYNTH);
+  return size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SWEEP_K) <= size_t(f_type) &&
+         size_t(f_type) <= size_t(ArchEvalManager::e_script_type::YOSYS_SCRIPT_SYNTH);
 }
 
 bool ArchEvalManager::valid_file_type(const ArchEvalManager::e_file_type& f_type) const {
@@ -2008,4 +2008,4 @@ int ArchEvalManager::gen_report_bitgen_qor(const std::string& ext_fname,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

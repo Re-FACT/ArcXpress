@@ -1,7 +1,7 @@
 File Formats
 ------------
 
-ArkAngel widely uses XML format for interchangable files
+ArcXpress widely uses XML format for interchangable files
 
 
 .. _file_formats:

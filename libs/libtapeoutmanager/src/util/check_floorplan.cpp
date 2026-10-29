@@ -5,7 +5,7 @@
 #include "command_exit_codes.h"
 #include "vtr_log.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /* All the CPP of standard cell libraries selected in synthesis strategy should be the same */
 int check_synth_sclib_cpp(const PdkManager& pdk_mgr, const FabricSynthStrategy& synth_strtg,
@@ -84,4 +84,4 @@ int init_floorplan_from_synth_sclib(const PdkManager& pdk_mgr,
   return openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

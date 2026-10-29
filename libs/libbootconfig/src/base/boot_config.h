@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class BootConfig {
@@ -103,7 +103,7 @@ class BootConfig {
                                              created for the first time */
   std::string
     date_last_modified_; /* For each file, the date that the benchmark suite is lastly modified */
-  std::string tool_version_; /* For each file, the version of ArkAngel that creates the project */
+  std::string tool_version_; /* For each file, the version of ArcXpress that creates the project */
 
   e_boot_type boot_type_;
 
@@ -118,4 +118,4 @@ class BootConfig {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress

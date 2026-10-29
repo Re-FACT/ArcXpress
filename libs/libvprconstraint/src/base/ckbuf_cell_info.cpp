@@ -5,7 +5,7 @@
 #include "vtr_log.h"
 #include "vtr_util.h"
 
-namespace arkangel {
+namespace arcxpress {
 
 /*This files stores information read from cell_map*/
 CkbufInfo::CkbufId_range CkbufInfo::ckbufs() const {
@@ -108,4 +108,4 @@ bool CkbufInfo::valid_ckbuf_id(CkbufId ckbuf_id) const {
   return (size_t(ckbuf_id) < ckbuf_ids_.size()) && (ckbuf_id == ckbuf_ids_[ckbuf_id]);
 }
 
-};  // namespace arkangel
+};  // namespace arcxpress

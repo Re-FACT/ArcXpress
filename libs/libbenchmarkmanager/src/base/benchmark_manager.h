@@ -9,11 +9,11 @@
 #include "benchmark_manager_fwd.h"
 #include "vtr_vector.h"
 
-/* namespace arkangel begins */
-namespace arkangel {
+/* namespace arcxpress begins */
+namespace arcxpress {
 
 /**
- * The data structure stores data for ArkAngel benchmark suites
+ * The data structure stores data for ArcXpress benchmark suites
  * It is used to provide necessary information to categorize spot benchmark files
  */
 class BenchmarkManager {
@@ -161,7 +161,7 @@ class BenchmarkManager {
   std::vector<std::string>
     date_last_modified_; /* For each file, the date that the benchmark suite is lastly modified */
   std::vector<std::string>
-    tool_version_; /* For each file, the version of ArkAngel that creates the project */
+    tool_version_; /* For each file, the version of ArcXpress that creates the project */
 
   /* A list of benchmark suites */
   vtr::vector<BenchmarkSuiteId, BenchmarkSuiteId> suite_ids_;
@@ -195,6 +195,6 @@ class BenchmarkManager {
   mutable bool is_valid_;
 };
 
-}  // namespace arkangel
+}  // namespace arcxpress
 
 #endif

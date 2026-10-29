@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
 
-project("arkangel_shell")
+project("ax_shell")
 
 file(GLOB_RECURSE EXEC_SOURCE main.cpp)
-file(GLOB_RECURSE LAUNCHER_SOURCE aaee.cpp)
+file(GLOB_RECURSE LAUNCHER_SOURCE arcxpress.cpp)
 file(GLOB_RECURSE LIB_SOURCES */*.cpp)
 file(GLOB_RECURSE LIB_HEADERS */*.h)
 files_to_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
@@ -12,75 +12,70 @@ files_to_dirs(LIB_HEADERS LIB_INCLUDE_DIRS)
 list(REMOVE_ITEM LIB_SOURCES ${EXEC_SOURCE})
 list(REMOVE_ITEM LIB_SOURCES ${LAUNCHER_SOURCE})
 
-if (ARKANGEL_WITH_SWIG)
+if (ARCXPRESS_WITH_SWIG)
 # SWIG library
-  SwigLib(NAME      arkangel_shell
+  SwigLib(NAME      ax_shell
           NAMESPACE std
           LANGUAGE  tcl
-          I_FILE    interface/arkangel_shell.i)
-  target_include_directories(arkangel_shell PUBLIC ${LIB_INCLUDE_DIRS})
-  target_link_libraries(arkangel_shell
-                        libarkangel)
+          I_FILE    interface/ax_shell.i)
+  target_include_directories(ax_shell PUBLIC ${LIB_INCLUDE_DIRS})
+  target_link_libraries(ax_shell
+                        libarcxpress)
 endif()
 
 #Create the library
 #Static linked library for other C++ libraries
-add_library(libarkangel STATIC
+add_library(libarcxpress STATIC
             ${LIB_HEADERS}
             ${LIB_SOURCES})
-target_include_directories(libarkangel PUBLIC ${LIB_INCLUDE_DIRS})
-set_target_properties(libarkangel PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
+target_include_directories(libarcxpress PUBLIC ${LIB_INCLUDE_DIRS})
+set_target_properties(libarcxpress PROPERTIES PREFIX "") #Avoid extra 'lib' prefix
 
 #Specify link-time dependancies
-target_link_libraries(libarkangel
+target_link_libraries(libarcxpress
                       libtapeoutmanager
                       libbenchmarkmanager
                       libpdkmanager
                       libbootconfig
-                      libarkangelutil
+                      libarcxpressutil
                       libsignalhandlermanager
                       libvprstats
                       libarchconfiger
                       libfilesignature
                       libopenfpga)
 
-if (BUILD_ARKANGEL_WITH_LICENSE)
-target_link_libraries(libarkangel
-                      liblicensemanager)
-endif()
-
 #Create the test executable
-add_executable(arkangel ${EXEC_SOURCE})
-target_link_libraries(arkangel libarkangel)
+add_executable(ax_shell ${EXEC_SOURCE})
+target_link_libraries(ax_shell libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
 if (MSVC)
-    target_compile_options(arkangel PRIVATE "/showIncludes")
+    target_compile_options(ax_shell PRIVATE "/showIncludes")
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARKANGEL_USES_IPO arkangel INTERPROCEDURAL_OPTIMIZATION)
-if (ARKANGEL_USES_IPO)
-    set_property(TARGET arkangel APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
+get_target_property(ARCXPRESS_USES_IPO ax_shell INTERPROCEDURAL_OPTIMIZATION)
+if (ARCXPRESS_USES_IPO)
+    set_property(TARGET ax_shell APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
 # Create launcher
-add_executable(aaee ${LAUNCHER_SOURCE})
-target_link_libraries(aaee libarkangel)
+add_executable(arcxpress ${LAUNCHER_SOURCE})
+target_link_libraries(arcxpress libarcxpress)
 
 # Show nested tree for header file being read for debugging compilation error when occurred
 if (MSVC)
-    target_compile_options(aaee PRIVATE "/showIncludes")
+    target_compile_options(arcxpress PRIVATE "/showIncludes")
 endif()
 
 #Suppress IPO link warnings if IPO is enabled
-get_target_property(ARKANGEL_USES_IPO aaee INTERPROCEDURAL_OPTIMIZATION)
-if (ARKANGEL_USES_IPO)
-    set_property(TARGET aaee APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
+get_target_property(ARCXPRESS_USES_IPO arcxpress INTERPROCEDURAL_OPTIMIZATION)
+if (ARCXPRESS_USES_IPO)
+    set_property(TARGET arcxpress APPEND PROPERTY LINK_FLAGS ${IPO_LINK_WARN_SUPRESS_FLAGS})
 endif()
 
 # Install targets
-install(TARGETS libarkangel arkangel aaee
+install(TARGETS libarcxpress arcxpress ax_shell
         DESTINATION bin
         COMPONENT engine_package
 )

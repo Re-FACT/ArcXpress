@@ -2,12 +2,12 @@
 
 #include <filesystem>
 
-#include "arkangel_constants.h"
-#include "arkangel_sys_env.h"
+#include "arcxpress_constants.h"
+#include "arcxpress_sys_env.h"
 #include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 BenchmarkManager::BenchmarkManager() {
   is_valid_ = false;
@@ -490,8 +490,8 @@ std::string BenchmarkManager::design_source_file_type_all2str() const {
 }
 
 bool BenchmarkManager::valid_design_source_file_type(const e_file_type& type) const {
-  return size_t(BenchmarkManager::e_file_type::VERILOG) <= size_t(type) <=
-         size_t(BenchmarkManager::e_file_type::BLIF);
+  return size_t(BenchmarkManager::e_file_type::VERILOG) <= size_t(type) &&
+         size_t(type) <= size_t(BenchmarkManager::e_file_type::BLIF);
 }
 
 BenchmarkManager::e_file_type BenchmarkManager::str2cocotb_file_type(const std::string& str,
@@ -529,8 +529,8 @@ std::string BenchmarkManager::cocotb_file_type_all2str() const {
 }
 
 bool BenchmarkManager::valid_cocotb_file_type(const e_file_type& type) const {
-  return size_t(BenchmarkManager::e_file_type::COCOTB_SOURCE) <= size_t(type) <=
-         size_t(BenchmarkManager::e_file_type::COCOTB_MAKEFILE);
+  return size_t(BenchmarkManager::e_file_type::COCOTB_SOURCE) <= size_t(type) &&
+         size_t(type) <= size_t(BenchmarkManager::e_file_type::COCOTB_MAKEFILE);
 }
 
 BenchmarkManager::e_file_type BenchmarkManager::str2constraint_file_type(
@@ -568,8 +568,8 @@ std::string BenchmarkManager::constraint_file_type_all2str() const {
 }
 
 bool BenchmarkManager::valid_constraint_file_type(const e_file_type& type) const {
-  return size_t(BenchmarkManager::e_file_type::SDC) <= size_t(type) <=
-         size_t(BenchmarkManager::e_file_type::PCF);
+  return size_t(BenchmarkManager::e_file_type::SDC) <= size_t(type) &&
+         size_t(type) <= size_t(BenchmarkManager::e_file_type::PCF);
 }
 
 void BenchmarkManager::clear() {
@@ -645,4 +645,4 @@ BenchmarkSuiteId BenchmarkManager::find_benchmark_suite(const std::string& bench
   return benchmark_suite_ids_[bm_id];
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

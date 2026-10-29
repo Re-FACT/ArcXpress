@@ -1,1 +1,1 @@
-../../../../libs/OpenFPGA/docs/source/manual/file_formats/fabric_key.rst
+../../../../thirdparty/OpenFPGA/docs/source/manual/file_formats/fabric_key.rst

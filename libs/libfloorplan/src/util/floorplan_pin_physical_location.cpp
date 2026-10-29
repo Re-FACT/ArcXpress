@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 static int read_xml_one_io_location(pugi::xml_node& xml_io, const pugiutil::loc_data& loc_data,
                                     TileQor& tile_qor) {
@@ -227,4 +227,4 @@ int floorplan_tile_pin_physical_location(const FloorplanStrategy& flrpln_strtg,
   return status;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

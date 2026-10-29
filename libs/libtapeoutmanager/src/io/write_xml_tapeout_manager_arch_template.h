@@ -8,9 +8,9 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 int write_xml_tapeout_manager_arch_template(const char* fname, const TapeoutManager& to_mgr,
                                             const bool& keep_reserved_word);
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

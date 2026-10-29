@@ -24,7 +24,7 @@ target_link_libraries(libtapeoutmanager
                       libopenfpgautil
                       libvtrutil
                       libarchopenfpga
-                      libarkangelutil
+                      libarcxpressutil
                       libbootconfig
                       yaml-cpp
                       libvprstats

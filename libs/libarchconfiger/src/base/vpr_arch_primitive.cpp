@@ -12,7 +12,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 VprArchPrimitive::VprArchPrimitive(const std::string& name) {
   name_ = name;
@@ -1037,4 +1037,4 @@ void VprArchPrimitive::add_mode_bit_tag_key_pair(const std::string& tag, const s
   mode_bit_tag2keys_[tag] = key;
 }
 
-}  // End namespace arkangel
+}  // End namespace arcxpress

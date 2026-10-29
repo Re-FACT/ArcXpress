@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
-namespace arkangel {
+namespace arcxpress {
 
 // yaml tags. when we read in task.yaml, we will use these tags to parse the yaml file
 namespace e_floorplan_yaml_tag {
@@ -295,4 +295,4 @@ struct FloorplanParams {
   ClockInfo clock_info;  // redundant data structure
   TileParams tile_params;
 };
-}  // namespace arkangel
+}  // namespace arcxpress

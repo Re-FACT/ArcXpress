@@ -1,5 +1,5 @@
 [submodule "libs/OpenFPGA"]
-	path = libs/OpenFPGA
+	path = thirdparty/OpenFPGA
 	url = https://github.com/lnis-uofu/OpenFPGA.git
 [submodule "etc/utils/Qver"]
 	path = etc/utils/Qver
@@ -10,3 +10,6 @@
 [submodule "etc/benchmarks/ubm"]
 	path = etc/benchmarks/ubm
 	url = https://github.com/tangxifan/ubm.git
+[submodule "thirdparty/Yosuf"]
+	path = thirdparty/Yosuf
+	url = https://github.com/Re-FACT/Yosuf.git

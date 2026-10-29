@@ -3,7 +3,7 @@
 Tapeout Flow
 ------------
 
-As shown in :numref:`fig_aaee_hardip_flow`,  ArkAngel provides a complete design flow to develop an eFPGA IP, starting from architecture exploration to layout generation.
+As shown in :numref:`fig_aaee_hardip_flow`,  ArcXpress provides a complete design flow to develop an eFPGA IP, starting from architecture exploration to layout generation.
 In addition to the final layout, the design flow covers all the aspects releated to the eFPGA IP, e.g., benchmarking, design verification, QoR back-annotation.
 To formalize the process, the tapeout flow consists of a number of steps:
 

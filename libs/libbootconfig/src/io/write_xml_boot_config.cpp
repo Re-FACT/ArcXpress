@@ -17,7 +17,7 @@
 #include "pugixml.hpp"
 #include "write_xml_boot_config.h"
 
-namespace arkangel {  // Begin namespace arkangel
+namespace arcxpress {  // Begin namespace arcxpress
 
 /********************************************************************
  * Only the time stamp of the first file that is read in will be outputted!
@@ -90,4 +90,4 @@ int write_xml_boot_config(const char* fname, const BootConfig& boot_cfg) {
   return err_code;
 }
 
-}  // End of namespace arkangel
+}  // End of namespace arcxpress

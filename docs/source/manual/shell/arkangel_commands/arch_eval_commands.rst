@@ -1,4 +1,4 @@
-.. _arkangel_arch_eval_commands:
+.. _arcxpress_arch_eval_commands:
 
 Arch Evaluation Commands
 ------------------------
@@ -22,7 +22,7 @@ eval_arch
 
 .. option:: --arch_run <string>
 
-  Specify the run id of architecture development. See details in :ref:`arkangel_arch_dev_commands`. Note that the architecture development should be finished successfully. If not specifed, the latest run will be automatically consideried.
+  Specify the run id of architecture development. See details in :ref:`arcxpress_arch_dev_commands`. Note that the architecture development should be finished successfully. If not specifed, the latest run will be automatically consideried.
 
 .. option:: --force_copy_arch_data
 
@@ -46,7 +46,7 @@ eval_arch
 
   Control the verbosity of the messages. For debugging usage, recommend to set to ``1``. By default, it is `0``, leading to minimum logging messages.
 
-.. _arkangel_dv_commands_run_benchmark_simulation:
+.. _arcxpress_dv_commands_run_benchmark_simulation:
 
 run_benchmark_simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~
