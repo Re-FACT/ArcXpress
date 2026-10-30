@@ -8,7 +8,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mode,
                          const std::string& ff_pb_name, const bool& add_ipack_pattern,
@@ -20,6 +20,6 @@ int bind_ff_pb_type_to_physical(arcxpress::ArchGen& arch_gen, const std::string&
 
 int add_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb, const bool& verbose);
 
-int add_sofahd_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose);
+int add_mosofa_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose);
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

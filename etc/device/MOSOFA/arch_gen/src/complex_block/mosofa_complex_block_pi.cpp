@@ -7,64 +7,15 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofahd_complex_block_pi.h"
-#include "sofahd_constants.h"
-#include "sofahd_naming.h"
+#include "mosofa_complex_block_pi.h"
+#include "mosofa_constants.h"
+#include "mosofa_naming.h"
 #include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD {
-
-static int add_ioffi_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb,
-                             const bool& verbose) {
-  int num_err = 0;
-
-  VTR_LOGV(verbose, "Adding intermediate pb_type '%s'\n", ff_pb.c_str());
-  num_err += arch_gen.add_pb_type(ff_pb) ? 0 : 1;
-  openfpga::BasicPort d_port("D", 1);
-  openfpga::BasicPort clr_port("R", 1);
-  openfpga::BasicPort q_port("Q", 1);
-  openfpga::BasicPort ck_port("C", 1);
-  num_err +=
-    arch_gen.add_pb_type_port(ff_pb, d_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(ff_pb, q_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(ff_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
-
-  Mmffisc2Gen mmff_gen(OP2PHY_PB_TYPE_MAP.at(ff_pb.c_str()));
-  std::string tag = mmff_gen.vpr_physical_model_name();
-  std::string phy_pb_type_name = arch_gen.find_primitive_pb_type_name(tag);
-
-  { /* Latch */
-    std::string pb_mode =
-      arcxpress::gen_pb_mode_name(ff_pb, std::string(OPERATING_BUILTIN_LATCH_NAME));
-    num_err += arch_gen.add_pb_type_mode(ff_pb, pb_mode) ? 0 : 1;
-    std::string latch_pb = gen_latch_pb_name(ff_pb);
-    num_err += arch_gen.add_pb_type_to_mode(pb_mode, latch_pb, 1) ? 0 : 1;
-    num_err += wire_ff_pb_type_mode(arch_gen, pb_mode, latch_pb, true, false);
-    /* Set binding to the its physical pb_type */
-    num_err += bind_ff_pb_type_to_physical(arch_gen, ff_pb, latch_pb, phy_pb_type_name, verbose);
-  }
-
-  /* Add mmff primitive */
-  for (auto pmtv : mmff_gen.vpr_arch_primitives(false)) {
-    std::string pb_mode = arcxpress::gen_pb_mode_name(ff_pb, pmtv.name());
-    num_err += arch_gen.add_pb_type_mode(ff_pb, pb_mode) ? 0 : 1;
-    num_err += arch_gen.add_pb_type_to_mode(pb_mode, pmtv.pb_type_name(tag), 1) ? 0 : 1;
-    num_err += wire_ff_pb_type_mode(arch_gen, pb_mode, pmtv.pb_type_name(tag), true, false);
-    /* Set binding to the its physical pb_type */
-    num_err += bind_ff_pb_type_to_physical(arch_gen, ff_pb, pmtv.pb_type_name(tag),
-                                           phy_pb_type_name, verbose);
-  }
-  VTR_LOGV(verbose, "Done\n");
-
-  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
-}
+namespace MOSOFA {
 
 static int assemble_pi_complex_block_physical_mode(
   arcxpress::ArchGen& arch_gen, const std::string& top_pb, const std::string& phy_pb_name,
@@ -164,4 +115,4 @@ int assemble_pi_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose)
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

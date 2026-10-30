@@ -7,10 +7,10 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofahd_complex_block_clb.h"
-#include "sofahd_complex_block_ff.h"
-#include "sofahd_constants.h"
-#include "sofahd_naming.h"
+#include "mosofa_complex_block_clb.h"
+#include "mosofa_complex_block_ff.h"
+#include "mosofa_constants.h"
+#include "mosofa_naming.h"
 #include "command_exit_codes.h"
 #include "fracff_gen.h"
 #include "vpr_arch_layout.h"
@@ -18,7 +18,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD {
+namespace MOSOFA {
 
 static int add_frac_logic_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   int num_err = 0;
@@ -988,4 +988,4 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

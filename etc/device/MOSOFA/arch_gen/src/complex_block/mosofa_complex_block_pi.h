@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 int assemble_pi_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose);
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

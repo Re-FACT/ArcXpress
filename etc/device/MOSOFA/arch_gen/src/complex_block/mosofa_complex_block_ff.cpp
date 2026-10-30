@@ -8,16 +8,16 @@
 
 /* Headers from vtr util library */
 #include "add_hidden_primitive_pb_types.h"
-#include "sofahd_complex_block_ff.h"
-#include "sofahd_constants.h"
-#include "sofahd_naming.h"
+#include "mosofa_complex_block_ff.h"
+#include "mosofa_constants.h"
+#include "mosofa_naming.h"
 #include "command_exit_codes.h"
 #include "fracff_gen.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD { // begin namespace SofaHD
+namespace MOSOFA { // begin namespace MOSOFA
 
 /* A unified function to do wiring between ff pb_type and its parent pb_type under a mode */
 int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mode,
@@ -182,11 +182,11 @@ int add_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb, const
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_sofahd_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
+int add_mosofa_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   int num_err = 0;
   VTR_LOGV(verbose, "Adding pb_types for vpr built-in model 'latches'...\n");
   for (auto scff_name : ALL_REGULAR_SCFF_NAMES) {
-    std::string pb_name = SofaHD::gen_latch_pb_name(scff_name);
+    std::string pb_name = MOSOFA::gen_latch_pb_name(scff_name);
     num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
     FracffGen fff_gen(scff_name);
     std::string mode_bits = fff_gen.default_mode_bits();
@@ -196,4 +196,4 @@ int add_sofahd_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, con
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // end namespace SofaHD
+}  // end namespace MOSOFA

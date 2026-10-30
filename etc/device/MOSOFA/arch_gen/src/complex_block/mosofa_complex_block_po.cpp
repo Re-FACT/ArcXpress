@@ -7,16 +7,16 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofahd_complex_block_po.h"
-#include "sofahd_constants.h"
-#include "sofahd_naming.h"
+#include "mosofa_complex_block_po.h"
+#include "mosofa_constants.h"
+#include "mosofa_naming.h"
 #include "command_exit_codes.h"
 #include "vpr_arch_layout.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD { // begin namespace SofaHD
+namespace MOSOFA { // begin namespace MOSOFA
 
 static int assemble_po_complex_block_physical_mode(
   arcxpress::ArchGen& arch_gen, const std::string& top_pb, const std::string& phy_pb_name,
@@ -125,4 +125,4 @@ int assemble_po_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose)
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace SofaHD
+}  // namespace MOSOFA
