@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace alkaid {  // Begin namespace alkaidC
+namespace SofaHD {  // Begin namespace SofaHD
 
-int assemble_clb_complex_block(arkangel::ArchGen& arch_gen, const bool& verbose);
+int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose);
 
-}  // namespace alkaid
+}  // namespace SofaHD
