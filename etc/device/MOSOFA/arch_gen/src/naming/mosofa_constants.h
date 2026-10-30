@@ -2,9 +2,10 @@
 
 #include <array>
 
-/** Common names for SOFA series. Each device may have difference on models */
-
-namespace sofa {
+/** Common names for SOFA series. Each device may have difference on models 
+ *  To be self-contained and conflict-free, each device should have a dedicated namespace
+ */
+namespace MOSOFA { // begin namespace MOSOFA
 
 /* Vpr models */
 /* Primary inputs */
