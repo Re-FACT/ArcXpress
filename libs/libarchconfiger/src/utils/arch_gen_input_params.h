@@ -1,9 +1,10 @@
 #pragma once
 
 #include <map>
+
 #include "physical_types.h"
 
-namespace arcxpress { // begin namespace arcxpress
+namespace arcxpress {  // begin namespace arcxpress
 
 /* Data packet */
 struct ArchGenInputParams {
@@ -18,4 +19,4 @@ struct ArchGenInputParams {
   bool sync_dp_dimension;
 };
 
-} // end namespace arcxpress
+}  // end namespace arcxpress

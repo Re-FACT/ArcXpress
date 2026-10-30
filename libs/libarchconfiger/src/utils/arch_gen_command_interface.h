@@ -1,18 +1,19 @@
 #pragma once
 
-#include <vector>
-#include <string>
 #include <map>
+#include <string>
+#include <vector>
+
+#include "arch_gen.h"
+#include "arch_gen_input_params.h"
 #include "command.h"
 #include "command_context.h"
-#include "arch_gen.h"
 #include "physical_types.h"
-#include "arch_gen_input_params.h"
 
-namespace arcxpress { // begin namespace arcxpress
+namespace arcxpress {  // begin namespace arcxpress
 
 class ArchGenCommandInterface {
-public:
+ public:
   /**
    * Parse command-line arguments and populate the command context.
    * Returns true on success, or false if parsing fails.
@@ -30,7 +31,7 @@ public:
    */
   int write_xml_templates(const ArchGen& arch_gen) const;
 
-private: /* internal data */
+ private: /* internal data */
   ArchGenInputParams params_;
   std::string vpr_arch_fpath_;
   std::string of_arch_fpath_;
@@ -41,4 +42,4 @@ private: /* internal data */
   std::string ut_ckbuf_loc_map_fpath_;
 };
 
-} // end namespace arcxpress
+}  // end namespace arcxpress
