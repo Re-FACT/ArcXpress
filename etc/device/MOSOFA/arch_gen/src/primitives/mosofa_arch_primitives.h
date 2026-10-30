@@ -8,8 +8,8 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen);
 
-}  // End of namespace SofaHD
+}  // End of namespace MOSOFA

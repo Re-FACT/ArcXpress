@@ -14,7 +14,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace Sofa { // begin namespace Sofa
+namespace MOSOFA { // begin namespace MOSOFA
 
 int add_pi_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   int num_err = 0;
@@ -44,4 +44,4 @@ int add_po_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace Sofa
+}  // namespace MOSOFA

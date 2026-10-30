@@ -7,7 +7,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 FracffGen::FracffGen(const std::string& name) {
   vpr_physical_model_name_ = name;
@@ -88,4 +88,4 @@ arcxpress::VprArchPrimitive FracffGen::vpr_arch_physical_primitive() const {
   return pmtv;
 }
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

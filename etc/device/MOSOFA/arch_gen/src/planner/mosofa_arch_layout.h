@@ -8,7 +8,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 /* pb_type name, circuit model name */
 typedef std::tuple<std::string, std::string> PhyPbInfo;
@@ -21,4 +21,4 @@ int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
                          const int& num_pclks, const int& num_regions,
                          const bool& sync_dp_dimension);
 
-}  // End of namespace SofaHD
+}  // End of namespace MOSOFA

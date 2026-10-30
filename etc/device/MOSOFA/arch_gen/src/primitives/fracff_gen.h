@@ -6,7 +6,7 @@
 
 #include "vpr_arch_primitive.h"
 
-namespace SofaHD { /* namespace SofaHD begins */
+namespace MOSOFA { /* namespace MOSOFA begins */
 
 /**
  * Fracturable ff primitive generator
@@ -33,4 +33,4 @@ class FracffGen {
   std::string vpr_physical_model_name_;
 };
 
-}  // namespace SofaHD
+}  // namespace MOSOFA

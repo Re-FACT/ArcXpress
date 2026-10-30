@@ -13,21 +13,21 @@
 #include "arch_gen_direct_connection.h"
 #include "add_hidden_primitive_pb_types.h"
 /* Headers from sofa common arch gen library */
-#include "sofahd_arch_layout_io.h"
-#include "sofahd_arch_layout_clb.h"
-#include "sofahd_prim_pb_type_timing.h"
-#include "sofahd_complex_block_po.h"
-#include "sofahd_complex_block_pi.h"
-#include "sofahd_complex_block_ff.h"
-#include "sofahd_complex_block_clb.h"
-#include "sofahd_constants.h"
-#include "sofahd_arch_layout.h"
-#include "sofahd_arch_planner.h"
+#include "mosofa_arch_layout_io_tile.h"
+#include "mosofa_arch_layout_clb_tile.h"
+#include "mosofa_prim_pb_type_timing.h"
+#include "mosofa_complex_block_po.h"
+#include "mosofa_complex_block_pi.h"
+#include "mosofa_complex_block_ff.h"
+#include "mosofa_complex_block_clb.h"
+#include "mosofa_constants.h"
+#include "mosofa_arch_layout.h"
+#include "mosofa_arch_planner.h"
 
-namespace SofaHD { // begin namespace SofaHD
+namespace MOSOFA { // begin namespace MOSOFA
 
 static int add_dimension_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
-                                            const SofaHD::ArchPlanner& arch_plan) {
+                                            const MOSOFA::ArchPlanner& arch_plan) {
   int num_err = 0;
 
   num_err += va_layout.set_dp_layout(arch_plan.dp_height(), arch_plan.dp_width()) ? 0: 1;
@@ -49,11 +49,12 @@ static int add_routing_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-static int add_direct_connect_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
+static int add_direct_connect_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+                                                 const MOSOFA::ArchPlanner& arch_plan) {
   int num_err = 0;
 
-  size_t num_fle = 12;
-  size_t lut_size = 5;
+  size_t num_fle = arch_plan.num_fle_per_clb();
+  size_t lut_size = arch_plan.max_lut_size();
   size_t num_outputs = num_fle * 2;
 
   std::string clb_tile = "clb";
@@ -84,22 +85,17 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen) {
   num_err += arch_gen.init_primitive_pb_type(true);
   /* Initialize hidden primitive pb_type from primitive lists */
   num_err += sofa::add_sofa_builtin_latch_primitive_pb_type(arch_gen, true);
-  num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 4, "1", true);
-  num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 5, "0", true);
+  num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 3, "1", true);
+  num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 4, "0", true);
   num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(sofa::PI_NAME), std::string(), true);
-  num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(sofa::PI_PDC_ECB1_NAME), "0000", true);
   num_err += arcxpress::add_builtin_po_primitive_pb_type(arch_gen, std::string(sofa::PO_NAME), true);
-  num_err += arcxpress::add_builtin_po_primitive_pb_type(arch_gen, std::string(sofa::PO_CKO_NAME), true);
   /* Initialize the primitive delay variables/numbers */
-  num_err += sofa::add_primitive_pb_type_timing(arch_gen, true);
+  num_err += add_primitive_pb_type_timing(arch_gen, true);
 
   /* Assemble top-level pb type */
-  num_err += sofa::assemble_ckbuf_complex_block(arch_gen, true);
-  num_err += sofa::assemble_po_complex_block(arch_gen, true);
-  num_err += sofa::assemble_po_cko_complex_block(arch_gen, true);
-  num_err += sofa::assemble_pi_complex_block(arch_gen, true);
-  num_err += sofa::assemble_pi_pdc_complex_block(arch_gen, true);
-  num_err += sofa::assemble_clb_complex_block(arch_gen, true);
+  num_err += assemble_po_complex_block(arch_gen, true);
+  num_err += assemble_pi_complex_block(arch_gen, true);
+  num_err += assemble_clb_complex_block(arch_gen, true);
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -120,7 +116,7 @@ int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
                          const bool& sync_dp_dimension) {
   int num_err = 0;
 
-  SofaHD::ArchPlanner arch_plan(height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
+  ArchPlanner arch_plan(height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
 
   arcxpress::VprArchLayout va_layout;
   va_layout.set_default_fc_in(0.15);
@@ -149,4 +145,4 @@ int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // End of namespace SofaHD
+}  // End of namespace MOSOFA

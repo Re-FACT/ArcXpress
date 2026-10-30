@@ -7,16 +7,17 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofa_arch_layout_clb.h"
-#include "sofa_constants.h"
+#include "mosofa_arch_layout_clb_subtile.h"
+#include "mosofa_constants.h"
 #include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace Sofa { // begin namespace Sofa
+namespace MOSOFA { // begin namespace MOSOFA
 
-int add_clb_pb_type_to_vpr_arch_layout(arkangel::VprArchLayout& va_layout) {
+int add_clb_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+                                       const ArchPlanner& arch_planner) {
   int num_err = 0;
 
   size_t num_fle = arch_planner.num_fle_per_clb();
@@ -25,13 +26,13 @@ int add_clb_pb_type_to_vpr_arch_layout(arkangel::VprArchLayout& va_layout) {
 
   std::string pb_type_name("clb");
   num_err +=
-    va_layout.create_pb_type(pb_type_name, arkangel::VprArchLayout::e_subtile_type::CLB) ? 0 : 1;
+    va_layout.create_pb_type(pb_type_name, arcxpress::VprArchLayout::e_subtile_type::CLB) ? 0 : 1;
   size_t equ_input_width = lut_size - 1;
   for (size_t iin = 0; iin < num_fle; ++iin) {
     std::string port_name = std::string("I") + std::to_string(iin);
     num_err +=
       va_layout.add_pb_type_port(pb_type_name, port_name,
-                                 arkangel::VprArchLayout::e_port_type::INPUT, equ_input_width)
+                                 arcxpress::VprArchLayout::e_port_type::INPUT, equ_input_width)
         ? 0
         : 1;
     num_err += va_layout.set_pb_type_port_logic_equivalent(pb_type_name, port_name, true) ? 0 : 1;
@@ -39,46 +40,47 @@ int add_clb_pb_type_to_vpr_arch_layout(arkangel::VprArchLayout& va_layout) {
   /* Last input of LUTs */
   std::string Ix_port_name = std::string("Ix");
   num_err += va_layout.add_pb_type_port(pb_type_name, Ix_port_name,
-                                        arkangel::VprArchLayout::e_port_type::INPUT, num_fle)
+                                        arcxpress::VprArchLayout::e_port_type::INPUT, num_fle)
                ? 0
                : 1;
   /* Cin */
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "cin", arkangel::VprArchLayout::e_port_type::CI) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "cin", arcxpress::VprArchLayout::e_port_type::CI) ? 0
                                                                                               : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "reg_in", arkangel::VprArchLayout::e_port_type::CI) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "reg_in", arcxpress::VprArchLayout::e_port_type::CI) ? 0
                                                                                               : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "sc_in", arkangel::VprArchLayout::e_port_type::CI) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "sc_in", arcxpress::VprArchLayout::e_port_type::CI) ? 0
                                                                                               : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "reset", arkangel::VprArchLayout::e_port_type::RESET)
+    va_layout.add_pb_type_port(pb_type_name, "reset", arcxpress::VprArchLayout::e_port_type::RESET)
       ? 0
       : 1;
   num_err += va_layout.add_pb_type_port(pb_type_name, "O",
-                                        arkangel::VprArchLayout::e_port_type::OUTPUT, num_outputs)
+                                        arcxpress::VprArchLayout::e_port_type::OUTPUT, num_outputs)
                ? 0
                : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "cout", arkangel::VprArchLayout::e_port_type::CO) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "cout", arcxpress::VprArchLayout::e_port_type::CO) ? 0
                                                                                                : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "reg_out", arkangel::VprArchLayout::e_port_type::CO) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "reg_out", arcxpress::VprArchLayout::e_port_type::CO) ? 0
                                                                                                : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "sc_out", arkangel::VprArchLayout::e_port_type::CO) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "sc_out", arcxpress::VprArchLayout::e_port_type::CO) ? 0
                                                                                                : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "clk", arkangel::VprArchLayout::e_port_type::CLOCK)
+    va_layout.add_pb_type_port(pb_type_name, "clk", arcxpress::VprArchLayout::e_port_type::CLOCK)
       ? 0
       : 1;
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_clb_clb_tile_to_vpr_arch_layout(arkangel::VprArchLayout& va_layout,
-                                        const std::string& tile_name) {
+int add_clb_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+                                       const ArchPlanner& arch_planner,
+                                       const std::string& tile_name) {
   int num_err = 0;
 
   size_t num_fle = arch_planner.num_fle_per_clb();

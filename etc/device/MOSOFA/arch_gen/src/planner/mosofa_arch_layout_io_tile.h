@@ -4,14 +4,14 @@
  * Include header files that are required by function declaration
  *******************************************************************/
 #include "vpr_arch_layout.h"
-#include "sofahd_arch_planner.h"
+#include "mosofa_arch_planner.h"
 
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
-int add_clb_tiles_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
-                                    const SofaHD::ArchPlanner& arch_plan);
+int add_io_tiles_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+                                    const ArchPlanner& arch_plan);
 
-}  // End of namespace SofaHD
+}  // End of namespace MOSOFA

@@ -5,7 +5,7 @@
 #include <vector>
 #include "physical_types.h"
 
-namespace SofaHD { // namespace SofaHD begins
+namespace MOSOFA { // namespace MOSOFA begins
 
 /**
  * 	Architecture parameter generator
@@ -59,4 +59,4 @@ class ArchPlanner {
   bool is_valid_;
 };
 
-}  // end namespace SofaHD
+}  // end namespace MOSOFA

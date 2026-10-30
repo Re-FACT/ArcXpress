@@ -6,10 +6,10 @@
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
-#include "sofahd_arch_planner.h"
+#include "mosofa_arch_planner.h"
 #include "side_manager.h"
 
-namespace SofaHD {  // Begin namespace SofaHD
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 ArchPlanner::ArchPlanner(const int& height, const int& width,
               const int& num_clks, const int& num_rsts,
@@ -288,4 +288,4 @@ size_t ArchPlanner::num_resets() const {
 }
 
 
-}  // End namespace SofaHD
+}  // End namespace MOSOFA
