@@ -7,8 +7,8 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofa_arch_layout_io.h"
-#include "sofa_naming.h"
+#include "mosofa_arch_layout_io_subtile.h"
+#include "mosofa_naming.h"
 #include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
@@ -19,7 +19,7 @@ namespace MOSOFA { // begin namespace MOSOFA
 int add_pi_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   int num_err = 0;
 
-  std::string pb_type_name = gen_pio_pb_type_name();
+  std::string pb_type_name = gen_pi_pb_type_name();
   num_err +=
     va_layout.create_pb_type(pb_type_name, arcxpress::VprArchLayout::e_subtile_type::PI) ? 0 : 1;
   num_err +=

@@ -11,16 +11,16 @@ int main(int argc, char** argv) {
    * General purpose interface API for architecture generator
    * Instantiate the interface with the command name
    */
-  arcxpress::ArchGenCommandInterface cmd_interface("arch_gen");
+  arcxpress::ArchGenCommandInterface cmd_interface;
   // Parse command-line options
-  if (!cmd_interface.parse(argc, argv)) {
+  if (!cmd_interface.parse("arch_gen", argc, argv)) {
     VTR_LOG_ERROR("Failed in parsing architecture generator command-line options\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* The standard arch genertor and status flag to start device-specific customization */
   arcxpress::ArchGen arch_gen;
   int status = 0;
-  ArchGenInputParams arch_params = cmd_interface.arch_parameters(); 
+  arcxpress::ArchGenInputParams arch_params = cmd_interface.arch_parameters(); 
 
   /*************************************
    * Run device-specific arch generation

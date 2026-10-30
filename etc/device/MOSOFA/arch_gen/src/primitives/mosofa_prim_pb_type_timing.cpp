@@ -4,8 +4,8 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "sofahd_constants.h"
-#include "sofahd_prim_pb_type_timing.h"
+#include "mosofa_constants.h"
+#include "mosofa_prim_pb_type_timing.h"
 #include "command_exit_codes.h"
 #include "fracff_gen.h"
 #include "vpr_arch_layout.h"
@@ -22,11 +22,11 @@ static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) 
     VTR_LOG_ERROR("The primitive pb_type '%s' was not successfully added!\n", FRAC_LUT4_BLIF_MODEL);
   }
   openfpga::BasicPort in_port("in", 4);
-  openfpga::BasicPort lut4_out_port("lut3_out", 2);
-  openfpga::BasicPort lut5_out_port("lut4_out", 1);
+  openfpga::BasicPort lut3_out_port("lut3_out", 2);
+  openfpga::BasicPort lut4_out_port("lut4_out", 1);
 
-  std::string lut3_delay_var = arch_gen.lut_comb_delay_variable(4);
-  std::string lut4_delay_var = arch_gen.lut_comb_delay_variable(5);
+  std::string lut3_delay_var = arch_gen.lut_comb_delay_variable(3);
+  std::string lut4_delay_var = arch_gen.lut_comb_delay_variable(4);
   num_err +=
     arch_gen.add_pb_type_comb_delay(prim_pb, in_port, lut3_out_port, lut4_delay_var) ? 0 : 1;
   num_err +=

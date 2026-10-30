@@ -19,7 +19,7 @@
 
 namespace MOSOFA { // begin namespace MOSOFA
 
-static int add_clb_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+int add_clb_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                            const ArchPlanner& arch_plan) {
   int num_err = 0;
 

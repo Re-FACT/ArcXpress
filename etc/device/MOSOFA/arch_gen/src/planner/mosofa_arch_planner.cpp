@@ -13,40 +13,40 @@ namespace MOSOFA {  // Begin namespace MOSOFA
 
 ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
   reset();
-  if (height != use_default()) {
+  if (params.height != use_default()) {
     core_height_ = params.height;
     is_valid_ = false;
   } 
-  if (width != use_default()) {
+  if (params.width != use_default()) {
     core_width_ = params.width;
     is_valid_ = false;
   }
-  if (sync_dp_dimension) {
+  if (params.sync_dp_dimension) {
     dp_core_height_ = core_height_;
     dp_core_width_ = core_width_;
     is_valid_ = false;
   }
-  if (num_clks != use_default()) {
-    VTR_LOG("Will use custom number of clocks: %d\n", num_clks);
+  if (params.num_clks != use_default()) {
+    VTR_LOG("Will use custom number of clocks: %d\n", params.num_clks);
     num_clks_ = params.num_clks;
     is_valid_ = false;
   } 
-  if (num_pclks != use_default()) {
-    VTR_LOG("Will use custom number of programming clocks: %d\n", num_pclks);
+  if (params.num_pclks != use_default()) {
+    VTR_LOG("Will use custom number of programming clocks: %d\n", params.num_pclks);
     num_pclks_ = params.num_pclks;
     is_valid_ = false;
   } 
-  if (num_regions != use_default()) {
-    VTR_LOG("Will use custom number of configurable regions: %d\n", num_regions);
-    num_config_regions_ = params.num_regions;
+  if (params.num_config_regions != use_default()) {
+    VTR_LOG("Will use custom number of configurable regions: %d\n", params.num_config_regions);
+    num_config_regions_ = params.num_config_regions;
     is_valid_ = false;
   } 
-  if (num_rsts != use_default()) {
-    VTR_LOG("Will use custom number of resets: %d\n", num_rsts);
+  if (params.num_rsts != use_default()) {
+    VTR_LOG("Will use custom number of resets: %d\n", params.num_rsts);
     num_rsts_ = params.num_rsts;
     is_valid_ = false;
   } 
-  if (!num_inputs.empty()) {
+  if (!params.num_inputs.empty()) {
     for (auto pair : params.num_inputs) {
       if (pair.second != use_default_num_io()) {
         num_inputs_[pair.first] = pair.second;
@@ -54,7 +54,7 @@ ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
       }
     }
   }
-  if (!num_outputs.empty()) {
+  if (!params.num_outputs.empty()) {
     for (auto pair : params.num_outputs) {
       if (pair.second != use_default_num_io()) {
         num_outputs_[pair.first] = pair.second;
@@ -101,16 +101,16 @@ void ArchPlanner::reset() {
   is_valid_ = true;
 }
 
-int ArchPlanner::num_fle_per_clb() const {
+size_t ArchPlanner::num_fle_per_clb() const {
   return num_fle_per_clb_;
 }
 
-int ArchPlanner::max_lut_size() const {
+size_t ArchPlanner::max_lut_size() const {
   return MAX_LUT_SIZE_;
 }
 
 void ArchPlanner::plan_io_num() {
-  for (e_side curr_side : TOTAL_2D_SIDES}) {
+  for (e_side curr_side : TOTAL_2D_SIDES) {
     num_inputs_[curr_side] = core_width_ * (num_input_per_tile_[curr_side]);
     num_outputs_[curr_side] = core_width_ * (num_output_per_tile_[curr_side]);
   }

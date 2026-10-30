@@ -15,6 +15,6 @@ namespace MOSOFA {  // Begin namespace MOSOFA
 typedef std::tuple<std::string, std::string> PhyPbInfo;
 
 int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
-                         const ArchGenInputParams& arch_params);
+                         const arcxpress::ArchGenInputParams& arch_params);
 
 }  // End of namespace MOSOFA

@@ -10,7 +10,7 @@
 #include "command_exit_codes.h"
 /* Headers from arch gen library */
 #include "vpr_arch_primitive.h"
-#include "mosofa_arch_primitive.h"
+#include "mosofa_arch_primitives.h"
 #include "mosofa_constants.h"
 #include "fracff_gen.h"
 
@@ -73,7 +73,7 @@ static int add_vpr_arch_primitive_ff(arcxpress::ArchGen& arch_gen) {
     if (std::string(scff) == std::string(PHYSICAL_REGULAR_SCFF_NAME)) {
       incl_phy = true;
     }
-    for (auto pmtv : fff_gen.vpr_arch_primitives(incl_phy, incl_scan_ff)) {
+    for (auto pmtv : fff_gen.vpr_arch_primitives(incl_phy)) {
       if (arch_gen.is_arch_primitive_exist(pmtv.name())) {
         std::string tag = fff_gen.vpr_physical_model_name();
         arch_gen.set_arch_primitive_mode_bits(pmtv.name(), tag, pmtv.mode_bits(tag));
@@ -98,24 +98,24 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
 
   /* Primary io models */
   VTR_LOG("Adding primary I/O models\n");
-  num_err += add_vpr_arch_primitive_pi(arcxpress::ArchGen& arch_gen);
+  num_err += add_vpr_arch_primitive_pi(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
-  num_err += add_vpr_arch_primitive_po(arcxpress::ArchGen& arch_gen);
+  num_err += add_vpr_arch_primitive_po(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
   VTR_LOG("Adding LUT models\n");
-  num_err += add_vpr_arch_primitive_lut(arcxpress::ArchGen& arch_gen);
+  num_err += add_vpr_arch_primitive_lut(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
   VTR_LOG("Adding Flip-flop models\n");
-  num_err += add_vpr_arch_primitive_ff(arcxpress::ArchGen& arch_gen);
+  num_err += add_vpr_arch_primitive_ff(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
   }

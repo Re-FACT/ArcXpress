@@ -83,9 +83,9 @@ int bind_ff_pb_type_to_physical(arcxpress::ArchGen& arch_gen, const std::string&
   VTR_LOGV(verbose, "Binding pb_type '%s' (tag: '%s') to its physical '%s'\n", ff_pb_type.c_str(),
            ff_pb_tag.c_str(), phy_pb_type_name.c_str());
   num_err += arch_gen.set_pb_type_physical_pb_type(ff_pb_type, phy_pb_type_name) ? 0 : 1;
-  if (std::string(ff_pb_tag) == std::string(OPERATING_BLE4_FF_NAME)) {
+  if (std::string(ff_pb_tag) == std::string(OPERATING_BLE3_FF_NAME)) {
     /* Intended to be empty */
-  } else if (std::string(ff_pb_tag) == std::string(OPERATING_BLE5_FF_NAME)) {
+  } else if (std::string(ff_pb_tag) == std::string(OPERATING_BLE4_FF_NAME)) {
     num_err += arch_gen.set_pb_type_physical_pb_type_index_factor(ff_pb_type, "2") ? 0 : 1;
     num_err += arch_gen.set_pb_type_physical_pb_type_index_offset(ff_pb_type, "0") ? 0 : 1;
   } else if (std::string(ff_pb_tag) == std::string(OPERATING_ALE_FF_NAME)) {

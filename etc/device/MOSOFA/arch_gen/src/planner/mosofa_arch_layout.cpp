@@ -13,6 +13,7 @@
 #include "arch_gen_direct_connection.h"
 #include "add_hidden_primitive_pb_types.h"
 /* Headers from sofa common arch gen library */
+#include "mosofa_arch_primitives.h"
 #include "mosofa_arch_layout_io_tile.h"
 #include "mosofa_arch_layout_clb_tile.h"
 #include "mosofa_prim_pb_type_timing.h"
@@ -76,7 +77,8 @@ static int add_direct_connect_to_vpr_arch_layout(arcxpress::VprArchLayout& va_la
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-static int add_complex_blocks(arcxpress::ArchGen& arch_gen) {
+static int add_complex_blocks(arcxpress::ArchGen& arch_gen,
+                              const ArchPlanner& arch_plan) {
   int num_err = 0;
 
   /* Initialize top-level pb_type from tile lists */
@@ -84,18 +86,18 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen) {
   /* Initialize primitive pb_type from primitive lists */
   num_err += arch_gen.init_primitive_pb_type(true);
   /* Initialize hidden primitive pb_type from primitive lists */
-  num_err += sofa::add_sofa_builtin_latch_primitive_pb_type(arch_gen, true);
+  num_err += add_mosofa_builtin_latch_primitive_pb_type(arch_gen, true);
   num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 3, "1", true);
   num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 4, "0", true);
-  num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(sofa::PI_NAME), std::string(), true);
-  num_err += arcxpress::add_builtin_po_primitive_pb_type(arch_gen, std::string(sofa::PO_NAME), true);
+  num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(PI_NAME), std::string(), true);
+  num_err += arcxpress::add_builtin_po_primitive_pb_type(arch_gen, std::string(PO_NAME), true);
   /* Initialize the primitive delay variables/numbers */
   num_err += add_primitive_pb_type_timing(arch_gen, true);
 
   /* Assemble top-level pb type */
   num_err += assemble_po_complex_block(arch_gen, true);
   num_err += assemble_pi_complex_block(arch_gen, true);
-  num_err += assemble_clb_complex_block(arch_gen, true);
+  num_err += assemble_clb_complex_block(arch_gen, arch_plan, true);
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -108,7 +110,7 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen) {
  * Return 2 if fail when creating files
  *******************************************************************/
 int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
-                         const ArchGenInputParams& arch_params) {
+                         const arcxpress::ArchGenInputParams& arch_params) {
   int status = MOSOFA::create_vpr_arch_primitives(arch_gen);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     VTR_LOG_ERROR("Failed in creating primitive details\n");
@@ -118,7 +120,6 @@ int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
   int num_err = 0;
 
   ArchPlanner arch_plan(arch_params);
-height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
 
   arcxpress::VprArchLayout va_layout;
   va_layout.set_default_fc_in(0.15);
@@ -126,12 +127,10 @@ height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regio
   /* Add I/O tiles */
   num_err += add_io_tiles_to_vpr_arch_layout(va_layout, arch_plan);
   /* Add CLB tiles */
-  num_err += add_clb_tiles_to_vpr_arch_layout(va_layout, arch_plan);
+  num_err += add_clb_tile_to_vpr_arch_layout(va_layout, arch_plan);
   /* Add layout dimension: Only the size of core fabric, do NOT count in I/O columns and rows */
   num_err += add_dimension_to_vpr_arch_layout(va_layout, arch_plan);
   num_err += add_routing_to_vpr_arch_layout(va_layout);
-  /* Add directlist */
-  num_err += add_direct_connect_to_vpr_arch_layout(va_layout);
 
   /* TODO: Run a validation on the arch layout */
 
@@ -142,7 +141,7 @@ height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regio
   arch_gen.set_num_resets(arch_plan.num_resets());
   
   /* Add complex block graph to arch generator */
-  num_err += add_complex_blocks(arch_gen);
+  num_err += add_complex_blocks(arch_gen, arch_plan);
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }

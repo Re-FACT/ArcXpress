@@ -27,16 +27,26 @@ static int add_io_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
   std::string tile_name = gen_io_tile_name(io_side);
   num_err += va_layout.create_tile(tile_name, arcxpress::VprArchLayout::e_tile_type::IO, io_side) ? 0 : 1;
 
-  std::string subtile_pio_name = gen_io_subtile_name(io_side, 0, false, false);
-  size_t num_pio = arch_plan.num_io_per_tile(io_side);
-  std::string pio_phy_pb_type_name = gen_pio_pb_type_name(0, false, false);
-  std::vector<std::string> pio_equ_pb_type_names;
-  num_err += va_layout.add_subtile(tile_name, subtile_pio_name, pio_phy_pb_type_name, pio_equ_pb_type_names, num_pio) ? 0 : 1;
-  e_side io_pin_side = SideManager(io_side).opposite();
-  for (size_t ipio = 0; ipio < num_pio; ++ipio) {
-    num_err += va_layout.add_subtile_pin_location(tile_name, subtile_pio_name, ipio, "outpad", 0, io_pin_side) ? 0 : 1;
-    num_err += va_layout.add_subtile_pin_location(tile_name, subtile_pio_name, ipio, "inpad", 0, io_pin_side) ? 0 : 1;
+  std::string subtile_pi_name = gen_pi_subtile_name(io_side);
+  size_t num_pi = arch_plan.num_input_per_tile(io_side);
+  std::string pi_phy_pb_type_name = gen_pi_pb_type_name();
+  std::vector<std::string> pi_equ_pb_type_names;
+  num_err += va_layout.add_subtile(tile_name, subtile_pi_name, pi_phy_pb_type_name, pi_equ_pb_type_names, num_pi) ? 0 : 1;
+  e_side pi_pin_side = SideManager(io_side).get_opposite();
+  for (size_t ipi = 0; ipi < num_pi; ++ipi) {
+    num_err += va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "inpad", 0, pi_pin_side) ? 0 : 1;
   }
+
+  std::string subtile_po_name = gen_po_subtile_name(io_side);
+  size_t num_po = arch_plan.num_output_per_tile(io_side);
+  std::string po_phy_pb_type_name = gen_po_pb_type_name();
+  std::vector<std::string> po_equ_pb_type_names;
+  num_err += va_layout.add_subtile(tile_name, subtile_po_name, po_phy_pb_type_name, po_equ_pb_type_names, num_po) ? 0 : 1;
+  e_side po_pin_side = SideManager(io_side).get_opposite();
+  for (size_t ipo = 0; ipo < num_po; ++ipo) {
+    num_err += va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "outpad", 0, po_pin_side) ? 0 : 1;
+  }
+
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -45,7 +55,8 @@ int add_io_tiles_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                     const ArchPlanner& arch_plan) {
   int num_err = 0;
 
-  num_err += add_pio_pb_type_to_vpr_arch_layout(va_layout);
+  num_err += add_pi_pb_type_to_vpr_arch_layout(va_layout);
+  num_err += add_po_pb_type_to_vpr_arch_layout(va_layout);
 
   for (e_side curr_side : TOTAL_2D_SIDES) {
     num_err += add_io_tile_to_vpr_arch_layout(va_layout, arch_plan, curr_side);

@@ -29,6 +29,10 @@ std::string gen_latch_pb_name(const std::string& prefix);
 
 std::string gen_io_tile_name(const e_side& io_side);
 
+std::string gen_pi_pb_type_name();
+
+std::string gen_po_pb_type_name();
+
 std::string gen_pi_subtile_name(const e_side& io_side);
 
 std::string gen_po_subtile_name(const e_side& io_side);

@@ -29,7 +29,6 @@ class ArchPlanner {
    void check_valid() const;
    size_t num_input_per_tile(const e_side& io_side) const;
    size_t num_output_per_tile(const e_side& io_side) const;
-   size_t num_io_per_tile(const e_side& io_side) const;
    size_t num_fle_per_clb() const;
    size_t max_lut_size() const;
  private: /* -- Mutators -- */
@@ -39,7 +38,7 @@ class ArchPlanner {
    void plan_io_num();
  private: /* -- Internal data -- */
   /* Constants */
-  int MAX_LUT_SIZE_ = 5;
+  int MAX_LUT_SIZE_ = 4;
   /* Paramters */
   size_t dp_core_height_;
   size_t dp_core_width_;
