@@ -1,13 +1,8 @@
-/********************************************************************
- * This file includes functions that outputs a bus group object to XML format
- *******************************************************************/
-#include "sofa_naming.h"
-
+#include "mosofa_naming.h"
 #include <string>
-
 #include "side_manager.h"
 
-namespace Sofa { // begin namespace Sofa
+namespace MOSOFA { // begin namespace MOSOFA
 
 std::string gen_latch_pb_name(const std::string& prefix) {
   return prefix + std::string("_") + std::string(OPERATING_BUILTIN_LATCH_NAME);
@@ -46,4 +41,4 @@ std::string gen_po_pb_type_name() {
   return ret;
 }
 
-}  // namespace Sofa
+}  // namespace MOSOFA

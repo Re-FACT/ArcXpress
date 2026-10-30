@@ -7,14 +7,14 @@
 #include <string>
 #include <tuple>
 
-#include "sofa_constants.h"
+#include "mosofa_constants.h"
 #include "arch_gen_naming.h"
 #include "physical_types.h"
 
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace Sofa {  // Begin namespace Sofa
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 /* pb_type name, circuit model name */
 typedef std::tuple<std::string, std::string> PhyPbInfo;
@@ -33,4 +33,4 @@ std::string gen_pi_subtile_name(const e_side& io_side);
 
 std::string gen_po_subtile_name(const e_side& io_side);
 
-}  // End of namespace Sofa
+}  // End of namespace MOSOFA
