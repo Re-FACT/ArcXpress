@@ -13,7 +13,7 @@ namespace MOSOFA { // namespace MOSOFA begins
  */
 class ArchPlanner {
  public: /* -- Constructor -- */
-  ArchPlanner(const ArchGenInputParams& params);
+  ArchPlanner(const arcxpress::ArchGenInputParams& params);
  public: /* -- TYPES -- */
  public: /* -- Accessors -- */
    int use_default() const;
@@ -30,6 +30,8 @@ class ArchPlanner {
    size_t num_input_per_tile(const e_side& io_side) const;
    size_t num_output_per_tile(const e_side& io_side) const;
    size_t num_io_per_tile(const e_side& io_side) const;
+   size_t num_fle_per_clb() const;
+   size_t max_lut_size() const;
  private: /* -- Mutators -- */
    void reset();
    /* Plan all the paramters and be ready for access*/
@@ -37,6 +39,8 @@ class ArchPlanner {
    void plan_io_num();
  private: /* -- Internal data -- */
   /* Constants */
+  int MAX_LUT_SIZE_ = 5;
+  /* Paramters */
   size_t dp_core_height_;
   size_t dp_core_width_;
   size_t core_height_;

@@ -11,7 +11,7 @@
 
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-ArchPlanner::ArchPlanner(const ArchGenInputParams& params) {
+ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
   reset();
   if (height != use_default()) {
     core_height_ = params.height;
@@ -99,6 +99,14 @@ void ArchPlanner::reset() {
   num_fle_per_clb_ = 8;
   plan_io_num();
   is_valid_ = true;
+}
+
+int ArchPlanner::num_fle_per_clb() const {
+  return num_fle_per_clb_;
+}
+
+int ArchPlanner::max_lut_size() const {
+  return MAX_LUT_SIZE_;
 }
 
 void ArchPlanner::plan_io_num() {
