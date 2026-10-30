@@ -8,21 +8,19 @@
 
 /* Headers from vtr util library */
 #include "add_hidden_primitive_pb_types.h"
-#include "alkaid_complex_block_ff.h"
-#include "alkaid_constants.h"
-#include "alkaid_naming.h"
+#include "sofahd_complex_block_ff.h"
+#include "sofahd_constants.h"
+#include "sofahd_naming.h"
 #include "command_exit_codes.h"
-#include "mmff_gen.h"
-#include "mmffisc2_gen.h"
-#include "mmffosc2_gen.h"
+#include "fracff_gen.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace alkaid {
+namespace SofaHD { // begin namespace SofaHD
 
 /* A unified function to do wiring between ff pb_type and its parent pb_type under a mode */
-int wire_ff_pb_type_mode(arkangel::ArchGen& arch_gen, const std::string& ff_mode,
+int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mode,
                          const std::string& ff_pb_name, const bool& add_ipack_pattern,
                          const bool& add_opack_pattern) {
   int num_err = 0;
@@ -31,12 +29,12 @@ int wire_ff_pb_type_mode(arkangel::ArchGen& arch_gen, const std::string& ff_mode
   openfpga::BasicPort q_port("Q", 1);
   openfpga::BasicPort ck_port("C", 1);
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
-    arkangel::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, d_port};
+    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, d_port};
     num_err += arch_gen.add_in2in_edge(ff_mode, d_port, des_edge_port) ? 0 : 1;
     if (add_ipack_pattern) {
       num_err +=
         arch_gen.set_in2in_edge_pack_pattern(ff_mode, d_port, des_edge_port,
-                                             arkangel::gen_ioff_pack_pattern_name(ff_pb_name, "D"))
+                                             arcxpress::gen_ioff_pack_pattern_name(ff_pb_name, "D"))
           ? 0
           : 1;
     }
@@ -47,17 +45,17 @@ int wire_ff_pb_type_mode(arkangel::ArchGen& arch_gen, const std::string& ff_mode
       if (!arch_gen.find_pb_type_port(ff_pb_name, des_ck_name, des_ck_port)) {
         continue;
       }
-      arkangel::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_ck_port};
+      arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_ck_port};
       num_err += arch_gen.add_in2in_edge(ff_mode, ck_port, des_edge_port) ? 0 : 1;
     }
   }
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
-    arkangel::ArchGen::EdgePort src_edge_port = {ff_pb_name, ipb, q_port};
+    arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb_name, ipb, q_port};
     num_err += arch_gen.add_out2out_edge(ff_mode, src_edge_port, q_port) ? 0 : 1;
     if (add_opack_pattern) {
       num_err +=
         arch_gen.set_out2out_edge_pack_pattern(
-          ff_mode, src_edge_port, q_port, arkangel::gen_ioff_pack_pattern_name(ff_pb_name, "Q"))
+          ff_mode, src_edge_port, q_port, arcxpress::gen_ioff_pack_pattern_name(ff_pb_name, "Q"))
           ? 0
           : 1;
     }
@@ -69,7 +67,7 @@ int wire_ff_pb_type_mode(arkangel::ArchGen& arch_gen, const std::string& ff_mode
       if (!arch_gen.find_pb_type_port(ff_pb_name, des_clr_name, des_clr_port)) {
         continue;
       }
-      arkangel::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_clr_port};
+      arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_clr_port};
       num_err += arch_gen.add_in2in_edge(ff_mode, clr_port, des_edge_port) ? 0 : 1;
     }
   }
@@ -77,7 +75,7 @@ int wire_ff_pb_type_mode(arkangel::ArchGen& arch_gen, const std::string& ff_mode
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int bind_ff_pb_type_to_physical(arkangel::ArchGen& arch_gen, const std::string& ff_pb_tag,
+int bind_ff_pb_type_to_physical(arcxpress::ArchGen& arch_gen, const std::string& ff_pb_tag,
                                 const std::string& ff_pb_type, const std::string& phy_pb_type_name,
                                 const bool& verbose) {
   int num_err = 0;
@@ -136,7 +134,7 @@ int bind_ff_pb_type_to_physical(arkangel::ArchGen& arch_gen, const std::string& 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_ff_pb_type(arkangel::ArchGen& arch_gen, const std::string& ff_pb, const bool& verbose) {
+int add_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb, const bool& verbose) {
   int num_err = 0;
 
   VTR_LOGV(verbose, "Adding intermediate pb_type '%s'\n", ff_pb.c_str());
@@ -146,21 +144,21 @@ int add_ff_pb_type(arkangel::ArchGen& arch_gen, const std::string& ff_pb, const 
   openfpga::BasicPort q_port("Q", 1);
   openfpga::BasicPort ck_port("C", 1);
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, d_port, arkangel::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, d_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, clr_port, arkangel::VprArchLayout::e_port_type::RESET) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, q_port, arkangel::VprArchLayout::e_port_type::OUTPUT) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, q_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, ck_port, arkangel::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
 
-  MmffGen phy_mmff_gen(PHYSICAL_REGULAR_SCFF_NAME);
-  std::string phy_tag = phy_mmff_gen.vpr_physical_model_name();
+  FracffGen phy_fff_gen(PHYSICAL_REGULAR_SCFF_NAME);
+  std::string phy_tag = phy_fff_gen.vpr_physical_model_name();
   std::string phy_pb_type_name = arch_gen.find_primitive_pb_type_name(phy_tag);
 
   { /* Latch */
     std::string pb_mode =
-      arkangel::gen_pb_mode_name(ff_pb, std::string(OPERATING_BUILTIN_LATCH_NAME));
+      arcxpress::gen_pb_mode_name(ff_pb, std::string(OPERATING_BUILTIN_LATCH_NAME));
     num_err += arch_gen.add_pb_type_mode(ff_pb, pb_mode) ? 0 : 1;
     std::string latch_pb = gen_latch_pb_name(ff_pb);
     num_err += arch_gen.add_pb_type_to_mode(pb_mode, latch_pb, 1) ? 0 : 1;
@@ -169,10 +167,10 @@ int add_ff_pb_type(arkangel::ArchGen& arch_gen, const std::string& ff_pb, const 
   }
 
   /* Add mmff primitive */
-  MmffGen mmff_gen(ff_pb);
-  std::string tag = mmff_gen.vpr_physical_model_name();
-  for (auto pmtv : mmff_gen.vpr_arch_primitives(false)) {
-    std::string pb_mode = arkangel::gen_pb_mode_name(ff_pb, pmtv.name());
+  FracffGen fff_gen(ff_pb);
+  std::string tag = fff_gen.vpr_physical_model_name();
+  for (auto pmtv : fff_gen.vpr_arch_primitives(false)) {
+    std::string pb_mode = arcxpress::gen_pb_mode_name(ff_pb, pmtv.name());
     num_err += arch_gen.add_pb_type_mode(ff_pb, pb_mode) ? 0 : 1;
     num_err += arch_gen.add_pb_type_to_mode(pb_mode, pmtv.pb_type_name(tag), 1) ? 0 : 1;
     num_err += wire_ff_pb_type_mode(arch_gen, pb_mode, pmtv.pb_type_name(tag), false, false);
@@ -184,32 +182,18 @@ int add_ff_pb_type(arkangel::ArchGen& arch_gen, const std::string& ff_pb, const 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_alkaid_builtin_latch_primitive_pb_type(arkangel::ArchGen& arch_gen, const bool& verbose) {
+int add_sofahd_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   int num_err = 0;
   VTR_LOGV(verbose, "Adding pb_types for vpr built-in model 'latches'...\n");
   for (auto scff_name : ALL_REGULAR_SCFF_NAMES) {
-    std::string pb_name = alkaid::gen_latch_pb_name(scff_name);
+    std::string pb_name = SofaHD::gen_latch_pb_name(scff_name);
     num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
-    MmffGen mmff_gen(scff_name);
-    std::string mode_bits = mmff_gen.default_mode_bits();
-    num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
-  }
-  for (auto scff_name : OPERATING_PI_SCFF_NAMES) {
-    std::string pb_name = alkaid::gen_latch_pb_name(scff_name);
-    num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
-    Mmffisc2Gen mmff_gen(scff_name);
-    std::string mode_bits = mmff_gen.default_mode_bits();
-    num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
-  }
-  for (auto scff_name : OPERATING_PO_SCFF_NAMES) {
-    std::string pb_name = alkaid::gen_latch_pb_name(scff_name);
-    num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
-    Mmffosc2Gen mmff_gen(scff_name);
-    std::string mode_bits = mmff_gen.default_mode_bits();
+    FracffGen fff_gen(scff_name);
+    std::string mode_bits = fff_gen.default_mode_bits();
     num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
   }
   VTR_LOGV(verbose, "Done\n");
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace alkaid
+}  // end namespace SofaHD
