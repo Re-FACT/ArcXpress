@@ -16,6 +16,6 @@ struct ArchGenInputParams {
   int num_pclks;
   int num_config_regions;
   bool sync_dp_dimension;
-}
+};
 
 } // end namespace arcxpress
