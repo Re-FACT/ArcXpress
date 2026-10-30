@@ -11,19 +11,14 @@
 
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-ArchPlanner::ArchPlanner(const int& height, const int& width,
-              const int& num_clks, const int& num_rsts,
-              const std::map<e_side, int>& num_inputs,
-              const std::map<e_side, int>& num_outputs,
-              const int& num_pclks, const int& num_regions,
-                         const bool& sync_dp_dimension) {
+ArchPlanner::ArchPlanner(const ArchGenInputParams& params) {
   reset();
   if (height != use_default()) {
-    core_height_ = height;
+    core_height_ = params.height;
     is_valid_ = false;
   } 
   if (width != use_default()) {
-    core_width_ = width;
+    core_width_ = params.width;
     is_valid_ = false;
   }
   if (sync_dp_dimension) {
@@ -33,26 +28,26 @@ ArchPlanner::ArchPlanner(const int& height, const int& width,
   }
   if (num_clks != use_default()) {
     VTR_LOG("Will use custom number of clocks: %d\n", num_clks);
-    num_clks_ = num_clks;
+    num_clks_ = params.num_clks;
     is_valid_ = false;
   } 
   if (num_pclks != use_default()) {
     VTR_LOG("Will use custom number of programming clocks: %d\n", num_pclks);
-    num_pclks_ = num_pclks;
+    num_pclks_ = params.num_pclks;
     is_valid_ = false;
   } 
   if (num_regions != use_default()) {
     VTR_LOG("Will use custom number of configurable regions: %d\n", num_regions);
-    num_config_regions_ = num_regions;
+    num_config_regions_ = params.num_regions;
     is_valid_ = false;
   } 
   if (num_rsts != use_default()) {
     VTR_LOG("Will use custom number of resets: %d\n", num_rsts);
-    num_rsts_ = num_rsts;
+    num_rsts_ = params.num_rsts;
     is_valid_ = false;
   } 
   if (!num_inputs.empty()) {
-    for (auto pair : num_inputs) {
+    for (auto pair : params.num_inputs) {
       if (pair.second != use_default_num_io()) {
         num_inputs_[pair.first] = pair.second;
         is_valid_ = false;
@@ -60,7 +55,7 @@ ArchPlanner::ArchPlanner(const int& height, const int& width,
     }
   }
   if (!num_outputs.empty()) {
-    for (auto pair : num_outputs) {
+    for (auto pair : params.num_outputs) {
       if (pair.second != use_default_num_io()) {
         num_outputs_[pair.first] = pair.second;
         is_valid_ = false;

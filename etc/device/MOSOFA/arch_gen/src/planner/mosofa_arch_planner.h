@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "physical_types.h"
+#include "arch_gen_input_params.h"
 
 namespace MOSOFA { // namespace MOSOFA begins
 
@@ -12,12 +13,7 @@ namespace MOSOFA { // namespace MOSOFA begins
  */
 class ArchPlanner {
  public: /* -- Constructor -- */
-  ArchPlanner(const int& height, const int& width,
-              const int& num_clks, const int& num_rsts,
-              const std::map<e_side, int>& num_inputs,
-              const std::map<e_side, int>& num_outputs,
-              const int& num_pclks, const int& num_regions,
-                         const bool& sync_dp_dimension);
+  ArchPlanner(const ArchGenInputParams& params);
  public: /* -- TYPES -- */
  public: /* -- Accessors -- */
    int use_default() const;

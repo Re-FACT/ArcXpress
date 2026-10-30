@@ -23,6 +23,7 @@ target_link_libraries(libarchconfiger
                       libvtrutil
                       libarchopenfpga
                       libclkarchopenfpga
+                      libtapeoutmanager
                       libvprconstraint)
 
 #Create the test executable

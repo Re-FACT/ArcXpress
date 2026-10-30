@@ -108,15 +108,17 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen) {
  * Return 2 if fail when creating files
  *******************************************************************/
 int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
-                         const int& height, const int& width,
-                         const int& num_clks, const int& num_rsts,
-                         const std::map<e_side, int>& num_inputs,
-                         const std::map<e_side, int>& num_outputs,
-                         const int& num_pclks, const int& num_regions,
-                         const bool& sync_dp_dimension) {
+                         const ArchGenInputParams& arch_params) {
+  int status = MOSOFA::create_vpr_arch_primitives(arch_gen);
+  if (status != openfpga::CMD_EXEC_SUCCESS) {
+    VTR_LOG_ERROR("Failed in creating primitive details\n");
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+
   int num_err = 0;
 
-  ArchPlanner arch_plan(height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
+  ArchPlanner arch_plan(arch_params);
+height, width, num_clks, num_rsts, num_inputs, num_outputs, num_pclks, num_regions, sync_dp_dimension);
 
   arcxpress::VprArchLayout va_layout;
   va_layout.set_default_fc_in(0.15);
