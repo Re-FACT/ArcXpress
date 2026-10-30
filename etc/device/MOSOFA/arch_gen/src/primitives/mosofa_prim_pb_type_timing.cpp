@@ -13,7 +13,7 @@
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace SofaHD { // begin namespace SofaHD
+namespace MOSOFA { // begin namespace MOSOFA
 
 static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
@@ -83,4 +83,4 @@ int add_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen, const bool& verbo
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // namespace SofaHD
+}  // namespace MOSOFA
