@@ -109,7 +109,7 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen,
  * Return 1 if there are more serious bugs in the architecture
  * Return 2 if fail when creating files
  *******************************************************************/
-int init_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
+int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
                          const arcxpress::ArchGenInputParams& arch_params) {
   int status = MOSOFA::create_vpr_arch_primitives(arch_gen);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
