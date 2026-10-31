@@ -288,8 +288,9 @@ endif()
 add_subdirectory(libs)
 add_subdirectory(core)
 
-# Included devices
-#add_subdirectory(etc/device/SOFA/utils)
+# Included device architecture generators
+# They can be built outside this CMake as long as the ArcXpress libs are available
+add_subdirectory(etc/device/MOSOFA/arch_gen)
 
 #PugiXml has some deliberate switch fallthrough cases (as indicated by comments), but they
 #are tagged as warnings with g++-7 (the comments don't match g++-7's suppression regexes).

@@ -1,0 +1,6 @@
+plugin -i yosys-sofa
+# Reserved lines for read benchmark files (design sources in verilog format)
+read_verilog ${BENCHMARK_VERILOG_FILES}
+read_slang ${BENCHMARK_SYSTEMVERILOG_FILES}
+synth_sofa -family ${DEVICE_FAMILY} -blif ${BLIF_FILE} -top ${TOP_MODULE} -K ${LUT_SIZE}
+tee -o ${STAT_JSON_FILE} stat -json -top ${TOP_MODULE}
