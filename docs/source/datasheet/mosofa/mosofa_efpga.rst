@@ -8,7 +8,7 @@ eFPGA Architecture
 Floorplan
 ^^^^^^^^^
 
-:numref:`fig_efpga_arch` shows an example on the architecture of the embedded FPGA fabric, which is sized to a 12x12 array.
+:numref:`fig_mosofa_efpga_arch` shows an example on the architecture of the embedded FPGA fabric, which is sized to a 12x12 array.
 The eFPGA follows a homogeneous architecture which only contains two type of tiles: 
 
 - Configurable Logic Block (CLB) at the center (See detailed architecture in :ref:`datasheet_mosofa_clb`)
@@ -124,7 +124,7 @@ Carry Chains
 ^^^^^^^^^^^^
 
 The carry chains can span across tiles in the same column.
-:numref:`fig_efpga_carry_chain` illustrates the detailed carry chain connections across tiles.
+:numref:`fig_mosofa_efpga_carry_chain` illustrates the detailed carry chain connections across tiles.
 For chain connection across columns, global routing has to be used.
 
 .. _fig_mosofa_efpga_carry_chain:
