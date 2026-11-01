@@ -20,6 +20,16 @@ User Manual
 
    manual/index
 
+Datasheet
+---------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Datasheet
+
+   datasheet/index
+
+
 Developer Manual
 ----------------
 
