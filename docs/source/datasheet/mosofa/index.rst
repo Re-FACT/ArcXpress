@@ -7,7 +7,7 @@ MOSOFA
 .. toctree::
    :maxdepth: 2
 
-   mosofa_summary
+   mosofa_overview
 
    mosofa_efpga
 
