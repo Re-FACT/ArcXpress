@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="199.875 272.7481 501.0762 167.19072" width="501.0762" height="167.19072">
+  <defs/>
+  <g id="pinput" stroke-dasharray="none" fill="none" stroke="none" fill-opacity="1" stroke-opacity="1">
+    <title>pinput</title>
+    <g id="pinput_图层_2">
+      <title>图层 2</title>
+      <g id="Graphic_286">
+        <rect x="247.5" y="304.875" width="384.7867" height="115.56815" fill="#ffffc0"/>
+        <path d="M 632.2867 304.875 L 247.5 304.875 L 247.5 420.44315 L 632.2867 420.44315 Z" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4.0,4.0" stroke-width="1"/>
+      </g>
+    </g>
+    <g id="pinput_图层_1">
+      <title>图层 1</title>
+      <g id="Graphic_151">
+        <rect x="281.41712" y="316.53872" width="56.5337" height="46.58957" fill="#417fff"/>
+        <rect x="281.41712" y="316.53872" width="56.5337" height="46.58957" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(286.41712 323.1963)" fill="white">
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="5.337164" y="13" xml:space="preserve">Input </tspan>
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="2.4404354" y="29.637207" xml:space="preserve">Buffer</tspan>
+        </text>
+      </g>
+      <g id="Graphic_80">
+        <text transform="translate(475.0388 272.7481)" fill="white">
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="0" y="13" xml:space="preserve">FF</tspan>
+        </text>
+      </g>
+      <g id="Graphic_184">
+        <rect x="470.64405" y="333.66043" width="29.338917" height="46.58957" fill="#0679ff"/>
+        <rect x="470.64405" y="333.66043" width="29.338917" height="46.58957" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_182">
+        <text transform="translate(476.2588 342.10046)" fill="white">
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="0" y="13" xml:space="preserve">FF</tspan>
+        </text>
+      </g>
+      <g id="Line_179">
+        <line x1="338.9508" y1="339.9389" x2="470.1433" y2="340.4114" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_173">
+        <line x1="460.0294" y1="358.36674" x2="470.1433" y2="358.36674" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_167">
+        <text transform="translate(642.8665 331.5149)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">fpga_in</tspan>
+        </text>
+      </g>
+      <g id="Line_190">
+        <line x1="246.54138" y1="340.03088" x2="280.41713" y2="339.925" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_232">
+        <text transform="translate(393.9808 421.35114)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="16" fill="black" x="0" y="14" xml:space="preserve">clk</tspan>
+        </text>
+      </g>
+      <g id="Line_233">
+        <path d="M 403.72006 420.44315 L 403.5 357.6689 L 460.0294 358.36674" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_237">
+        <path d="M 470.64405 354.9232 L 479.42464 358.2194 L 470.64405 361.5156 Z" fill="#ccc"/>
+        <path d="M 470.64405 354.9232 L 479.42464 358.2194 L 470.64405 361.5156 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_261">
+        <text transform="translate(477.50026 421.8724)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">rst</tspan>
+        </text>
+      </g>
+      <g id="Graphic_265">
+        <text transform="translate(430.7005 421.8724)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">ff_en</tspan>
+        </text>
+      </g>
+      <g id="Line_280">
+        <path d="M 446.92093 420.44315 L 447.5 369.5 L 470.1433 369.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_281">
+        <line x1="485.53434" y1="420.44315" x2="486" y2="380.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_282">
+        <text transform="translate(209.4533 331.7852)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">A2F</tspan>
+        </text>
+      </g>
+      <g id="Graphic_288">
+        <path d="M 562.1221 368.1192 L 562.1221 311.5855 L 581.61775 322.89225 L 581.61775 356.81247 Z" fill="#0679ff"/>
+        <path d="M 562.1221 368.1192 L 562.1221 311.5855 L 581.61775 322.89225 L 581.61775 356.81247 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(552.5604 320.7615)" fill="white">
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="11" fill="white" x="15.249002" y="10" xml:space="preserve">M</tspan>
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="11" fill="white" x="16.46824" y="22.467285" xml:space="preserve">U</tspan>
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="11" fill="white" x="16.46824" y="34.93457" xml:space="preserve">X</tspan>
+        </text>
+      </g>
+      <g id="Line_289">
+        <line x1="582.61775" y1="339.85022" x2="632.2867" y2="339.84034" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_290">
+        <path d="M 445.51054 340.3227 L 445.5 322.75 L 562.1221 322.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Line_291">
+        <line x1="500.09086" y1="346.25" x2="562.1221" y2="346.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_292">
+        <ellipse cx="445.5101" cy="339.55436" rx="3.67043818122635" ry="3.29620359050867" fill="black"/>
+        <ellipse cx="445.5101" cy="339.55436" rx="3.67043818122635" ry="3.29620359050867" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>
