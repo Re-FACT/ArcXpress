@@ -71,11 +71,11 @@ Routing Architecture
 ^^^^^^^^^^^^^^^^^^^^
 
 The routing architecture is based on uni-directional routing tracks, which are interconnected by routing multiplexers.
-:numref:`fig_mosofa_efpga_routing_arch` illustrates the detailed organization of the routing architecture.
+:numref:`fig_mosofa_routing_arch` illustrates the detailed organization of the routing architecture.
 
-.. _fig_mosofa_efpga_routing_arch:
+.. _fig_mosofa_routing_arch:
 
-.. figure:: ./figures/mosofa_efpga_routing_arch.svg
+.. figure:: ./figures/mosofa_routing_arch.svg
   :width: 80%
   :alt: Detailed routing architecture
 
@@ -88,9 +88,9 @@ The routing architecture consists the following type of routing tracks:
 - Length-4 wires (``L4 wires``), which hop over 4 logic block (including I/O block)
 
 Each tile includes two routing channels, i.e., the X-direction routing channel and the Y-direction routing channel, providing horizental and vertical connections to adjacent tiles.
-Each routing channel consists of 96 pairs of routing tracks. See details in :numref:`table_datasheet_efpga_arch_routing_track_distribution`.
+Each routing channel consists of 96 pairs of routing tracks. See details in :numref:`table_datasheet_mosofa_routing_track_distribution`.
 
-.. _table_datasheet_efpga_arch_routing_track_distribution:
+.. _table_datasheet_mosofa_routing_track_distribution:
 
 .. list-table:: Routing track distribution of eFPGA 
   :widths: 30 70
