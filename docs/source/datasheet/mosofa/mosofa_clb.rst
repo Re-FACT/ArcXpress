@@ -42,6 +42,101 @@ The FLE can operate in different modes to map logic function efficiently
 - 1-bit adder and single FF (see details in :ref:`datasheet_clb_fle_arith`).
 - 4-input LUT and two shift registers (see details in :ref:`datasheet_clb_fle_sreg`).
 
+In each mode, a FF can be mapped into various operating modes.
+The FF has a ``EN`` signal to control write enable.
+The following table summarizes the 16 supported flip-flop configurations.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 12 16 16 16 20
+
+   * - Clock Edge
+     - Control
+     - Synchronization
+     - Polarity
+     - Mode
+   * - Rising
+     - Set
+     - Synchronous
+     - Active-High
+     - ``sdffs``
+   * - Rising
+     - Set
+     - Synchronous
+     - Active-Low
+     - ``sdffsn``
+   * - Rising
+     - Set
+     - Asynchronous
+     - Active-High
+     - ``dffs``
+   * - Rising
+     - Set
+     - Asynchronous
+     - Active-Low
+     - ``dffsn``
+   * - Rising
+     - Reset
+     - Synchronous
+     - Active-High
+     - ``sdffr``
+   * - Rising
+     - Reset
+     - Synchronous
+     - Active-Low
+     - ``sdffrn``
+   * - Rising
+     - Reset
+     - Asynchronous
+     - Active-High
+     - ``dffr``
+   * - Rising
+     - Reset
+     - Asynchronous
+     - Active-Low
+     - ``dffrn``
+   * - Falling
+     - Set
+     - Synchronous
+     - Active-High
+     - ``sdffns``
+   * - Falling
+     - Set
+     - Synchronous
+     - Active-Low
+     - ``sdffnsn``
+   * - Falling
+     - Set
+     - Asynchronous
+     - Active-High
+     - ``dffns``
+   * - Falling
+     - Set
+     - Asynchronous
+     - Active-Low
+     - ``dffnsn``
+   * - Falling
+     - Reset
+     - Synchronous
+     - Active-High
+     - ``sdffnr``
+   * - Falling
+     - Reset
+     - Synchronous
+     - Active-Low
+     - ``sdffnrn``
+   * - Falling
+     - Reset
+     - Asynchronous
+     - Active-High
+     - ``dffnr``
+   * - Falling
+     - Reset
+     - Asynchronous
+     - Active-Low
+     - ``dffnrn``
+
+
 .. _datasheet_clb_arch_fle_n1_lut4:
 
 FLE LUT4 Mode
