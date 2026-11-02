@@ -157,9 +157,5 @@ For chain connection across columns, global routing has to be used.
 Configuration Protocol
 ^^^^^^^^^^^^^^^^^^^^^^
 
-The eFPGA adapt configuration chains to load bitstreams.
-A number of configuration chains connect tiles across the complete eFPGA. 
-All the configuration chains start from the left side and end at the right side.
-Each configuration chain is controlled by an independent clock for reconfiguration.
 See details in :ref:`datasheet_mosofa_config`
 

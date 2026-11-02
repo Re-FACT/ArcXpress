@@ -16,3 +16,5 @@ MOSOFA
    mosofa_io
 
    mosofa_clock
+
+   mosofa_config
