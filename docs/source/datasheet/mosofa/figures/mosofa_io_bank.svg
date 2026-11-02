@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="239.45833 355.625 193.54167 270.875" width="193.54167" height="270.875">
+  <defs/>
+  <g id="pio_bank" stroke-dasharray="none" fill="none" stroke="none" fill-opacity="1" stroke-opacity="1">
+    <title>pio_bank</title>
+    <g id="pio_bank_图层_3">
+      <title>图层 3</title>
+      <g id="Graphic_321">
+        <rect x="240.45833" y="356.625" width="191.54167" height="268.875" fill="#ccc"/>
+        <rect x="240.45833" y="356.625" width="191.54167" height="268.875" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+      <g id="Graphic_322">
+        <text transform="translate(245.504 361.625)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15" xml:space="preserve">Programmable I/O Bank</tspan>
+        </text>
+      </g>
+    </g>
+    <g id="pio_bank_图层_2">
+      <title>图层 2</title>
+      <g id="Graphic_286">
+        <rect x="247.5" y="388.6363" width="175.5" height="31.80685" fill="#ffffc0"/>
+        <rect x="247.5" y="388.6363" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(252.5 395.31573)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="51.478" y="15" xml:space="preserve">pinput[0]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_313">
+        <rect x="247.5" y="420.44315" width="175.5" height="31.80685" fill="#ffffc0"/>
+        <rect x="247.5" y="420.44315" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(252.5 427.1226)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="51.478" y="15" xml:space="preserve">pinput[1]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_314">
+        <rect x="247.5" y="471.74" width="175.5" height="31.80685" fill="#ffffc0"/>
+        <rect x="247.5" y="471.74" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(252.5 478.41945)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="42.59" y="15" xml:space="preserve">pinput[N-1]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_315">
+        <text transform="translate(327.25 448.29203)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15" xml:space="preserve">…</tspan>
+        </text>
+      </g>
+      <g id="Graphic_319">
+        <rect x="246.83333" y="503.5469" width="175.5" height="31.80685" fill="#ffc0c0"/>
+        <rect x="246.83333" y="503.5469" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(251.83333 510.2263)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="46.142" y="15" xml:space="preserve">poutput[0]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_318">
+        <rect x="246.83333" y="535.3537" width="175.5" height="31.80685" fill="#ffc0c0"/>
+        <rect x="246.83333" y="535.3537" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(251.83333 542.03315)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="46.142" y="15" xml:space="preserve">poutput[1]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_317">
+        <rect x="246.83333" y="586.6506" width="175.5" height="31.80685" fill="#ffc0c0"/>
+        <rect x="246.83333" y="586.6506" width="175.5" height="31.80685" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(251.83333 593.33)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="36.062" y="15" xml:space="preserve">poutput[M-1]</tspan>
+        </text>
+      </g>
+      <g id="Graphic_316">
+        <text transform="translate(326.58333 563.2026)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15" xml:space="preserve">…</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
