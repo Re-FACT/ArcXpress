@@ -271,13 +271,13 @@ std::string FracffGen::vpr_model_name(const e_clk_type& ck_type, const e_clr_fun
   if (clr_func != e_clr_func::NONE) {
     ret = clr_type2str(clr_type) + ret;
   }
-  if (wen_type != e_wen_type::NONE) {
-    ret = wen_type2str(wen_type) + ret;
-  }
   ret += clk_type2str(ck_type);
   if (clr_func != e_clr_func::NONE) {
     ret += clr_func2str(clr_func);
     ret += clr_polarity2str(clr_pol);
+  }
+  if (wen_type != e_wen_type::NONE) {
+    ret = wen_type2str(wen_type) + ret;
   }
   return ret;
 }
@@ -333,6 +333,15 @@ std::vector<FracffGen::e_clk_type> FracffGen::clk_types() const {
   return ret;
 }
 
+std::vector<FracffGen::e_wen_type> FracffGen::wen_types() const {
+  std::vector<FracffGen::e_wen_type> ret;
+  for (int ien_type = size_t(FracffGen::e_wen_type::NONE);
+       ien_type < size_t(FracffGen::e_wen_type::NUM_TYPES); ++ien_type) {
+    ret.push_back(static_cast<FracffGen::e_wen_type>(ien_type));
+  }
+  return ret;
+}
+
 std::vector<FracffGen::e_clr_type> FracffGen::clr_types() const {
   std::vector<FracffGen::e_clr_type> ret;
   for (int iclr_type = size_t(FracffGen::e_clr_type::SYNC);
@@ -370,7 +379,7 @@ std::vector<arcxpress::VprArchPrimitive> FracffGen::vpr_arch_primitives(
       if (clr_func == FracffGen::e_clr_func::NONE) {
         for (e_wen_type wen_type : wen_types()) {
           ret.push_back(vpr_arch_primitive(ck_type, clr_func, e_clr_type::ASYNC,
-                                           e_clr_polarity::ACTIVE_HIGH, e_wen_type));
+                                           e_clr_polarity::ACTIVE_HIGH, wen_type));
         }
         continue; /* no need to iterate over reset and set details */
       }
