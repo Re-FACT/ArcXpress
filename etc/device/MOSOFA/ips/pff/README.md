@@ -1,7 +1,7 @@
 # Programmable Flip-Flop Documentation
 
 ## Overview
-The `programmable_ff` module is a highly configurable Verilog register designed to adapt dynamically based on a 4-bit control vector (`mode_i`). It supports configurable clock edge sensitivity (rising/falling), reset/set synchronization mode (asynchronous/synchronous), control signal polarity (active-high/active-low), and control functionality (reset to `0` or set to `1`).
+The `pff` module is a highly configurable Verilog register designed to adapt dynamically based on a 4-bit control vector (`mode_i`). It supports configurable clock edge sensitivity (rising/falling), reset/set synchronization mode (asynchronous/synchronous), control signal polarity (active-high/active-low), and control functionality (reset to `0` or set to `1`).
 
 ---
 

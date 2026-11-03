@@ -1,4 +1,4 @@
-module programmable_ff (
+module pff (
     input  wire       clk_i,
     input  wire       d_i,
     input  wire       clr_i,     // Reset / Set control signal
