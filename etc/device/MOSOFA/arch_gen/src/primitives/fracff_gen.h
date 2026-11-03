@@ -18,6 +18,7 @@ class FracffGen {
 
  public: /* -- TYPES -- */
   enum class e_clk_type { RISING = 0, FALLING, NUM_TYPES };
+  enum class e_wen_type { NONE = 0, ACTIVE_LOW, ACTIVE_HIGH, NUM_TYPES };
   enum class e_clr_func { NONE = 0, RESET, SET, NUM_TYPES };
   enum class e_clr_type { SYNC = 0, ASYNC, NUM_TYPES };
   enum class e_clr_polarity { ACTIVE_LOW = 0, ACTIVE_HIGH, NUM_TYPES };
@@ -27,6 +28,7 @@ class FracffGen {
     const bool& include_physical) const;
   std::vector<std::string> vpr_model_names(const bool& include_physical) const;
   arcxpress::VprArchPrimitive vpr_arch_primitive(const e_clk_type& ck_type,
+                                                const e_wen_type& wen_type,
                                                 const e_clr_func& clr_func,
                                                 const e_clr_type& clr_type,
                                                 const e_clr_polarity& clr_pol) const;

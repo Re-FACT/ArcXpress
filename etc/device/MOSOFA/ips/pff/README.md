@@ -1,79 +1,50 @@
-# Programmable Flip-Flop Documentation
+# Programmable Flip-Flop (pff)
 
-## Overview
-The `pff` module is a highly configurable Verilog register designed to adapt dynamically based on a 4-bit control vector (`mode_i`). It supports configurable clock edge sensitivity (rising/falling), reset/set synchronization mode (asynchronous/synchronous), control signal polarity (active-high/active-low), and control functionality (reset to `0` or set to `1`).
+A highly configurable, synthesizable Verilog HDL flip-flop supporting dynamic run-time operation modes (rising/falling edge, synchronous/asynchronous control, active-high/low polarities, and enable configuration) accompanied by a comprehensive **cocotb** verification suite.
 
 ---
 
-## Interface Signal Description
+## Features
 
-| Signal Name | Direction | Data Type | Description |
+- **Edge Selectable (`mode_i[4]`)**: Configurable for rising edge (`posedge`) or falling edge (`negedge`) triggering.
+- **Operation Type (`mode_i[3]`)**: Supports both Asynchronous and Synchronous reset/set operations.
+- **Control Polarity (`mode_i[2]`)**: Configurable active-high or active-low reset/set control signal (`clr_i`).
+- **Control Function (`mode_i[1]`)**: Supports either a **Reset** function (clears output to `0`) or a **Set** function (presets output to `1`).
+- **Clock Enable Polarity (`mode_i[0]`)**: Configurable active-high or active-low clock enable (`en_i`).
+
+---
+
+## Port Interface
+
+| Port Name | Direction | Width | Description |
 | :--- | :--- | :--- | :--- |
-| `clk_i` | Input | `wire` | Master clock input signal. |
-| `d_i` | Input | `wire` | Data input signal. |
-| `clr_i` | Input | `wire` | Control signal (Reset or Set depending on mode). |
-| `en_i` | Input | `wire` | Clock enable signal (`1`: update output, `0`: hold state). |
-| `mode_i[3:0]` | Input | `wire [3:0]` | 4-bit configuration mode selection vector. |
-| `q_o` | Output | `reg` | Data output register. |
+| `clk_i` | Input | 1-bit | Clock input signal |
+| `d_i` | Input | 1-bit | Data input |
+| `clr_i` | Input | 1-bit | Asynchronous / Synchronous Reset or Set control signal |
+| `en_i` | Input | 1-bit | Clock enable signal |
+| `mode_i` | Input | 5-bit | Configuration mode vector |
+| `q_o` | Output | 1-bit | Flip-flop data output |
 
 ---
 
-## Configuration Mode Mapping (`mode_i[3:0]`)
+## Mode Configuration Map (`mode_i[4:0]`)
 
-| Bit Index | Parameter | Value `0` | Value `1` |
-| :---: | :--- | :--- | :--- |
-| **`mode_i[3]`** | Clock Edge (`clk_edge`) | **Rising Edge** (`posedge`) | **Falling Edge** (`negedge`) |
-| **`mode_i[2]`** | Synchronization (`sync_mode`) | **Asynchronous** | **Synchronous** |
-| **`mode_i[1]`** | Control Polarity (`polarity`) | **Active-Low** (`clr_i == 0`) | **Active-High** (`clr_i == 1`) |
-| **`mode_i[0]`** | Control Function (`func_type`) | **Reset** (`q_o <= 0`) | **Set** (`q_o <= 1`) |
-
----
-
-## Operating Modes Matrix
-
-| Mode `mode_i[3:0]` | Trigger Edge | Mode Type | Control Polarity | Control Function | Output (`q_o`) on `clr_i` Asserted |
-| :---: | :---: | :---: | :---: | :---: | :---: |
-| `4'b0000` | Rising | Asynchronous | Active-Low | Reset | `0` |
-| `4'b0001` | Rising | Asynchronous | Active-Low | Set | `1` |
-| `4'b0010` | Rising | Asynchronous | Active-High | Reset | `0` |
-| `4'b0011` | Rising | Asynchronous | Active-High | Set | `1` |
-| `4'b0100` | Rising | Synchronous | Active-Low | Reset | `0` |
-| `4'b0101` | Rising | Synchronous | Active-Low | Set | `1` |
-| `4'b0110` | Rising | Synchronous | Active-High | Reset | `0` |
-| `4'b0111` | Rising | Synchronous | Active-High | Set | `1` |
-| `4'b1000` | Falling | Asynchronous | Active-Low | Reset | `0` |
-| `4'b1001` | Falling | Asynchronous | Active-Low | Set | `1` |
-| `4'b1010` | Falling | Asynchronous | Active-High | Reset | `0` |
-| `4'b1011` | Falling | Asynchronous | Active-High | Set | `1` |
-| `4'b1100` | Falling | Synchronous | Active-Low | Reset | `0` |
-| `4'b1101` | Falling | Synchronous | Active-Low | Set | `1` |
-| `4'b1110` | Falling | Synchronous | Active-High | Reset | `0` |
-| `4'b1111` | Falling | Synchronous | Active-High | Set | `1` |
+| Bit | Function | `0` | `1` |
+| :--- | :--- | :--- | :--- |
+| **`mode_i[4]`** | Clock Edge | Rising Edge (`posedge`) | Falling Edge (`negedge`) |
+| **`mode_i[3]`** | Operation Type | Asynchronous | Synchronous |
+| **`mode_i[2]`** | Control Polarity | Active-Low (`clr_i` active when `0`) | Active-High (`clr_i` active when `1`) |
+| **`mode_i[1]`** | Control Function | Reset (`q_o` $\rightarrow$ `0`) | Set (`q_o` $\rightarrow$ `1`) |
+| **`mode_i[0]`** | Enable Polarity | Active-Low (`en_i` active when `0`) | Active-High (`en_i` active when `1`) |
 
 ---
 
-## Operational Priority Logic
+## Verification with cocotb
 
-1. **Reset / Set Override**: `clr_i` takes priority over data capture (`d_i`).
-2. **Clock Enable (`en_i`)**: Sampled only when `clr_i` is inactive.
-3. **Hold State**: When `en_i` is low (`0`) and `clr_i` is inactive, `q_o` retains its previous value.
+This repository includes a Python-based testbench using **cocotb** to verify multiple modes of operation (such as asynchronous active-high reset and synchronous falling-edge set).
 
-```
-                  +-----------------------------------+
-                  |            clr_i Active?          |
-                  +-----------------------------------+
-                                /       \
-                               /         \
-                             Yes          No
-                             /             \
-             +-----------------+         +-------------------+
-             | q_o <= target_val|        |    en_i Active?   |
-             +-----------------+         +-------------------+
-                                               /       \
-                                              /         \
-                                            Yes          No
-                                            /             \
-                             +-----------------+       +---------------+
-                             |  q_o <= d_i     |       | q_o <= q_o    |
-                             +-----------------+       +---------------+
-```
+### Prerequisites
+Make sure you have Python, `cocotb`, and a Verilog simulator (such as Icarus Verilog) installed:
+```bash
+pip install cocotb
+sudo apt-get install iverilog  # Or equivalent for your OS
