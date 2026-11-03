@@ -7,14 +7,14 @@
 #include <string>
 
 /* Headers from vtr util library */
+#include "command_exit_codes.h"
 #include "mosofa_arch_layout_clb_subtile.h"
 #include "mosofa_constants.h"
-#include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 int add_clb_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                        const ArchPlanner& arch_planner) {
@@ -46,13 +46,15 @@ int add_clb_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
   /* Cin */
   num_err +=
     va_layout.add_pb_type_port(pb_type_name, "cin", arcxpress::VprArchLayout::e_port_type::CI) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "reg_in", arcxpress::VprArchLayout::e_port_type::CI) ? 0
-                                                                                              : 1;
+    va_layout.add_pb_type_port(pb_type_name, "reg_in", arcxpress::VprArchLayout::e_port_type::CI)
+      ? 0
+      : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "sc_in", arcxpress::VprArchLayout::e_port_type::CI) ? 0
-                                                                                              : 1;
+    va_layout.add_pb_type_port(pb_type_name, "sc_in", arcxpress::VprArchLayout::e_port_type::CI)
+      ? 0
+      : 1;
   num_err +=
     va_layout.add_pb_type_port(pb_type_name, "reset", arcxpress::VprArchLayout::e_port_type::RESET)
       ? 0
@@ -63,13 +65,15 @@ int add_clb_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                : 1;
   num_err +=
     va_layout.add_pb_type_port(pb_type_name, "cout", arcxpress::VprArchLayout::e_port_type::CO) ? 0
-                                                                                               : 1;
+                                                                                                : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "reg_out", arcxpress::VprArchLayout::e_port_type::CO) ? 0
-                                                                                               : 1;
+    va_layout.add_pb_type_port(pb_type_name, "reg_out", arcxpress::VprArchLayout::e_port_type::CO)
+      ? 0
+      : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "sc_out", arcxpress::VprArchLayout::e_port_type::CO) ? 0
-                                                                                               : 1;
+    va_layout.add_pb_type_port(pb_type_name, "sc_out", arcxpress::VprArchLayout::e_port_type::CO)
+      ? 0
+      : 1;
   num_err +=
     va_layout.add_pb_type_port(pb_type_name, "clk", arcxpress::VprArchLayout::e_port_type::CLOCK)
       ? 0
@@ -141,14 +145,16 @@ int add_clb_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
   }
 
   num_err += va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "cin", 0, TOP) ? 0 : 1;
-  num_err += va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "reg_in", 0, TOP) ? 0 : 1;
-  num_err += va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "sc_in", 0, TOP) ? 0 : 1;
+  num_err +=
+    va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "reg_in", 0, TOP) ? 0 : 1;
+  num_err +=
+    va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "sc_in", 0, TOP) ? 0 : 1;
   num_err +=
     va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "cout", 0, BOTTOM) ? 0 : 1;
-    va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "reg_out", 0, BOTTOM) ? 0 : 1;
-    va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "sc_out", 0, BOTTOM) ? 0 : 1;
+  va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "reg_out", 0, BOTTOM) ? 0 : 1;
+  va_layout.add_subtile_pin_location(tile_name, subtile_name, 0, "sc_out", 0, BOTTOM) ? 0 : 1;
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-}  // end namespace Sofa
+}  // namespace MOSOFA

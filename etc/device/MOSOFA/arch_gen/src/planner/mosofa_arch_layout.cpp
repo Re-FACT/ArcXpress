@@ -9,29 +9,29 @@
 /* Headers from openfpga library */
 #include "command_exit_codes.h"
 /* Headers from arch gen library */
-#include "vpr_arch_layout.h"
-#include "arch_gen_direct_connection.h"
 #include "add_hidden_primitive_pb_types.h"
+#include "arch_gen_direct_connection.h"
+#include "vpr_arch_layout.h"
 /* Headers from sofa common arch gen library */
-#include "mosofa_arch_primitives.h"
-#include "mosofa_arch_layout_io_tile.h"
-#include "mosofa_arch_layout_clb_tile.h"
-#include "mosofa_prim_pb_type_timing.h"
-#include "mosofa_complex_block_po.h"
-#include "mosofa_complex_block_pi.h"
-#include "mosofa_complex_block_ff.h"
-#include "mosofa_complex_block_clb.h"
-#include "mosofa_constants.h"
 #include "mosofa_arch_layout.h"
+#include "mosofa_arch_layout_clb_tile.h"
+#include "mosofa_arch_layout_io_tile.h"
 #include "mosofa_arch_planner.h"
+#include "mosofa_arch_primitives.h"
+#include "mosofa_complex_block_clb.h"
+#include "mosofa_complex_block_ff.h"
+#include "mosofa_complex_block_pi.h"
+#include "mosofa_complex_block_po.h"
+#include "mosofa_constants.h"
+#include "mosofa_prim_pb_type_timing.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_dimension_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                             const MOSOFA::ArchPlanner& arch_plan) {
   int num_err = 0;
 
-  num_err += va_layout.set_dp_layout(arch_plan.dp_height(), arch_plan.dp_width()) ? 0: 1;
+  num_err += va_layout.set_dp_layout(arch_plan.dp_height(), arch_plan.dp_width()) ? 0 : 1;
   num_err += va_layout.set_ultimate_layout(arch_plan.height(), arch_plan.width()) ? 0 : 1;
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
@@ -40,12 +40,12 @@ static int add_dimension_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
 static int add_routing_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   int num_err = 0;
 
-  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 1, 12) ? 0: 1;
-  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 2, 6) ? 0: 1;
-  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 4, 10) ? 0: 1;
+  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 1, 12) ? 0 : 1;
+  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 2, 6) ? 0 : 1;
+  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::X, 4, 10) ? 0 : 1;
   num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::Y, 1, 12) ? 0 : 1;
   num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::Y, 2, 6) ? 0 : 1;
-  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::Y, 4, 10) ? 0: 1;
+  num_err += va_layout.add_segment(arcxpress::VprArchLayout::e_segment_type::Y, 4, 10) ? 0 : 1;
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -64,21 +64,21 @@ static int add_direct_connect_to_vpr_arch_layout(arcxpress::VprArchLayout& va_la
   std::string clb_output_port = "O";
 
   /* Add carry chain connection */
-  num_err += va_layout.add_carrychain_direct_connection(clb_tile, "cout", "cin", arcxpress::VprArchLayout::e_segment_type::Y, arcxpress::VprArchLayout::e_dir_type::DEC) ? 0 : 1;
+  num_err += va_layout.add_carrychain_direct_connection(clb_tile, "cout", "cin",
+                                                        arcxpress::VprArchLayout::e_segment_type::Y,
+                                                        arcxpress::VprArchLayout::e_dir_type::DEC)
+               ? 0
+               : 1;
 
   /* Feedback connection for CLB */
-  num_err += arcxpress::add_full_capable_direct_connections(va_layout, clb_tile,
-                                                clb_eq_input_port_prefix,
-                                                clb_noneq_input_port_prefix,
-                                                clb_output_port,
-                                                lut_size, num_fle, num_outputs
-                                               ); 
+  num_err += arcxpress::add_full_capable_direct_connections(
+    va_layout, clb_tile, clb_eq_input_port_prefix, clb_noneq_input_port_prefix, clb_output_port,
+    lut_size, num_fle, num_outputs);
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-static int add_complex_blocks(arcxpress::ArchGen& arch_gen,
-                              const ArchPlanner& arch_plan) {
+static int add_complex_blocks(arcxpress::ArchGen& arch_gen, const ArchPlanner& arch_plan) {
   int num_err = 0;
 
   /* Initialize top-level pb_type from tile lists */
@@ -89,7 +89,8 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen,
   num_err += add_mosofa_builtin_latch_primitive_pb_type(arch_gen, true);
   num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 3, "1", true);
   num_err += arcxpress::add_builtin_lut_primitive_pb_type(arch_gen, 4, "0", true);
-  num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(PI_NAME), std::string(), true);
+  num_err += arcxpress::add_builtin_pi_primitive_pb_type(arch_gen, std::string(PI_NAME),
+                                                         std::string(), true);
   num_err += arcxpress::add_builtin_po_primitive_pb_type(arch_gen, std::string(PO_NAME), true);
   /* Initialize the primitive delay variables/numbers */
   num_err += add_primitive_pb_type_timing(arch_gen, true);
@@ -110,7 +111,7 @@ static int add_complex_blocks(arcxpress::ArchGen& arch_gen,
  * Return 2 if fail when creating files
  *******************************************************************/
 int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
-                         const arcxpress::ArchGenInputParams& arch_params) {
+                           const arcxpress::ArchGenInputParams& arch_params) {
   int status = MOSOFA::create_vpr_arch_primitives(arch_gen);
   if (status != openfpga::CMD_EXEC_SUCCESS) {
     VTR_LOG_ERROR("Failed in creating primitive details\n");
@@ -139,7 +140,7 @@ int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
   arch_gen.set_num_pclocks(arch_plan.num_pclocks());
   arch_gen.set_num_config_regions(arch_plan.num_config_regions());
   arch_gen.set_num_resets(arch_plan.num_resets());
-  
+
   /* Add complex block graph to arch generator */
   num_err += add_complex_blocks(arch_gen, arch_plan);
 

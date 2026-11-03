@@ -2,10 +2,10 @@
 
 #include <array>
 
-/** Common names for SOFA series. Each device may have difference on models 
+/** Common names for SOFA series. Each device may have difference on models
  *  To be self-contained and conflict-free, each device should have a dedicated namespace
  */
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 /* Vpr models */
 /* Primary inputs */
@@ -60,4 +60,4 @@ constexpr std::array<const char*, 8> ALL_OPERATING_SCFF_NAMES = {
 constexpr const char* PB_MUX_HIGHLOAD_CIRCUIT_MODEL_NAME = "pb_mux_highload";
 constexpr const char* PB_MUX_NO_CONST_INPUT_CIRCUIT_MODEL_NAME = "pb_mux_no_const_input";
 
-}  // namespace alkaid
+}  // namespace MOSOFA

@@ -1,8 +1,10 @@
 #include "mosofa_naming.h"
+
 #include <string>
+
 #include "side_manager.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 std::string gen_latch_pb_name(const std::string& prefix) {
   return prefix + std::string("_") + std::string(OPERATING_BUILTIN_LATCH_NAME);

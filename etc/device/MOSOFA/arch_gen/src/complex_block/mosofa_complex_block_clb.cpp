@@ -7,12 +7,12 @@
 #include <string>
 
 /* Headers from vtr util library */
+#include "command_exit_codes.h"
+#include "fracff_gen.h"
 #include "mosofa_complex_block_clb.h"
 #include "mosofa_complex_block_ff.h"
 #include "mosofa_constants.h"
 #include "mosofa_naming.h"
-#include "command_exit_codes.h"
-#include "fracff_gen.h"
 #include "vpr_arch_layout.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
@@ -32,10 +32,10 @@ static int add_frac_logic_pb_type(arcxpress::ArchGen& arch_gen, const bool& verb
     arch_gen.add_pb_type_port(frac_logic_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT)
       ? 0
       : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(frac_logic_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT)
-      ? 0
-      : 1;
+  num_err += arch_gen.add_pb_type_port(frac_logic_pb, out_port,
+                                       arcxpress::VprArchLayout::e_port_type::OUTPUT)
+               ? 0
+               : 1;
 
   /* Default mode */
   std::string default_mode = arcxpress::gen_default_mode_name(frac_logic_pb);
@@ -108,16 +108,16 @@ static int add_ble3_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   openfpga::BasicPort out_port("out", 1);
   num_err +=
     arch_gen.add_pb_type_port(ble3_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
-                                                                                             : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(ble3_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
                                                                                               : 1;
   num_err +=
+    arch_gen.add_pb_type_port(ble3_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                               : 1;
+  num_err +=
     arch_gen.add_pb_type_port(ble3_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
-                                                                                             : 1;
+                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(ble3_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
-                                                                                               : 1;
+                                                                                                : 1;
 
   /* Default mode */
   std::string pb_mode = arcxpress::gen_default_mode_name(ble3_pb);
@@ -224,19 +224,21 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   openfpga::BasicPort ck_port("clk", 1);
   openfpga::BasicPort out_port("out", 1);
   num_err +=
-    arch_gen.add_pb_type_port(ale_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
+    arch_gen.add_pb_type_port(ale_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(ale_pb, cin_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0 : 1;
   num_err +=
     arch_gen.add_pb_type_port(ale_pb, cout_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0 : 1;
   num_err +=
     arch_gen.add_pb_type_port(ale_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                              : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(ale_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
                                                                                              : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ale_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
-  num_err +=
     arch_gen.add_pb_type_port(ale_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
 
   /* Default mode */
   std::string pb_mode = arcxpress::gen_default_mode_name(ale_pb);
@@ -393,15 +395,17 @@ static int add_lut3inter_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbo
   openfpga::BasicPort ck_port("clk", 1);
   openfpga::BasicPort out_port("out", 2);
   num_err +=
-    arch_gen.add_pb_type_port(top_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(top_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+    arch_gen.add_pb_type_port(top_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                              : 1;
   num_err +=
-    arch_gen.add_pb_type_port(top_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
+    arch_gen.add_pb_type_port(top_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                              : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(top_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(top_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
 
   /* Default mode */
   std::string pb_mode = arcxpress::gen_default_mode_name(top_pb);
@@ -467,16 +471,16 @@ static int add_ble4_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   openfpga::BasicPort out_port("out", 1);
   num_err +=
     arch_gen.add_pb_type_port(ble4_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
-                                                                                             : 1;
-  num_err +=
-    arch_gen.add_pb_type_port(ble4_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
                                                                                               : 1;
   num_err +=
+    arch_gen.add_pb_type_port(ble4_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                               : 1;
+  num_err +=
     arch_gen.add_pb_type_port(ble4_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
-                                                                                             : 1;
+                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(ble4_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
-                                                                                               : 1;
+                                                                                                : 1;
 
   /* Default mode */
   std::string pb_mode = arcxpress::gen_default_mode_name(ble4_pb);
@@ -852,8 +856,7 @@ static int assemble_fle_complex_block_operating_mode_arith(arcxpress::ArchGen& a
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen,
-                               const ArchPlanner& arch_planner,
+int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& arch_planner,
                                const bool& verbose) {
   int num_err = 0;
 
@@ -877,27 +880,33 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen,
   openfpga::BasicPort reg_out_port("reg_out", 1);
   openfpga::BasicPort sc_out_port("sc_out", 1);
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
-                                                                                             : 1;
+                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, cin_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, reg_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, reg_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0
+                                                                                              : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, sc_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, sc_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0
+                                                                                             : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, cout_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, reg_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, reg_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0
+                                                                                               : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, sc_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0 : 1;
+    arch_gen.add_pb_type_port(fle_pb, sc_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0
+                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
 
   num_err += assemble_fle_complex_block_physical_mode(arch_gen, fle_pb);
   num_err += assemble_fle_complex_block_operating_mode_n2_lut3(arch_gen, fle_pb);
@@ -946,10 +955,7 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen,
   }
   /* Carry chain, shift register chain and scan-chain */
   std::map<std::string, std::string> chain_port_pairs = {
-    {"cin", "cout"},
-    {"reg_in", "reg_out"},
-    {"sc_in", "sc_out"}
-  };
+    {"cin", "cout"}, {"reg_in", "reg_out"}, {"sc_in", "sc_out"}};
   for (const auto& [iport, oport] : chain_port_pairs) {
     std::string pack_pattern_name = iport + std::string("chain");
     {
@@ -978,10 +984,10 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen,
       openfpga::BasicPort des_port(oport, 0, 0);
       arcxpress::ArchGen::EdgePort src_edge_port = {fle_pb, num_fle - 1, src_port};
       num_err += arch_gen.add_out2out_edge(clb_mode, src_edge_port, des_port) ? 0 : 1;
-      num_err += arch_gen.set_out2out_edge_pack_pattern(clb_mode, src_edge_port, des_port,
-                                                        pack_pattern_name)
-                   ? 0
-                   : 1;
+      num_err +=
+        arch_gen.set_out2out_edge_pack_pattern(clb_mode, src_edge_port, des_port, pack_pattern_name)
+          ? 0
+          : 1;
     }
   }
 

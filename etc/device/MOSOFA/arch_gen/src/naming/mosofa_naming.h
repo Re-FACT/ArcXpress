@@ -7,8 +7,8 @@
 #include <string>
 #include <tuple>
 
-#include "mosofa_constants.h"
 #include "arch_gen_naming.h"
+#include "mosofa_constants.h"
 #include "physical_types.h"
 
 /********************************************************************

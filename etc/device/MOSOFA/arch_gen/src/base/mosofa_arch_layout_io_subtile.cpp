@@ -7,14 +7,14 @@
 #include <string>
 
 /* Headers from vtr util library */
+#include "command_exit_codes.h"
 #include "mosofa_arch_layout_io_subtile.h"
 #include "mosofa_naming.h"
-#include "command_exit_codes.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 int add_pi_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   int num_err = 0;

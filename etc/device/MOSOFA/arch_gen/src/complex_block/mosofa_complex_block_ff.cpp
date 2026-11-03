@@ -8,16 +8,16 @@
 
 /* Headers from vtr util library */
 #include "add_hidden_primitive_pb_types.h"
+#include "command_exit_codes.h"
+#include "fracff_gen.h"
 #include "mosofa_complex_block_ff.h"
 #include "mosofa_constants.h"
 #include "mosofa_naming.h"
-#include "command_exit_codes.h"
-#include "fracff_gen.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 /* A unified function to do wiring between ff pb_type and its parent pb_type under a mode */
 int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mode,
@@ -146,7 +146,8 @@ int add_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb, const
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, d_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, q_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0 : 1;
   num_err +=

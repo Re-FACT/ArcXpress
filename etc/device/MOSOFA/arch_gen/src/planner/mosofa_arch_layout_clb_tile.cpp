@@ -7,20 +7,20 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "vtr_assert.h"
-#include "vtr_log.h"
-#include "vtr_time.h"
-#include "vpr_arch_layout.h"
+#include "add_hidden_primitive_pb_types.h"
+#include "command_exit_codes.h"
 #include "mosofa_arch_layout_clb_subtile.h"
 #include "mosofa_arch_layout_clb_tile.h"
 #include "mosofa_constants.h"
-#include "command_exit_codes.h"
-#include "add_hidden_primitive_pb_types.h"
+#include "vpr_arch_layout.h"
+#include "vtr_assert.h"
+#include "vtr_log.h"
+#include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 int add_clb_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
-                                           const ArchPlanner& arch_plan) {
+                                    const ArchPlanner& arch_plan) {
   int num_err = 0;
 
   std::string tile_name("clb");
