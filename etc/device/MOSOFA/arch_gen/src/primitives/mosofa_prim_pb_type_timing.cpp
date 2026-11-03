@@ -4,16 +4,16 @@
 #include <string>
 
 /* Headers from vtr util library */
-#include "mosofa_constants.h"
-#include "mosofa_prim_pb_type_timing.h"
 #include "command_exit_codes.h"
 #include "fracff_gen.h"
+#include "mosofa_constants.h"
+#include "mosofa_prim_pb_type_timing.h"
 #include "vpr_arch_layout.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
@@ -49,10 +49,10 @@ static int add_dff_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen,
     /* Port class: TODO: may be moved to a separated function */
     num_err +=
       arch_gen.set_pb_type_port_class(prim_pb, d_port, arcxpress::ArchGen::e_port_class::FF_D) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
     num_err +=
       arch_gen.set_pb_type_port_class(prim_pb, q_port, arcxpress::ArchGen::e_port_class::FF_Q) ? 0
-                                                                                              : 1;
+                                                                                               : 1;
     num_err +=
       arch_gen.set_pb_type_port_class(prim_pb, ck_port, arcxpress::ArchGen::e_port_class::FF_CLOCK)
         ? 0

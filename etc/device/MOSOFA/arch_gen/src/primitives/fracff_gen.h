@@ -24,14 +24,13 @@ class FracffGen {
   enum class e_wen_type { NONE = 0, ACTIVE_LOW, ACTIVE_HIGH, NUM_TYPES };
 
  public: /* -- Accessors -- */
-  std::vector<arcxpress::VprArchPrimitive> vpr_arch_primitives(
-    const bool& include_physical) const;
+  std::vector<arcxpress::VprArchPrimitive> vpr_arch_primitives(const bool& include_physical) const;
   std::vector<std::string> vpr_model_names(const bool& include_physical) const;
   arcxpress::VprArchPrimitive vpr_arch_primitive(const e_clk_type& ck_type,
-                                                const e_clr_func& clr_func,
-                                                const e_clr_type& clr_type,
-                                                const e_clr_polarity& clr_pol,
-                                                const e_wen_type& wen_type) const;
+                                                 const e_clr_func& clr_func,
+                                                 const e_clr_type& clr_type,
+                                                 const e_clr_polarity& clr_pol,
+                                                 const e_wen_type& wen_type) const;
   std::string vpr_model_name(const e_clk_type& ck_type, const e_clr_func& clr_func,
                              const e_clr_type& clr_type, const e_clr_polarity& clr_pol,
                              const e_wen_type& wen_type) const;
@@ -39,10 +38,8 @@ class FracffGen {
   std::string circuit_model_name() const;
   arcxpress::VprArchPrimitive vpr_arch_physical_primitive() const;
   std::string default_mode_bits() const;
-  std::string mode_bits(const e_clk_type& ck_type,
-                        const e_clr_func& clr_func,
-                        const e_clr_type& clr_type,
-                        const e_clr_polarity& clr_pol,
+  std::string mode_bits(const e_clk_type& ck_type, const e_clr_func& clr_func,
+                        const e_clr_type& clr_type, const e_clr_polarity& clr_pol,
                         const e_wen_type& wen_type) const;
 
  public: /* Public utility */
@@ -76,8 +73,7 @@ class FracffGen {
 
   e_clr_polarity str2clr_polarity(const std::string& str, const bool& verbose = false) const;
   std::string clr_polarity2str(const e_clr_polarity& type, const bool& verbose = false) const;
-  std::string clr_polarity2mode_bit(const e_clr_polarity& type,
-                                       const bool& verbose = false) const;
+  std::string clr_polarity2mode_bit(const e_clr_polarity& type, const bool& verbose = false) const;
   std::string clr_polarity_all2str() const;
   bool valid_clr_polarity(const e_clr_polarity& type) const;
   std::vector<FracffGen::e_clr_polarity> clr_polarities() const;

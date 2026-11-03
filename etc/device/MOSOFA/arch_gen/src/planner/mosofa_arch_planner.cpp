@@ -1,13 +1,14 @@
-#include <filesystem>
+#include "mosofa_arch_planner.h"
+
 #include <cctype>
 #include <cmath>
+#include <filesystem>
 
 #include "command_exit_codes.h"
+#include "side_manager.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
-#include "mosofa_arch_planner.h"
-#include "side_manager.h"
 
 namespace MOSOFA {  // Begin namespace MOSOFA
 
@@ -16,7 +17,7 @@ ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
   if (params.height != use_default()) {
     core_height_ = params.height;
     is_valid_ = false;
-  } 
+  }
   if (params.width != use_default()) {
     core_width_ = params.width;
     is_valid_ = false;
@@ -30,22 +31,22 @@ ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
     VTR_LOG("Will use custom number of clocks: %d\n", params.num_clks);
     num_clks_ = params.num_clks;
     is_valid_ = false;
-  } 
+  }
   if (params.num_pclks != use_default()) {
     VTR_LOG("Will use custom number of programming clocks: %d\n", params.num_pclks);
     num_pclks_ = params.num_pclks;
     is_valid_ = false;
-  } 
+  }
   if (params.num_config_regions != use_default()) {
     VTR_LOG("Will use custom number of configurable regions: %d\n", params.num_config_regions);
     num_config_regions_ = params.num_config_regions;
     is_valid_ = false;
-  } 
+  }
   if (params.num_rsts != use_default()) {
     VTR_LOG("Will use custom number of resets: %d\n", params.num_rsts);
     num_rsts_ = params.num_rsts;
     is_valid_ = false;
-  } 
+  }
   if (!params.num_inputs.empty()) {
     for (auto pair : params.num_inputs) {
       if (pair.second != use_default_num_io()) {
@@ -65,27 +66,13 @@ ArchPlanner::ArchPlanner(const arcxpress::ArchGenInputParams& params) {
   plan(true);
 }
 
-int ArchPlanner::use_default() const {
-  return 0;
-}
+int ArchPlanner::use_default() const { return 0; }
 
-int ArchPlanner::use_default_num_io() const {
-  return -1;
-}
+int ArchPlanner::use_default_num_io() const { return -1; }
 
 void ArchPlanner::reset() {
-  num_input_per_tile_ = { 
-   {TOP, 12},
-   {RIGHT, 12},
-   {BOTTOM, 108},
-   {LEFT, 12}
-  };
-  num_output_per_tile_ = {
-   {TOP, 12},
-   {RIGHT, 12},
-   {BOTTOM, 108},
-   {LEFT, 12}
-  };
+  num_input_per_tile_ = {{TOP, 12}, {RIGHT, 12}, {BOTTOM, 108}, {LEFT, 12}};
+  num_output_per_tile_ = {{TOP, 12}, {RIGHT, 12}, {BOTTOM, 108}, {LEFT, 12}};
 
   dp_core_height_ = 4;
   dp_core_width_ = 4;
@@ -101,13 +88,9 @@ void ArchPlanner::reset() {
   is_valid_ = true;
 }
 
-size_t ArchPlanner::num_fle_per_clb() const {
-  return num_fle_per_clb_;
-}
+size_t ArchPlanner::num_fle_per_clb() const { return num_fle_per_clb_; }
 
-size_t ArchPlanner::max_lut_size() const {
-  return MAX_LUT_SIZE_;
-}
+size_t ArchPlanner::max_lut_size() const { return MAX_LUT_SIZE_; }
 
 void ArchPlanner::plan_io_num() {
   for (e_side curr_side : TOTAL_2D_SIDES) {
@@ -127,10 +110,12 @@ void ArchPlanner::plan(const bool& verbose) {
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   if (core_height_ * core_width_ * num_fle_per_clb_ > max_array_size_) {
-    VTR_LOG_ERROR("Core dimension %lu x %lu exceeds the resource limit (%lu)!\n", core_width_, core_height_, max_array_size_ / num_fle_per_clb_);
+    VTR_LOG_ERROR("Core dimension %lu x %lu exceeds the resource limit (%lu)!\n", core_width_,
+                  core_height_, max_array_size_ / num_fle_per_clb_);
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
-  /* If the core height and width is smaller than the dp height and width. Set the dp to follow the core dimension */
+  /* If the core height and width is smaller than the dp height and width. Set the dp to follow the
+   * core dimension */
   if (core_height_ < dp_core_height_) {
     VTR_LOG("Set dp height to be same as core height (=%ld) for consistency\n", core_height_);
     dp_core_height_ = core_height_;
@@ -145,11 +130,13 @@ void ArchPlanner::plan(const bool& verbose) {
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   if (num_pclks_ < 1) {
-    VTR_LOG_ERROR("Number of programming clocks should be at least 1 but provided '%lu'!\n", num_pclks_);
+    VTR_LOG_ERROR("Number of programming clocks should be at least 1 but provided '%lu'!\n",
+                  num_pclks_);
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   if (num_config_regions_ < 1) {
-    VTR_LOG_ERROR("Number of configurable regions should be at least 1 but provided '%lu'!\n", num_config_regions_);
+    VTR_LOG_ERROR("Number of configurable regions should be at least 1 but provided '%lu'!\n",
+                  num_config_regions_);
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
 
@@ -167,7 +154,8 @@ void ArchPlanner::plan(const bool& verbose) {
       if (num_inputs_[curr_side] <= core_width_) {
         num_input_per_tile_[curr_side] = 1;
       } else {
-        num_input_per_tile_[curr_side] = std::ceil((float)(num_inputs_[curr_side]) / (float)core_width_); 
+        num_input_per_tile_[curr_side] =
+          std::ceil((float)(num_inputs_[curr_side]) / (float)core_width_);
       }
       if (num_input_per_tile_[curr_side] % core_width_ != 0) {
         VTR_LOG(
@@ -180,7 +168,8 @@ void ArchPlanner::plan(const bool& verbose) {
       if (num_inputs_[curr_side] <= core_height_) {
         num_input_per_tile_[curr_side] = 1;
       } else {
-        num_input_per_tile_[curr_side] = std::ceil((float)(num_inputs_[curr_side]) / (float)core_height_); 
+        num_input_per_tile_[curr_side] =
+          std::ceil((float)(num_inputs_[curr_side]) / (float)core_height_);
       }
       if (num_input_per_tile_[curr_side] % core_height_ != 0) {
         VTR_LOG(
@@ -196,7 +185,8 @@ void ArchPlanner::plan(const bool& verbose) {
       if (num_outputs_[curr_side] <= core_width_) {
         num_output_per_tile_[curr_side] = 1;
       } else {
-        num_output_per_tile_[curr_side] = std::ceil((float)(num_outputs_[curr_side]) / (float)core_width_); 
+        num_output_per_tile_[curr_side] =
+          std::ceil((float)(num_outputs_[curr_side]) / (float)core_width_);
       }
       if (num_output_per_tile_[curr_side] % core_width_ != 0) {
         VTR_LOG(
@@ -209,7 +199,8 @@ void ArchPlanner::plan(const bool& verbose) {
       if (num_outputs_[curr_side] <= core_height_) {
         num_output_per_tile_[curr_side] = 1;
       } else {
-        num_output_per_tile_[curr_side] = std::ceil((float)(num_outputs_[curr_side]) / (float)core_height_); 
+        num_output_per_tile_[curr_side] =
+          std::ceil((float)(num_outputs_[curr_side]) / (float)core_height_);
       }
       if (num_output_per_tile_[curr_side] % core_height_ != 0) {
         VTR_LOG(
@@ -272,23 +263,22 @@ size_t ArchPlanner::num_output_per_tile(const e_side& io_side) const {
 
 size_t ArchPlanner::num_clocks() const {
   check_valid();
-  return num_clks_; 
+  return num_clks_;
 }
 
 size_t ArchPlanner::num_pclocks() const {
   check_valid();
-  return num_pclks_; 
+  return num_pclks_;
 }
 
 size_t ArchPlanner::num_config_regions() const {
   check_valid();
-  return num_config_regions_; 
+  return num_config_regions_;
 }
 
 size_t ArchPlanner::num_resets() const {
   check_valid();
-  return num_rsts_; 
+  return num_rsts_;
 }
-
 
 }  // End namespace MOSOFA

@@ -11,8 +11,7 @@
  *******************************************************************/
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, 
-                               const ArchPlanner& arch_planner,
+int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& arch_planner,
                                const bool& verbose);
 
 }  // namespace MOSOFA

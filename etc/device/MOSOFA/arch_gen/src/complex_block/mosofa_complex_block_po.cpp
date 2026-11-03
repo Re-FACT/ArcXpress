@@ -7,20 +7,22 @@
 #include <string>
 
 /* Headers from vtr util library */
+#include "command_exit_codes.h"
 #include "mosofa_complex_block_po.h"
 #include "mosofa_constants.h"
 #include "mosofa_naming.h"
-#include "command_exit_codes.h"
 #include "vpr_arch_layout.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
-static int assemble_po_complex_block_physical_mode(
-  arcxpress::ArchGen& arch_gen, const std::string& top_pb, const std::string& phy_pb_name,
-  const PhyPbInfo& pad_pb_name, const bool& verbose) {
+static int assemble_po_complex_block_physical_mode(arcxpress::ArchGen& arch_gen,
+                                                   const std::string& top_pb,
+                                                   const std::string& phy_pb_name,
+                                                   const PhyPbInfo& pad_pb_name,
+                                                   const bool& verbose) {
   int num_err = 0;
 
   VTR_LOGV(verbose, "Assemble physical mode for PO '%s'...\n", top_pb.c_str());
@@ -64,8 +66,7 @@ static int assemble_po_complex_block_physical_mode(
 
 static int assemble_po_complex_block_operating_modes(
   arcxpress::ArchGen& arch_gen, const std::string& top_pb, const std::string& op_pb_name,
-  const std::string& op_pad_name, const std::string& phy_pad_name,
-  const bool& verbose) {
+  const std::string& op_pad_name, const std::string& phy_pad_name, const bool& verbose) {
   int num_err = 0;
 
   VTR_LOGV(verbose, "Assemble operating mode for PO '%s'...\n", top_pb.c_str());
@@ -116,8 +117,8 @@ int assemble_po_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose)
   VTR_LOGV(verbose, "Assemble top-level pb_type '%s'\n", top_pb.c_str());
   std::string po_pb = arch_gen.find_primitive_pb_type_name(std::string(PO_BLIF_MODEL));
   PhyPbInfo pad_pb_info = {po_pb, PO_CIRCUIT_MODEL};
-  num_err += assemble_po_complex_block_physical_mode(arch_gen, top_pb, "po_pad", 
-                                                     pad_pb_info, verbose);
+  num_err +=
+    assemble_po_complex_block_physical_mode(arch_gen, top_pb, "po_pad", pad_pb_info, verbose);
   num_err += assemble_po_complex_block_operating_modes(arch_gen, top_pb, "io_output",
                                                        std::string(PO_NAME), po_pb, verbose);
   VTR_LOGV(verbose, "Done\n");

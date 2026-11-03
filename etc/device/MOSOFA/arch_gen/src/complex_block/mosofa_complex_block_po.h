@@ -8,7 +8,7 @@
 /********************************************************************
  * Function declaration
  *******************************************************************/
-namespace MOSOFA{  // Begin namespace MOSOFA
+namespace MOSOFA {  // Begin namespace MOSOFA
 
 int assemble_po_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose);
 

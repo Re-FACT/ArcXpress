@@ -21,7 +21,8 @@ FracffGen::FracffGen(const std::string& name) {
   VPR_MODEL_PREFIX_ = "dff";
 
   CLK_TYPE_MODE_BITS_ = {"1", "0"};
-  WEN_TYPE_MODE_BITS_ = {"0", "0", "1"}; // The active-low is default, which is designed for connection block multiplexers to output '0' when unused
+  WEN_TYPE_MODE_BITS_ = {"0", "0", "1"};  // The active-low is default, which is designed for
+                                          // connection block multiplexers to output '0' when unused
   CLR_FUNC_MODE_BITS_ = {"0", "0", "1"};
   CLR_TYPE_MODE_BITS_ = {"0", "1"};
   CLR_POLARITY_MODE_BITS_ = {"0", "1"};
@@ -39,8 +40,7 @@ FracffGen::e_clk_type FracffGen::str2clk_type(const std::string& str, const bool
   return FracffGen::e_clk_type::NUM_TYPES;
 }
 
-std::string FracffGen::clk_type2str(const FracffGen::e_clk_type& type,
-                                     const bool& verbose) const {
+std::string FracffGen::clk_type2str(const FracffGen::e_clk_type& type, const bool& verbose) const {
   if (!valid_clk_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clock type! Expect %s\n",
                    clk_type_all2str().c_str());
@@ -50,7 +50,7 @@ std::string FracffGen::clk_type2str(const FracffGen::e_clk_type& type,
 }
 
 std::string FracffGen::clk_type2mode_bit(const FracffGen::e_clk_type& type,
-                                          const bool& verbose) const {
+                                         const bool& verbose) const {
   if (!valid_clk_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clock type! Expect %s\n",
                    clk_type_all2str().c_str());
@@ -86,8 +86,7 @@ FracffGen::e_wen_type FracffGen::str2wen_type(const std::string& str, const bool
   return FracffGen::e_wen_type::NUM_TYPES;
 }
 
-std::string FracffGen::wen_type2str(const FracffGen::e_wen_type& type,
-                                     const bool& verbose) const {
+std::string FracffGen::wen_type2str(const FracffGen::e_wen_type& type, const bool& verbose) const {
   if (!valid_wen_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff write enable type! Expect %s\n",
                    wen_type_all2str().c_str());
@@ -97,7 +96,7 @@ std::string FracffGen::wen_type2str(const FracffGen::e_wen_type& type,
 }
 
 std::string FracffGen::wen_type2mode_bit(const FracffGen::e_wen_type& type,
-                                          const bool& verbose) const {
+                                         const bool& verbose) const {
   if (!valid_wen_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff write enable type! Expect %s\n",
                    wen_type_all2str().c_str());
@@ -133,8 +132,7 @@ FracffGen::e_clr_func FracffGen::str2clr_func(const std::string& str, const bool
   return FracffGen::e_clr_func::NUM_TYPES;
 }
 
-std::string FracffGen::clr_func2str(const FracffGen::e_clr_func& type,
-                                     const bool& verbose) const {
+std::string FracffGen::clr_func2str(const FracffGen::e_clr_func& type, const bool& verbose) const {
   if (!valid_clr_func(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear functionality! Expect %s\n",
                    clr_func_all2str().c_str());
@@ -144,7 +142,7 @@ std::string FracffGen::clr_func2str(const FracffGen::e_clr_func& type,
 }
 
 std::string FracffGen::clr_func2mode_bit(const FracffGen::e_clr_func& type,
-                                          const bool& verbose) const {
+                                         const bool& verbose) const {
   if (!valid_clr_func(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear functionality! Expect %s\n",
                    clr_func_all2str().c_str());
@@ -180,8 +178,7 @@ FracffGen::e_clr_type FracffGen::str2clr_type(const std::string& str, const bool
   return FracffGen::e_clr_type::NUM_TYPES;
 }
 
-std::string FracffGen::clr_type2str(const FracffGen::e_clr_type& type,
-                                     const bool& verbose) const {
+std::string FracffGen::clr_type2str(const FracffGen::e_clr_type& type, const bool& verbose) const {
   if (!valid_clr_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear type! Expect %s\n",
                    clr_type_all2str().c_str());
@@ -191,7 +188,7 @@ std::string FracffGen::clr_type2str(const FracffGen::e_clr_type& type,
 }
 
 std::string FracffGen::clr_type2mode_bit(const FracffGen::e_clr_type& type,
-                                          const bool& verbose) const {
+                                         const bool& verbose) const {
   if (!valid_clr_type(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear type! Expect %s\n",
                    clr_type_all2str().c_str());
@@ -216,7 +213,7 @@ bool FracffGen::valid_clr_type(const e_clr_type& type) const {
 }
 
 FracffGen::e_clr_polarity FracffGen::str2clr_polarity(const std::string& str,
-                                                        const bool& verbose) const {
+                                                      const bool& verbose) const {
   for (int itype = size_t(FracffGen::e_clr_polarity::ACTIVE_LOW);
        itype < size_t(FracffGen::e_clr_polarity::NUM_TYPES); ++itype) {
     if (str == std::string(CLR_POLARITY_STRING_[itype])) {
@@ -229,7 +226,7 @@ FracffGen::e_clr_polarity FracffGen::str2clr_polarity(const std::string& str,
 }
 
 std::string FracffGen::clr_polarity2str(const FracffGen::e_clr_polarity& type,
-                                         const bool& verbose) const {
+                                        const bool& verbose) const {
   if (!valid_clr_polarity(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear polarity! Expect %s\n",
                    clr_polarity_all2str().c_str());
@@ -239,7 +236,7 @@ std::string FracffGen::clr_polarity2str(const FracffGen::e_clr_polarity& type,
 }
 
 std::string FracffGen::clr_polarity2mode_bit(const FracffGen::e_clr_polarity& type,
-                                              const bool& verbose) const {
+                                             const bool& verbose) const {
   if (!valid_clr_polarity(type)) {
     VTR_LOGV_ERROR(verbose, "Invalid type for ff clear polarity! Expect %s\n",
                    clr_polarity_all2str().c_str());
@@ -264,9 +261,8 @@ bool FracffGen::valid_clr_polarity(const e_clr_polarity& type) const {
 }
 
 std::string FracffGen::vpr_model_name(const e_clk_type& ck_type, const e_clr_func& clr_func,
-                                    const e_clr_type& clr_type,
-                                    const e_clr_polarity& clr_pol,
-                                    const e_wen_type& wen_type) const {
+                                      const e_clr_type& clr_type, const e_clr_polarity& clr_pol,
+                                      const e_wen_type& wen_type) const {
   std::string ret = VPR_MODEL_PREFIX_;
   if (clr_func != e_clr_func::NONE) {
     ret = clr_type2str(clr_type) + ret;
@@ -283,13 +279,14 @@ std::string FracffGen::vpr_model_name(const e_clk_type& ck_type, const e_clr_fun
 }
 
 arcxpress::VprArchPrimitive FracffGen::vpr_arch_primitive(const e_clk_type& ck_type,
-                                                       const e_clr_func& clr_func,
-                                                       const e_clr_type& clr_type,
-                                                       const e_clr_polarity& clr_pol,
-                                                       const e_wen_type& wen_type) const {
+                                                          const e_clr_func& clr_func,
+                                                          const e_clr_type& clr_type,
+                                                          const e_clr_polarity& clr_pol,
+                                                          const e_wen_type& wen_type) const {
   arcxpress::VprArchPrimitive pmtv(vpr_model_name(ck_type, clr_func, clr_type, clr_pol, wen_type));
   pmtv.set_blif_model(vpr_model_name(ck_type, clr_func, clr_type, clr_pol, wen_type));
-  pmtv.set_mode_bits(vpr_physical_model_name(), mode_bits(ck_type, clr_func, clr_type, clr_pol, wen_type));
+  pmtv.set_mode_bits(vpr_physical_model_name(),
+                     mode_bits(ck_type, clr_func, clr_type, clr_pol, wen_type));
   /* input ports */
   pmtv.add_input_port("D", 1);
   pmtv.add_input_port("C", 1, true);
@@ -407,8 +404,8 @@ std::vector<std::string> FracffGen::vpr_model_names(const bool& include_physical
     for (e_clr_func clr_func : clr_funcs()) {
       if (clr_func == FracffGen::e_clr_func::NONE) {
         for (e_wen_type wen_type : wen_types()) {
-          ret.push_back(
-            vpr_model_name(ck_type, clr_func, e_clr_type::ASYNC, e_clr_polarity::ACTIVE_HIGH, wen_type));
+          ret.push_back(vpr_model_name(ck_type, clr_func, e_clr_type::ASYNC,
+                                       e_clr_polarity::ACTIVE_HIGH, wen_type));
         }
         continue; /* no need to iterate over reset and set details */
       }
@@ -466,10 +463,8 @@ std::string FracffGen::default_mode_bits() const {
                    e_clr_polarity::ACTIVE_HIGH, e_wen_type::NONE);
 }
 
-std::string FracffGen::mode_bits(const e_clk_type& ck_type,
-                                 const e_clr_func& clr_func,
-                                 const e_clr_type& clr_type,
-                                 const e_clr_polarity& clr_pol,
+std::string FracffGen::mode_bits(const e_clk_type& ck_type, const e_clr_func& clr_func,
+                                 const e_clr_type& clr_type, const e_clr_polarity& clr_pol,
                                  const e_wen_type& wen_type) const {
   std::string mode_bits;
   // TODO: Double check how little endian is going to change here. Was designed for big endian

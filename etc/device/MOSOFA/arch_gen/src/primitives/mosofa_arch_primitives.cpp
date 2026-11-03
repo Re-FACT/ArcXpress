@@ -9,12 +9,12 @@
 /* Headers from openfpga library */
 #include "command_exit_codes.h"
 /* Headers from arch gen library */
-#include "vpr_arch_primitive.h"
+#include "fracff_gen.h"
 #include "mosofa_arch_primitives.h"
 #include "mosofa_constants.h"
-#include "fracff_gen.h"
+#include "vpr_arch_primitive.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_vpr_arch_primitive_pi(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;

@@ -1,8 +1,8 @@
 /********************************************************************
  * Test the project manager by loading data and output data
  *******************************************************************/
-#include "arch_gen_command_interface.h"
 #include "arch_gen.h"
+#include "arch_gen_command_interface.h"
 #include "command_exit_codes.h"
 #include "mosofa_arch_layout.h"
 
@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
   /* The standard arch genertor and status flag to start device-specific customization */
   arcxpress::ArchGen arch_gen;
   int status = 0;
-  arcxpress::ArchGenInputParams arch_params = cmd_interface.arch_parameters(); 
+  arcxpress::ArchGenInputParams arch_params = cmd_interface.arch_parameters();
 
   /*************************************
    * Run device-specific arch generation

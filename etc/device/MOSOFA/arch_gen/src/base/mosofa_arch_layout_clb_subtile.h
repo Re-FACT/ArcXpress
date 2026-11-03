@@ -5,8 +5,8 @@
  *******************************************************************/
 #include <string>
 
-#include "vpr_arch_layout.h"
 #include "mosofa_arch_planner.h"
+#include "vpr_arch_layout.h"
 
 /********************************************************************
  * Function declaration
