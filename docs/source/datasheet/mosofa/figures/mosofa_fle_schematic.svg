@@ -14,10 +14,12 @@
         <line x1="293.573" y1="240.8071" x2="383.18888" y2="240" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </g>
       <g id="Graphic_151">
-        <rect x="234.96644" y="218.1116" width="56.5337" height="139.87187" fill="#417fff"/>
-        <rect x="234.96644" y="218.1116" width="56.5337" height="139.87187" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <text transform="translate(239.96644 279.72893)" fill="white">
-          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="1.5981503" y="13" xml:space="preserve">4-LUT</tspan>
+        <rect x="234.96644" y="218.1116" width="56.5337" height="154.2634" fill="#417fff"/>
+        <rect x="234.96644" y="218.1116" width="56.5337" height="154.2634" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <text transform="translate(239.96644 270.2875)" fill="white">
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="6.402838" y="13" xml:space="preserve">Frac. </tspan>
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="4.095709" y="29.637207" xml:space="preserve">LUT4 </tspan>
+          <tspan font-family="Times New Roman" font-weight="bold" font-size="15" fill="white" x="5.769293" y="46.274414" xml:space="preserve">Arith</tspan>
         </text>
       </g>
       <g id="Line_149">
@@ -135,8 +137,8 @@
         <ellipse cx="405.64233" cy="324.54805" rx="2.5824375886183" ry="2.75000439423019" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
       </g>
       <g id="Graphic_187">
-        <text transform="translate(296.82473 251.7978)" fill="black">
-          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">LUT4_out</tspan>
+        <text transform="translate(299.19 251.7978)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">lut4_o</tspan>
         </text>
       </g>
       <g id="Line_190">
@@ -149,13 +151,13 @@
         <line x1="291.5813" y1="324.50875" x2="338.24768" y2="324.04805" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </g>
       <g id="Graphic_193">
-        <text transform="translate(293.65994 219.54083)" fill="black">
-          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">LUT3_out[0]</tspan>
+        <text transform="translate(300.0252 219.54083)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">lut3_o[0]</tspan>
         </text>
       </g>
       <g id="Graphic_194">
-        <text transform="translate(296.20583 305.9816)" fill="black">
-          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">LUT3_out[1]</tspan>
+        <text transform="translate(301.90443 305.9816)" fill="black">
+          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">lut3_o[1]</tspan>
         </text>
       </g>
       <g id="Line_201">
@@ -244,61 +246,18 @@
         </text>
       </g>
       <g id="Line_245">
-        <path d="M 187.85625 206.7161 L 187.33333 287.3643 L 207.34185 287.33333" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="263.2333" y1="206.7161" x2="263.2333" y2="217.1116" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </g>
       <g id="Graphic_246">
-        <text transform="translate(178.33572 188.64967)" fill="black">
+        <text transform="translate(253.64955 188.64967)" fill="black">
           <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">cin</tspan>
         </text>
       </g>
-      <g id="Graphic_248">
-        <path d="M 206.7669 278.2587 L 206.7717 327.29805 C 206.7717 327.29805 222.07878 319.92797 221.79531 319.6445 C 221.51185 319.36105 221.50707 283.6445 221.50707 283.6445 Z" fill="#417fff"/>
-        <path d="M 206.7669 278.2587 L 206.7717 327.29805 C 206.7717 327.29805 222.07878 319.92797 221.79531 319.6445 C 221.51185 319.36105 221.50707 283.6445 221.50707 283.6445 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-      <g id="Graphic_247">
-        <text transform="translate(208.61997 279.72197)" fill="white">
-          <tspan font-family="Times New Roman" font-weight="bold" font-size="12" fill="white" x="0" y="11" xml:space="preserve">M</tspan>
-          <tspan font-family="Times New Roman" font-weight="bold" font-size="12" fill="white" x="1.3300781" y="25.509766" xml:space="preserve">U</tspan>
-          <tspan font-family="Times New Roman" font-weight="bold" font-size="12" fill="white" x="1.3300781" y="40.01953" xml:space="preserve">X</tspan>
-        </text>
-      </g>
-      <g id="Graphic_250">
-        <text transform="translate(293.65994 325.3254)" fill="black">
-          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">LUT2_out[1]</tspan>
-        </text>
-      </g>
       <g id="Line_249">
-        <path d="M 291.90178 353.41635 L 291.573 352.66667 L 309 352.418 L 309 403.85204 L 333.20833 403.33333" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-      <g id="Graphic_251">
-        <path d="M 378.5414 394.57625 L 329.502 394.58103 C 329.502 394.58103 336.8721 409.8881 337.15556 409.60465 C 337.43902 409.3212 373.15556 409.3164 373.15556 409.3164 Z" fill="#417fff"/>
-        <path d="M 378.5414 394.57625 L 329.502 394.58103 C 329.502 394.58103 336.8721 409.8881 337.15556 409.60465 C 337.43902 409.3212 373.15556 409.3164 373.15556 409.3164 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-      <g id="Line_253">
-        <path d="M 291.96284 343.09235 L 292.03425 343.22917 L 363.6755 342.5625 L 363.6755 393.22917 L 362.94316 393.90154" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-      <g id="Graphic_252">
-        <text transform="translate(340.8791 396.26126)" fill="white">
-          <tspan font-family="Times New Roman" font-weight="bold" font-size="12" fill="white" x="0" y="11" xml:space="preserve">MUX</tspan>
-        </text>
-      </g>
-      <g id="Graphic_254">
-        <text transform="translate(225.03494 391.5421)" fill="black">
-          <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">LUT2_out[0]</tspan>
-        </text>
-      </g>
-      <g id="Line_255">
-        <path d="M 188.10834 286.21817 L 187.66667 371.33333 L 345.66667 370.66667 L 345.66667 394.57625 L 344.9268 393.91066" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-      </g>
-      <g id="Graphic_256">
-        <ellipse cx="188.10011" cy="287.80266" rx="2.58243758861827" ry="2.75000439423021" fill="black"/>
-        <ellipse cx="188.10011" cy="287.80266" rx="2.58243758861827" ry="2.75000439423021" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
-      </g>
-      <g id="Line_258">
-        <line x1="355.33333" y1="420.44315" x2="355.25323" y2="409.60854" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <line x1="263.2333" y1="373.375" x2="263.2333" y2="420.44315" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
       </g>
       <g id="Graphic_259">
-        <text transform="translate(341.87445 421.8724)" fill="black">
+        <text transform="translate(249.89955 421.8724)" fill="black">
           <tspan font-family="Times New Roman" font-style="italic" font-weight="bold" font-size="15" fill="black" x="0" y="13" xml:space="preserve">cout</tspan>
         </text>
       </g>
