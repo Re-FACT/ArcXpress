@@ -17,9 +17,9 @@ namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
-  std::string prim_pb = arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_BLIF_MODEL));
+  std::string prim_pb = arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_ARITH_BLIF_MODEL));
   if (prim_pb.empty()) {
-    VTR_LOG_ERROR("The primitive pb_type '%s' was not successfully added!\n", FRAC_LUT4_BLIF_MODEL);
+    VTR_LOG_ERROR("The primitive pb_type '%s' was not successfully added!\n", FRAC_LUT4_ARITH_BLIF_MODEL);
   }
   openfpga::BasicPort in_port("in", 4);
   openfpga::BasicPort cin_port("cin", 1);
