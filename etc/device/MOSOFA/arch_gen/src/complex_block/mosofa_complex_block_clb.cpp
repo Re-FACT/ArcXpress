@@ -298,7 +298,7 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   std::string ff_pb = std::string(OPERATING_ALE_FF_NAME);
   num_err += add_ff_pb_type(arch_gen, ff_pb, verbose);
   /* Bind physical port */
-  std::string adder_pb = arch_gen.find_primitive_pb_type_name(std::string(ADDER_BLIF_MODEL));
+  std::string adder_pb = arch_gen.find_primitive_pb_type_name(ADDER_BLIF_MODEL);
   std::string phy_adder_pb = arch_gen.find_primitive_pb_type_name(PHYSICAL_ADDER_BLIF_MODEL);
   num_err += arch_gen.set_pb_type_physical_pb_type(adder_pb, phy_adder_pb) ? 0 : 1;
 
