@@ -27,23 +27,35 @@ static int add_frac_logic_pb_type(arcxpress::ArchGen& arch_gen, const bool& verb
   VTR_LOGV(verbose, "Adding intermediate pb_type '%s'\n", frac_logic_pb.c_str());
   num_err += arch_gen.add_pb_type(frac_logic_pb) ? 0 : 1;
   openfpga::BasicPort in_port("in", 4);
-  openfpga::BasicPort out_port("out", 2);
   num_err +=
     arch_gen.add_pb_type_port(frac_logic_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT)
       ? 0
       : 1;
+  openfpga::BasicPort out_port("out", 2);
   num_err += arch_gen.add_pb_type_port(frac_logic_pb, out_port,
                                        arcxpress::VprArchLayout::e_port_type::OUTPUT)
                ? 0
                : 1;
+  openfpga::BasicPort cin_port("cin", 1);
+  num_err +=
+    arch_gen.add_pb_type_port(frac_logic_pb, cin_port, arcxpress::VprArchLayout::e_port_type::INPUT)
+      ? 0
+      : 1;
+  openfpga::BasicPort cout_port("cout", 1);
+  num_err +=
+    arch_gen.add_pb_type_port(frac_logic_pb, cout_port, arcxpress::VprArchLayout::e_port_type::OUTPUT)
+      ? 0
+      : 1;
 
   /* Default mode */
   std::string default_mode = arcxpress::gen_default_mode_name(frac_logic_pb);
-  std::string frac_lut_pb = arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_BLIF_MODEL));
   num_err += arch_gen.add_pb_type_mode(frac_logic_pb, default_mode) ? 0 : 1;
+  /* Add child pb_types */
+  std::string frac_lut_pb = arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_ARITH_BLIF_MODEL));
   num_err += arch_gen.add_pb_type_to_mode(default_mode, frac_lut_pb, 1) ? 0 : 1;
-  num_err += arch_gen.set_pb_type_circuit_model(frac_lut_pb, FRAC_LUT4_CIRCUIT_MODEL) ? 0 : 1;
+  num_err += arch_gen.set_pb_type_circuit_model(frac_lut_pb, FRAC_LUT4_ARITH_CIRCUIT_MODEL) ? 0 : 1;
   /* Interconnect*/
+  /* in -> in */
   openfpga::BasicPort des_in_port;
   if (!arch_gen.find_pb_type_port(frac_lut_pb, "in", des_in_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -56,6 +68,27 @@ static int add_frac_logic_pb_type(arcxpress::ArchGen& arch_gen, const bool& verb
       num_err += arch_gen.add_in2in_edge(default_mode, src_in_pin, des_edge_port) ? 0 : 1;
     }
   }
+  /* cin -> cin */
+  openfpga::BasicPort des_cin_port;
+  if (!arch_gen.find_pb_type_port(frac_lut_pb, "cin", des_cin_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+  for (auto pin : des_cin_port.pins()) {
+    openfpga::BasicPort src_in_pin(des_cin_port.get_name(), pin, pin);
+    openfpga::BasicPort des_in_pin(des_cin_port.get_name(), pin, pin);
+    for (auto ipb : arch_gen.child_pbs(default_mode, frac_lut_pb)) {
+      arcxpress::ArchGen::EdgePort des_edge_port = {frac_lut_pb, ipb, des_in_pin};
+      num_err += arch_gen.add_in2in_edge(default_mode, src_in_pin, des_edge_port) ? 0 : 1;
+    }
+  }
+  /* cout -> cout */
+  for (auto ipb : arch_gen.child_pbs(default_mode, frac_lut_pb)) {
+    arcxpress::ArchGen::EdgePort src_edge_port = {frac_lut_pb, ipb, cout_port};
+    openfpga::BasicPort des_cout_port(cout_port.get_name(), 0, 0);
+    num_err += arch_gen.add_out2out_edge(default_mode, src_edge_port, des_out_port) ? 0 : 1;
+  }
+
+  /* lut3 out -> out */
   openfpga::BasicPort src_lut3_out_port;
   if (!arch_gen.find_pb_type_port(frac_lut_pb, "lut3_out", src_lut3_out_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -99,15 +132,20 @@ static int add_frac_logic_pb_type(arcxpress::ArchGen& arch_gen, const bool& verb
 static int add_ble3_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   int num_err = 0;
 
-  std::string ble3_pb = std::string(OPERATING_BLE4_NAME);
+  std::string ble3_pb = std::string(OPERATING_BLE3_NAME);
   VTR_LOGV(verbose, "Adding intermediate pb_type '%s'\n", ble3_pb.c_str());
   num_err += arch_gen.add_pb_type(ble3_pb) ? 0 : 1;
-  openfpga::BasicPort in_port("in", 4);
+  openfpga::BasicPort in_port("in", 3);
   openfpga::BasicPort rst_port("reset", 1);
   openfpga::BasicPort ck_port("clk", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
   openfpga::BasicPort out_port("out", 1);
   num_err +=
     arch_gen.add_pb_type_port(ble3_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                              : 1;
+
+  num_err +=
+    arch_gen.add_pb_type_port(ble3_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                               : 1;
   num_err +=
     arch_gen.add_pb_type_port(ble3_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
@@ -124,19 +162,19 @@ static int add_ble3_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   num_err += arch_gen.add_pb_type_mode(ble3_pb, pb_mode) ? 0 : 1;
 
   /* Build child pbs */
-  std::string lut_pb = arch_gen.lut_primitive_pb_type_name(4);
+  std::string lut_pb = arch_gen.lut_primitive_pb_type_name(3);
   std::string phy_lut_pb = arch_gen.find_primitive_pb_type_name(FRAC_LUT4_BLIF_MODEL);
   num_err += arch_gen.set_pb_type_physical_pb_type(lut_pb, phy_lut_pb) ? 0 : 1;
   num_err += arch_gen.set_pb_type_physical_pb_type_index_factor(lut_pb, "0.5") ? 0 : 1;
   num_err +=
-    arch_gen.set_pb_type_physical_port_binding(lut_pb, "in", openfpga::BasicPort("in", 0, 3)) ? 0
+    arch_gen.set_pb_type_physical_port_binding(lut_pb, "in", openfpga::BasicPort("in", 0, 2)) ? 0
                                                                                               : 1;
   num_err += arch_gen.set_pb_type_physical_port_binding(lut_pb, "out",
-                                                        openfpga::BasicPort("lut4_out", 0, 0), "1")
+                                                        openfpga::BasicPort("lut3_out", 0, 0), "1")
                ? 0
                : 1;
   /* TODO: Bind physical ports */
-  std::string ff_pb = std::string(OPERATING_BLE4_FF_NAME);
+  std::string ff_pb = std::string(OPERATING_BLE3_FF_NAME);
   num_err += add_ff_pb_type(arch_gen, ff_pb, true);
 
   /* Add child pbs */
@@ -155,6 +193,14 @@ static int add_ble3_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
       arcxpress::ArchGen::EdgePort des_edge_port = {lut_pb, ipb, des_pin};
       num_err += arch_gen.add_in2in_edge(pb_mode, src_pin, des_edge_port) ? 0 : 1;
     }
+  }
+  openfpga::BasicPort des_ff_en_port;
+  if (!arch_gen.find_pb_type_port(ff_pb, "ff_en", des_ff_en_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+  for (auto ipb : arch_gen.child_pbs(pb_mode, ff_pb)) {
+    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_ff_en_port};
+    num_err += arch_gen.add_in2in_edge(pb_mode, ff_en_port, des_edge_port) ? 0 : 1;
   }
   openfpga::BasicPort des_rst_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "R", des_rst_port)) {
@@ -222,9 +268,13 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   openfpga::BasicPort cout_port("cout", 1);
   openfpga::BasicPort rst_port("reset", 1);
   openfpga::BasicPort ck_port("clk", 1);
-  openfpga::BasicPort out_port("out", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
+  openfpga::BasicPort out_port("out", 2);
   num_err +=
     arch_gen.add_pb_type_port(ale_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                             : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(ale_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(ale_pb, cin_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0 : 1;
@@ -246,38 +296,26 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
 
   /* Build child pbs */
   std::string ff_pb = std::string(OPERATING_ALE_FF_NAME);
-  num_err += add_ff_pb_type(arch_gen, ff_pb, true);
-  std::string lut_pb = arch_gen.lut_primitive_pb_type_name(4);
-  std::string phy_lut_pb = arch_gen.find_primitive_pb_type_name(FRAC_LUT4_BLIF_MODEL);
-  num_err += arch_gen.set_pb_type_physical_pb_type(lut_pb, phy_lut_pb) ? 0 : 1;
+  num_err += add_ff_pb_type(arch_gen, ff_pb, verbose);
   /* Bind physical port */
-  num_err += arch_gen.set_pb_type_physical_pb_type_index_factor(lut_pb, "0.5") ? 0 : 1;
-  num_err +=
-    arch_gen.set_pb_type_physical_port_binding(lut_pb, "in", openfpga::BasicPort("in", 0, 3)) ? 0
-                                                                                              : 1;
-  num_err += arch_gen.set_pb_type_physical_port_binding(lut_pb, "out",
-                                                        openfpga::BasicPort("lut3_out", 0, 0), "1")
-               ? 0
-               : 1;
   std::string adder_pb = arch_gen.find_primitive_pb_type_name(std::string(ADDER_BLIF_MODEL));
   std::string phy_adder_pb = arch_gen.find_primitive_pb_type_name(PHYSICAL_ADDER_BLIF_MODEL);
   num_err += arch_gen.set_pb_type_physical_pb_type(adder_pb, phy_adder_pb) ? 0 : 1;
 
   /* Add child pbs */
-  num_err += arch_gen.add_pb_type_to_mode(pb_mode, lut_pb, 2) ? 0 : 1;
   num_err += arch_gen.add_pb_type_to_mode(pb_mode, adder_pb, 1) ? 0 : 1;
   num_err += arch_gen.add_pb_type_to_mode(pb_mode, ff_pb, 1) ? 0 : 1;
 
   /* TODO: Interconnect */
   openfpga::BasicPort des_in_port;
-  if (!arch_gen.find_pb_type_port(lut_pb, "in", des_in_port)) {
+  if (!arch_gen.find_pb_type_port(adder_pb, "in", des_in_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto pin : des_in_port.pins()) {
     openfpga::BasicPort src_pin(des_in_port.get_name(), pin, pin);
     openfpga::BasicPort des_pin(des_in_port.get_name(), pin, pin);
-    for (auto ipb : arch_gen.child_pbs(pb_mode, lut_pb)) {
-      arcxpress::ArchGen::EdgePort des_edge_port = {lut_pb, ipb, des_pin};
+    for (auto ipb : arch_gen.child_pbs(pb_mode, adder_pb)) {
+      arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, ipb, des_pin};
       num_err += arch_gen.add_in2in_edge(pb_mode, src_pin, des_edge_port) ? 0 : 1;
     }
   }
@@ -310,31 +348,8 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
         : 1;
   }
 
-  openfpga::BasicPort src_lutout_port;
-  if (!arch_gen.find_pb_type_port(lut_pb, "out", src_lutout_port)) {
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-  openfpga::BasicPort des_a_port;
-  if (!arch_gen.find_pb_type_port(adder_pb, "a", des_a_port)) {
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-  openfpga::BasicPort des_b_port;
-  if (!arch_gen.find_pb_type_port(adder_pb, "b", des_b_port)) {
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-  {
-    arcxpress::ArchGen::EdgePort src_edge_port = {lut_pb, 0, src_lutout_port};
-    arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, 0, des_a_port};
-    num_err += arch_gen.add_internal_edge(pb_mode, src_edge_port, des_edge_port) ? 0 : 1;
-  }
-  {
-    arcxpress::ArchGen::EdgePort src_edge_port = {lut_pb, 1, src_lutout_port};
-    arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, 0, des_b_port};
-    num_err += arch_gen.add_internal_edge(pb_mode, src_edge_port, des_edge_port) ? 0 : 1;
-  }
-
   openfpga::BasicPort src_sumout_port;
-  if (!arch_gen.find_pb_type_port(adder_pb, "sumout", src_sumout_port)) {
+  if (!arch_gen.find_pb_type_port(adder_pb, "lut4_out", src_sumout_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_d_port;
@@ -365,18 +380,21 @@ static int add_ale_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
                  ? 0
                  : 1;
   }
-
+  /* ff.Q -> ale.out[0] */
   openfpga::BasicPort src_q_port;
+  openfpga::BasicPort des_out0_port(out_port.get_name(), 0, 0);
   if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(pb_mode, ff_pb)) {
     arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb, ipb, src_q_port};
-    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, out_port) ? 0 : 1;
+    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, des_out0_port) ? 0 : 1;
   }
+  /* adder_lut.lut4_out -> ale.out[0] */
+  openfpga::BasicPort des_out1_port(out_port.get_name(), 1, 1);
   for (auto ipb : arch_gen.child_pbs(pb_mode, adder_pb)) {
     arcxpress::ArchGen::EdgePort src_edge_port = {adder_pb, ipb, src_sumout_port};
-    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, out_port) ? 0 : 1;
+    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, des_out1_port) ? 0 : 1;
   }
 
   VTR_LOGV(verbose, "Done\n");
@@ -393,9 +411,13 @@ static int add_lut3inter_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbo
   openfpga::BasicPort in_port("in", 3);
   openfpga::BasicPort rst_port("reset", 1);
   openfpga::BasicPort ck_port("clk", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
   openfpga::BasicPort out_port("out", 2);
   num_err +=
     arch_gen.add_pb_type_port(top_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                             : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(top_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(top_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
@@ -427,6 +449,14 @@ static int add_lut3inter_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbo
       arcxpress::ArchGen::EdgePort des_edge_port = {ble3_pb, ipb, des_pin};
       num_err += arch_gen.add_in2in_edge(pb_mode, src_pin, des_edge_port) ? 0 : 1;
     }
+  }
+  openfpga::BasicPort des_ff_en_port;
+  if (!arch_gen.find_pb_type_port(ble3_pb, "ff_en", des_ff_en_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+  for (auto ipb : arch_gen.child_pbs(pb_mode, ble3_pb)) {
+    arcxpress::ArchGen::EdgePort des_edge_port = {ble3_pb, ipb, des_ff_en_port};
+    num_err += arch_gen.add_in2in_edge(pb_mode, ff_en_port, des_edge_port) ? 0 : 1;
   }
   openfpga::BasicPort des_rst_port;
   if (!arch_gen.find_pb_type_port(ble3_pb, "reset", des_rst_port)) {
@@ -468,9 +498,13 @@ static int add_ble4_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   openfpga::BasicPort in_port("in", 4);
   openfpga::BasicPort rst_port("reset", 1);
   openfpga::BasicPort ck_port("clk", 1);
-  openfpga::BasicPort out_port("out", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
+  openfpga::BasicPort out_port("out", 2);
   num_err +=
     arch_gen.add_pb_type_port(ble4_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                              : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(ble4_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                               : 1;
   num_err +=
     arch_gen.add_pb_type_port(ble4_pb, rst_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
@@ -526,6 +560,14 @@ static int add_ble4_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
     arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_rst_port};
     num_err += arch_gen.add_in2in_edge(pb_mode, rst_port, des_edge_port) ? 0 : 1;
   }
+  openfpga::BasicPort des_ff_en_port;
+  if (!arch_gen.find_pb_type_port(ff_pb, "ff_en", des_ff_en_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+  for (auto ipb : arch_gen.child_pbs(pb_mode, ff_pb)) {
+    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_ff_en_port};
+    num_err += arch_gen.add_in2in_edge(pb_mode, ff_en_port, des_edge_port) ? 0 : 1;
+  }
   openfpga::BasicPort des_ck_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "C", des_ck_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -554,11 +596,9 @@ static int add_ble4_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
                    : 1;
     }
   }
-  for (auto ipb : arch_gen.child_pbs(pb_mode, lut_pb)) {
-    arcxpress::ArchGen::EdgePort src_edge_port = {lut_pb, ipb, src_lutout_port};
-    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, out_port) ? 0 : 1;
-  }
-
+  openfpga::BasicPort des_out0_port(out_port.get_name(), 0, 0);
+  /* ff.Q -> out[0] */
+  openfpga::BasicPort des_out1_port(out_port.get_name(), 1, 1);
   openfpga::BasicPort src_q_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -566,6 +606,12 @@ static int add_ble4_pb_type(arcxpress::ArchGen& arch_gen, const bool& verbose) {
   for (auto ipb : arch_gen.child_pbs(pb_mode, ff_pb)) {
     arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb, ipb, src_q_port};
     num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, out_port) ? 0 : 1;
+  }
+  /* lut.out -> out[1] */
+  openfpga::BasicPort des_out1_port(out_port.get_name(), 1, 1);
+  for (auto ipb : arch_gen.child_pbs(pb_mode, lut_pb)) {
+    arcxpress::ArchGen::EdgePort src_edge_port = {lut_pb, ipb, src_lutout_port};
+    num_err += arch_gen.add_out2out_edge(pb_mode, src_edge_port, des_out1_port) ? 0 : 1;
   }
 
   VTR_LOGV(verbose, "Done\n");
@@ -598,10 +644,8 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
   num_err += arch_gen.add_pb_type_to_mode(fabric_mode, ff_pb, 2) ? 0 : 1;
   FracffGen phy_fff_gen(PHYSICAL_REGULAR_SCFF_NAME);
   num_err += arch_gen.set_pb_type_circuit_model(ff_pb, phy_fff_gen.circuit_model_name()) ? 0 : 1;
-  std::string adder_pb = arch_gen.find_primitive_pb_type_name((PHYSICAL_ADDER_BLIF_MODEL));
-  num_err += arch_gen.add_pb_type_to_mode(fabric_mode, adder_pb, 1) ? 0 : 1;
-  num_err += arch_gen.set_pb_type_circuit_model(adder_pb, PHYSICAL_ADDER_CIRCUIT_MODEL) ? 0 : 1;
   /* TODO: Interconnect */
+  /* in -> in */ 
   openfpga::BasicPort src_in_port("in", 4);
   openfpga::BasicPort des_in_port;
   if (!arch_gen.find_pb_type_port(frac_logic_pb, "in", des_in_port)) {
@@ -615,24 +659,27 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
       num_err += arch_gen.add_in2in_edge(fabric_mode, src_pin, des_edge_port) ? 0 : 1;
     }
   }
+  /* cin -> cin */ 
   openfpga::BasicPort src_cin_port("cin", 1);
   openfpga::BasicPort des_cin_port;
-  if (!arch_gen.find_pb_type_port(adder_pb, "cin", des_cin_port)) {
+  if (!arch_gen.find_pb_type_port(frac_logic_pb, "cin", des_cin_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
-  for (auto ipb : arch_gen.child_pbs(fabric_mode, adder_pb)) {
-    arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, ipb, des_cin_port};
+  for (auto ipb : arch_gen.child_pbs(fabric_mode, frac_logic_pb)) {
+    arcxpress::ArchGen::EdgePort des_edge_port = {frac_logic_pb, ipb, des_cin_port};
     num_err += arch_gen.add_in2in_edge(fabric_mode, src_cin_port, des_edge_port) ? 0 : 1;
   }
+  /* cout -> cout */ 
   openfpga::BasicPort des_cout_port("cout", 1);
   openfpga::BasicPort src_cout_port;
-  if (!arch_gen.find_pb_type_port(adder_pb, "cout", src_cout_port)) {
+  if (!arch_gen.find_pb_type_port(frac_logic_pb, "cout", src_cout_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(fabric_mode, adder_pb)) {
     arcxpress::ArchGen::EdgePort src_edge_port = {adder_pb, ipb, src_cout_port};
     num_err += arch_gen.add_out2out_edge(fabric_mode, src_edge_port, des_cout_port) ? 0 : 1;
   }
+  /* clk -> clk */ 
   openfpga::BasicPort src_ck_port("clk", 1);
   openfpga::BasicPort des_ck_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "C", des_ck_port)) {
@@ -642,6 +689,17 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
     arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_ck_port};
     num_err += arch_gen.add_in2in_edge(fabric_mode, src_ck_port, des_edge_port) ? 0 : 1;
   }
+  /* ff_en -> ff_en */ 
+  openfpga::BasicPort src_ff_en_port("clk", 1);
+  openfpga::BasicPort des_ff_en_port;
+  if (!arch_gen.find_pb_type_port(ff_pb, "ff_en", des_ff_en_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+  for (auto ipb : arch_gen.child_pbs(fabric_mode, ff_pb)) {
+    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_ff_en_port};
+    num_err += arch_gen.add_in2in_edge(fabric_mode, src_ff_en_port, des_edge_port) ? 0 : 1;
+  }
+  /* reset -> reset */ 
   openfpga::BasicPort src_rst_port("reset", 1);
   openfpga::BasicPort des_rst_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "R", des_rst_port)) {
@@ -651,20 +709,8 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
     arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, ipb, des_rst_port};
     num_err += arch_gen.add_in2in_edge(fabric_mode, src_rst_port, des_edge_port) ? 0 : 1;
   }
-  {
-    openfpga::BasicPort src_out_port("out", 0, 0);
-    openfpga::BasicPort des_a_port("a", 0, 0);
-    arcxpress::ArchGen::EdgePort src_edge_port = {frac_logic_pb, 0, src_out_port};
-    arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, 0, des_a_port};
-    num_err += arch_gen.add_internal_edge(fabric_mode, src_edge_port, des_edge_port) ? 0 : 1;
-  }
-  {
-    openfpga::BasicPort src_out_port("out", 1, 1);
-    openfpga::BasicPort des_b_port("b", 0, 0);
-    arcxpress::ArchGen::EdgePort src_edge_port = {frac_logic_pb, 0, src_out_port};
-    arcxpress::ArchGen::EdgePort des_edge_port = {adder_pb, 0, des_b_port};
-    num_err += arch_gen.add_internal_edge(fabric_mode, src_edge_port, des_edge_port) ? 0 : 1;
-  }
+  /* out    ->
+   * reg_in -> MUX -> ff[0].D */ 
   {
     openfpga::BasicPort src_out_port("out", 0, 0);
     openfpga::BasicPort des_d_port("D", 0, 0);
@@ -675,6 +721,16 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
       arch_gen.add_internal_edge(fabric_mode, src_edge_port, des_edge_port, edge_delay) ? 0 : 1;
   }
   {
+    openfpga::BasicPort src_regin_port("regin", 0, 0);
+    openfpga::BasicPort des_d_port("D", 0, 0);
+    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, 0, des_d_port};
+    arcxpress::ArchGen::EdgeDelay edge_delay = {"${REGIN_TO_FF_D_DELAY}", "0"};
+    num_err +=
+      arch_gen.add_in2in_edge(fabric_mode, src_regin_port, des_edge_port, edge_delay) ? 0 : 1;
+  }
+  /* ff[0].reg_out     -> MUX -> ff[1].reg_in
+   * frac_logic.out[1] -> */
+  {
     openfpga::BasicPort src_out_port("out", 1, 1);
     openfpga::BasicPort des_d_port("D", 0, 0);
     arcxpress::ArchGen::EdgePort src_edge_port = {frac_logic_pb, 0, src_out_port};
@@ -683,14 +739,15 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
     num_err +=
       arch_gen.add_internal_edge(fabric_mode, src_edge_port, des_edge_port, edge_delay) ? 0 : 1;
   }
+  /* ff[1].reg_out -> reg_out */ 
+  openfpga::BasicPort des_regout_port("reg_out", 1);
+  openfpga::BasicPort src_regout_port;
+  if (!arch_gen.find_pb_type_port(ff_pb, "reg_out", src_regout_port)) {
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
   {
-    openfpga::BasicPort src_out_port("sumout", 0, 0);
-    openfpga::BasicPort des_d_port("D", 0, 0);
-    arcxpress::ArchGen::EdgePort src_edge_port = {adder_pb, 0, src_out_port};
-    arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb, 1, des_d_port};
-    arcxpress::ArchGen::EdgeDelay edge_delay = {"${LUT_OUT1_TO_FF_D_DELAY}", "0"};
-    num_err +=
-      arch_gen.add_internal_edge(fabric_mode, src_edge_port, des_edge_port, edge_delay) ? 0 : 1;
+    arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb, 1, src_regout_port};
+    num_err += arch_gen.add_out2out_edge(fabric_mode, src_edge_port, des_regout_port) ? 0 : 1;
   }
   {
     openfpga::BasicPort des_out_port("out", 0, 0);
@@ -717,16 +774,6 @@ static int assemble_fle_complex_block_physical_mode(arcxpress::ArchGen& arch_gen
     openfpga::BasicPort src_q_port("Q", 0, 0);
     arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb, 1, src_q_port};
     arcxpress::ArchGen::EdgeDelay edge_delay = {"${FF1_Q_TO_FLE_OUT_DELAY}", "0"};
-    num_err += arch_gen.add_out2out_edge(fabric_mode, src_edge_port, des_out_port,
-                                         PB_MUX_HIGHLOAD_CIRCUIT_MODEL_NAME, edge_delay)
-                 ? 0
-                 : 1;
-  }
-  {
-    openfpga::BasicPort des_out_port("out", 1, 1);
-    openfpga::BasicPort src_out_port("sumout", 0, 0);
-    arcxpress::ArchGen::EdgePort src_edge_port = {adder_pb, 0, src_out_port};
-    arcxpress::ArchGen::EdgeDelay edge_delay = {"${LUT_OUT1_TO_FLE_OUT_DELAY}", "0"};
     num_err += arch_gen.add_out2out_edge(fabric_mode, src_edge_port, des_out_port,
                                          PB_MUX_HIGHLOAD_CIRCUIT_MODEL_NAME, edge_delay)
                  ? 0
@@ -766,11 +813,12 @@ static int assemble_fle_complex_block_operating_mode_n2_lut3(arcxpress::ArchGen&
 }
 
 static int assemble_fle_complex_block_operating_mode_n1_lut4(arcxpress::ArchGen& arch_gen,
-                                                             const std::string& fle_pb) {
+                                                             const std::string& fle_pb,
+                                                             const bool& verbose) {
   int num_err = 0;
 
   /* Build child pb type */
-  num_err += add_ble4_pb_type(arch_gen, true);
+  num_err += add_ble4_pb_type(arch_gen, verbose);
   /* physical modes and its child pb_type */
   std::string pb_mode = arcxpress::gen_pb_mode_name(fle_pb, std::string("n1_lut4"));
   num_err += arch_gen.add_pb_type_mode(fle_pb, pb_mode) ? 0 : 1;
@@ -783,11 +831,12 @@ static int assemble_fle_complex_block_operating_mode_n1_lut4(arcxpress::ArchGen&
 }
 
 static int assemble_fle_complex_block_operating_mode_arith(arcxpress::ArchGen& arch_gen,
-                                                           const std::string& fle_pb) {
+                                                           const std::string& fle_pb,
+                                                           const bool& verbose) {
   int num_err = 0;
 
   /* Build child pb_type */
-  num_err += add_ale_pb_type(arch_gen, true);
+  num_err += add_ale_pb_type(arch_gen, verbose);
   /* physical modes and its child pb_type */
   std::string pb_mode = arcxpress::gen_pb_mode_name(fle_pb, std::string("arith"));
   num_err += arch_gen.add_pb_type_mode(fle_pb, pb_mode) ? 0 : 1;
@@ -873,12 +922,11 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& 
   openfpga::BasicPort rst_port("reset", 1);
   openfpga::BasicPort cin_port("cin", 1);
   openfpga::BasicPort reg_in_port("reg_in", 1);
-  openfpga::BasicPort sc_in_port("sc_in", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
   openfpga::BasicPort ck_port("clk", 1);
   openfpga::BasicPort out_port("out", 2);
   openfpga::BasicPort cout_port("cout", 1);
   openfpga::BasicPort reg_out_port("reg_out", 1);
-  openfpga::BasicPort sc_out_port("sc_out", 1);
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, in_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                              : 1;
@@ -891,7 +939,7 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& 
     arch_gen.add_pb_type_port(fle_pb, reg_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0
                                                                                               : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, sc_in_port, arcxpress::VprArchLayout::e_port_type::CI) ? 0
+    arch_gen.add_pb_type_port(fle_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                              : 1;
   num_err +=
     arch_gen.add_pb_type_port(fle_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0
@@ -902,16 +950,13 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& 
     arch_gen.add_pb_type_port(fle_pb, reg_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0
                                                                                                : 1;
   num_err +=
-    arch_gen.add_pb_type_port(fle_pb, sc_out_port, arcxpress::VprArchLayout::e_port_type::CO) ? 0
-                                                                                              : 1;
-  num_err +=
     arch_gen.add_pb_type_port(fle_pb, out_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0
                                                                                                : 1;
 
-  num_err += assemble_fle_complex_block_physical_mode(arch_gen, fle_pb);
-  num_err += assemble_fle_complex_block_operating_mode_n2_lut3(arch_gen, fle_pb);
-  num_err += assemble_fle_complex_block_operating_mode_n1_lut4(arch_gen, fle_pb);
-  num_err += assemble_fle_complex_block_operating_mode_arith(arch_gen, fle_pb);
+  num_err += assemble_fle_complex_block_physical_mode(arch_gen, fle_pb, verbose);
+  num_err += assemble_fle_complex_block_operating_mode_n2_lut3(arch_gen, fle_pb, verbose);
+  num_err += assemble_fle_complex_block_operating_mode_n1_lut4(arch_gen, fle_pb, verbose);
+  num_err += assemble_fle_complex_block_operating_mode_arith(arch_gen, fle_pb, verbose);
 
   /* Interconnect fle to clb */
   for (size_t ifle = 0; ifle < num_fle; ++ifle) {
@@ -944,6 +989,12 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& 
     num_err += arch_gen.add_in2in_edge(clb_mode, src_port, des_edge_port) ? 0 : 1;
   }
   for (size_t ifle = 0; ifle < num_fle; ++ifle) {
+    openfpga::BasicPort src_port("ff_en", 0, 0);
+    openfpga::BasicPort des_port("ff_en", 0, 0);
+    arcxpress::ArchGen::EdgePort des_edge_port = {fle_pb, ifle, des_port};
+    num_err += arch_gen.add_in2in_edge(clb_mode, src_port, des_edge_port) ? 0 : 1;
+  }
+  for (size_t ifle = 0; ifle < num_fle; ++ifle) {
     openfpga::BasicPort src_out_port("out", 2);
     for (size_t pin : src_out_port.pins()) {
       openfpga::BasicPort src_port("out", pin, pin);
@@ -955,7 +1006,7 @@ int assemble_clb_complex_block(arcxpress::ArchGen& arch_gen, const ArchPlanner& 
   }
   /* Carry chain, shift register chain and scan-chain */
   std::map<std::string, std::string> chain_port_pairs = {
-    {"cin", "cout"}, {"reg_in", "reg_out"}, {"sc_in", "sc_out"}};
+    {"cin", "cout"}, {"reg_in", "reg_out"}};
   for (const auto& [iport, oport] : chain_port_pairs) {
     std::string pack_pattern_name = iport + std::string("chain");
     {
