@@ -20,8 +20,7 @@ int main(int argc, char** argv) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* The standard arch genertor and status flag to start device-specific customization */
-  arcxpress::ArchGen arch_gen;
-  arch_gen.set_support_programmable_global_network(support_gntwk);
+  arcxpress::ArchGen arch_gen(support_gntwk);
   int status = 0;
   arcxpress::ArchGenInputParams arch_params = cmd_interface.arch_parameters();
 

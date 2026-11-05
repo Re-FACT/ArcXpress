@@ -282,7 +282,7 @@ int assemble_po_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose)
 
   std::string top_pb = "io_po";
   VTR_LOGV(verbose, "Assemble top-level pb_type '%s'\n", top_pb.c_str());
-  FracffGen fff_gen(PHYSICAL_PO_SCFF_NAME, PHYSICAL_PO_SCFF_NAME);
+  FracffGen fff_gen(PHYSICAL_PO_SCFF_NAME);
   std::string ff_pb =
     fff_gen.vpr_arch_physical_primitive().pb_type_name(std::string(PHYSICAL_PO_SCFF_NAME));
   PhyPbInfo ff_pb_info = {ff_pb, fff_gen.circuit_model_name()};
