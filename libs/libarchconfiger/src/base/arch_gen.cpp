@@ -3300,6 +3300,44 @@ int ArchGen::build_ckbuf_location_map(const VprArchLayout::e_fabric_type& fb_typ
 
 int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) const {
   int num_err = 0;
+  num_err += add_xml_openfpga_bitstream_setting_non_mode_select_nodes(root_node);
+  num_err += add_xml_openfpga_bitstream_setting_mode_select_nodes(root_node);
+
+  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+}
+
+int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_node(pugi::xml_node& root_node) const {
+  int num_err = 0;
+  /* Walk through all the arch primitives which require a mode-select bitstream setting */
+  for (auto pmtv : arch_primitives_) {
+    if (!pmtv.require_non_mode_select_parameters()) {
+      continue;
+    }
+    /* Get the pb_type name for each primitive and output info in XML nodes */
+    for (std::string pb_type_name : pmtv.pb_type_names()) {
+      size_t pb_type_id = find_pb_type_id(pb_type_name);
+      if (!valid_pb_type_id(pb_type_id)) {
+        VTR_LOG_ERROR("Invalid pb_type '%s' which is not yet defined!\n", pb_type_name.c_str());
+        return openfpga::CMD_EXEC_FATAL_ERROR;
+      }
+      /* Find all the mode-select parameters and organize in the XML node */
+      for (std::string ms_param : pmtv.non_mode_select_parameters()) {
+        std::string ms_param_key = pmtv.non_mode_select_parameter_key(pb_type_name);
+        pugi::xml_node bs_node = root_node.append_child(XML_PB_TYPE_NODE_NAME);
+        bs_node.append_attribute(XML_PB_TYPE_ATTRIBUTE_NAME) =
+          pb_type_hierarchy_to_string(pb_type_name).c_str();
+        bs_node.append_attribute(XML_PB_TYPE_ATTRIBUTE_SOURCE) = "eblif";
+        bs_node.append_attribute(XML_PB_TYPE_ATTRIBUTE_CONTENT) = ms_param.c_str();
+        bs_node.append_attribute(XML_PB_TYPE_ATTRIBUTE_BITSTREAM_OFFSET) =
+          std::to_string(pmtv.mode_select_offset(ms_param, ms_param_key)).c_str();
+      }
+    }
+  }
+  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+}
+
+int ArchGen::add_xml_openfpga_bitstream_setting_mode_select_node(pugi::xml_node& root_node) const {
+  int num_err = 0;
   /* Walk through all the arch primitives which require a mode-select bitstream setting */
   for (auto pmtv : arch_primitives_) {
     if (!pmtv.require_mode_select_parameters()) {
@@ -3312,7 +3350,7 @@ int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) 
         VTR_LOG_ERROR("Invalid pb_type '%s' which is not yet defined!\n", pb_type_name.c_str());
         return openfpga::CMD_EXEC_FATAL_ERROR;
       }
-      /* Find all the parameters and organize in the XML node */
+      /* Find all the mode-select parameters and organize in the XML node */
       for (std::string ms_param : pmtv.mode_select_parameters()) {
         std::string ms_param_key = pmtv.mode_select_parameter_key(pb_type_name);
         pugi::xml_node bs_node = root_node.append_child(XML_PB_TYPE_NODE_NAME);

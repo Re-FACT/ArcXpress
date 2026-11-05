@@ -180,6 +180,8 @@ class ArchGen {
   std::string gen_gntwk_branch_spine_name(const std::string& prefix,
                                           const VprArchLayout::e_dir_type& dir,
                                           const vtr::Point<size_t>& tap_point) const;
+  int add_xml_openfpga_bitstream_setting_non_mode_select_nodes(pugi::xml_node& root_node) const;
+  int add_xml_openfpga_bitstream_setting_mode_select_nodes(pugi::xml_node& root_node) const;
 
  public: /* -- Mutators -- */
   /* TODO: Set I/O number constraints */

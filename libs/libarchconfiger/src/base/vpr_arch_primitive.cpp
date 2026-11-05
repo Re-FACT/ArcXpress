@@ -466,6 +466,35 @@ VprArchLayout::e_port_type VprArchPrimitive::port_type(
   }
 }
 
+bool VprArchPrimitive::require_non_mode_select_parameters() const {
+  return !non_mode_select_parameters().empty();
+}
+std::vector<std::string> VprArchPrimitive::non_mode_select_parameters() const {
+  std::vector<std::string> ret;
+  for (auto pair : non_mode_select_offsets_) {
+    ret.push_back(pair.first);
+  }
+  return ret;
+}
+
+size_t VprArchPrimitive::non_mode_select_offset(const std::string& param,
+                                            const std::string& key) const {
+  auto result = non_mode_select_offsets_.find(param);
+  if (result == non_mode_select_offsets_.end()) {
+    VTR_LOG_ERROR("The regular bitstream overload parameter '%s' does not exist for primitive '%s'!\n",
+                  param.c_str(), name().c_str());
+    exit(openfpga::CMD_EXEC_FATAL_ERROR);
+  }
+  auto k_result = result->second.find(key);
+  if (k_result == result->second.end()) {
+    VTR_LOG_ERROR(
+      "The key '%s' for regular bitstream overload parameter '%s' does not exist for primitive '%s'!\n",
+      key.c_str(), param.c_str(), name().c_str());
+    exit(openfpga::CMD_EXEC_FATAL_ERROR);
+  }
+  return k_result->second;
+}
+
 bool VprArchPrimitive::require_mode_select_parameters() const {
   return !mode_select_parameters().empty();
 }
@@ -517,6 +546,12 @@ size_t VprArchPrimitive::mode_select_offset(const std::string& param,
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   return k_result->second;
+}
+
+bool VprArchPrimitive::add_non_mode_select_offset(const std::string& param, const size_t& offset,
+                                                  const std::string& key) {
+  non_mode_select_offsets_[param][key] = offset;
+  return true;
 }
 
 bool VprArchPrimitive::add_mode_select_offset(const std::string& param, const size_t& offset,

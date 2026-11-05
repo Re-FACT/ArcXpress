@@ -43,7 +43,11 @@ class VprArchPrimitive {
   VprArchLayout::e_port_type port_type(const PortId& port_id) const;
   bool contain_mode_bits() const;
   std::string pb_type_name() const;
+  bool require_non_mode_select_parameters() const;
+  std::vector<std::string> non_mode_select_parameters() const;
   bool require_mode_select_parameters() const;
+  size_t non_mode_select_offset(const std::string& param,
+                            const std::string& key = DEFAULT_MODE_SELECT_PARAMETER_KEY_) const;
   std::vector<std::string> mode_select_parameters() const;
   std::string mode_select_parameter_key(const std::string& curr_pb_type_name) const;
   size_t mode_select_offset(const std::string& param,
@@ -87,6 +91,8 @@ class VprArchPrimitive {
   bool add_input_comb_sink_port(const std::string& name, const std::string& s_port);
   bool set_input_require_clock_port(const std::string& name, const std::string& ck_port);
   bool set_output_require_clock_port(const std::string& name, const std::string& ck_port);
+  bool add_non_mode_select_offset(const std::string& param, const size_t& offset,
+                              const std::string& key = "default");
   bool add_mode_select_offset(const std::string& param, const size_t& offset,
                               const std::string& key = "default");
 
@@ -122,12 +128,18 @@ class VprArchPrimitive {
   std::string blif_model_;
   /* A flag to show the primitive requires a circuit model (a physical one) */
   std::string circuit_model_;
+  /* Parameter: the name for eblif .param or .attr, representing where the bitstream should be loaded from
+   * tag: physical model name of a primitive 
+   * bits: a string of [0|1], representing the bitstream
+   * key: the name of a operating pb_type which should be associated to the physical model. Note that a physical model could be linked to a number of operating pb_types, where each operating pb_type requires a different bitstream
+   */
   /* tag -> bits */
   std::map<std::string, std::string> mode_bits_;
   /* tag -> key */
   std::map<std::string, std::string> mode_bit_tag2keys_;
   /* parameters -> key -> bits */
-  std::map<std::string, std::map<std::string, size_t>> mode_select_offsets_;
+  std::map<std::string, std::map<std::string, size_t>> mode_select_offsets_; /* For mode selection bitstream */
+  std::map<std::string, std::map<std::string, size_t>> non_mode_select_offsets_; /* For regular bitstream */
   e_model_type circuit_model_type_;
   bool is_physical_model_;
   bool require_external_netlist_;

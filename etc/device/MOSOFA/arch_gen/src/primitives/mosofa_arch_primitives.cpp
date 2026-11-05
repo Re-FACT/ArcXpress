@@ -73,8 +73,8 @@ static int add_vpr_arch_primitive_adder_lut4(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
   arcxpress::VprArchPrimitive pmtv(ADDER_BLIF_MODEL);
   num_err += pmtv.set_blif_model(std::string(ADDER_BLIF_MODEL)) ? 0 : 1;
-  // TODO: How to specify the mode bits should come from bitstream setting
-  //num_err += pmtv.set_mode_bits(std::string(FRAC_LUT4_ARITH_BLIF_MODEL), "0") ? 0 : 1;
+  num_err += pmtv.add_non_mode_select_offset(".param LUT", 0, std::string(ADDER_BLIF_MODEL)) ? 0 : 1;
+  num_err += pmtv.add_mode_select_offset(std::string(".param IN2_IS_CIN"), 0, std::string(ADDER_BLIF_MODEL)) ? 0 : 1;
   num_err += pmtv.add_input_port("in", 4) ? 0 : 1;
   num_err += pmtv.add_input_port("cin", 1) ? 0 : 1;
   num_err += pmtv.add_output_port("lut4_out", 1) ? 0 : 1;
