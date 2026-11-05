@@ -2614,9 +2614,11 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       GCLK_NAME_.c_str();
     gp_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_IS_CLOCK) = "true";
     gp_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_DEFAULT_VAL) = "0";
-    gp_node.append_attribute(
-      XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_CLOCK_ARCH_TREE_NAME) =
-      GCLK_NTWK_NAME_.c_str();
+    if (support_gntwk_) {
+      gp_node.append_attribute(
+        XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_CLOCK_ARCH_TREE_NAME) =
+        GCLK_NTWK_NAME_.c_str();
+    }
     /* List all the tile ports */
     for (auto tile : arch_layout_.tiles()) {
       /* TODO: Bypass non-I/O tile as openfpga has a bug here */
@@ -2644,9 +2646,11 @@ int ArchGen::add_xml_openfpga_arch_tile_annotation(pugi::xml_node& root_node) co
       GRST_NAME_.c_str();
     gp_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_IS_RESET) = "true";
     gp_node.append_attribute(XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_DEFAULT_VAL) = "1";
-    gp_node.append_attribute(
-      XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_CLOCK_ARCH_TREE_NAME) =
-      GRST_NTWK_NAME_.c_str();
+    if (support_gntwk_) {
+      gp_node.append_attribute(
+        XML_OPENFPGA_ARCH_TILE_ANNOTATIONS_GLOBAL_PORT_ATTR_CLOCK_ARCH_TREE_NAME) =
+        GRST_NTWK_NAME_.c_str();
+    }
     /* List all the tile ports */
     for (auto tile : arch_layout_.tiles()) {
       /* TODO: Bypass non I/O tile as openfpga has a bug here */
@@ -3201,6 +3205,11 @@ int ArchGen::build_global_network(const VprArchLayout::e_fabric_type& fb_type,
                                   openfpga::ClockNetwork& gntwk) const {
   int num_err = 0;
 
+  if (!support_gntwk_) {
+    VTR_LOG_ERROR("Global network cannot be built in this architecture as it does not support the feature!\n");
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
+
   if (!arch_layout_.valid_fabric_type(fb_type)) {
     VTR_LOG_ERROR("Invalid fabric type. Expect [dp | ultimate]!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
@@ -3240,6 +3249,11 @@ int ArchGen::build_global_network(const VprArchLayout::e_fabric_type& fb_type,
 int ArchGen::build_ckbuf_location_map(const VprArchLayout::e_fabric_type& fb_type,
                                       GlobalPortLoc& ckbuf_loc_map) const {
   int num_err = 0;
+
+  if (!support_gntwk_) {
+    VTR_LOG_ERROR("Clock buffer location map cannot be built in this architecture as it does not support the programmable global network!\n");
+    return openfpga::CMD_EXEC_FATAL_ERROR;
+  }
 
   if (!arch_layout_.valid_fabric_type(fb_type)) {
     VTR_LOG_ERROR("Invalid fabric type. Expect [dp | ultimate]!\n");

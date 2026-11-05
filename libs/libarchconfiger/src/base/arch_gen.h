@@ -27,7 +27,7 @@ namespace arcxpress {
  */
 class ArchGen {
  public: /* -- Constructor -- */
-  ArchGen();
+  explicit ArchGen(bool support_gntwk = false);
 
  public: /* -- TYPES -- */
   /* Modeling the interconnects between pb_types */
@@ -323,6 +323,7 @@ class ArchGen {
   size_t num_config_regions_;
   size_t num_rsts_;
   std::array<size_t, 4> num_ios_; /* Side: top, right, bottom, left */
+  bool support_gntwk_;
 
   std::vector<VprArchPrimitive> arch_primitives_;
   VprArchLayout arch_layout_;

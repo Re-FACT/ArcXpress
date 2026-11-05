@@ -16,6 +16,11 @@
 
 namespace arcxpress {  // begin namespace arcxpress
 
+ArchGenCommandInterface::ArchGenCommandInterface(bool use_gntwk) : use_gntwk_(use_gntwk) {
+  VTR_LOG("Arch generator command-line interface enable with the following options:\n");
+  VTR_LOG("\tuse programmable global network: %s\n", use_gntwk_ ? "enabled", "disabled");
+}
+
 bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char** argv) {
   openfpga::Command exec_cmd(cmd_name.c_str());
   openfpga::CommandOptionId opt_vpr_arch =
@@ -26,29 +31,33 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
     exec_cmd.add_option("openfpga_arch", true, "Specify the path to OpenFPGA architecture file");
   exec_cmd.set_option_require_value(opt_of_arch, openfpga::OPT_STRING);
 
-  openfpga::CommandOptionId opt_dp_gntwk = exec_cmd.add_option(
-    "openfpga_dp_global_network", true,
-    "Specify the path to OpenFPGA global network file for design-planning fabric");
-  exec_cmd.set_option_require_value(opt_dp_gntwk, openfpga::OPT_STRING);
+  if (use_gntwk_)
+    openfpga::CommandOptionId opt_dp_gntwk = exec_cmd.add_option(
+      "openfpga_dp_global_network", true,
+      "Specify the path to OpenFPGA global network file for design-planning fabric");
+    exec_cmd.set_option_require_value(opt_dp_gntwk, openfpga::OPT_STRING);
 
-  openfpga::CommandOptionId opt_ut_gntwk =
-    exec_cmd.add_option("openfpga_ultimate_global_network", true,
-                        "Specify the path to OpenFPGA global network file for ultimate fabric");
-  exec_cmd.set_option_require_value(opt_ut_gntwk, openfpga::OPT_STRING);
+    openfpga::CommandOptionId opt_ut_gntwk =
+      exec_cmd.add_option("openfpga_ultimate_global_network", true,
+                          "Specify the path to OpenFPGA global network file for ultimate fabric");
+    exec_cmd.set_option_require_value(opt_ut_gntwk, openfpga::OPT_STRING);
+  }
 
   openfpga::CommandOptionId opt_bitset = exec_cmd.add_option(
     "openfpga_bitstream_setting", true, "Specify the path to OpenFPGA bitstream setting file");
   exec_cmd.set_option_require_value(opt_bitset, openfpga::OPT_STRING);
 
-  openfpga::CommandOptionId opt_dp_ckbuf_loc_map = exec_cmd.add_option(
-    "dp_ckbuf_loc_map", true,
-    "Specify the path to clock location buf map file for design-planning fabric");
-  exec_cmd.set_option_require_value(opt_dp_ckbuf_loc_map, openfpga::OPT_STRING);
+  if (use_gntwk_)
+    openfpga::CommandOptionId opt_dp_ckbuf_loc_map = exec_cmd.add_option(
+      "dp_ckbuf_loc_map", true,
+      "Specify the path to clock location buf map file for design-planning fabric");
+    exec_cmd.set_option_require_value(opt_dp_ckbuf_loc_map, openfpga::OPT_STRING);
 
-  openfpga::CommandOptionId opt_ut_ckbuf_loc_map =
-    exec_cmd.add_option("ultimate_ckbuf_loc_map", true,
-                        "Specify the path to clock location buf map file for ultimate fabric");
-  exec_cmd.set_option_require_value(opt_ut_ckbuf_loc_map, openfpga::OPT_STRING);
+    openfpga::CommandOptionId opt_ut_ckbuf_loc_map =
+      exec_cmd.add_option("ultimate_ckbuf_loc_map", true,
+                          "Specify the path to clock location buf map file for ultimate fabric");
+    exec_cmd.set_option_require_value(opt_ut_ckbuf_loc_map, openfpga::OPT_STRING);
+  }
 
   openfpga::CommandOptionId opt_height =
     exec_cmd.add_option("height", true, "Specify the height of the core fabric, excluding I/Os");
@@ -138,11 +147,13 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
   /* Output file paths */
   vpr_arch_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_vpr_arch);
   of_arch_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_of_arch);
-  of_dp_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_gntwk);
-  of_ut_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_ut_gntwk);
   of_bitset_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_bitset);
-  dp_ckbuf_loc_map_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_ckbuf_loc_map);
-  ut_ckbuf_loc_map_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_ut_ckbuf_loc_map);
+  if (use_gntwk_)
+    of_dp_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_gntwk);
+    of_ut_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_ut_gntwk);
+    dp_ckbuf_loc_map_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_ckbuf_loc_map);
+    ut_ckbuf_loc_map_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_ut_ckbuf_loc_map);
+  }
 
   /* Confirm options after parsing */
   VTR_LOG("eFPGA core dimension: %lu (H) x %lu (W)\n", params_.height, params_.width);
@@ -189,26 +200,6 @@ int ArchGenCommandInterface::write_xml_templates(const ArchGen& arch_gen) const 
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
-  /* Generate dp clock network */
-  VTR_LOG("Write OpenFPGA global network for dp fabric to an XML file: %s.\n",
-          of_dp_gntwk_fpath_.c_str());
-  status = write_xml_openfpga_gntwk(of_dp_gntwk_fpath_.c_str(), arch_gen,
-                                    VprArchLayout::e_fabric_type::DP);
-  if (status != openfpga::CMD_EXEC_SUCCESS) {
-    VTR_LOG_ERROR("Failed\n");
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-
-  /* Generate ultimate clock network */
-  VTR_LOG("Write OpenFPGA global network for ultimate fabric to an XML file: %s.\n",
-          of_ut_gntwk_fpath_.c_str());
-  status = write_xml_openfpga_gntwk(of_ut_gntwk_fpath_.c_str(), arch_gen,
-                                    VprArchLayout::e_fabric_type::ULTIMATE);
-  if (status != openfpga::CMD_EXEC_SUCCESS) {
-    VTR_LOG_ERROR("Failed\n");
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-
   /* Generate bitstream settings */
   VTR_LOG("Write OpenFPGA bitstream settings to an XML file: %s.\n", of_bitset_fpath_.c_str());
   status = write_xml_openfpga_bitstream_setting(of_bitset_fpath_.c_str(), arch_gen);
@@ -217,24 +208,45 @@ int ArchGenCommandInterface::write_xml_templates(const ArchGen& arch_gen) const 
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
-  /* Generate dp ckbuf location map */
-  VTR_LOG("Write ckbuf location map for dp fabric to an XML file: %s.\n",
-          dp_ckbuf_loc_map_fpath_.c_str());
-  status = write_xml_arch_ckbuf_loc_map(dp_ckbuf_loc_map_fpath_.c_str(), arch_gen,
-                                        VprArchLayout::e_fabric_type::DP);
-  if (status != openfpga::CMD_EXEC_SUCCESS) {
-    VTR_LOG_ERROR("Failed\n");
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
+  /* Clock network is optional when disabled by users */
+  if (use_gntwk_) {
+    /* Generate dp clock network */
+    VTR_LOG("Write OpenFPGA global network for dp fabric to an XML file: %s.\n",
+            of_dp_gntwk_fpath_.c_str());
+    status = write_xml_openfpga_gntwk(of_dp_gntwk_fpath_.c_str(), arch_gen,
+                                      VprArchLayout::e_fabric_type::DP);
+    if (status != openfpga::CMD_EXEC_SUCCESS) {
+      VTR_LOG_ERROR("Failed\n");
+      return openfpga::CMD_EXEC_FATAL_ERROR;
+    }
 
-  /* Generate ultimate ckbuf location map */
-  VTR_LOG("Write ckbuf location map for ultimate fabric to an XML file: %s.\n",
-          ut_ckbuf_loc_map_fpath_.c_str());
-  status = write_xml_arch_ckbuf_loc_map(ut_ckbuf_loc_map_fpath_.c_str(), arch_gen,
-                                        VprArchLayout::e_fabric_type::ULTIMATE);
-  if (status != openfpga::CMD_EXEC_SUCCESS) {
-    VTR_LOG_ERROR("Failed\n");
-    return openfpga::CMD_EXEC_FATAL_ERROR;
+    /* Generate ultimate clock network */
+    VTR_LOG("Write OpenFPGA global network for ultimate fabric to an XML file: %s.\n",
+            of_ut_gntwk_fpath_.c_str());
+    status = write_xml_openfpga_gntwk(of_ut_gntwk_fpath_.c_str(), arch_gen,
+                                      VprArchLayout::e_fabric_type::ULTIMATE);
+    if (status != openfpga::CMD_EXEC_SUCCESS) {
+      VTR_LOG_ERROR("Failed\n");
+      return openfpga::CMD_EXEC_FATAL_ERROR;
+    }
+    /* Generate dp ckbuf location map */
+    VTR_LOG("Write ckbuf location map for dp fabric to an XML file: %s.\n",
+            dp_ckbuf_loc_map_fpath_.c_str());
+    status = write_xml_arch_ckbuf_loc_map(dp_ckbuf_loc_map_fpath_.c_str(), arch_gen,
+                                          VprArchLayout::e_fabric_type::DP);
+    if (status != openfpga::CMD_EXEC_SUCCESS) {
+      VTR_LOG_ERROR("Failed\n");
+      return openfpga::CMD_EXEC_FATAL_ERROR;
+    }
+    /* Generate ultimate ckbuf location map */
+    VTR_LOG("Write ckbuf location map for ultimate fabric to an XML file: %s.\n",
+            ut_ckbuf_loc_map_fpath_.c_str());
+    status = write_xml_arch_ckbuf_loc_map(ut_ckbuf_loc_map_fpath_.c_str(), arch_gen,
+                                          VprArchLayout::e_fabric_type::ULTIMATE);
+    if (status != openfpga::CMD_EXEC_SUCCESS) {
+      VTR_LOG_ERROR("Failed\n");
+      return openfpga::CMD_EXEC_FATAL_ERROR;
+    }
   }
 
   return status;
