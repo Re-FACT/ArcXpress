@@ -13,9 +13,11 @@ namespace MOSOFA {  // begin namespace MOSOFA
 /* Primary inputs */
 constexpr const char* PI_BLIF_MODEL = "input";
 constexpr const char* PI_CIRCUIT_MODEL = "pinput";
+constexpr const char* PHYSICAL_PI_SCFF_NAME = "pi_scff";
 /* Primary outputs */
 constexpr const char* PO_BLIF_MODEL = "output";
 constexpr const char* PO_CIRCUIT_MODEL = "poutput";
+constexpr const char* PHYSICAL_PO_SCFF_NAME = "po_scff";
 /* Look-up Tables */
 constexpr const char* FRAC_LUT4_ARITH_BLIF_MODEL = "_frac_lut4_arith";
 constexpr const char* FRAC_LUT4_ARITH_CIRCUIT_MODEL = "frac_lut4_arith";
