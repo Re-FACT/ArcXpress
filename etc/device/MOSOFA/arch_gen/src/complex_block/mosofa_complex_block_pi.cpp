@@ -41,7 +41,7 @@ static int add_pi_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff
     arch_gen.add_pb_type_port(ff_pb, ck_port, arcxpress::VprArchLayout::e_port_type::CLOCK) ? 0 : 1;
 
   FracffGen fff_gen(OP2PHY_PB_TYPE_MAP.at(ff_pb.c_str()));
-  std::string tag = mmff_gen.vpr_physical_model_name();
+  std::string tag = fff_gen.vpr_physical_model_name();
   std::string phy_pb_type_name = arch_gen.find_primitive_pb_type_name(tag);
 
   { /* Latch */
@@ -234,12 +234,12 @@ static int assemble_pi_complex_block_operating_modes(
                      : 1;
       }
 
-      Mmffisc2Gen mmff_gen(OP2PHY_PB_TYPE_MAP.at(ff_pb.c_str()));
-      for (auto pmtv : mmff_gen.vpr_arch_primitives(false)) {
+      FracffGen fff_gen(OP2PHY_PB_TYPE_MAP.at(ff_pb.c_str()));
+      for (auto pmtv : fff_gen.vpr_arch_primitives(false)) {
         num_err += arch_gen.set_internal_edge_pack_pattern(
                      op_pb_default_mode, src_edge_port, des_edge_port,
                      arcxpress::gen_ioff_pack_pattern_name(
-                       pmtv.pb_type_name(mmff_gen.vpr_physical_model_name()), "D"))
+                       pmtv.pb_type_name(fff_gen.vpr_physical_model_name()), "D"))
                      ? 0
                      : 1;
       }
