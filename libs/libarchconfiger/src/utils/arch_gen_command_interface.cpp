@@ -18,7 +18,7 @@ namespace arcxpress {  // begin namespace arcxpress
 
 ArchGenCommandInterface::ArchGenCommandInterface(bool use_gntwk) : use_gntwk_(use_gntwk) {
   VTR_LOG("Arch generator command-line interface enable with the following options:\n");
-  VTR_LOG("\tuse programmable global network: %s\n", use_gntwk_ ? "enabled", "disabled");
+  VTR_LOG("\tuse programmable global network: %s\n", use_gntwk_ ? "enabled" : "disabled");
 }
 
 bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char** argv) {
@@ -31,13 +31,15 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
     exec_cmd.add_option("openfpga_arch", true, "Specify the path to OpenFPGA architecture file");
   exec_cmd.set_option_require_value(opt_of_arch, openfpga::OPT_STRING);
 
-  if (use_gntwk_)
-    openfpga::CommandOptionId opt_dp_gntwk = exec_cmd.add_option(
+  openfpga::CommandOptionId opt_dp_gntwk;
+  openfpga::CommandOptionId opt_ut_gntwk;
+  if (use_gntwk_) { 
+    opt_dp_gntwk = exec_cmd.add_option(
       "openfpga_dp_global_network", true,
       "Specify the path to OpenFPGA global network file for design-planning fabric");
     exec_cmd.set_option_require_value(opt_dp_gntwk, openfpga::OPT_STRING);
 
-    openfpga::CommandOptionId opt_ut_gntwk =
+    opt_ut_gntwk =
       exec_cmd.add_option("openfpga_ultimate_global_network", true,
                           "Specify the path to OpenFPGA global network file for ultimate fabric");
     exec_cmd.set_option_require_value(opt_ut_gntwk, openfpga::OPT_STRING);
@@ -47,13 +49,15 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
     "openfpga_bitstream_setting", true, "Specify the path to OpenFPGA bitstream setting file");
   exec_cmd.set_option_require_value(opt_bitset, openfpga::OPT_STRING);
 
-  if (use_gntwk_)
-    openfpga::CommandOptionId opt_dp_ckbuf_loc_map = exec_cmd.add_option(
+  openfpga::CommandOptionId opt_dp_ckbuf_loc_map;
+  openfpga::CommandOptionId opt_ut_ckbuf_loc_map;
+  if (use_gntwk_) {
+    opt_dp_ckbuf_loc_map = exec_cmd.add_option(
       "dp_ckbuf_loc_map", true,
       "Specify the path to clock location buf map file for design-planning fabric");
     exec_cmd.set_option_require_value(opt_dp_ckbuf_loc_map, openfpga::OPT_STRING);
 
-    openfpga::CommandOptionId opt_ut_ckbuf_loc_map =
+    opt_ut_ckbuf_loc_map =
       exec_cmd.add_option("ultimate_ckbuf_loc_map", true,
                           "Specify the path to clock location buf map file for ultimate fabric");
     exec_cmd.set_option_require_value(opt_ut_ckbuf_loc_map, openfpga::OPT_STRING);
@@ -148,7 +152,7 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
   vpr_arch_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_vpr_arch);
   of_arch_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_of_arch);
   of_bitset_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_bitset);
-  if (use_gntwk_)
+  if (use_gntwk_) {
     of_dp_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_gntwk);
     of_ut_gntwk_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_ut_gntwk);
     dp_ckbuf_loc_map_fpath_ = exec_cmd_ctx.option_value(exec_cmd, opt_dp_ckbuf_loc_map);

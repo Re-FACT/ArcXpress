@@ -44,6 +44,7 @@ class VprArchPrimitive {
   bool contain_mode_bits() const;
   std::string pb_type_name() const;
   bool require_non_mode_select_parameters() const;
+  std::string non_mode_select_parameter_key(const std::string& curr_pb_type_name) const;
   std::vector<std::string> non_mode_select_parameters() const;
   bool require_mode_select_parameters() const;
   size_t non_mode_select_offset(const std::string& param,

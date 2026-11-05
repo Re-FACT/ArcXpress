@@ -15,7 +15,9 @@
 
 namespace arcxpress {  // Begin namespace arcxpress
 
-ArchGen::ArchGen() {
+ArchGen::ArchGen(bool support_gntwk) {
+  /* User-defined settings */
+  support_gntwk_ = support_gntwk;
   /* Default settings */
   num_clks_ = 8;
   num_pclks_ = 8;
@@ -3306,7 +3308,7 @@ int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_node(pugi::xml_node& root_node) const {
+int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_nodes(pugi::xml_node& root_node) const {
   int num_err = 0;
   /* Walk through all the arch primitives which require a mode-select bitstream setting */
   for (auto pmtv : arch_primitives_) {
@@ -3336,7 +3338,7 @@ int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_node(pugi::xml_n
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int ArchGen::add_xml_openfpga_bitstream_setting_mode_select_node(pugi::xml_node& root_node) const {
+int ArchGen::add_xml_openfpga_bitstream_setting_mode_select_nodes(pugi::xml_node& root_node) const {
   int num_err = 0;
   /* Walk through all the arch primitives which require a mode-select bitstream setting */
   for (auto pmtv : arch_primitives_) {

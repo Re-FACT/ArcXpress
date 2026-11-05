@@ -8,9 +8,11 @@
 
 /* Headers from vtr util library */
 #include "command_exit_codes.h"
+#include "mosofa_complex_block_ff.h"
 #include "mosofa_complex_block_pi.h"
 #include "mosofa_constants.h"
 #include "mosofa_naming.h"
+#include "fracff_gen.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
@@ -163,7 +165,7 @@ static int assemble_pi_complex_block_physical_mode(arcxpress::ArchGen& arch_gen,
 
 static int assemble_pi_complex_block_operating_modes(
   arcxpress::ArchGen& arch_gen, const std::string& top_pb, const std::string& op_pb_name,
-  const std::string& op_pad_name, const std::string& phy_pad_name, const bool& verbose) {
+  const std::string& op_pad_name, const std::string& op_ff_name, const std::string& phy_pad_name, const bool& verbose) {
   int num_err = 0;
 
   VTR_LOGV(verbose, "Assemble operating mode for PI '%s'...\n", top_pb.c_str());
@@ -212,7 +214,7 @@ static int assemble_pi_complex_block_operating_modes(
     arcxpress::ArchGen::EdgePort src_edge_port = {ff_pb, ipb, src_q_port};
     arcxpress::ArchGen::EdgeDelay edge_delay = {"0.429e-9", "0.166e-9"};
     num_err +=
-      arch_gen.add_out2out_edge(op_pb_default_mode, src_edge_port, des_a2f_port, edge_delay) ? 0
+      arch_gen.add_out2out_edge(op_pb_default_mode, src_edge_port, des_a2f_port, edge_delay) ? 0 : 1;
   }
   openfpga::BasicPort des_d_port;
   if (!arch_gen.find_pb_type_port(ff_pb, "D", des_d_port)) {

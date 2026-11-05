@@ -477,6 +477,11 @@ std::vector<std::string> VprArchPrimitive::non_mode_select_parameters() const {
   return ret;
 }
 
+std::string VprArchPrimitive::non_mode_select_parameter_key(
+  const std::string& curr_pb_type_name) const {
+  return mode_select_parameter_key(curr_pb_type_name);
+}
+
 size_t VprArchPrimitive::non_mode_select_offset(const std::string& param,
                                             const std::string& key) const {
   auto result = non_mode_select_offsets_.find(param);
