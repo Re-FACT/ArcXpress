@@ -1,0 +1,20 @@
+# load tapeout project
+load_tapeout --config_file ${PROJECT_CONFIG_HOME}/project_arch_setup.xml
+
+## Check architecture development status
+show_status --step arch #--verbosity 1
+set_benchmark_custom_pin_utilization --run iter0 --corner tt_25C_v1p0 --benchmark and2 --tile clb --input_pin_util 0.9 --output_pin_util 0.95
+set_benchmark_custom_pin_utilization --run iter0 --corner tt_25C_v1p0 --benchmark and2 --tile io --input_pin_util 0.95 --output_pin_util 0.9
+save_tapeout --config_file ${PROJECT_CONFIG_HOME}/project_arch_eval.xml
+### Run arch validation
+### Run arch validation
+eval_arch --corner tt_25C_v1p0 #--verbosity 1
+analyze_qor --corner tt_25C_v1p0 #--verbosity 1
+analyze_qor --corner tt_25C_v1p0 --file qor_tt_25C_v1p0.csv
+analyze_qor --corner tt_25C_v1p0 --file qor_tt_25C_v1p0.rpt
+
+# Show a dashboard
+show_dashboard
+
+# Finish and exit
+exit

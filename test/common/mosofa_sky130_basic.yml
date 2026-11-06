@@ -1,0 +1,6 @@
+# task configuration
+reg_tasks:
+  - name: mosofa_sky130_arch_default
+    workspace: "[TASK_ROOT]/mosofa/sky130/arch_default/_work"
+    subtasks: "[TASK_ROOT]/mosofa/sky130/arch_default/config/task.yaml" 
+    expect_failure: false
