@@ -7,18 +7,20 @@
 #include "mosofa_arch_layout.h"
 
 int main(int argc, char** argv) {
+  /* MOSOFA does not support programmable global network */
+  bool support_gntwk = false;
   /*************************************
    * General purpose interface API for architecture generator
    * Instantiate the interface with the command name
    */
-  arcxpress::ArchGenCommandInterface cmd_interface;
+  arcxpress::ArchGenCommandInterface cmd_interface(support_gntwk);  // disable gntwk
   // Parse command-line options
   if (!cmd_interface.parse("arch_gen", argc, argv)) {
     VTR_LOG_ERROR("Failed in parsing architecture generator command-line options\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   /* The standard arch genertor and status flag to start device-specific customization */
-  arcxpress::ArchGen arch_gen;
+  arcxpress::ArchGen arch_gen(support_gntwk);
   int status = 0;
   arcxpress::ArchGenInputParams arch_params = cmd_interface.arch_parameters();
 

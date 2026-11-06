@@ -13,6 +13,9 @@
 namespace arcxpress {  // begin namespace arcxpress
 
 class ArchGenCommandInterface {
+ public: /* Constructor */
+  explicit ArchGenCommandInterface(bool use_gntwk = true);
+
  public:
   /**
    * Parse command-line arguments and populate the command context.
@@ -40,6 +43,7 @@ class ArchGenCommandInterface {
   std::string of_bitset_fpath_;
   std::string dp_ckbuf_loc_map_fpath_;
   std::string ut_ckbuf_loc_map_fpath_;
+  bool use_gntwk_;
 };
 
 }  // end namespace arcxpress

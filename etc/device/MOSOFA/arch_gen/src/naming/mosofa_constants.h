@@ -7,20 +7,26 @@
  */
 namespace MOSOFA {  // begin namespace MOSOFA
 
-/* Vpr models */
+/** Vpr models
+ * Unmappable blif model should be named with a prefix of "_"
+ */
 /* Primary inputs */
 constexpr const char* PI_BLIF_MODEL = "input";
 constexpr const char* PI_CIRCUIT_MODEL = "pinput";
+constexpr const char* PHYSICAL_PI_SCFF_NAME = "pi_scff";
+constexpr const char* OPERATING_PI_SCFF_NAME = "v_pi_scff";
 /* Primary outputs */
 constexpr const char* PO_BLIF_MODEL = "output";
 constexpr const char* PO_CIRCUIT_MODEL = "poutput";
+constexpr const char* PHYSICAL_PO_SCFF_NAME = "po_scff";
+constexpr const char* OPERATING_PO_SCFF_NAME = "v_po_scff";
 /* Look-up Tables */
-constexpr const char* FRAC_LUT4_BLIF_MODEL = "frac_lut4";
-constexpr const char* FRAC_LUT4_CIRCUIT_MODEL = "frac_lut4";
+constexpr const char* FRAC_LUT4_ARITH_BLIF_MODEL = "_frac_lut4_arith";
+constexpr const char* FRAC_LUT4_ARITH_CIRCUIT_MODEL = "frac_lut4_arith";
 /* Adders */
-constexpr const char* ADDER_BLIF_MODEL = "soft_adder";
-constexpr const char* PHYSICAL_ADDER_BLIF_MODEL = "adder";
-constexpr const char* PHYSICAL_ADDER_CIRCUIT_MODEL = "adder";
+/* The soft adder is implemented by the look-up table */
+constexpr const char* ADDER_BLIF_MODEL = "adder_lut4";
+constexpr const char* PHYSICAL_ADDER_BLIF_MODEL = "_frac_lut4_arith";
 
 /* Tile and subtile names */
 constexpr const char* TILE_IO_PREFIX = "io";

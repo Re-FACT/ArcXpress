@@ -46,20 +46,47 @@ static int add_vpr_arch_primitive_po(arcxpress::ArchGen& arch_gen) {
 
 static int add_vpr_arch_primitive_lut(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
-  arcxpress::VprArchPrimitive pmtv(FRAC_LUT4_BLIF_MODEL);
-  num_err += pmtv.set_blif_model(std::string(FRAC_LUT4_BLIF_MODEL)) ? 0 : 1;
-  num_err += pmtv.set_circuit_model(std::string(FRAC_LUT4_CIRCUIT_MODEL)) ? 0 : 1;
+  arcxpress::VprArchPrimitive pmtv(FRAC_LUT4_ARITH_BLIF_MODEL);
+  num_err += pmtv.set_blif_model(std::string(FRAC_LUT4_ARITH_BLIF_MODEL)) ? 0 : 1;
+  num_err += pmtv.set_circuit_model(std::string(FRAC_LUT4_ARITH_CIRCUIT_MODEL)) ? 0 : 1;
   num_err += pmtv.set_circuit_model_type(arcxpress::VprArchPrimitive::e_model_type::LUT) ? 0 : 1;
-  num_err += pmtv.set_require_external_netlist(false) ? 0 : 1;
-  num_err += pmtv.set_mode_bits(std::string(FRAC_LUT4_BLIF_MODEL), "0") ? 0 : 1;
+  num_err += pmtv.set_require_external_netlist(true) ? 0 : 1;
+  num_err += pmtv.set_mode_bits(std::string(FRAC_LUT4_ARITH_BLIF_MODEL), "0") ? 0 : 1;
   num_err += pmtv.set_physical_model() ? 0 : 1;
   num_err += pmtv.add_input_port("in", 4) ? 0 : 1;
+  num_err += pmtv.add_input_port("cin", 1) ? 0 : 1;
   num_err += pmtv.add_output_port("lut3_out", 2) ? 0 : 1;
   num_err += pmtv.set_output_port_frac_level("lut4_out", 3) ? 0 : 1;
   num_err += pmtv.add_output_port("lut4_out", 1) ? 0 : 1;
+  num_err += pmtv.add_output_port("cout", 1) ? 0 : 1;
   num_err += pmtv.set_output_port_frac_level("lut4_out", 4) ? 0 : 1;
   num_err += pmtv.add_input_comb_sink_port("in", "lut3_out") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("cin", "lut4_out") ? 0 : 1;
   num_err += pmtv.add_input_comb_sink_port("in", "lut4_out") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("in", "cout") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("cin", "cout") ? 0 : 1;
+  arch_gen.add_arch_primitive(pmtv);
+  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+}
+
+static int add_vpr_arch_primitive_adder_lut4(arcxpress::ArchGen& arch_gen) {
+  int num_err = 0;
+  arcxpress::VprArchPrimitive pmtv(ADDER_BLIF_MODEL);
+  num_err += pmtv.set_blif_model(std::string(ADDER_BLIF_MODEL)) ? 0 : 1;
+  num_err +=
+    pmtv.add_non_mode_select_offset(".param LUT", 0, std::string(ADDER_BLIF_MODEL)) ? 0 : 1;
+  num_err +=
+    pmtv.add_mode_select_offset(std::string(".param IN2_IS_CIN"), 0, std::string(ADDER_BLIF_MODEL))
+      ? 0
+      : 1;
+  num_err += pmtv.add_input_port("in", 4) ? 0 : 1;
+  num_err += pmtv.add_input_port("cin", 1) ? 0 : 1;
+  num_err += pmtv.add_output_port("lut4_out", 1) ? 0 : 1;
+  num_err += pmtv.add_output_port("cout", 1) ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("cin", "lut4_out") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("in", "lut4_out") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("in", "cout") ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("cin", "cout") ? 0 : 1;
   arch_gen.add_arch_primitive(pmtv);
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -108,12 +135,19 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
-  VTR_LOG("Adding LUT models\n");
+  VTR_LOG("Adding frac lut4 models\n");
   num_err += add_vpr_arch_primitive_lut(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
+  VTR_LOG("Adding adder lut4 models\n");
+  num_err += add_vpr_arch_primitive_adder_lut4(arch_gen);
+  if (num_err) {
+    VTR_LOG_ERROR("Fatal error occur");
+    return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+  }
+
   VTR_LOG("Adding Flip-flop models\n");
   num_err += add_vpr_arch_primitive_ff(arch_gen);
   if (num_err) {

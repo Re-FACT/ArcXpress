@@ -27,7 +27,7 @@ namespace arcxpress {
  */
 class ArchGen {
  public: /* -- Constructor -- */
-  ArchGen();
+  explicit ArchGen(bool support_gntwk = false);
 
  public: /* -- TYPES -- */
   /* Modeling the interconnects between pb_types */
@@ -180,6 +180,8 @@ class ArchGen {
   std::string gen_gntwk_branch_spine_name(const std::string& prefix,
                                           const VprArchLayout::e_dir_type& dir,
                                           const vtr::Point<size_t>& tap_point) const;
+  int add_xml_openfpga_bitstream_setting_non_mode_select_nodes(pugi::xml_node& root_node) const;
+  int add_xml_openfpga_bitstream_setting_mode_select_nodes(pugi::xml_node& root_node) const;
 
  public: /* -- Mutators -- */
   /* TODO: Set I/O number constraints */
@@ -323,6 +325,7 @@ class ArchGen {
   size_t num_config_regions_;
   size_t num_rsts_;
   std::array<size_t, 4> num_ios_; /* Side: top, right, bottom, left */
+  bool support_gntwk_;
 
   std::vector<VprArchPrimitive> arch_primitives_;
   VprArchLayout arch_layout_;
