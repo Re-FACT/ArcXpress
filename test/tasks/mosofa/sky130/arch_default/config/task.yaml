@@ -6,13 +6,13 @@ arch_setup:
   template:
     path: "[TEMPLATE_ROOT]/arch_setup_run_tmpl.ax" # Template path has a root from the configuration file 
     single_line_replaced_variables: 
-      project_config_home: "[SUBTASK_ROOT]"
+      project_config_home: "[current_subtask_root]"
 arch_setup:
   enable: true # If set false, the subtask will not be added
   tool_under_test: ax_shell # Use the tool configuration file setting. Must be a valid entity name
   template:
     path: "[TEMPLATE_ROOT]/arch_setup_run_tmpl.ax" # Template path has a root from the configuration file 
     single_line_replaced_variables: 
-      project_config_home: "[SUBTASK_ROOT]"
+      project_config_home: "[current_subtask_root]"
   dep:
     - "arch_step"
