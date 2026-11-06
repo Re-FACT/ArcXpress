@@ -13,3 +13,6 @@
 [submodule "thirdparty/Yosuf"]
 	path = thirdparty/Yosuf
 	url = https://github.com/Re-FACT/Yosuf.git
+[submodule "test/ezreg"]
+	path = test/ezreg
+	url = https://github.com/Re-FACT/ezreg.git
