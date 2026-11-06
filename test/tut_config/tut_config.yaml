@@ -5,13 +5,13 @@
 # Take the example below, the 'gds_dummy' task will invoke a tool run through the following command line:
 #   yosys run.tcl -l run.log
 # Where in the task configuration file,
-#   - the '[tcl]' is defined through the syntax 'tcl' 
+#   - the '[TCL]' is defined through the syntax 'tcl' 
 ax_shell:
   bin: ax_shell
   runtime_script: run.ax
   options: "kargs"
   kargs:
-    - name: "--file [tcl]"
-    - name: "--boot_config [boot_config]"
+    - name: "--file [TCL]"
+    - name: "--boot_config [BOOT_CONFIG]"
     - name: "--root_path [ROOT_PATH]"
     - name: "--batch_execution"

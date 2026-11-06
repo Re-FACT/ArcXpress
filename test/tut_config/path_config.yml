@@ -11,3 +11,4 @@
 benchmark_root: "[ROOT_PATH]/etc/benchmarks"
 template_root: "[ROOT_PATH]/test/tmpl"
 task_root: "[ROOT_PATH]/test/tasks"
+boot_config: "[ROOT_PATH]/etc/boot_config/build.xml"
