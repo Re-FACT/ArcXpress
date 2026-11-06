@@ -40,7 +40,7 @@ copyright = u'2026, ReFACT'
 author = u'ReFACT'
 manpage_url = u'https://refact-fpga.org'
 # Logo for PDF build at front-page
-latex_logo = 'appendix/refact_logo.jpeg' 
+latex_logo = 'appendix/refact_logo.png' 
 
 # The short X.Y version
 with open("VERSION.md") as ver_f:
