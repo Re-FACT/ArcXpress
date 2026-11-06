@@ -1,18 +1,20 @@
+#include "mosofa_complex_block_po.h"
+
 #include <algorithm>
 #include <filesystem>
 #include <string>
-#include "mosofa_complex_block_ff.h"
-#include "mosofa_complex_block_po.h"
-#include "mosofa_constants.h"
-#include "mosofa_naming.h"
+
 #include "command_exit_codes.h"
 #include "fracff_gen.h"
+#include "mosofa_complex_block_ff.h"
+#include "mosofa_constants.h"
+#include "mosofa_naming.h"
 #include "vpr_arch_layout.h"
 #include "vtr_assert.h"
 #include "vtr_log.h"
 #include "vtr_time.h"
 
-namespace MOSOFA { // begin namespace MOSOFA
+namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_po_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb,
                              const bool& verbose) {
@@ -29,9 +31,11 @@ static int add_po_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, d_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                               : 1;
   num_err +=
-    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0 : 1;
+    arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
+                                                                                             : 1;
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, q_port, arcxpress::VprArchLayout::e_port_type::OUTPUT) ? 0 : 1;
   num_err +=

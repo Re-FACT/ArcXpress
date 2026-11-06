@@ -3208,7 +3208,8 @@ int ArchGen::build_global_network(const VprArchLayout::e_fabric_type& fb_type,
   int num_err = 0;
 
   if (!support_gntwk_) {
-    VTR_LOG_ERROR("Global network cannot be built in this architecture as it does not support the feature!\n");
+    VTR_LOG_ERROR(
+      "Global network cannot be built in this architecture as it does not support the feature!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
@@ -3253,7 +3254,9 @@ int ArchGen::build_ckbuf_location_map(const VprArchLayout::e_fabric_type& fb_typ
   int num_err = 0;
 
   if (!support_gntwk_) {
-    VTR_LOG_ERROR("Clock buffer location map cannot be built in this architecture as it does not support the programmable global network!\n");
+    VTR_LOG_ERROR(
+      "Clock buffer location map cannot be built in this architecture as it does not support the "
+      "programmable global network!\n");
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
 
@@ -3308,7 +3311,8 @@ int ArchGen::add_xml_openfpga_bitstream_setting_node(pugi::xml_node& root_node) 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_nodes(pugi::xml_node& root_node) const {
+int ArchGen::add_xml_openfpga_bitstream_setting_non_mode_select_nodes(
+  pugi::xml_node& root_node) const {
   int num_err = 0;
   /* Walk through all the arch primitives which require a mode-select bitstream setting */
   for (auto pmtv : arch_primitives_) {

@@ -483,17 +483,19 @@ std::string VprArchPrimitive::non_mode_select_parameter_key(
 }
 
 size_t VprArchPrimitive::non_mode_select_offset(const std::string& param,
-                                            const std::string& key) const {
+                                                const std::string& key) const {
   auto result = non_mode_select_offsets_.find(param);
   if (result == non_mode_select_offsets_.end()) {
-    VTR_LOG_ERROR("The regular bitstream overload parameter '%s' does not exist for primitive '%s'!\n",
-                  param.c_str(), name().c_str());
+    VTR_LOG_ERROR(
+      "The regular bitstream overload parameter '%s' does not exist for primitive '%s'!\n",
+      param.c_str(), name().c_str());
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }
   auto k_result = result->second.find(key);
   if (k_result == result->second.end()) {
     VTR_LOG_ERROR(
-      "The key '%s' for regular bitstream overload parameter '%s' does not exist for primitive '%s'!\n",
+      "The key '%s' for regular bitstream overload parameter '%s' does not exist for primitive "
+      "'%s'!\n",
       key.c_str(), param.c_str(), name().c_str());
     exit(openfpga::CMD_EXEC_FATAL_ERROR);
   }

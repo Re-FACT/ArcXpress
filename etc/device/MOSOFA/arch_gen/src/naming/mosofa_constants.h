@@ -7,8 +7,8 @@
  */
 namespace MOSOFA {  // begin namespace MOSOFA
 
-/** Vpr models 
- * Unmappable blif model should be named with a prefix of "_" 
+/** Vpr models
+ * Unmappable blif model should be named with a prefix of "_"
  */
 /* Primary inputs */
 constexpr const char* PI_BLIF_MODEL = "input";

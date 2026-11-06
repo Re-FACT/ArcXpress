@@ -33,7 +33,7 @@ bool ArchGenCommandInterface::parse(const std::string& cmd_name, int argc, char*
 
   openfpga::CommandOptionId opt_dp_gntwk;
   openfpga::CommandOptionId opt_ut_gntwk;
-  if (use_gntwk_) { 
+  if (use_gntwk_) {
     opt_dp_gntwk = exec_cmd.add_option(
       "openfpga_dp_global_network", true,
       "Specify the path to OpenFPGA global network file for design-planning fabric");

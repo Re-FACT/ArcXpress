@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
    * General purpose interface API for architecture generator
    * Instantiate the interface with the command name
    */
-  arcxpress::ArchGenCommandInterface cmd_interface(support_gntwk); // disable gntwk
+  arcxpress::ArchGenCommandInterface cmd_interface(support_gntwk);  // disable gntwk
   // Parse command-line options
   if (!cmd_interface.parse("arch_gen", argc, argv)) {
     VTR_LOG_ERROR("Failed in parsing architecture generator command-line options\n");

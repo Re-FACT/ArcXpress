@@ -17,9 +17,11 @@ namespace MOSOFA {  // begin namespace MOSOFA
 
 static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
-  std::string prim_pb = arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_ARITH_BLIF_MODEL));
+  std::string prim_pb =
+    arch_gen.find_primitive_pb_type_name(std::string(FRAC_LUT4_ARITH_BLIF_MODEL));
   if (prim_pb.empty()) {
-    VTR_LOG_ERROR("The primitive pb_type '%s' was not successfully added!\n", FRAC_LUT4_ARITH_BLIF_MODEL);
+    VTR_LOG_ERROR("The primitive pb_type '%s' was not successfully added!\n",
+                  FRAC_LUT4_ARITH_BLIF_MODEL);
   }
   openfpga::BasicPort in_port("in", 4);
   openfpga::BasicPort cin_port("cin", 1);
@@ -34,10 +36,8 @@ static int add_frac_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen) 
   num_err +=
     arch_gen.add_pb_type_comb_delay(prim_pb, in_port, lut3_out_port, lut4_delay_var) ? 0 : 1;
   // TODO: Think about a proper variable
-  num_err +=
-    arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, cout_port, lut4_delay_var) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_comb_delay(prim_pb, in_port, cout_port, lut4_delay_var) ? 0 : 1;
+  num_err += arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, cout_port, lut4_delay_var) ? 0 : 1;
+  num_err += arch_gen.add_pb_type_comb_delay(prim_pb, in_port, cout_port, lut4_delay_var) ? 0 : 1;
   num_err +=
     arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, lut4_out_port, lut4_delay_var) ? 0 : 1;
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
@@ -56,10 +56,8 @@ static int add_adder_lut4_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen)
 
   std::string lut4_delay_var = arch_gen.lut_comb_delay_variable(4);
   // TODO: Think about a proper variable
-  num_err +=
-    arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, cout_port, lut4_delay_var) ? 0 : 1;
-  num_err +=
-    arch_gen.add_pb_type_comb_delay(prim_pb, in_port, cout_port, lut4_delay_var) ? 0 : 1;
+  num_err += arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, cout_port, lut4_delay_var) ? 0 : 1;
+  num_err += arch_gen.add_pb_type_comb_delay(prim_pb, in_port, cout_port, lut4_delay_var) ? 0 : 1;
   num_err +=
     arch_gen.add_pb_type_comb_delay(prim_pb, cin_port, lut4_out_port, lut4_delay_var) ? 0 : 1;
   num_err +=

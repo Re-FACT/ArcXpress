@@ -14,7 +14,8 @@ namespace arcxpress {  // begin namespace arcxpress
 
 class ArchGenCommandInterface {
  public: /* Constructor */
-   explicit ArchGenCommandInterface(bool use_gntwk = true);
+  explicit ArchGenCommandInterface(bool use_gntwk = true);
+
  public:
   /**
    * Parse command-line arguments and populate the command context.
