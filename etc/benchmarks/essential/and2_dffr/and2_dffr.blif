@@ -1,0 +1,11 @@
+# Benchmark "and2_dffr" written by ABC on Wed Mar 11 10:36:28 2020
+.model and2_dffr
+.inputs a b clk rst
+.outputs c d
+
+.subckt dffr C=clk D=c Q=d R=rst
+
+.names a b c
+11 1
+
+.end
