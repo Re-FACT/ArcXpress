@@ -7,11 +7,11 @@
 # Where in the task configuration file,
 #   - the '[TCL]' is defined through the syntax 'tcl' 
 ax_shell:
-  bin: ax_shell
+  bin: "${BIN_ROOT}/ax_shell"
   runtime_script: run.ax
   options: "kargs"
   kargs:
     - name: "--file [runtime_script]"
-    - name: "--boot_config [BOOT_CONFIG]"
-    - name: "--root_path [ROOT_PATH]"
+    - name: "--boot_config ${BOOT_CONFIG}"
+    - name: "--root_path ${RUN_ROOT}"
     - name: "--batch_execution"
