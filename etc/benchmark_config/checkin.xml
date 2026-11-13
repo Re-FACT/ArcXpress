@@ -10,7 +10,7 @@
  -->
 <benchmark_suite>
   <stamp>
-    <author>ReFACT</author>
+    <author>Xifan Tang</author>
     <dates>
       <created>Sat Dec 31 03:14:41 PM PST 2022</created>
       <last_modified>Sat Dec 31 03:14:41 PM PST 2022</last_modified>
@@ -67,42 +67,6 @@
     <top_module>and2_dffr</top_module>
     <constraints>
       <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/essential/and2_dffr/pcf_gclk.xml</file>
-    </constraints>
-  </benchmark>
-  <benchmark name="and2_or2" suite="checkin">
-    <!-- Design sources can be verilog -->
-    <design>
-      <file type="verilog">${ROOT_PATH}/etc/benchmarks/essential/and2_or2/and2_or2.v</file>
-    </design>
-    <!-- Only 1 top module is allowed, corresponding to the design source files -->
-    <top_module>and2_or2</top_module>
-    <!-- Files to be used when running cocotb. 
-         'source' is the non-top python scripts.
-         'top' is the top-level python script which will be adapt later in dv
-         'makefile' is the makefile which runs cocotb
-      -->
-    <cocotb>
-      <file type="top">${ROOT_PATH}/etc/benchmarks/essential/and2_or2/test_and2_or2.py</file>
-      <file type="makefile">${ROOT_PATH}/etc/benchmarks/essential/and2_or2/Makefile</file>
-    </cocotb>
-    <!-- Design constraints can be 
-        'sdc' is the design constraints when running bitgen flow
-        'pcf' is the clock constreaints (To be auto-generated during bitgen flow)
-      -->
-    <constraints>
-    </constraints>
-  </benchmark>
-  <benchmark name="local_clk_test" suite="checkin">
-    <top_module>local_clk_test</top_module>
-    <design>
-      <file type="verilog">${ROOT_PATH}/etc/benchmarks/essential/local_clk_test/local_clk_test.v</file>
-    </design>
-    <cocotb>
-      <file type="top">${ROOT_PATH}/etc/benchmarks/essential/local_clk_test/test_local_clk_test.py</file>
-      <file type="makefile">${ROOT_PATH}/etc/benchmarks/essential/local_clk_test/Makefile</file>
-    </cocotb>
-    <constraints>
-      <file type="pcf_gclk">${ROOT_PATH}/etc/benchmarks/essential/local_clk_test/pcf_gclk.xml</file>
     </constraints>
   </benchmark>
 </benchmark_suite>
