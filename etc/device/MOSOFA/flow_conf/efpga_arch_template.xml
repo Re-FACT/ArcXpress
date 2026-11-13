@@ -57,25 +57,25 @@
     </qorso>
   </flow_settings>
   <builtin_corner_map>
-<pdk name="sky130" default="tt_025C_1v80">
-  <corner name="ff_100C_1v95">
-    <sclib>ff_100C_1v95</sclib>
-    <spef>cn_25C</spef>
-  </corner>
-   <corner name="ss_n40C_1v35">
-    <sclib>ss_n40C_1v35</sclib>
-    <spef>cn_25C</spef>
-  </corner>
-  <corner name="tt_025C_1v80">
-    <sclib>tt_025C_1v80</sclib>
-    <spef>cn_25C</spef>
-  </corner>
-</pdk>
+    <pdk name="sky130" default="tt_025C_1v80">
+      <corner name="ff_100C_1v95">
+        <sclib>ff_100C_1v95</sclib>
+        <spef>cn_25C</spef>
+      </corner>
+       <corner name="ss_n40C_1v35">
+        <sclib>ss_n40C_1v35</sclib>
+        <spef>cn_25C</spef>
+      </corner>
+      <corner name="tt_025C_1v80">
+        <sclib>tt_025C_1v80</sclib>
+        <spef>cn_25C</spef>
+      </corner>
+    </pdk>
   </builtin_corner_map>
   <arch_template route_chan_width="64">
     <arch_generator>
-      <file type="build">${ROOT_PATH}/build/etc/device/MOSOFA/utils/sofa_hd_arch_tmpl_gen</file>
-      <file type="install">${ROOT_PATH}/etc/arch_gen/sofa_hd_arch_tmpl_gen</file>
+      <file type="build">${ROOT_PATH}/build/etc/device/MOSOFA/utils/mosofa_arch_tmpl_gen</file>
+      <file type="install">${ROOT_PATH}/etc/arch_gen/mosofa_arch_tmpl_gen</file>
     </arch_generator>
     <io_settings>
       <num_io_per_tile name="NUM_LEFT_PI_PER_TILE" type="input" side="left" msb="MSB_LEFT_PI_PER_TILE"/>
