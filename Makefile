@@ -160,7 +160,7 @@ FORCE_COMMIT_VERSION_UPDATE = off
 INFRA_ROOT = ${PWD}/utils/refact_infra/
 
 # Reg test options
-REG_TEST_TYPE = basic
+REG_TEST_TYPE = mosofa_sky130_basic
 REG_TEST_SELECT = all
 REG_TEST_DRYRUN = OFF
 REG_TEST_FLAGS = 
@@ -304,17 +304,15 @@ unit_test:
 	${FLRPLN_BIN} --cpp 0.21 --sc_height 1.50 --strategy ${FLRPLN_STRONG2_INPUT_DIR}/floorplan_strategy.xml --tile_qor ${FLRPLN_STRONG2_INPUT_DIR}/R2_tile_qor.csv --tile_ref ${FLRPLN_STRONG2_INPUT_DIR}/R0-tile_reference.yaml --shaping_result ${UNIT_TEST_OUTPUT_DIR}/O0-hetero-shaping.txt --report ${UNIT_TEST_OUTPUT_DIR}/O1-hetero-floorplan_result.csv --floorplan_signal_distribution_network --signal_distribution_network_report_file ${UNIT_TEST_OUTPUT_DIR}/O2-floorplan_sig_distr_ntwk.xml --io_coordinates ${FLRPLN_STRONG2_INPUT_DIR}/R5-fpga_io_location.xml --io_metal_layer M2 --io_physical_location_report ${UNIT_TEST_OUTPUT_DIR}/O3-io_phy_loc_rpt.txt --tile_pin_location ${FLRPLN_STRONG2_INPUT_DIR}/R1-fabric_pin_location_tiles.xml --tile_pin_metal_layer M1 --tile_pin_physical_location_report ${UNIT_TEST_OUTPUT_DIR}/O4-tile_pin_phy_loc_rpt.txt --result_figure ${UNIT_TEST_OUTPUT_DIR}/O5-floorplan.png --figure_scale_factor 4 --dominant_tile tile_1__2_ --shrink_factor 0.9 --precision 3 --verbosity 2 || exit 1;
 
 reg_test:
-# Run regression tests. Use REG_TEST_TYPE=[checkin|basic|basic_alkaidL_only|strong_alkaidL|strong_alkaidC|strong_alkaidD] to select the testcases. Use REG_TEST_SELECT=[task1|task2|...] to select single task run. Enable dryrun mode using REG_TEST_DRYRUN=ON
-	${PYTHON_EXEC} ${PWD}/test/scripts/run_arcxpress_test.py \
-	--config ${PWD}/test/common/test_config.yaml \
-	--task ${PWD}/test/common/${REG_TEST_TYPE}_tests.yaml \
-	--arcxpress_root ${PWD} \
-	--arcxpress_build_path ${PWD}/build/core \
-	--arcxpress_boot_config ${ARCXPRESS_BOOT_CONFIG_FILE} \
+# Run regression tests. Use REG_TEST_TYPE=[mosofa_sky130_basic] to select the testcases. Use REG_TEST_SELECT=[task1|task2|...] to select single task run. Enable dryrun mode using REG_TEST_DRYRUN=ON
+	${PYTHON_EXEC} ${PWD}/test/ezreg/scripts/run_ezreg_test.py \
+	--path_config ${PWD}/test/common/path_config.yml \
+	--tut_config ${PWD}/test/common/tut_config.yml \
+	--task ${PWD}/test/common/${REG_TEST_TYPE}.yml \
+	--root_dir ${PWD} \
 	--task_select ${REG_TEST_SELECT} \
 	--new_thread_wait_time ${REG_TEST_NEW_THREAD_WAIT_TIME} \
 	--j ${NUM_JOBS} \
-	--output_html_file ${PWD}/test/reports/${REG_TEST_TYPE}_reg_test_status_report.html \
 	${REG_TEST_FLAGS} || exit 1;
 
 # Functions to extract comments from Makefiles

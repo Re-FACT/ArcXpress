@@ -11,7 +11,7 @@ ax_shell:
   runtime_script: run.ax
   options: "kargs"
   kargs:
-    - name: "--file [TCL]"
+    - name: "--file [runtime_script]"
     - name: "--boot_config [BOOT_CONFIG]"
     - name: "--root_path [ROOT_PATH]"
     - name: "--batch_execution"
