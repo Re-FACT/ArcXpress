@@ -24,10 +24,10 @@ std::string create_arcxpress_title() {
   title += std::string("\n");
   title += std::string("┌──────────────────────────────────────────────────────────┐  \n");
   title += std::string("│  ArcXpress eFPGA Design Tool Suites                      │  \n");
-  title += std:;string("├──────────────────────────────────────────────────────────┤  \n");
-  title += std:;string("│  Copyright (C) 2026 ReFACT                               │  \n");
-  title += std:;string("│  Licensed under the GNU General Public License v3.0      │  \n");
-  title += std:;string("└──────────────────────────────────────────────────────────┘  \n");
+  title += std::string("├──────────────────────────────────────────────────────────┤  \n");
+  title += std::string("│  Copyright (C) 2026 ReFACT                               │  \n");
+  title += std::string("│  Licensed under the GNU General Public License v3.0      │  \n");
+  title += std::string("└──────────────────────────────────────────────────────────┘  \n");
   title += std::string("\n");
 
   return title;
