@@ -15,46 +15,19 @@ std::string create_arcxpress_title() {
   std::string title;
 
   title += std::string("\n");
-  title += std::string("                        _                                        _ \n");
-  title += std::string("         /\\            | |        /\\                            | |\n");
-  title += std::string("        /  \\     _ __  | | __    /  \\     _ __     __ _    ___  | |\n");
-  title +=
-    std::string("       / /\\ \\   | '__| | |/ /   / /\\ \\   | '_ \\   / _` |  / _ \\ | |\n");
-  title += std::string("      / ____ \\  | |    |   <   / ____ \\  | | | | | (_| | |  __/ | |\n");
-  title += std::string(
-    "     /_/    \\_\\ |_|    |_|\\_\\ /_/    \\_\\ |_| |_|  \\__, |  \\___| |_|     \n");
-  title += std::string("                                                   __/ |           \n");
-  title += std::string("                                                  |___/            \n");
+  title += std::string("    ___              _  __                       \n");  
+  title += std::string("   /   |  ________  | |/ /____  ________  __________\n");
+  title += std::string("  / /| | / ___/ __ \\|   // __ \\/ ___/ _ \\/ ___/ ___/\n");
+  title += std::string(" / ___ |/ /  / /_/ /   |/ /_/ / /  /  __(__  |__  ) \n");
+  title += std::string("/_/  |_/_/   \\___//_/|_/ .___/_/   \\___/____/____/  \n");
+  title += std::string("                      /_/\n");
   title += std::string("\n");
-  title += std::string(
-    "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
-  title += std::string("\n");
-  title += std::string("                        Arcxpress FPGA Design Tool Suites\n");
-  title += std::string("             Copyright (C) 2026 by ReFACT\n");
-  title += std::string("                              Under GPL3 license\n");
-  title += std::string("\n");
-  title += std::string("The open-source software is provided on an \"AS IS\" basis\n");
-  title += std::string("\n");
-  title +=
-    std::string("ANY WARRANTIES, EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED\n");
-  title +=
-    std::string("OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ARE HEREBY DISCLAIMED\n");
-  title += std::string(
-    "AS: RAPID FLEX SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL\n");
-  title += std::string(
-    "EXEMPLARY, OR CONSEQUENTIAL DAMAGES INCLUDING BUT NOT LIMITED TO PROCUREMENT OF\n");
-  title +=
-    std::string("SUBSTITUTE GOODS OR SERVICES, LOSS OF USE OR DATA OR PROFITS, OR BUSINESS\n");
-  title +=
-    std::string("INTERRUPTION, NO MATTER HOW THEY ARE CAUSED IN USING OF THIS SOFRWARE, ON ANY\n");
-  title +=
-    std::string("THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT ARISING IN\n");
-  title +=
-    std::string("ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF\n");
-  title += std::string("SUCH DAMAGE.\n");
-  title += std::string("\n");
-  title += std::string(
-    "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+  title += std::string("┌──────────────────────────────────────────────────────────┐  \n");
+  title += std::string("│  ArcXpress eFPGA Design Tool Suites                      │  \n");
+  title += std:;string("├──────────────────────────────────────────────────────────┤  \n");
+  title += std:;string("│  Copyright (C) 2026 ReFACT                               │  \n");
+  title += std:;string("│  Licensed under the GNU General Public License v3.0      │  \n");
+  title += std:;string("└──────────────────────────────────────────────────────────┘  \n");
   title += std::string("\n");
 
   return title;
