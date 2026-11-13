@@ -7,6 +7,8 @@ arch_setup:
     path: "[TEMPLATE_ROOT]/arch_setup_run_tmpl.ax" # Template path has a root from the configuration file 
     single_line_replaced_variables: 
       project_config_home: "[current_subtask_root]"
+  pass_checks:
+    - "[REQ_ROOT]/log_error_keywords.yaml"
 arch_setup:
   enable: true # If set false, the subtask will not be added
   tool_under_test: ax_shell # Use the tool configuration file setting. Must be a valid entity name
@@ -16,3 +18,5 @@ arch_setup:
       project_config_home: "[current_subtask_root]"
   dep:
     - "arch_step"
+  pass_checks:
+    - "[REQ_ROOT]/log_error_keywords.yaml"
