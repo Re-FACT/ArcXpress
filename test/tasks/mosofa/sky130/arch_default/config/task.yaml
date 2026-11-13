@@ -5,6 +5,8 @@ arch_setup:
   tool_under_test: ax_shell # Use the tool configuration file setting. Must be a valid entity name
   template:
     path: "[TEMPLATE_ROOT]/arch_setup_run_tmpl.ax" # Template path has a root from the configuration file 
+    multiple_line_replaced_variables: 
+      dummy: ""
     single_line_replaced_variables: 
       project_config_home: "[current_subtask_root]"
   pass_checks:
@@ -14,6 +16,8 @@ arch_setup:
   tool_under_test: ax_shell # Use the tool configuration file setting. Must be a valid entity name
   template:
     path: "[TEMPLATE_ROOT]/arch_setup_run_tmpl.ax" # Template path has a root from the configuration file 
+    multiple_line_replaced_variables: 
+      dummy: ""
     single_line_replaced_variables: 
       project_config_home: "[current_subtask_root]"
   dep:
