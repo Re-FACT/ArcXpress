@@ -100,13 +100,11 @@
     <openfpga_error_conf>${ROOT_PATH}/etc/device/MOSOFA/flow_conf/log_error_keywords.xml</openfpga_error_conf>
     <openfpga_stats_conf>${ROOT_PATH}/etc/device/MOSOFA/flow_conf/openfpga_log_keywords.xml</openfpga_stats_conf>
     <!-- Only applicable to ultimate fabric -->
-    <arch_timing pdk_template="t22ulp" file_template="tt_25C_v0p9">
+    <arch_timing pdk_template="sky130" file_template="tt_25C_v0p9">
       <pdk name="sky130">
-        <file type="tt_25C_v1p1">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_tt_25C_v1p1.yml</file>
-        <file type="tt_25C_v0p9">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_tt_25C_v0p9.yml</file>
-        <file type="tt_25C_v1p0">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_tt_25C_v1p0.yml</file>
-        <file type="ffg_25C_v1p1">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_ffg_25C_v1p1.yml</file>
-        <file type="ffg_ccs_25C_v1p1">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_ffg_ccs_25C_v1p1.yml</file>
+        <file type="tt_025C_1v80">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_tt_025C_1v80.yml</file>
+        <file type="ss_n40C_1v35">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_ss_n40C_1v35.yml</file>
+        <file type="ff_100C_1v95">${ROOT_PATH}/etc/device/MOSOFA/arch/ultimate/sky130_timing/arch_timing_ff_100C_1v95.yml</file>
       </pdk>
     </arch_timing>
     <dp>
