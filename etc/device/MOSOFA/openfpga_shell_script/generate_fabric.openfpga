@@ -1,0 +1,91 @@
+# This script is designed to generate fabric Verilog netlists
+# with a fixed device layout
+# It will only output netlists to be used by backend tools,
+# i.e., Synopsys ICC2, including
+#   - Verilog netlists
+#   - fabric hierarchy description for ICC2's hierarchical flow
+#
+vpr ${VPR_ARCH_FILE} ${VPR_TESTBENCH_BLIF} \
+  --pack --place --route --analysis \
+  --clock_modeling ideal \
+  --device ${OPENFPGA_VPR_DEVICE_LAYOUT} \
+  --route_chan_width ${OPENFPGA_VPR_ROUTE_CHAN_WIDTH} \
+  --place_delay_model delta \
+  --read_placement_delay_lookup ${OPENFPGA_VPR_PLACEMENT_DELAY_LOOKUP_FILE} \
+  --read_router_lookahead ${OPENFPGA_VPR_ROUTER_LOOKAHEAD_FILE} \
+  --read_rr_graph ${OPENFPGA_VPR_RR_GRAPH_FILE} \
+  --skip_sync_clustering_and_routing_results on \
+  --absorb_buffer_luts off
+
+# Read OpenFPGA architecture definition
+read_openfpga_arch -f ${OPENFPGA_ARCH_FILE}
+
+# Read OpenFPGA simulation settings
+read_openfpga_simulation_setting -f ${OPENFPGA_SIM_SETTING_FILE}
+
+# Read OpenFPGA clock architecture
+read_openfpga_clock_arch -f ${OPENFPGA_CLOCK_ARCH_FILE}
+
+# Append clock network to vpr's routing resource graph
+append_clock_rr_graph --verbose
+
+# Annotate the OpenFPGA architecture to VPR data base
+# to debug use --verbose options
+link_openfpga_arch --sort_gsb_chan_node_in_edges --allow_gsb_dangling_opin 
+
+# Route all the clocks
+route_clock_rr_graph --pin_constraints_file ${OPENFPGA_PIN_CONSTRAINTS_FILE}
+
+# Build the module graph
+#  - Enabled compression on routing architecture modules
+#  - Disable pin duplication on grid modules due to our PD strategy
+# TODO: Bring back fabric key
+build_fabric --compress_routing --load_fabric_key ${EXTERNAL_FABRIC_KEY_FILE} --group_tile ${OPENFPGA_TILE_CONFIG_FILE} --group_config_block --name_module_using_index #--verbose
+
+# Add a fpga core between fpga top and the underlying modules
+add_fpga_core_to_fabric --instance_name fpga_core_inst --verbose
+
+# Rename modules with a given rule
+rename_modules --file ${OPENFPGA_RENAME_MODULE_FILE}
+
+# Apply renaming
+
+# Output GSB file
+#write_gsb_to_xml --file ${OPENFPGA_RRGSB_DIR} --unique
+
+# Output mux modules 
+write_fabric_hierarchy --file ${OPENFPGA_MUX_MODULE_FILE} --depth 1 --module (grid|cbx|cby|sb)* --filter *mux*_size([0-9]+) --verbose --exclude_empty_modules
+# Output config mem modules 
+write_fabric_hierarchy --file ${OPENFPGA_CONFIG_MEM_MODULE_FILE} --depth 1 --module (grid|cbx|cby|sb)* --filter *config_group_mem_size([0-9]+) --verbose --exclude_empty_modules
+
+# Output references
+report_reference --file ${OPENFPGA_TILE_REFERENCE_FILE} --module fpga_core --no_time_stamp --verbose
+
+# Write the fabric hierarchy of module graph to a file
+# This is used by hierarchical PnR flows
+write_fabric_hierarchy --file ${OPENFPGA_FABRIC_HIERARCHY_FILE} --depth 3
+
+# Write fabric pin physical location file to drive PnR flows
+write_fabric_pin_physical_location --file ${OPENFPGA_FABRIC_PIN_PHY_LOC_FILE} --module *tile* --no_time_stamp
+
+# Write the Verilog netlist for FPGA fabric
+#  - Enable the use of explicit port mapping in Verilog netlist
+#    which is required by Synopsys ICC2 parser
+# Do NOT output any time stamp in output files, which is eaiser for version control
+write_fabric_verilog --file ${OPENFPGA_VERILOG_OUTPUT_DIR} \
+  --constant_undriven_inputs bit0 \
+  --explicit_port_mapping \
+  --default_net_type wire \
+  --no_time_stamp \
+  --use_relative_path \
+  --verbose
+
+## Output bitstream distribution
+#repack 
+#build_architecture_bitstream
+#build_fabric_bitstream
+#write_fabric_bitstream --format xml --file ${OPENFPGA_BITSTREAM_BASE_FILE} --no_time_stamp --trim_path --path_only
+#report_bitstream_distribution --file ${OPENFPGA_BITSTREAM_DISTRIBUTION_FILE} --no_time_stamp
+
+# Finish and exit OpenFPGA
+exit

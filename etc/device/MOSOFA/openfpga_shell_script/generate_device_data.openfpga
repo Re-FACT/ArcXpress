@@ -1,0 +1,17 @@
+# This script is designed to generate device data which can be reused many times by other flows
+#
+vpr ${VPR_ARCH_FILE} ${VPR_TESTBENCH_BLIF} \
+  --pack --place --route --analysis \
+  --clock_modeling ideal \
+  --device ${OPENFPGA_VPR_DEVICE_LAYOUT} \
+  --route_chan_width ${OPENFPGA_VPR_ROUTE_CHAN_WIDTH} \
+  --place_delay_model delta \
+  --write_placement_delay_lookup ${OPENFPGA_VPR_PLACEMENT_DELAY_LOOKUP_FILE} \
+  --router_lookahead map \
+  --write_router_lookahead ${OPENFPGA_VPR_ROUTER_LOOKAHEAD_FILE} \
+  --write_rr_graph ${OPENFPGA_VPR_RR_GRAPH_FILE} \
+  --skip_sync_clustering_and_routing_results on \
+  --absorb_buffer_luts off
+
+# Finish and exit OpenFPGA
+exit

@@ -1,0 +1,53 @@
+# This script is designed to generate fabric Verilog netlists
+# with a fixed device layout
+# It will only output netlists to be used by backend tools,
+# i.e., Synopsys ICC2, including
+#   - Verilog netlists
+#   - fabric hierarchy description for ICC2's hierarchical flow
+#
+vpr ${VPR_ARCH_FILE} ${VPR_TESTBENCH_BLIF} \
+  --pack --place --route --analysis \
+  --clock_modeling ideal \
+  --device ${OPENFPGA_VPR_DEVICE_LAYOUT} \
+  --route_chan_width ${OPENFPGA_VPR_ROUTE_CHAN_WIDTH} \
+  --place_delay_model delta \
+  --read_placement_delay_lookup ${OPENFPGA_VPR_PLACEMENT_DELAY_LOOKUP_FILE} \
+  --read_router_lookahead ${OPENFPGA_VPR_ROUTER_LOOKAHEAD_FILE} \
+  --read_rr_graph ${OPENFPGA_VPR_RR_GRAPH_FILE} \
+  --skip_sync_clustering_and_routing_results on \
+  --absorb_buffer_luts off
+
+# Read OpenFPGA architecture definition
+read_openfpga_arch -f ${OPENFPGA_ARCH_FILE}
+
+# Read OpenFPGA simulation settings
+read_openfpga_simulation_setting -f ${OPENFPGA_SIM_SETTING_FILE}
+
+# Read OpenFPGA clock architecture
+read_openfpga_clock_arch -f ${OPENFPGA_CLOCK_ARCH_FILE}
+
+# Append clock network to vpr's routing resource graph
+append_clock_rr_graph
+
+# Annotate the OpenFPGA architecture to VPR data base
+# to debug use --verbose options
+link_openfpga_arch --sort_gsb_chan_node_in_edges --allow_gsb_dangling_opin 
+
+# Build the module graph
+#  - Enabled compression on routing architecture modules
+#  - Disable pin duplication on grid modules due to our PD strategy
+#  - Please do not use the naming here, because fabric key relies on the original names!!!
+build_fabric --compress_routing --group_tile ${OPENFPGA_TILE_CONFIG_FILE} --group_config_block #--name_module_using_index  #--verbose
+write_fabric_key --file ${REF_FABRIC_KEY_FILE} 
+# Add a fpga core between fpga top and the underlying modules
+add_fpga_core_to_fabric --instance_name fpga_core_inst --verbose
+#rename_modules --file ${CRAFTED_MODULE_NAME_FILE}
+
+# Output references
+#report_reference --file ${OPENFPGA_TILE_REFERENCE_FILE} --module fpga_core --no_time_stamp --verbose
+
+# Write the fabric hierarchy of module graph to a file, used by auto module renaming for tiles
+#write_fabric_hierarchy --file ${OPENFPGA_FABRIC_HIERARCHY_FILE} --depth 3
+
+# Finish and exit OpenFPGA
+exit

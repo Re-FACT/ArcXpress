@@ -1,0 +1,79 @@
+#########################################
+# VPR architecture design variables
+#########################################
+# Routing architecture timing parameters
+L1X_MUX_DELAY: 632.4e-12
+L2X_MUX_DELAY: 1129.9e-12
+L4X_MUX_DELAY: 1584.2e-12
+L1Y_MUX_DELAY: 632.4e-12
+L2Y_MUX_DELAY: 1129.9e-12
+L4Y_MUX_DELAY: 1584.2e-12
+CB_MUX_DELAY: 764.0e-12
+CK_MUX_DELAY: 1121.9e-12
+L1_WIRE_R: 0
+L1_WIRE_C: 0.0e-12
+L2_WIRE_R: 0
+L2_WIRE_C: 0.0e-12
+L4_WIRE_R: 0
+L4_WIRE_C: 0.0e-12
+
+#########################################
+# I/O block timing parameters
+IO_INPAD_MAX_DELAY: 881.0e-12
+IO_INPAD_MIN_DELAY: 881.0e-12
+IO_OUTPAD_MAX_DELAY: 398.1e-12
+IO_OUTPAD_MIN_DELAY: 398.1e-12
+# Took from column 2 in std cell lib file.
+# Averaged over rising and falling numbers
+IO_LATCH_TSETUP: 135.4e-12
+IO_LATCH_THOLD: 116.8e-12
+IO_LATCH_CLK2Q_MAX: 95.9e-12
+IO_LATCH_CLK2Q_MIN: 95.9e-12
+IO_FF_TSETUP: 135.4e-12
+IO_FF_THOLD: 116.8e-12
+IO_FF_CLK2Q: 95.9e-12
+IO_O2O_MAX_DELAY: 206.6e-12
+IO_O2O_MIN_DELAY: 206.6e-12
+IO_FF2O_MAX_DELAY: 834.6e-12
+IO_FF2O_MIN_DELAY: 834.6e-12
+IO_I2I_MAX_DELAY: 266.4e-12
+IO_I2I_MIN_DELAY: 266.4e-12
+IO_FF2I_MAX_DELAY: 254.9e-12
+IO_FF2I_MIN_DELAY: 254.9e-12
+IO_CLK_MAX_DELAY: 262.0e-12
+IO_CLK_MIN_DELAY: 262.0e-12
+IO_RST_MAX_DELAY: 318.6e-12
+IO_RST_MIN_DELAY: 318.6e-12
+
+#########################################
+# CLB timing parameters
+# Took from column 2 in std cell lib file.
+# Averaged over rising and falling numbers
+FF_T_SETUP: 135.4e-12
+FF_T_HOLD: 116.8e-12
+FF_T_CLK2Q: 95.9e-12
+# This delay is actually the output MUX from LUT4 output to FF
+LUT_OUT0_TO_FF_D_DELAY: 439.6e-12
+# This delay is actually the output MUX from LUT3 output to FF
+LUT_OUT1_TO_FF_D_DELAY: 439.6e-12
+LUT_OUT0_TO_FLE_OUT_DELAY: 416.2e-12
+FF0_Q_TO_FLE_OUT_DELAY: 416.2e-12
+LUT_OUT1_TO_FLE_OUT_DELAY: 520.8e-12
+FF1_Q_TO_FLE_OUT_DELAY: 416.2e-12
+# LUT4 timing is from in0 to stage3 output
+LUT4_DELAY: 662.7e-12
+LUT4_OUT_TO_FLE_OUT_DELAY: 340.0e-12
+# LUT5 timing is from in0 to out
+LUT5_DELAY: 744.7e-12
+LUT5_OUT_TO_FLE_OUT_DELAY: 416.2e-12
+# Arithmetic mode
+ALUT4_DELAY: 662.7e-12
+ADDER_A2S_DELAY: 49.5e-12
+ADDER_B2S_DELAY: 47.7e-12
+ADDER_C2S_DELAY: 43.2e-12
+ADDER_A2C_DELAY: 33.9e-12
+ADDER_B2C_DELAY: 31.8e-12
+ADDER_C2C_DELAY: 130.9e-12
+# Local routing delay
+CLB_CLK_MUX_DELAY: 0.0e-12
+CLB_RST_MUX_DELAY: 0.0e-12

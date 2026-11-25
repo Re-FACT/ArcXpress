@@ -1,0 +1,89 @@
+# This script is designed to generate testbenches based on
+# - given VPR results: packing, placement, routing. 
+vpr ${VPR_ARCH_FILE} ${VPR_TESTBENCH_BLIF} \
+  --clock_modeling ideal \
+  --device ${OPENFPGA_VPR_DEVICE_LAYOUT} \
+  --route_chan_width 64 \
+  --circuit_format eblif \
+  --analysis \
+  --net_file ${VPR_NET_FILE} \
+  --place_file ${VPR_PLACE_FILE} \
+  --route_file ${VPR_ROUTE_FILE} \
+  --place_delay_model delta \
+  --read_placement_delay_lookup ${OPENFPGA_VPR_PLACEMENT_DELAY_LOOKUP_FILE} \
+  --read_router_lookahead ${OPENFPGA_VPR_ROUTER_LOOKAHEAD_FILE} \
+  --read_rr_graph ${OPENFPGA_VPR_RR_GRAPH_FILE} \
+  --sdc_file ${OPENFPGA_VPR_SDC} \
+  --full_stats on \
+  --absorb_buffer_luts on  \
+  --timing_report_detail detailed \
+  --timing_report_npaths 100 \
+  --skip_sync_clustering_and_routing_results on \
+  --verify_file_digests off \
+  --constant_net_method route 
+
+# Read OpenFPGA architecture definition
+read_openfpga_arch -f ${OPENFPGA_ARCH_FILE}
+
+# Read OpenFPGA simulation settings
+read_openfpga_simulation_setting -f ${OPENFPGA_SIM_SETTING_FILE}
+
+# Read OpenFPGA clock architecture
+read_openfpga_clock_arch -f ${OPENFPGA_CLOCK_ARCH_FILE}
+
+# Append clock network to vpr's routing resource graph
+append_clock_rr_graph
+
+# Annotate the OpenFPGA architecture to VPR data base
+# to debug use --verbose options
+link_openfpga_arch --sort_gsb_chan_node_in_edges --allow_gsb_dangling_opin  
+
+# Check and correct any naming conflicts in the BLIF netlists
+check_netlist_naming_conflict --fix --report ./netlist_renaming.xml
+
+# Apply fix-up to clustering nets based on routing results
+pb_pin_fixup --verbose #--map_global_net_to_msb
+
+# Route clock based on clock network definition
+route_clock_rr_graph --disable_unused_trees --disable_unused_spines --pin_constraints_file ${OPENFPGA_FINAL_VPR_PIN_CONSTRAINTS_FILE}
+
+# Apply fix-up to Look-Up Table truth tables based on packing results
+lut_truth_table_fixup
+
+# Build the module graph
+#  - Enabled compression on routing architecture modules
+build_fabric --compress_routing --load_fabric_key ${EXTERNAL_FABRIC_KEY_FILE} --frame_view --group_tile ${OPENFPGA_GROUP_TILE_CONFIG_FILE} --group_config_block --name_module_using_index #--verbose
+
+# Add a fpga core between fpga top and the underlying modules
+add_fpga_core_to_fabric --instance_name fpga_core_inst --verbose
+
+# Rename modules with a given rule
+rename_modules --file ${OPENFPGA_RENAME_MODULE_FILE}
+
+# Build bitstream database but has not outputs, which is required by testbench writer functions
+repack 
+build_architecture_bitstream #--write_file arch_bitstream.xml
+build_fabric_bitstream
+
+# Write the full testbench for FPGA fabric
+# - with self-checking feature
+# - Do NOT output any time stamp which is easier for version control
+# - Do not enable yet `--include_signal_init` which is necessary in some cases
+# - Force to use relative path which is easier for HDL simulators
+# - Do not enable yet `--explicit_port_mapping` which causes errors for benchmarks containing bus ports
+write_full_testbench --file ${OPENFPGA_FULL_TESTBENCH_DIR} \
+   --reference_benchmark_file_path ${REFERENCE_VERILOG} \
+   --fabric_netlist_file_path fabric_netlists.v \
+   --bitstream ${OPENFPGA_BITSTREAM_BIT_FILE} \
+   --pin_constraints_file ${OPENFPGA_FULL_PIN_CONSTRAINTS_FILE} \
+   --bus_group_file ${OPENFPGA_BUS_GROUP_FILE} \
+   --use_relative_path \
+   --default_net_type wire \
+   --explicit_port_mapping \
+   --no_time_stamp
+
+# Finish and exit OpenFPGA
+exit
+
+# Note :
+# To run verification at the end of the flow maintain source in ./SRC directory
