@@ -24,12 +24,6 @@ namespace arcxpress {
  *******************************************************************/
 int create_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                 const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arcxpress_ctx.license_manager().checkOut(
-        arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-#endif
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
   int verbosity = 0;
@@ -91,12 +85,6 @@ int create_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
  *******************************************************************/
 int setup_arch(ArcxpressContext& arcxpress_ctx, const openfpga::Command& cmd,
                const openfpga::CommandContext& cmd_ctx) {
-#ifdef ARCXPRESS_LICENSED_BUILD
-  if (!arcxpress_ctx.license_manager().checkOut(
-        arcxpress::LicenseManager::LicensedFeatureName::EVAL)) {
-    return openfpga::CMD_EXEC_FATAL_ERROR;
-  }
-#endif
   openfpga::CommandOptionId opt_run = cmd.option("run");
   openfpga::CommandOptionId opt_verbosity = cmd.option("verbosity");
   int verbosity = 0;
