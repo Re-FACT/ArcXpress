@@ -26,6 +26,14 @@ int add_pi_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
     va_layout.add_pb_type_port(pb_type_name, "a2f_o", arcxpress::VprArchLayout::e_port_type::OUTPUT)
       ? 0
       : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "clk", arcxpress::VprArchLayout::e_port_type::CLOCK)
+      ? 0
+      : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "reset", arcxpress::VprArchLayout::e_port_type::RESET)
+      ? 0
+      : 1;
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
@@ -38,6 +46,14 @@ int add_po_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
     va_layout.create_pb_type(pb_type_name, arcxpress::VprArchLayout::e_subtile_type::PI) ? 0 : 1;
   num_err +=
     va_layout.add_pb_type_port(pb_type_name, "f2a_i", arcxpress::VprArchLayout::e_port_type::INPUT)
+      ? 0
+      : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "clk", arcxpress::VprArchLayout::e_port_type::CLOCK)
+      ? 0
+      : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "reset", arcxpress::VprArchLayout::e_port_type::RESET)
       ? 0
       : 1;
 

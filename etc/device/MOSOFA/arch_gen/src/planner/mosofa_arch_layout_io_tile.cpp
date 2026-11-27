@@ -36,9 +36,22 @@ static int add_io_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                ? 0
                : 1;
   e_side pi_pin_side = SideManager(io_side).get_opposite();
+  // Currently all the global signal should access from the right side of I/Os. However, at the right side of eFPGA, the access point should be adjusted to the left side
+  e_side pi_gclk_pin_side = RIGHT;
+  if (io_side == RIGHT) {
+    pi_gclk_pin_side = LEFT;
+  }
   for (size_t ipi = 0; ipi < num_pi; ++ipi) {
     num_err +=
       va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "a2f_o", 0, pi_pin_side)
+        ? 0
+        : 1;
+    num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "clk", 0, pi_gclk_pin_side)
+        ? 0
+        : 1;
+    num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "reset", 0, pi_gclk_pin_side)
         ? 0
         : 1;
   }
@@ -52,9 +65,22 @@ static int add_io_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                ? 0
                : 1;
   e_side po_pin_side = SideManager(io_side).get_opposite();
+  // Currently all the global signal should access from the right side of I/Os. However, at the right side of eFPGA, the access point should be adjusted to the left side
+  e_side po_gclk_pin_side = RIGHT;
+  if (io_side == RIGHT) {
+    po_gclk_pin_side = LEFT;
+  }
   for (size_t ipo = 0; ipo < num_po; ++ipo) {
     num_err +=
       va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "f2a_i", 0, po_pin_side)
+        ? 0
+        : 1;
+    num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "clk", 0, po_gclk_pin_side)
+        ? 0
+        : 1;
+    num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "reset", 0, po_gclk_pin_side)
         ? 0
         : 1;
   }
