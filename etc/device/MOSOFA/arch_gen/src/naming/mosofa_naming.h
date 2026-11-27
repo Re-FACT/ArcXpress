@@ -23,7 +23,10 @@ typedef std::tuple<std::string, std::string> PhyPbInfo;
 inline const std::map<std::string, std::string> OP2PHY_PB_TYPE_MAP = {
   {OPERATING_BLE3_FF_NAME, PHYSICAL_REGULAR_SCFF_NAME},
   {OPERATING_BLE4_FF_NAME, PHYSICAL_REGULAR_SCFF_NAME},
-  {OPERATING_SREG_FF_NAME, PHYSICAL_REGULAR_SCFF_NAME}};
+  {OPERATING_SREG_FF_NAME, PHYSICAL_REGULAR_SCFF_NAME},
+  {OPERATING_PI_SCFF_NAME, PHYSICAL_PI_SCFF_NAME},
+  {OPERATING_PO_SCFF_NAME, PHYSICAL_PO_SCFF_NAME}
+};
 
 std::string gen_latch_pb_name(const std::string& prefix);
 
