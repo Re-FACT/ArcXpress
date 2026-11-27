@@ -79,7 +79,7 @@ static int assemble_pi_complex_block_physical_mode(
   const PhyPbInfo& pad_pb_name, const PhyPbInfo& ff_pb_name, const bool& verbose) {
   int num_err = 0;
 
-  VTR_LOGV(verbose, "Assemble physical mode for PO '%s'...\n", top_pb.c_str());
+  VTR_LOGV(verbose, "Assemble physical mode for PI '%s'...\n", top_pb.c_str());
 
   /* physical modes and its child pb_type */
   std::string pb_mode = arcxpress::gen_physical_mode_name(top_pb);
@@ -182,13 +182,15 @@ static int assemble_pi_complex_block_operating_modes(
   /* Build child pb type */
   std::string ff_pb = op_ff_name;
   num_err += add_pi_ff_pb_type(arch_gen, ff_pb, verbose);
+  std::string pad_pb = op_pad_name;
+  /* Bind to physical pb_type */
+  num_err += arch_gen.set_pb_type_physical_pb_type(pad_pb, phy_pad_name) ? 0 : 1;
 
   /* Operating mode detailed pb_type tree */
   std::string op_pb_default_mode = arcxpress::gen_default_mode_name(op_pb);
   num_err += arch_gen.add_pb_type_mode(op_pb, op_pb_default_mode) ? 0 : 1;
-  std::string pad_pb = op_pad_name;
+  num_err += arch_gen.add_pb_type_to_mode(op_pb_default_mode, ff_pb, 1) ? 0 : 1;
   num_err += arch_gen.add_pb_type_to_mode(op_pb_default_mode, pad_pb, 1) ? 0 : 1;
-  num_err += arch_gen.set_pb_type_physical_pb_type(pad_pb, phy_pad_name) ? 0 : 1;
 
   /* Interconnect */
   num_err +=
