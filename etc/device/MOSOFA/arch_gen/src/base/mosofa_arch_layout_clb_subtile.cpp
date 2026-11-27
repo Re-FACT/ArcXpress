@@ -78,6 +78,24 @@ int add_clb_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
+int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
+  int num_err = 0;
+
+  std::string pb_type_name("ckbuf");
+  num_err +=
+    va_layout.create_pb_type(pb_type_name, arcxpress::VprArchLayout::e_subtile_type::CKBUF) ? 0 : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "in", arkangel::VprArchLayout::e_port_type::INPUT) ? 0
+                                                                                                : 1;
+  num_err +=
+    va_layout.add_pb_type_port(pb_type_name, "out", arkangel::VprArchLayout::e_port_type::OUTPUT)
+      ? 0
+      : 1;
+  num_err += va_layout.set_pb_type_port_fc(pb_type_name, "out", 0.) ? 0 : 1;
+
+  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+}
+
 int add_clb_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                        const ArchPlanner& arch_planner,
                                        const std::string& tile_name) {

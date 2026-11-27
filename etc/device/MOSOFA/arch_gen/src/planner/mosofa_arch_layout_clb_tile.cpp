@@ -10,6 +10,7 @@
 #include "add_hidden_primitive_pb_types.h"
 #include "command_exit_codes.h"
 #include "mosofa_arch_layout_clb_subtile.h"
+#include "mosofa_arch_layout_ckbuf_subtile.h"
 #include "mosofa_arch_layout_clb_tile.h"
 #include "mosofa_constants.h"
 #include "vpr_arch_layout.h"
@@ -25,8 +26,10 @@ int add_clb_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
 
   std::string tile_name("clb");
   num_err += add_clb_pb_type_to_vpr_arch_layout(va_layout, arch_plan);
-  num_err += add_clb_subtile_to_vpr_arch_layout(va_layout, arch_plan, tile_name);
+  num_err += add_ckbuf_pb_type_to_vpr_arch_layout(va_layout, arch_plan);
   num_err += va_layout.create_tile(tile_name, arcxpress::VprArchLayout::e_tile_type::CLB) ? 0 : 1;
+  num_err += add_clb_subtile_to_vpr_arch_layout(va_layout, arch_plan, tile_name);
+  num_err += add_ckbuf_subtile_to_vpr_arch_layout(va_layout, arch_plan, tile_name);
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
