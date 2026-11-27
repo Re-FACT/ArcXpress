@@ -96,6 +96,7 @@ static int assemble_pi_complex_block_physical_mode(
   num_err += arch_gen.add_pb_type_to_mode(phy_pb_default_mode, pad_pb, 1) ? 0 : 1;
   num_err += arch_gen.set_pb_type_circuit_model(pad_pb, std::get<1>(pad_pb_name)) ? 0 : 1;
   std::string ff_pb = std::get<0>(ff_pb_name);
+  VTR_LOG("Adding pb_type '%s' to mode '%s'\n", ff_pb.c_str(), phy_pb_default_mode.c_str());
   num_err += arch_gen.add_pb_type_to_mode(phy_pb_default_mode, ff_pb, 1) ? 0 : 1;
   num_err += arch_gen.set_pb_type_circuit_model(ff_pb, std::get<1>(ff_pb_name)) ? 0 : 1;
 

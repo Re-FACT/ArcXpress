@@ -831,7 +831,7 @@ bool ArchGen::auto_wire_control_signals_pb_type_mode_child(const std::string& mo
     return false;
   }
   if (child_pbs(mode_name, child_pb_type).size() != 1) {
-    VTR_LOG_ERROR("Require the only 1 child pb_type '%s' in the mode '%s', while multiple",
+    VTR_LOG_ERROR("Require the only 1 child pb_type '%s' in the mode '%s', while multiple is found\n",
                   child_pb_type.c_str(), mode_name.c_str());
     return false;
   }
