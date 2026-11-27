@@ -429,7 +429,7 @@ bool ArchGen::add_pb_type_setup_delay(const std::string& name, const openfpga::B
     }
   }
   if (existed) {
-    VTR_LOG_WARN("Skip to add timing info as it is already defined!\n");
+    //VTR_LOG_WARN("Skip to add timing info as it is already defined!\n");
     return true;
   }
 

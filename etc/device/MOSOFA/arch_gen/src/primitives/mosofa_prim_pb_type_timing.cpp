@@ -110,6 +110,19 @@ int add_primitive_pb_type_timing(arcxpress::ArchGen& arch_gen, const bool& verbo
       num_err += add_dff_primitive_pb_type_timing(arch_gen, pmtv.name());
     }
   }
+  for (auto scff : ALL_PI_SCFF_NAMES) {
+    FracffGen fff_gen(scff);
+    for (auto pmtv : fff_gen.vpr_arch_primitives(true)) {
+      num_err += add_dff_primitive_pb_type_timing(arch_gen, pmtv.name());
+    }
+  }
+  for (auto scff : ALL_PO_SCFF_NAMES) {
+    FracffGen fff_gen(scff);
+    for (auto pmtv : fff_gen.vpr_arch_primitives(true)) {
+      num_err += add_dff_primitive_pb_type_timing(arch_gen, pmtv.name());
+    }
+  }
+
   VTR_LOGV(verbose, "Done\n");
 
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
