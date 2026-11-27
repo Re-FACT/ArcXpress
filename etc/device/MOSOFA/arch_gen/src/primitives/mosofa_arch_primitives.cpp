@@ -173,7 +173,7 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
   }
   VTR_LOG("Adding PI Flip-flop models\n");
   std::vector<std::string> pi_scff_names;
-  for (auto curr_scff : PI_SCFF_NAMES) {
+  for (auto curr_scff : ALL_PI_SCFF_NAMES) {
     pi_scff_names.push_back(std::string(curr_scff));
   }
   num_err += add_vpr_arch_primitive_ff(arch_gen, pi_scff_names, std::string(PHYSICAL_PI_SCFF_NAME));
@@ -182,7 +182,7 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
   }
   VTR_LOG("Adding PO Flip-flop models\n");
   std::vector<std::string> po_scff_names;
-  for (auto curr_scff : PO_SCFF_NAMES) {
+  for (auto curr_scff : ALL_PO_SCFF_NAMES) {
     po_scff_names.push_back(std::string(curr_scff));
   }
   num_err += add_vpr_arch_primitive_ff(arch_gen, po_scff_names, std::string(PHYSICAL_PO_SCFF_NAME));
