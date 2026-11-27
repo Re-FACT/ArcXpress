@@ -74,7 +74,7 @@
   </builtin_corner_map>
   <arch_template route_chan_width="64">
     <arch_generator>
-      <file type="build">${ROOT_PATH}/build/etc/device/MOSOFA/utils/mosofa_arch_tmpl_gen</file>
+      <file type="build">${ROOT_PATH}/build/etc/device/MOSOFA/arch_gen/mosofa_arch_tmpl_gen</file>
       <file type="install">${ROOT_PATH}/etc/arch_gen/mosofa_arch_tmpl_gen</file>
     </arch_generator>
     <io_settings>
@@ -123,7 +123,7 @@
     </ultimate>
     <netlist_flags>
       <pdk name="sky130">
-        <flag name="S40ULP_7T">1</flag>
+        <flag name="SKY130">1</flag>
       </pdk>
       <pdk name="t22ulp">
         <flag name="T22ULP">1</flag>

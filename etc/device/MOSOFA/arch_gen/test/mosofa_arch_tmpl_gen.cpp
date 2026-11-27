@@ -7,8 +7,8 @@
 #include "mosofa_arch_layout.h"
 
 int main(int argc, char** argv) {
-  /* MOSOFA does not support programmable global network */
-  bool support_gntwk = false;
+  /* MOSOFA supports programmable global network */
+  bool support_gntwk = true;
   /*************************************
    * General purpose interface API for architecture generator
    * Instantiate the interface with the command name
