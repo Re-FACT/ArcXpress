@@ -93,7 +93,7 @@ std::string FracffGen::wen_type2str(const FracffGen::e_wen_type& type, const boo
                    wen_type_all2str().c_str());
     return std::string();
   }
-  return std::string(CLK_TYPE_STRING_[size_t(type)]);
+  return std::string(WEN_TYPE_STRING_[size_t(type)]);
 }
 
 std::string FracffGen::wen_type2mode_bit(const FracffGen::e_wen_type& type,

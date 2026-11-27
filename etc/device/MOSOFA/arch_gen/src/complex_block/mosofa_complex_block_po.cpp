@@ -59,6 +59,7 @@ static int add_po_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff
   /* Add mmff primitive */
   for (auto pmtv : fff_gen.vpr_arch_primitives(false)) {
     std::string pb_mode = arcxpress::gen_pb_mode_name(ff_pb, pmtv.name());
+    VTR_LOG("pb_mode name to add: %s\n", pb_mode.c_str());
     num_err += arch_gen.add_pb_type_mode(ff_pb, pb_mode) ? 0 : 1;
     num_err += arch_gen.add_pb_type_to_mode(pb_mode, pmtv.pb_type_name(tag), 1) ? 0 : 1;
     num_err += wire_ff_pb_type_mode(arch_gen, pb_mode, pmtv.pb_type_name(tag), false, true);
