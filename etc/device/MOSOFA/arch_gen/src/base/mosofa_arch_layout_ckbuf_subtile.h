@@ -13,8 +13,7 @@
  *******************************************************************/
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
-                                       const ArchPlanner& arch_planner);
+int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout);
 
 int add_ckbuf_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                        const ArchPlanner& arch_planner,

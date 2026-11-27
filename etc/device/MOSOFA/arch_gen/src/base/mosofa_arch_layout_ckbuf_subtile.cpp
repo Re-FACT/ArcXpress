@@ -34,7 +34,7 @@ int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-int add_clb_ckbuf_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
+int add_ckbuf_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                           const std::string& tile_name,
                                           const ArchPlanner& arch_plan) {
   int num_err = 0;

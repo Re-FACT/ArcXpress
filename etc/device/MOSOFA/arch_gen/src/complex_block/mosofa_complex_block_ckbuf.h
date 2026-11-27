@@ -10,6 +10,6 @@
  *******************************************************************/
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-int assemble_ckbuf_complex_block(arkangel::ArchGen& arch_gen, const bool& verbose);
+int assemble_ckbuf_complex_block(arcxpress::ArchGen& arch_gen, const bool& verbose);
 
 }  // end namespace MOSOFA

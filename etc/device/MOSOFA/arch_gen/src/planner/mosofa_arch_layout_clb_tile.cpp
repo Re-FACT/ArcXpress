@@ -26,7 +26,7 @@ int add_clb_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
 
   std::string tile_name("clb");
   num_err += add_clb_pb_type_to_vpr_arch_layout(va_layout, arch_plan);
-  num_err += add_ckbuf_pb_type_to_vpr_arch_layout(va_layout, arch_plan);
+  num_err += add_ckbuf_pb_type_to_vpr_arch_layout(va_layout);
   num_err += va_layout.create_tile(tile_name, arcxpress::VprArchLayout::e_tile_type::CLB) ? 0 : 1;
   num_err += add_clb_subtile_to_vpr_arch_layout(va_layout, arch_plan, tile_name);
   num_err += add_ckbuf_subtile_to_vpr_arch_layout(va_layout, arch_plan, tile_name);
