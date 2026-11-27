@@ -33,6 +33,7 @@ class ArchPlanner {
   size_t num_output_per_tile(const e_side& io_side) const;
   size_t num_fle_per_clb() const;
   size_t max_lut_size() const;
+  size_t num_ckbuf_per_tile() const;
 
  private: /* -- Mutators -- */
   void reset();

@@ -23,10 +23,10 @@ int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
   num_err +=
     va_layout.create_pb_type(pb_type_name, arcxpress::VprArchLayout::e_subtile_type::CKBUF) ? 0 : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "in", arkangel::VprArchLayout::e_port_type::INPUT) ? 0
+    va_layout.add_pb_type_port(pb_type_name, "in", arcxpress::VprArchLayout::e_port_type::INPUT) ? 0
                                                                                                 : 1;
   num_err +=
-    va_layout.add_pb_type_port(pb_type_name, "out", arkangel::VprArchLayout::e_port_type::OUTPUT)
+    va_layout.add_pb_type_port(pb_type_name, "out", arcxpress::VprArchLayout::e_port_type::OUTPUT)
       ? 0
       : 1;
   num_err += va_layout.set_pb_type_port_fc(pb_type_name, "out", 0.) ? 0 : 1;

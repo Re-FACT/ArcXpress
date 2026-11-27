@@ -92,6 +92,12 @@ size_t ArchPlanner::num_fle_per_clb() const { return num_fle_per_clb_; }
 
 size_t ArchPlanner::max_lut_size() const { return MAX_LUT_SIZE_; }
 
+size_t ArchPlanner::num_ckbuf_per_tile() const {
+  check_valid();
+  return std::ceil((float)(num_clks_ + num_rsts_) / 2.);
+}
+
+
 void ArchPlanner::plan_io_num() {
   for (e_side curr_side : TOTAL_2D_SIDES) {
     num_inputs_[curr_side] = core_width_ * (num_input_per_tile_[curr_side]);
