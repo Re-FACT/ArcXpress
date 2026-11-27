@@ -81,7 +81,7 @@ void ArchPlanner::reset() {
   num_clks_ = 1;
   num_pclks_ = 1;
   num_config_regions_ = 12;
-  num_rsts_ = 0;
+  num_rsts_ = 1;
   max_array_size_ = 4096;
   num_fle_per_clb_ = 8;
   plan_io_num();
