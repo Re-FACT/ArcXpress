@@ -125,12 +125,6 @@
       <pdk name="sky130">
         <flag name="SKY130">1</flag>
       </pdk>
-      <pdk name="t22ulp">
-        <flag name="T22ULP">1</flag>
-      </pdk>
-      <pdk name="s180bcd">
-        <flag name="S180BCD_6T">1</flag>
-      </pdk>
     </netlist_flags>
     <ips>
       <!-- IP MMFF -->
