@@ -9,8 +9,9 @@
 
 namespace MOSOFA {  // Begin namespace MOSOFA
 
-FracffGen::FracffGen(const std::string& name) {
+FracffGen::FracffGen(const std::string& name, const std::string& blif_model) {
   vpr_physical_model_name_ = name;
+  blif_model_name_ = blif_model;
   CIRCUIT_MODEL_NAME_ = "fracff_wrapper";
   /* Constants */
   CLK_TYPE_STRING_ = {"", "n"};
@@ -433,7 +434,7 @@ std::string FracffGen::circuit_model_name() const { return std::string(CIRCUIT_M
 arcxpress::VprArchPrimitive FracffGen::vpr_arch_physical_primitive() const {
   arcxpress::VprArchPrimitive pmtv(vpr_physical_model_name());
   int num_err = 0;
-  num_err += pmtv.set_blif_model(vpr_physical_model_name()) ? 0 : 1;
+  num_err += pmtv.set_blif_model(blif_model_name_) ? 0 : 1;
   num_err += pmtv.set_circuit_model(circuit_model_name()) ? 0 : 1;
   num_err += pmtv.set_circuit_model_type(arcxpress::VprArchPrimitive::e_model_type::FF) ? 0 : 1;
   num_err += pmtv.set_physical_model() ? 0 : 1;

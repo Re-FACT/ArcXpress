@@ -14,7 +14,8 @@ namespace MOSOFA {
  */
 class FracffGen {
  public: /* -- Constructor -- */
-  FracffGen(const std::string& name);
+  FracffGen(const std::string& name, const std::string& blif_model);
+  //FracffGen(const std::string& name) : FracffGen(name, name) {}
 
  public: /* -- TYPES -- */
   enum class e_clk_type { RISING = 0, FALLING, NUM_TYPES };
@@ -94,6 +95,7 @@ class FracffGen {
   std::string VPR_MODEL_PREFIX_;
   std::string CIRCUIT_MODEL_NAME_;
   std::string vpr_physical_model_name_;
+  std::string blif_model_name_;
 };
 
 }  // namespace MOSOFA

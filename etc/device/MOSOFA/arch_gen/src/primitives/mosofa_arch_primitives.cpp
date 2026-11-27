@@ -110,7 +110,7 @@ static int add_vpr_arch_primitive_ff(arcxpress::ArchGen& arch_gen,
   int num_err = 0;
 
   for (auto scff : ff_names) {
-    FracffGen fff_gen(scff);
+    FracffGen fff_gen(scff, phy_ff_name);
     bool incl_phy = false;
     if (std::string(scff) == phy_ff_name) {
       incl_phy = true;
