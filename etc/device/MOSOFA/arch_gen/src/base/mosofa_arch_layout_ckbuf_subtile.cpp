@@ -35,8 +35,8 @@ int add_ckbuf_pb_type_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout) {
 }
 
 int add_ckbuf_subtile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
-                                          const std::string& tile_name,
-                                          const ArchPlanner& arch_plan) {
+                                          const ArchPlanner& arch_plan,
+                                          const std::string& tile_name) {
   int num_err = 0;
 
   /* Later should be managed by number of clocks and resets */
