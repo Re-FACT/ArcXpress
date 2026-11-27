@@ -193,6 +193,20 @@ int add_mosofa_builtin_latch_primitive_pb_type(arcxpress::ArchGen& arch_gen, con
     std::string mode_bits = fff_gen.default_mode_bits();
     num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
   }
+  for (auto scff_name : ALL_PI_SCFF_NAMES) {
+    std::string pb_name = MOSOFA::gen_latch_pb_name(scff_name);
+    num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
+    FracffGen fff_gen(scff_name);
+    std::string mode_bits = fff_gen.default_mode_bits();
+    num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
+  }
+  for (auto scff_name : ALL_PO_SCFF_NAMES) {
+    std::string pb_name = MOSOFA::gen_latch_pb_name(scff_name);
+    num_err += add_builtin_latch_primitive_pb_type(arch_gen, pb_name, true);
+    FracffGen fff_gen(scff_name);
+    std::string mode_bits = fff_gen.default_mode_bits();
+    num_err += arch_gen.set_pb_type_mode_bits(pb_name, mode_bits) ? 0 : 1;
+  }
   VTR_LOGV(verbose, "Done\n");
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }

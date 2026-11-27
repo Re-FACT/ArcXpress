@@ -66,10 +66,13 @@ int add_io_tiles_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
                                     const ArchPlanner& arch_plan) {
   int num_err = 0;
 
+  VTR_LOG("Adding pi_pb_type\n");
   num_err += add_pi_pb_type_to_vpr_arch_layout(va_layout);
+  VTR_LOG("Adding po_pb_type\n");
   num_err += add_po_pb_type_to_vpr_arch_layout(va_layout);
 
   for (e_side curr_side : TOTAL_2D_SIDES) {
+    VTR_LOG("Adding io tile\n");
     num_err += add_io_tile_to_vpr_arch_layout(va_layout, arch_plan, curr_side);
   }
 
