@@ -14,8 +14,9 @@ namespace MOSOFA {
  */
 class FracffGen {
  public: /* -- Constructor -- */
+  /* Use a custom blif model name if the fracturable ff is going to share the blif model with other primitives */
   FracffGen(const std::string& name, const std::string& blif_model);
-  //FracffGen(const std::string& name) : FracffGen(name, name) {}
+  FracffGen(const std::string& name) : FracffGen(name, name) {}
 
  public: /* -- TYPES -- */
   enum class e_clk_type { RISING = 0, FALLING, NUM_TYPES };
