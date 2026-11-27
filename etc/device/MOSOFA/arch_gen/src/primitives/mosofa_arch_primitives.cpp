@@ -44,6 +44,19 @@ static int add_vpr_arch_primitive_po(arcxpress::ArchGen& arch_gen) {
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
+static int add_vpr_arch_primitive_ckbuf(arcxpress::ArchGen& arch_gen) {
+  int num_err = 0;
+  VTR_LOG("Adding clock buffer models\n");
+  arcxpress::VprArchPrimitive pmtv(CKBUF_BLIF_MODEL);
+  num_err += pmtv.set_blif_model(std::string(CKBUF_BLIF_MODEL)) ? 0 : 1;
+  num_err += pmtv.set_circuit_model(std::string(CKBUF_CIRCUIT_MODEL)) ? 0 : 1;
+  num_err += pmtv.add_input_port("in", 1) ? 0 : 1;
+  num_err += pmtv.add_output_port("out", 1) ? 0 : 1;
+  num_err += pmtv.add_input_comb_sink_port("in", "out") ? 0 : 1;
+  arch_gen.add_arch_primitive(pmtv);
+  return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
+}
+
 static int add_vpr_arch_primitive_lut(arcxpress::ArchGen& arch_gen) {
   int num_err = 0;
   arcxpress::VprArchPrimitive pmtv(FRAC_LUT4_ARITH_BLIF_MODEL);
@@ -147,12 +160,17 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
-
   VTR_LOG("Adding Flip-flop models\n");
   num_err += add_vpr_arch_primitive_ff(arch_gen);
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
   }
+  VTR_LOG("Adding clock buffer models\n");
+  num_err += add_vpr_arch_primitive_ckbuf(arch_gen);
+  if (num_err) {
+    VTR_LOG_ERROR("Fatal error occur");
+  }
+
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 

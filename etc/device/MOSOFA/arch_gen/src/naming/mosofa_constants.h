@@ -20,6 +20,9 @@ constexpr const char* PO_BLIF_MODEL = "output";
 constexpr const char* PO_CIRCUIT_MODEL = "poutput";
 constexpr const char* PHYSICAL_PO_SCFF_NAME = "po_scff";
 constexpr const char* OPERATING_PO_SCFF_NAME = "v_po_scff";
+/* Clock buffer */
+constexpr const char* CKBUF_BLIF_MODEL = "ckbuf";
+constexpr const char* CKBUF_CIRCUIT_MODEL = "CKBUF_WRAPPER";
 /* Look-up Tables */
 constexpr const char* FRAC_LUT4_ARITH_BLIF_MODEL = "_frac_lut4_arith";
 constexpr const char* FRAC_LUT4_ARITH_CIRCUIT_MODEL = "frac_lut4_arith";
