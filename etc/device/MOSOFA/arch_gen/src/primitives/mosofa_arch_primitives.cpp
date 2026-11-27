@@ -104,19 +104,21 @@ static int add_vpr_arch_primitive_adder_lut4(arcxpress::ArchGen& arch_gen) {
   return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
 }
 
-static int add_vpr_arch_primitive_ff(arcxpress::ArchGen& arch_gen) {
+static int add_vpr_arch_primitive_ff(arcxpress::ArchGen& arch_gen,
+                                     const std::vector<std::string> ff_names,
+                                     const std::string& phy_ff_name) {
   int num_err = 0;
 
-  for (auto scff : ALL_REGULAR_SCFF_NAMES) {
+  for (auto scff : ff_names) {
     FracffGen fff_gen(scff);
     bool incl_phy = false;
-    if (std::string(scff) == std::string(PHYSICAL_REGULAR_SCFF_NAME)) {
+    if (std::string(scff) == phy_ff_name) {
       incl_phy = true;
     }
     for (auto pmtv : fff_gen.vpr_arch_primitives(incl_phy)) {
       if (arch_gen.is_arch_primitive_exist(pmtv.name())) {
         std::string tag = fff_gen.vpr_physical_model_name();
-        arch_gen.set_arch_primitive_mode_bits(pmtv.name(), tag, pmtv.mode_bits(tag));
+        num_err += arch_gen.set_arch_primitive_mode_bits(pmtv.name(), tag, pmtv.mode_bits(tag));
       } else {
         VTR_LOG("Adding FF model '%s'\n", pmtv.name().c_str());
         arch_gen.add_arch_primitive(pmtv);
@@ -160,11 +162,34 @@ int create_vpr_arch_primitives(arcxpress::ArchGen& arch_gen) {
     VTR_LOG_ERROR("Fatal error occur");
     return num_err ? openfpga::CMD_EXEC_FATAL_ERROR : openfpga::CMD_EXEC_SUCCESS;
   }
-  VTR_LOG("Adding Flip-flop models\n");
-  num_err += add_vpr_arch_primitive_ff(arch_gen);
+  VTR_LOG("Adding CLB Flip-flop models\n");
+  std::vector<std::string> clb_scff_names;
+  for (auto curr_scff : ALL_REGULAR_SCFF_NAMES) {
+    clb_scff_names.push_back(std::string(curr_scff));
+  }
+  num_err += add_vpr_arch_primitive_ff(arch_gen, clb_scff_names, std::string(PHYSICAL_REGULAR_SCFF_NAME));
   if (num_err) {
     VTR_LOG_ERROR("Fatal error occur");
   }
+  VTR_LOG("Adding PI Flip-flop models\n");
+  std::vector<std::string> pi_scff_names;
+  for (auto curr_scff : PI_SCFF_NAMES) {
+    pi_scff_names.push_back(std::string(curr_scff));
+  }
+  num_err += add_vpr_arch_primitive_ff(arch_gen, pi_scff_names, std::string(PHYSICAL_PI_SCFF_NAME));
+  if (num_err) {
+    VTR_LOG_ERROR("Fatal error occur");
+  }
+  VTR_LOG("Adding PO Flip-flop models\n");
+  std::vector<std::string> po_scff_names;
+  for (auto curr_scff : PO_SCFF_NAMES) {
+    po_scff_names.push_back(std::string(curr_scff));
+  }
+  num_err += add_vpr_arch_primitive_ff(arch_gen, po_scff_names, std::string(PHYSICAL_PO_SCFF_NAME));
+  if (num_err) {
+    VTR_LOG_ERROR("Fatal error occur");
+  }
+
   VTR_LOG("Adding clock buffer models\n");
   num_err += add_vpr_arch_primitive_ckbuf(arch_gen);
   if (num_err) {
