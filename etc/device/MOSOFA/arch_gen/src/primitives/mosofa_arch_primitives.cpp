@@ -56,7 +56,7 @@ static int add_vpr_arch_primitive_lut(arcxpress::ArchGen& arch_gen) {
   num_err += pmtv.add_input_port("in", 4) ? 0 : 1;
   num_err += pmtv.add_input_port("cin", 1) ? 0 : 1;
   num_err += pmtv.add_output_port("lut3_out", 2) ? 0 : 1;
-  num_err += pmtv.set_output_port_frac_level("lut4_out", 3) ? 0 : 1;
+  num_err += pmtv.set_output_port_frac_level("lut3_out", 3) ? 0 : 1;
   num_err += pmtv.add_output_port("lut4_out", 1) ? 0 : 1;
   num_err += pmtv.add_output_port("cout", 1) ? 0 : 1;
   num_err += pmtv.set_output_port_frac_level("lut4_out", 4) ? 0 : 1;
