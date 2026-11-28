@@ -119,6 +119,7 @@ static int assemble_pi_complex_block_physical_mode(
   std::map<std::string, std::string> data_port_map;
   data_port_map["reset"] = "R";
   data_port_map["clk"] = "C";
+  data_port_map["ff_en"] = "EN";
   for (auto pair : data_port_map) {
     openfpga::BasicPort src_d_port;
     if (!arch_gen.find_pb_type_port(phy_pb, pair.first, src_d_port, true)) {

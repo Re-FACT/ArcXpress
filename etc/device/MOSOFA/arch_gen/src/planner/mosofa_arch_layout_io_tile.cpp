@@ -47,6 +47,10 @@ static int add_io_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
         ? 0
         : 1;
     num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "ff_en", 0, pi_pin_side)
+        ? 0
+        : 1;
+    num_err +=
       va_layout.add_subtile_pin_location(tile_name, subtile_pi_name, ipi, "clk", 0, pi_gclk_pin_side)
         ? 0
         : 1;
@@ -73,6 +77,10 @@ static int add_io_tile_to_vpr_arch_layout(arcxpress::VprArchLayout& va_layout,
   for (size_t ipo = 0; ipo < num_po; ++ipo) {
     num_err +=
       va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "f2a_i", 0, po_pin_side)
+        ? 0
+        : 1;
+    num_err +=
+      va_layout.add_subtile_pin_location(tile_name, subtile_po_name, ipo, "ff_en", 0, po_pin_side)
         ? 0
         : 1;
     num_err +=

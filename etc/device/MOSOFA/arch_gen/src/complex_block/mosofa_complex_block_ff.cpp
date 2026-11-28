@@ -41,8 +41,8 @@ int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mod
     }
   }
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
-    openfpga::BasicPort des_ck_port;
     for (std::string des_ck_name : {"clk", "C"}) {
+      openfpga::BasicPort des_ck_port;
       if (!arch_gen.find_pb_type_port(ff_pb_name, des_ck_name, des_ck_port, false)) {
         continue;
       }

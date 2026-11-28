@@ -130,8 +130,9 @@ static int assemble_po_complex_block_physical_mode(
   data_port_map["f2a_i"] = "D";
   data_port_map["reset"] = "R";
   data_port_map["clk"] = "C";
+  data_port_map["ff_en"] = "EN";
   for (auto pair : data_port_map) {
-    openfpga::BasicPort src_d_port;
+   openfpga::BasicPort src_d_port;
     if (!arch_gen.find_pb_type_port(phy_pb, pair.first, src_d_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
@@ -216,11 +217,11 @@ static int assemble_po_complex_block_operating_modes(
 
   /* Data port */
   openfpga::BasicPort src_d_port;
-  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_d_port, true)) {
+  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_d_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_d_port;
-  if (!arch_gen.find_pb_type_port(ff_pb, "D", des_d_port, true)) {
+  if (!arch_gen.find_pb_type_port(ff_pb, "D", des_d_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, ff_pb)) {
@@ -231,11 +232,11 @@ static int assemble_po_complex_block_operating_modes(
   }
   /* Output mux */
   openfpga::BasicPort src_f2a_port;
-  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_f2a_port, true)) {
+  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_f2a_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_q_port;
-  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port, true)) {
+  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, pad_pb)) {
@@ -245,7 +246,7 @@ static int assemble_po_complex_block_operating_modes(
       arch_gen.add_in2in_edge(op_pb_default_mode, src_f2a_port, des_edge_port, edge_delay) ? 0 : 1;
   }
   openfpga::BasicPort src_q_port;
-  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port, true)) {
+  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, ff_pb)) {
