@@ -773,7 +773,7 @@ bool ArchGen::find_pb_type_port(const std::string& pb_type_name, const std::stri
   if (show_err) {
     VTR_LOGV_ERROR(show_err, "Cannot find required port '%s' for pb_type '%s'\n", port_name.c_str(), pb_type_name.c_str());
     for (auto curr_port : pb_type_ports_[pb_type_id]) {
-      VTR_LOG_ERROR(show_err, "\t%s\n", curr_port.to_verilog_string().c_str());
+      VTR_LOGV_ERROR(show_err, "\t%s\n", curr_port.to_verilog_string().c_str());
     }
   }
   return false;
