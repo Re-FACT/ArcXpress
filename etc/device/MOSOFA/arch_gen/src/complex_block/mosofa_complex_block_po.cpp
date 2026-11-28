@@ -88,11 +88,11 @@ static int assemble_po_complex_block_physical_mode(
   num_err += arch_gen.auto_wire_pb_type_mode(pb_mode) ? 0 : 1;
   {
     openfpga::BasicPort src_port;
-    if (!arch_gen.find_pb_type_port(top_pb, "clk", src_port)) {
+    if (!arch_gen.find_pb_type_port(top_pb, "clk", src_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     openfpga::BasicPort des_port;
-    if (!arch_gen.find_pb_type_port(phy_pb, "clk", des_port)) {
+    if (!arch_gen.find_pb_type_port(phy_pb, "clk", des_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     arcxpress::ArchGen::EdgePort des_edge_port = {phy_pb, 0, des_port};
@@ -101,11 +101,11 @@ static int assemble_po_complex_block_physical_mode(
   }
   {
     openfpga::BasicPort src_port;
-    if (!arch_gen.find_pb_type_port(top_pb, "reset", src_port)) {
+    if (!arch_gen.find_pb_type_port(top_pb, "reset", src_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     openfpga::BasicPort des_port;
-    if (!arch_gen.find_pb_type_port(phy_pb, "reset", des_port)) {
+    if (!arch_gen.find_pb_type_port(phy_pb, "reset", des_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     arcxpress::ArchGen::EdgePort des_edge_port = {phy_pb, 0, des_port};
@@ -129,13 +129,14 @@ static int assemble_po_complex_block_physical_mode(
   std::map<std::string, std::string> data_port_map;
   data_port_map["f2a_i"] = "D";
   data_port_map["reset"] = "R";
+  data_port_map["clk"] = "C";
   for (auto pair : data_port_map) {
     openfpga::BasicPort src_d_port;
-    if (!arch_gen.find_pb_type_port(phy_pb, pair.first, src_d_port)) {
+    if (!arch_gen.find_pb_type_port(phy_pb, pair.first, src_d_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     openfpga::BasicPort des_d_port;
-    if (!arch_gen.find_pb_type_port(ff_pb, pair.second, des_d_port)) {
+    if (!arch_gen.find_pb_type_port(ff_pb, pair.second, des_d_port, true)) {
       return openfpga::CMD_EXEC_FATAL_ERROR;
     }
     for (auto ipb : arch_gen.child_pbs(phy_pb_default_mode, ff_pb)) {
@@ -145,11 +146,11 @@ static int assemble_po_complex_block_physical_mode(
   }
   /* Output mux */
   openfpga::BasicPort src_f2a_port;
-  if (!arch_gen.find_pb_type_port(phy_pb, "f2a_i", src_f2a_port)) {
+  if (!arch_gen.find_pb_type_port(phy_pb, "f2a_i", src_f2a_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_q_port;
-  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port)) {
+  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(phy_pb_default_mode, pad_pb)) {
@@ -161,7 +162,7 @@ static int assemble_po_complex_block_physical_mode(
                  : 1;
   }
   openfpga::BasicPort src_q_port;
-  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port)) {
+  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(phy_pb_default_mode, ff_pb)) {
@@ -215,11 +216,11 @@ static int assemble_po_complex_block_operating_modes(
 
   /* Data port */
   openfpga::BasicPort src_d_port;
-  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_d_port)) {
+  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_d_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_d_port;
-  if (!arch_gen.find_pb_type_port(ff_pb, "D", des_d_port)) {
+  if (!arch_gen.find_pb_type_port(ff_pb, "D", des_d_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, ff_pb)) {
@@ -230,11 +231,11 @@ static int assemble_po_complex_block_operating_modes(
   }
   /* Output mux */
   openfpga::BasicPort src_f2a_port;
-  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_f2a_port)) {
+  if (!arch_gen.find_pb_type_port(op_pb, "f2a_i", src_f2a_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   openfpga::BasicPort des_q_port;
-  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port)) {
+  if (!arch_gen.find_pb_type_port(pad_pb, "outpad", des_q_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, pad_pb)) {
@@ -244,7 +245,7 @@ static int assemble_po_complex_block_operating_modes(
       arch_gen.add_in2in_edge(op_pb_default_mode, src_f2a_port, des_edge_port, edge_delay) ? 0 : 1;
   }
   openfpga::BasicPort src_q_port;
-  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port)) {
+  if (!arch_gen.find_pb_type_port(ff_pb, "Q", src_q_port, true)) {
     return openfpga::CMD_EXEC_FATAL_ERROR;
   }
   for (auto ipb : arch_gen.child_pbs(op_pb_default_mode, ff_pb)) {

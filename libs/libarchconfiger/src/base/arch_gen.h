@@ -68,7 +68,7 @@ class ArchGen {
   std::vector<std::string> find_primitive_pb_type_names(const std::string& pmtv_name) const;
   std::string find_primitive_pb_type_name(const std::string& pmtv_name) const;
   bool find_pb_type_port(const std::string& pb_type_name, const std::string& port_name,
-                         openfpga::BasicPort& port) const;
+                         openfpga::BasicPort& port, const bool& show_err = true) const;
   std::vector<size_t> child_pbs(const std::string& mode_name,
                                 const std::string child_pb_name) const;
   int add_xml_openfpga_arch_node(pugi::xml_node& root_node) const;

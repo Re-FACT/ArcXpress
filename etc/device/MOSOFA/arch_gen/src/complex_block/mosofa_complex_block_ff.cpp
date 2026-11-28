@@ -26,6 +26,7 @@ int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mod
   int num_err = 0;
   openfpga::BasicPort d_port("D", 1);
   openfpga::BasicPort clr_port("R", 1);
+  openfpga::BasicPort en_port("ff_en", 1);
   openfpga::BasicPort q_port("Q", 1);
   openfpga::BasicPort ck_port("C", 1);
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
@@ -42,7 +43,7 @@ int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mod
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
     openfpga::BasicPort des_ck_port;
     for (std::string des_ck_name : {"clk", "C"}) {
-      if (!arch_gen.find_pb_type_port(ff_pb_name, des_ck_name, des_ck_port)) {
+      if (!arch_gen.find_pb_type_port(ff_pb_name, des_ck_name, des_ck_port, false)) {
         continue;
       }
       arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_ck_port};
@@ -64,11 +65,22 @@ int wire_ff_pb_type_mode(arcxpress::ArchGen& arch_gen, const std::string& ff_mod
   for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
     for (std::string des_clr_name : {"R", "RN", "S", "SN"}) {
       openfpga::BasicPort des_clr_port;
-      if (!arch_gen.find_pb_type_port(ff_pb_name, des_clr_name, des_clr_port)) {
+      if (!arch_gen.find_pb_type_port(ff_pb_name, des_clr_name, des_clr_port, false)) {
         continue;
       }
       arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_clr_port};
       num_err += arch_gen.add_in2in_edge(ff_mode, clr_port, des_edge_port) ? 0 : 1;
+    }
+  }
+  /* Handle the optional enable signals */
+  for (auto ipb : arch_gen.child_pbs(ff_mode, ff_pb_name)) {
+    for (std::string des_en_name : {"EN", "ENN"}) {
+      openfpga::BasicPort des_en_port;
+      if (!arch_gen.find_pb_type_port(ff_pb_name, des_en_name, des_en_port, false)) {
+        continue;
+      }
+      arcxpress::ArchGen::EdgePort des_edge_port = {ff_pb_name, ipb, des_en_port};
+      num_err += arch_gen.add_in2in_edge(ff_mode, en_port, des_edge_port) ? 0 : 1;
     }
   }
 
@@ -88,6 +100,8 @@ int bind_ff_pb_type_to_physical(arcxpress::ArchGen& arch_gen, const std::string&
   } else if (std::string(ff_pb_tag) == std::string(OPERATING_BLE4_FF_NAME)) {
     num_err += arch_gen.set_pb_type_physical_pb_type_index_factor(ff_pb_type, "2") ? 0 : 1;
     num_err += arch_gen.set_pb_type_physical_pb_type_index_offset(ff_pb_type, "0") ? 0 : 1;
+  } else if (std::string(ff_pb_tag) == std::string(OPERATING_SREG_FF_NAME)) {
+    /* Intended to be empty */
   } else if (std::string(ff_pb_tag) == std::string(OPERATING_ALE_FF_NAME)) {
     num_err += arch_gen.set_pb_type_physical_pb_type_index_factor(ff_pb_type, "2") ? 0 : 1;
     num_err += arch_gen.set_pb_type_physical_pb_type_index_offset(ff_pb_type, "1") ? 0 : 1;
@@ -96,34 +110,25 @@ int bind_ff_pb_type_to_physical(arcxpress::ArchGen& arch_gen, const std::string&
   {
     openfpga::BasicPort src_port;
     openfpga::BasicPort phy_port("C", 1);
-    if (arch_gen.find_pb_type_port(ff_pb_type, "clk", src_port)) {
+    if (arch_gen.find_pb_type_port(ff_pb_type, "C", src_port, true)) {
       num_err +=
         arch_gen.set_pb_type_physical_port_binding(ff_pb_type, src_port.get_name(), phy_port) ? 0
                                                                                               : 1;
     }
   }
-  {
+  for (std::string cand_port_name : {"R", "RN", "S", "SN"}) { 
     openfpga::BasicPort src_port;
     openfpga::BasicPort phy_port("R", 1);
-    if (arch_gen.find_pb_type_port(ff_pb_type, "RN", src_port)) {
+    if (arch_gen.find_pb_type_port(ff_pb_type, cand_port_name, src_port, false)) {
       num_err +=
         arch_gen.set_pb_type_physical_port_binding(ff_pb_type, src_port.get_name(), phy_port) ? 0
                                                                                               : 1;
     }
   }
-  {
+  for (std::string cand_port_name : {"EN", "ENN"}) { 
     openfpga::BasicPort src_port;
-    openfpga::BasicPort phy_port("R", 1);
-    if (arch_gen.find_pb_type_port(ff_pb_type, "S", src_port)) {
-      num_err +=
-        arch_gen.set_pb_type_physical_port_binding(ff_pb_type, src_port.get_name(), phy_port) ? 0
-                                                                                              : 1;
-    }
-  }
-  {
-    openfpga::BasicPort src_port;
-    openfpga::BasicPort phy_port("R", 1);
-    if (arch_gen.find_pb_type_port(ff_pb_type, "SN", src_port)) {
+    openfpga::BasicPort phy_port("EN", 1);
+    if (arch_gen.find_pb_type_port(ff_pb_type, cand_port_name, src_port, false)) {
       num_err +=
         arch_gen.set_pb_type_physical_port_binding(ff_pb_type, src_port.get_name(), phy_port) ? 0
                                                                                               : 1;
@@ -141,10 +146,13 @@ int add_ff_pb_type(arcxpress::ArchGen& arch_gen, const std::string& ff_pb, const
   num_err += arch_gen.add_pb_type(ff_pb) ? 0 : 1;
   openfpga::BasicPort d_port("D", 1);
   openfpga::BasicPort clr_port("R", 1);
+  openfpga::BasicPort ff_en_port("ff_en", 1);
   openfpga::BasicPort q_port("Q", 1);
   openfpga::BasicPort ck_port("C", 1);
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, d_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
+  num_err +=
+    arch_gen.add_pb_type_port(ff_pb, ff_en_port, arcxpress::VprArchLayout::e_port_type::INPUT) ? 0 : 1;
   num_err +=
     arch_gen.add_pb_type_port(ff_pb, clr_port, arcxpress::VprArchLayout::e_port_type::RESET) ? 0
                                                                                              : 1;

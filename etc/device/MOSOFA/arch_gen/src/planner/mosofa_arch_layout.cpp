@@ -127,11 +127,14 @@ int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
   va_layout.set_default_fc_out(0.10);
   /* Add I/O tiles */
   num_err += add_io_tiles_to_vpr_arch_layout(va_layout, arch_plan);
+  VTR_LOG("after io tiles num_err: %d\n", num_err);
   /* Add CLB tiles */
   num_err += add_clb_tile_to_vpr_arch_layout(va_layout, arch_plan);
+  VTR_LOG("after clb tiles num_err: %d\n", num_err);
   /* Add layout dimension: Only the size of core fabric, do NOT count in I/O columns and rows */
   num_err += add_dimension_to_vpr_arch_layout(va_layout, arch_plan);
   num_err += add_routing_to_vpr_arch_layout(va_layout);
+  VTR_LOG("after routing tiles num_err: %d\n", num_err);
 
   /* TODO: Run a validation on the arch layout */
 
@@ -140,6 +143,7 @@ int create_vpr_arch_layout(arcxpress::ArchGen& arch_gen,
   arch_gen.set_num_pclocks(arch_plan.num_pclocks());
   arch_gen.set_num_config_regions(arch_plan.num_config_regions());
   arch_gen.set_num_resets(arch_plan.num_resets());
+  VTR_LOG("before complex_block num_err: %d\n", num_err);
 
   /* Add complex block graph to arch generator */
   num_err += add_complex_blocks(arch_gen, arch_plan);

@@ -758,15 +758,22 @@ std::string ArchGen::find_primitive_pb_type_name(const std::string& pmtv_name) c
 }
 
 bool ArchGen::find_pb_type_port(const std::string& pb_type_name, const std::string& port_name,
-                                openfpga::BasicPort& port) const {
+                                openfpga::BasicPort& port, const bool& show_err) const {
   size_t pb_type_id = find_pb_type_id(pb_type_name);
   if (!valid_pb_type_id(pb_type_id)) {
+    VTR_LOGV_ERROR(show_err, "Cannot find required pb_type '%s' when searching for port '%s'\n", pb_type_name.c_str(), port_name.c_str());
     return false;
   }
   for (auto curr_port : pb_type_ports_[pb_type_id]) {
     if (curr_port.get_name() == port_name) {
       port = curr_port;
       return true;
+    }
+  }
+  if (show_err) {
+    VTR_LOGV_ERROR(show_err, "Cannot find required port '%s' for pb_type '%s'\n", port_name.c_str(), pb_type_name.c_str());
+    for (auto curr_port : pb_type_ports_[pb_type_id]) {
+      VTR_LOG_ERROR(show_err, "\t%s\n", curr_port.to_verilog_string().c_str());
     }
   }
   return false;
